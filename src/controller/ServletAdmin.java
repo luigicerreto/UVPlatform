@@ -173,7 +173,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
    */
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    Integer result = 0; // indica se la query è riuscita
+    Integer result = 0; // indica se la query Ã¨ riuscita
     String error = ""; // indica il mex di errore
     String content = ""; // indica il contenuto trovato dopo la query
     String redirect = ""; // reindirizza di nuovo alla pagina in caso di errore
@@ -263,7 +263,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
                 content += "    </td>";
 
                 content += "    <td class='text-center'>" + r.getString("serial") + "</td>";
-                if (r.getInt("id_state") == requestWorkingAdmin) { // Se è in lavorazione dall'admin
+                if (r.getInt("id_state") == requestWorkingAdmin) { // Se Ã¨ in lavorazione dall'admin
                   content += "<td class='text-center'>" + r.getString("name");
                   content +=
                       "  <button class=\"btn btn-primary btn-action changeName\" data-iduser=\""
@@ -302,15 +302,15 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
                 content += "    <td class='text-center'>" + r.getString("ente") + "</td>";
                 content += "    <td class='text-center'>";
 
-                if (r.getInt("id_state") == requestWorkingAdmin) { // Se è in lavorazione dall'admin
-                  if (!r.getString("ente_mail").equals("")) { // Se è settata la mail dell'ente
+                if (r.getInt("id_state") == requestWorkingAdmin) { // Se Ã¨ in lavorazione dall'admin
+                  if (!r.getString("ente_mail").equals("")) { // Se Ã¨ settata la mail dell'ente
                     content += "<button class=\"btn btn-primary btn-action verifyCertificate"
                         + "\" title=\"Verifica Validit&agrave; "
                         + "Certificato Tramite Mail\" data-mail=\"" + r.getString("ente_mail")
                         + "\" data-certserial=\"" + r.getString("certificate_serial")
                         + "\"><i class=\"fa fa-question\"></i></button>";
                   } else if (!r.getString("ente_site").equals("")) {
-                    // Se è settato il sito dell'ente
+                    // Se Ã¨ settato il sito dell'ente
                     content += "<a target=\"_blank\" href=\"" + r.getString("ente_site")
                         + "\" class=\"btn btn-primary verifyCertificate"
                         + "\" title=\"Verifica Validit&agrave; Certificato Tramite Sito Web"
@@ -332,7 +332,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
                           + "\"><i class=\"fa fa-times\"></i></button>";
                 } else if (r.getInt("id_state") == requestWorkingEducationAdvice1
                     || r.getInt("id_state") == requestWorkingEducationAdvice2) {
-                  // Se è in lavorazione da consiglio didattico
+                  // Se Ã¨ in lavorazione da consiglio didattico
 
                   // Mettere in requestAccepted
                   content += "<button class=\"btn btn-primary btn-action toAccepted accept"
@@ -346,7 +346,7 @@ public class ServletAdmin<WritableWorkbook> extends HttpServlet {
                       + "\" title=\"Rifiutata dal Consiglio Didattico"
                       + "\"><i class=\"fa fa-times\"></i></button>";
                 } else if (r.getInt("id_state") == requestAccepted
-                    || r.getInt("id_state") == requestRefused) { // Se è conclusa
+                    || r.getInt("id_state") == requestRefused) { // Se Ã¨ conclusa
                   content += "/";
                 }
                 content += "</td>";

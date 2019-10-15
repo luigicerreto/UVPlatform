@@ -11,7 +11,7 @@ $(document)
 								$(".preloader").hide();
 								showData();
 							});
-					
+
 					$(document).on(
 							"click",
 							"#generateExcelRefused",
@@ -430,6 +430,7 @@ $(document)
 				});
 
 function showData() {
+
 	$(".preloader").show();
 
 	$.ajax({

@@ -50,7 +50,7 @@ public class Downloader extends HttpServlet {
     int idRequest = Integer.parseInt(request.getParameter("idRequest"));
     String filename = request.getParameter("filename");
     String basePath = 
-        new SystemAttribute().getValueByKey("request-upload-path") + "//" + idRequest + "//";
+        new SystemAttribute().getValueByKey("request-upload-path") + "\\" + idRequest + "\\";
 
     try {
       in = new FileInputStream(basePath + filename);
