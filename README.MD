@@ -14,3 +14,6 @@ Alessandro Bacco, Ivan Buccella, Giuseppe Cirino, Alfonso Ingenito, Angelomaria 
 Giammaria Giordano, Valeria Pontillo.
 ## Customer/Sponsor:
 Dipartimento di Informatica dell'Università di Salerno, Prof.ssa Filomena Ferrucci.
+
+## Come si installa
+Aprire il file "Progetto Avvio.txt" e il manuale di installazione presente nella cartella Documentazione progetto.
