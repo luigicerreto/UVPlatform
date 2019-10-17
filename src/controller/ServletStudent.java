@@ -87,8 +87,8 @@ public class ServletStudent extends HttpServlet {
           throw new IllegalArgumentException("Formato non corretto");
         }
         String email = request.getParameter("email");
-        /*l'email è valida se la sua lunghezza è diversa da 0, 
-         * se non è presente nel DB e se rispetta il formato
+        /*l'email ï¿½ valida se la sua lunghezza ï¿½ diversa da 0, 
+         * se non ï¿½ presente nel DB e se rispetta il formato
          * se finisce con @studenti.unisa.it
         */
         String prefix = "";
@@ -111,7 +111,7 @@ public class ServletStudent extends HttpServlet {
         if (pass.length() < 8) {
           throw new IllegalArgumentException("Formato non corretto");
         }
-        //quì la password viene criptata per essere poi salvata nel db
+        //quï¿½ la password viene criptata per essere poi salvata nel db
         String password = new Utils().generatePwd(pass);
         int userType = 0;
         UserInterface user = null;

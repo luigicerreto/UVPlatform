@@ -49,7 +49,7 @@ public class ServletSecretary extends HttpServlet {
    */
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    Integer result = 0; // indica se la query è riuscita
+    Integer result = 0; // indica se la query ï¿½ riuscita
     String error = ""; // indica il mex di errore
     String content = ""; // indica il contenuto trovato dopo la query
     String redirect = ""; // reindirizza di nuovo alla pagina in caso di errore
