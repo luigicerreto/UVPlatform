@@ -3,7 +3,7 @@
 [DESCRIZIONE]
 
 ## Autori: 
-
+Rosario Di Palma, Andrea Riccelli, Michele Pirro, Antonio Baldi, Vincenzo Manserra, Carmine Rovito, Marco Spagnuolo ed Emanuele Nardone
 
 ## PM:
 Luigi Cerreto, Giuseppe D'Avanzo e Antonio Martella
