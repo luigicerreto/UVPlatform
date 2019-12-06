@@ -1,4 +1,4 @@
-var absolutePath = "/EnglishValidation";
+var absolutePath = "/UVPlatform";
 
 // sendPostData(msg.redirect, { 'idRequest': msg.contenuto });
 function sendPostData(url, data) {
