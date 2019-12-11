@@ -56,6 +56,11 @@
 											<input type="text" class="form-control" id="serial"
 												placeholder="Matricola" minlength="10" required>
 										</div>
+										
+										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<input type="password" class="form-control" id="password"
+												placeholder="Password" minlength="8" required>
+										</div>
 
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<label class="radio-inline"><input type="radio"
@@ -64,10 +69,6 @@
 												name="sex" value="F" required>F</label>
 										</div>
 
-										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="password"
-												placeholder="Password" minlength="8" required>
-										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<input type="password" class="form-control"
 												id="verifyPassword" placeholder="Verifica Password"
