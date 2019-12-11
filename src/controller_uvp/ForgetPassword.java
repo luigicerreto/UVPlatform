@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import util.MailSender;
+import util.PasswordGenerator;
 
 /**
  * Servlet implementation class ForgetPassword
@@ -38,7 +39,15 @@ public class ForgetPassword extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String mail= request.getParameter("email");
-		MailSender.send("antoniobaldi75@gmail.com","test", "testeeeeeeer");
+		String subject = "Password autogenerata";
+		PasswordGenerator generatorePassword = new PasswordGenerator();
+		String text = "La tua nuova password è:\n\n"+generatorePassword.generate(32)+
+				"\n\n\nAccedi alla tua pagina utente per modificare la password ";
+		
+		System.out.println("la mail è "+mail);
+		log("la mail è "+mail);
+		
+		MailSender.send(mail, subject, text);
 		
 		doGet(request, response);
 	}

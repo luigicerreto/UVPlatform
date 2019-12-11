@@ -5,23 +5,18 @@
 						$(document)
 								.on(
 										'submit',
-										'#signUp',
+										'#recuperaPassword',
 										function(e) {
 											var email = $("#email").val();
 											$
 															.ajax({
 																url : absolutePath
-																		+ "/ServletStudent",
+																		+ "/ForgetPassword",
 																type : "POST",
 																dataType : 'JSON',
 																async : false,
 																data : {
-																	
-																	
 																	"email" : email,
-																	
-																	
-																	
 																},
 																success : function(
 																		msg) {
@@ -44,7 +39,7 @@
 																error : function(
 																		msg) {
 																	showAlert(1,
-																			"Impossibile Recuperare i dati.");
+																			"Impossibile inviare l'email.");
 																}
 															});
 

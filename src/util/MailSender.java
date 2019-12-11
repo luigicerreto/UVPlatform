@@ -8,17 +8,17 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.*;
 import java.util.Date;
 import java.util.Properties;
 
 public class MailSender {
 
 	// for example, smtp.mailgun.org
-    private static final String SMTP_SERVER = "smtp server ";
-    private static final String USERNAME = "";
-    private static final String PASSWORD = "";
-
-    private static final String EMAIL_FROM = "info@uvp.it";
+    private static final String SMTP_SERVER = "smtp.gmail.com";
+    private static final String USERNAME = "unisavalidationplatform@gmail.com";
+    private static final String PASSWORD = "h6n{;LG-+YqZX!G\"#.Kk2~WQNt[+-!%}";
+    private static final String EMAIL_FROM = "unisavalidationplatform@gmail.com";
 
    
 
@@ -35,7 +35,8 @@ public class MailSender {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.host", SMTP_SERVER); //optional, defined in SMTPTransport
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.port", "25"); // default port 25
+        prop.put("mail.smtp.port", "587"); // default port 25
+        prop.put("mail.smtp.starttls.enable", "true");
 
         Session session = Session.getInstance(prop, null);
         Message msg = new MimeMessage(session);
