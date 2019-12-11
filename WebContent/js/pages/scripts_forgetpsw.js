@@ -31,9 +31,10 @@
 
 																		setTimeout(
 																				function() {
+																					
 																					window.location.href = msg.redirect;
 																				},
-																				2000);
+																				4000);
 																	}
 																},
 																error : function(

@@ -26,10 +26,10 @@ public final class PasswordGenerator {
         private boolean usePunctuation;
 
         public PasswordGeneratorBuilder() {
-            this.useLower = false;
-            this.useUpper = false;
-            this.useDigits = false;
-            this.usePunctuation = false;
+            this.useLower = true;
+            this.useUpper = true;
+            this.useDigits = true;
+            this.usePunctuation = true;
         }
 
         /**

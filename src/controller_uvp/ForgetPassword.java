@@ -41,6 +41,7 @@ public class ForgetPassword extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	
+	@SuppressWarnings({"unchecked" })
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer result = 0;
 		String error = "";
@@ -49,7 +50,7 @@ public class ForgetPassword extends HttpServlet {
 		String mail= request.getParameter("email");
 		String subject = "Password autogenerata";
 		PasswordGenerator generatorePassword = new PasswordGenerator();
-		String text = "La tua nuova password è:\n\n"+generatorePassword.generate(32)+
+		String text = "La tua nuova password è:\n\n"+generatorePassword.generate(12)+
 				"\n\n\nAccedi alla tua pagina utente per modificare la password ";
 		try
 		{
@@ -61,6 +62,9 @@ public class ForgetPassword extends HttpServlet {
 			error+="Mail non inviata correttamente";
 		}
 		content = "Email inviata correttamente";
+		//TODO
+		//redirect non funziona.
+		redirect = request.getContextPath() + "/login.jsp";
 		
 		JSONObject res = new JSONObject();
 	    res.put("result", result);
