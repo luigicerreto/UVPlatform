@@ -86,7 +86,8 @@ public class ServletCommon extends HttpServlet {
 
               int userType = r.getInt("user_type");
               if (userType == 0) { // Profilo Student
-                redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
+            	  redirect = request.getContextPath() + "/scelta.jsp"; //Modifica effettuata= redirect su scelta.jsp in modo che l'utente possa scegliere gestione tirocinio o english validation
+               // redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
                 user = new Student(email, name, surname, sex, password, userType);
               } else if (userType == 1) { // Profilo Secretary
                 redirect = request.getContextPath() + "/_areaSecretary/viewRequest.jsp";
