@@ -65,6 +65,7 @@
 	
 
 	<jsp:include page="/partials/includes.jsp" />
+	<script src="<%= request.getContextPath() %>/js/pages/scripts_forgetpsw.js"></script>
 
 </body>
 </html>
