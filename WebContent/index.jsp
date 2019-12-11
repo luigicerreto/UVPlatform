@@ -44,7 +44,6 @@
 										aria-pressed="true">Registrati</a>
 									<p></p>
 								</div>
-
 							</div>
 						</div>
 					</div>
