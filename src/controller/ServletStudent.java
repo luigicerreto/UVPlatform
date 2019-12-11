@@ -138,13 +138,10 @@ public class ServletStudent extends HttpServlet {
                 
               stmt.setString(7, serial);
               if (stmt.executeUpdate() > 0) {
-<<<<<<< HEAD
             	  redirect = request.getContextPath() + "/scelta.jsp";
                 //redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
-=======
             	  redirect = request.getContextPath() + "/scelta.jsp"; // modifica effettuata per effettuare la scelta di english validation o tirocinio esterno
                // redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
->>>>>>> branch 'feature_1' of https://github.com/skizzotime/UVPlatform.git
                 user = new Student(email, name, surname, sex, password, userType);
                 request.getSession().setAttribute("user", user);
                 content = "Registrazione effettuata correttamente.";

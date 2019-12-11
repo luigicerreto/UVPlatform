@@ -30,7 +30,7 @@
 				<div class="row clearfix">
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
-<<<<<<< HEAD
+
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 index-container">
 								<div class="panel">
 									<h2 class="text-center">Benvenuto</h2>
@@ -54,34 +54,6 @@
 		
 		<jsp:include page="/partials/footer.jsp" />
 		</div>
-=======
-							<div class="news-block-seven">
-					
-								
-								<div
-									class="col-lg-6 col-md-6 col-sm-12 col-xs-12 index-container">
-									<div class="panel">
-										<h2 class="text-center"></h2>
-										<p></p>
-									</div> 
-									<a href="_areaStudent/viewRequest.jsp" class="btn btn-primary btn-lg btn-block"
-										role="button" aria-pressed="true">English Validation</a>
-									<p></p>
-									<a href="#"
-										class="btn btn-primary btn-lg btn-block" role="button"
-										aria-pressed="true">Richiesta Tirocinio</a> 
-									<p></p>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<jsp:include page="/partials/footer.jsp" />
-	</div>
->>>>>>> branch 'feature_1' of https://github.com/skizzotime/UVPlatform.git
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
