@@ -43,6 +43,10 @@
 										class="btn btn-primary btn-lg btn-block" role="button"
 										aria-pressed="true">Registrati</a>
 									<p></p>
+									<a href="#"
+										class="btn btn-primary btn-lg btn-block" role="button"
+										aria-pressed="true">Recupera password</a>
+									<p></p>
 								</div>
 							</div>
 						</div>
