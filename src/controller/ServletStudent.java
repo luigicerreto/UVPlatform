@@ -135,6 +135,7 @@ public class ServletStudent extends HttpServlet {
               stmt.setString(4, String.valueOf(sex));
               stmt.setString(5, password);
               stmt.setInt(6, userType);
+                
               stmt.setString(7, serial);
               if (stmt.executeUpdate() > 0) {
             	  redirect = request.getContextPath() + "/scelta.jsp"; // modifica effettuata per effettuare la scelta di english validation o tirocinio esterno
