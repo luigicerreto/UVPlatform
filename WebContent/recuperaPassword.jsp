@@ -31,19 +31,13 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-
 								<div
 									class="col-lg-6 col-md-6 col-sm-12 col-xs-12 signUp-container">
-									
-									<form id="signUp">
-										
+									<form id="recuperaPassword">
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<input type="email" class="form-control" id="email"
 												placeholder="Email" minlength="1" required>
 										</div>
-										
-
-										
 										<div
 											class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<button type="submit" class="btn btn-primary btn-submit">Invia</button>
