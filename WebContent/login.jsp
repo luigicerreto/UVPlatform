@@ -64,7 +64,7 @@
 		<jsp:include page="/partials/footer.jsp" />
 	</div>
 	<!--End pagewrapper-->
-
+	
 	<jsp:include page="/partials/includes.jsp" />
 	<script src="<%= request.getContextPath() %>/js/pages/scripts_login.js"></script>
 

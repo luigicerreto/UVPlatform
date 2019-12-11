@@ -52,6 +52,10 @@
 											<input type="email" class="form-control" id="email"
 												placeholder="Email" minlength="1" required>
 										</div>
+										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<input type="text" class="form-control" id="serial"
+												placeholder="Matricola" minlength="10" required>
+										</div>
 
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<label class="radio-inline"><input type="radio"

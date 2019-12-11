@@ -10,6 +10,7 @@ $(document)
 										var name = $("#name").val();
 										var surname = $("#surname").val();
 										var email = $("#email").val();
+										var serial = $('#serial').val();
 										var sex = $(".sex:checked").val();
 										var password = $("#password").val();
 										var verifyPassword = $(
@@ -18,6 +19,7 @@ $(document)
 										if (name != undefined
 												&& surname != undefined
 												&& email != undefined
+												&& serial != undefined
 												&& sex != undefined
 												&& password != undefined
 												&& verifyPassword != undefined) {
@@ -38,6 +40,7 @@ $(document)
 																"name" : name,
 																"surname" : surname,
 																"email" : email,
+																"serial" : serial,
 																"sex" : sex,
 																"password" : password,
 																"flag" : 1

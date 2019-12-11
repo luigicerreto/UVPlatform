@@ -90,6 +90,7 @@ public class ServletStudent extends HttpServlet {
          * se non � presente nel DB e se rispetta il formato
          * se finisce con @studenti.unisa.it
         */
+        String serial = request.getParameter("serial");
         String prefix = "";
         if (email.length() > 0) {
           prefix = email.substring(0, email.indexOf("@"));
@@ -125,8 +126,8 @@ public class ServletStudent extends HttpServlet {
           } else {
             int count = r.last() ? r.getRow() : 0;
             if (count == 0) {
-              sql = " INSERT INTO user " + " (email, name, surname, sex, password, user_type) "
-                  + " VALUES " + " (?, ?, ?, ?, ?, ?) ";
+              sql = " INSERT INTO user " + " (email, name, surname, sex, password, user_type, serial) "
+                  + " VALUES " + " (?, ?, ?, ?, ?, ?,?) ";
               stmt = conn.prepareStatement(sql);
               stmt.setString(1, email.toLowerCase());
               stmt.setString(2, name);
@@ -134,9 +135,16 @@ public class ServletStudent extends HttpServlet {
               stmt.setString(4, String.valueOf(sex));
               stmt.setString(5, password);
               stmt.setInt(6, userType);
+                
+              stmt.setString(7, serial);
               if (stmt.executeUpdate() > 0) {
+<<<<<<< HEAD
             	  redirect = request.getContextPath() + "/scelta.jsp";
                 //redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
+=======
+            	  redirect = request.getContextPath() + "/scelta.jsp"; // modifica effettuata per effettuare la scelta di english validation o tirocinio esterno
+               // redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
+>>>>>>> branch 'feature_1' of https://github.com/skizzotime/UVPlatform.git
                 user = new Student(email, name, surname, sex, password, userType);
                 request.getSession().setAttribute("user", user);
                 content = "Registrazione effettuata correttamente.";
