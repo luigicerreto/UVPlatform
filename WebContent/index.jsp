@@ -31,9 +31,7 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-
-								<div
-									class="col-lg-6 col-md-6 col-sm-12 col-xs-12 index-container">
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 index-container">
 									<div class="panel">
 										<h2 class="text-center">Benvenuto</h2>
 										<p></p>
