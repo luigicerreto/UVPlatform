@@ -8,14 +8,13 @@ $(document).ready(function() {
 			$(".preloader").show();
 
 			$.ajax({
-				url : absolutePath + "/ServletCommon",
+				url : absolutePath + "/ServletLogin",
 				type : "POST",
 				dataType : 'JSON',
 				async : false,
 				data : {
 					"email" : email,
-					"password" : password,
-					"flag" : 1
+					"password" : password
 				},
 				success : function(msg) {
 					if (!msg.result) {
@@ -28,13 +27,10 @@ $(document).ready(function() {
 					showAlert(1, "Impossibile Recuperare i dati.");
 				}
 			});
-
 			$(".preloader").hide();
 		} else {
 			showAlert(1, "Errore prelevamento dati.");
 		}
-
 		return false;
 	});
-
 });

@@ -21,7 +21,7 @@ import model.Student;
 /**
  * Servlet implementation class Signup
  */
-@WebServlet("/Signup")
+@WebServlet("/ServletSignup")
 public class ServletSignup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
