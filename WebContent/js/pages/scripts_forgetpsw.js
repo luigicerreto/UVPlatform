@@ -6,7 +6,7 @@
 								.on(
 										'submit',
 										'#recuperaPassword',
-										function(e) {
+										function() {
 											
 					
 											var email = $("#email").val();
@@ -26,7 +26,7 @@
 																success : function(
 																		msg) {
 																			
-																	if (false) {
+																	if (!msg.result) {
 																		showAlert(
 																				1,
 																				msg.error);
@@ -44,7 +44,7 @@
 																					alert(msg.redirect);
 																					window.location.href = msg.redirect;
 																				},
-																				20000000000000000);
+																				6000000000000000000000);
 																				//TODO
 																	}
 																},
