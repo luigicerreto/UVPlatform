@@ -12,7 +12,7 @@ public final class PasswordGenerator {
     private boolean useLower= true;
     private boolean useUpper= true;
     private boolean useDigits= true;
-    private boolean usePunctuation= true;
+    private boolean usePunctuation= false;
 
 
     public PasswordGenerator() {
@@ -29,7 +29,7 @@ public final class PasswordGenerator {
             this.useLower = true;
             this.useUpper = true;
             this.useDigits = true;
-            this.usePunctuation = true;
+            this.usePunctuation = false;
         }
 
         /**

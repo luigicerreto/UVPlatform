@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import util.MailSender;
+import util.Mailer;
 import util.PasswordGenerator;
 
 /**
@@ -54,7 +54,9 @@ public class ForgetPassword extends HttpServlet {
 				"\n\n\nAccedi alla tua pagina utente per modificare la password ";
 		try
 		{
-		MailSender.send(mail, subject, text);
+		Mailer.send(mail,subject,text);  
+		
+		//MailSender.send(mail, subject, text);
 		result=1;
 		}
 		catch (Exception e)

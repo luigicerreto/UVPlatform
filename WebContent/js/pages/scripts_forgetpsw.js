@@ -34,7 +34,7 @@
 																					
 																					window.location.href = msg.redirect;
 																				},
-																				4000);
+																				2000);
 																	}
 																},
 																error : function(
