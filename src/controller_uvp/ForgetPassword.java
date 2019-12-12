@@ -67,7 +67,6 @@ public class ForgetPassword extends HttpServlet {
 		//TODO
 		//redirect non funziona.
 		redirect = request.getContextPath() + "/login.jsp";
-		
 		JSONObject res = new JSONObject();
 	    res.put("result", result);
 	    res.put("error", error);
@@ -76,6 +75,7 @@ public class ForgetPassword extends HttpServlet {
 	    PrintWriter out = response.getWriter();
 	    out.println(res);
 	    response.setContentType("json");
+	    
 		
 	}
 
