@@ -56,12 +56,13 @@ public class ForgetPassword extends HttpServlet {
 		{
 		Mailer.send(mail,subject,text);  
 		result=1;
+		content = "Email inviata correttamente";
 		}
 		catch (Exception e)
 		{
-			error+="Mail non inviata correttamente";
+			error ="Mail non inviata correttamente";
 		}
-		content = "Email inviata correttamente";
+		
 		//TODO
 		//redirect non funziona.
 		redirect = request.getContextPath() + "/login.jsp";
