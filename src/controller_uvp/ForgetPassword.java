@@ -55,8 +55,6 @@ public class ForgetPassword extends HttpServlet {
 		try
 		{
 		Mailer.send(mail,subject,text);  
-		
-		//MailSender.send(mail, subject, text);
 		result=1;
 		}
 		catch (Exception e)
