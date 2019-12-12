@@ -35,7 +35,7 @@ public class MailSender {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.host", SMTP_SERVER); //optional, defined in SMTPTransport
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.port", "587"); // default port 25
+        prop.put("mail.smtp.port", "25"); // default port 25
         prop.put("mail.smtp.starttls.enable", "true");
 
         Session session = Session.getInstance(prop, null);
