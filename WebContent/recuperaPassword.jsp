@@ -32,6 +32,10 @@
 						<div class="content">
 							<div class="news-block-seven">
 								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 signUp-container">
+								<div class="panel">
+										<h2 class="text-center">Inserisci la tua E-mail</h2>
+										<p></p>
+									</div>
 									<form id="recuperaPassword">
 										<input type="email" class="form-control" id="email"
 											placeholder="Email" minlength="1" required>

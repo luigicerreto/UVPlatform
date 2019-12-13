@@ -30,7 +30,7 @@ public class DbConnection {
     try {
       Class.forName("com.mysql.jdbc.Driver");
       String url = "jdbc:mysql://" + this.hostName + ":" + this.hostPort + "/" + this.databaseName
-          + "?useSSL=false";
+          + "?allowPublicKeyRetrieval=true" + "&useSSL=false";
       this.conn = DriverManager.getConnection(url, this.userName, this.password);
       this.conn.setAutoCommit(false);
     } catch (Exception exc) {
