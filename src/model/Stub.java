@@ -3,7 +3,7 @@ package model;
 import java.util.HashMap;
 
 public class Stub {
-  HashMap<String, String> database;
+  public HashMap<String, String> database;
   Student st = new Student("aaa@sss.it", "","",'x',"hhh",0);
   Student st2 = new Student("xxx", "","",'t',"",1);
   Secretary sc = new Secretary("zzz@lif.it", "","",'f', "qqq", 1);
