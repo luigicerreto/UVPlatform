@@ -40,7 +40,7 @@
 									<a href="_areaStudent/viewRequest.jsp" class="btn btn-primary btn-lg btn-block"
 										role="button" aria-pressed="true">English Validation</a>
 									<p></p>
-									<a href="#"
+									<a href="_areaStudent_uvp/viewRichiestaTirocinio.jsp"
 										class="btn btn-primary btn-lg btn-block" role="button"
 										aria-pressed="true">Richiesta Tirocinio</a>
 									<p></p>
