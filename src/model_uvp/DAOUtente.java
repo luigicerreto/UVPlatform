@@ -9,6 +9,19 @@ import controller.Utils;
 
 
 public class DAOUtente {
+	/**
+	 * 
+	 * Questo metodo serve per aggiornare la password nel database dato
+	 * la mail dell'utente e la nuova password.
+	 * 
+	 * 
+	 * @author Antonio Baldi
+	 * @author Rosario Di Palma
+	 * @param email
+	 * @param nuovaPsw
+	 * @return Boolean
+	 * @throws SQLException
+	 */
 	public static boolean updatePassword(String email, String nuovaPsw) throws SQLException 
 	{
 		String newPassword = new Utils().generatePwd(nuovaPsw);
@@ -38,9 +51,20 @@ public class DAOUtente {
 		}
 		return false;
 	}
-
+	/**
+	 * 
+	 * Questo metodo serve per controllare se la mail passata come paramentro
+	 * è presente nel database.
+	 * 
+	 * @author Antonio Baldi
+	 * @author Rosario Di Palma
+	 * @param email
+	 * @return
+	 * @throws SQLException
+	 */
 	public static boolean checkMail(String email) throws SQLException 
 	{
+
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		String checkMail = "SELECT EMAIL FROM user where EMAIL = ?;";
