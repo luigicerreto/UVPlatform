@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import model_uvp.DAOUtente;
 import util.Mailer;
 import util.PasswordGenerator;
 
@@ -20,14 +21,14 @@ import util.PasswordGenerator;
 @WebServlet("/ForgetPassword")
 public class ForgetPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ForgetPassword() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ForgetPassword() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,42 +41,61 @@ public class ForgetPassword extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	
+
 	@SuppressWarnings({"unchecked" })
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer result = 0;
 		String error = "";
-	    String content = "";
-	    String redirect = "";
+		String content = "";
+		String redirect = "";
 		String mail= request.getParameter("email");
 		String subject = "Password autogenerata";
 		PasswordGenerator generatorePassword = new PasswordGenerator();
-		String text = "La tua nuova password è:\n\n"+generatorePassword.generate(12)+
-				"\n\n\nAccedi alla tua pagina utente per modificare la password ";
+		String nuovaPsw = generatorePassword.generate(12);
+		String text = "La tua nuova password è:\n\n"+nuovaPsw+
+				"\n\n\nAccedi alla tua pagina utente per modificare la password";
 		try
 		{
-		Mailer.send(mail,subject,text);  
-		result=1;
-		content = "Email inviata correttamente";
+			if(!DAOUtente.checkMail(mail))
+			{
+				result=0;
+				error = "L'Email inserita non e' registrata";
+			}
+			else
+			{
+				if(DAOUtente.updatePassword(mail, nuovaPsw))
+				{
+					Mailer.send(mail,subject,text);  
+					result=1;
+					content = "Email inviata correttamente";
+				}
+				else
+				{
+					result=0;
+					error = "Errore nell'aggiornamento della password";
+				}
+			}
 		}
 		catch (Exception e)
 		{
-			error ="Mail non inviata correttamente";
+			result=0;
+			error ="Impossibile recuperare i dati";
+			e.printStackTrace();
 		}
-		
+
 		//TODO
 		//redirect non funziona.
 		redirect = request.getContextPath() + "/login.jsp";
 		JSONObject res = new JSONObject();
-	    res.put("result", result);
-	    res.put("error", error);
-	    res.put("content", content);
-	    res.put("redirect", redirect);
-	    PrintWriter out = response.getWriter();
-	    out.println(res);
-	    response.setContentType("json");
-	    
-		
+		res.put("result", result);
+		res.put("error", error);
+		res.put("content", content);
+		res.put("redirect", redirect);
+		PrintWriter out = response.getWriter();
+		out.println(res);
+		response.setContentType("json");
+
+
 	}
 
 }

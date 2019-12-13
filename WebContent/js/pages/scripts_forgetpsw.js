@@ -26,7 +26,7 @@ $(document).ready(function()
 									{
 								window.location.href = msg.redirect;
 									},
-									2000);
+									500);
 						}
 					},
 					error : function(msg) 
