@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
 
 <%
-	String pageName = "scelta.jsp";
+	String pageName = "sceltaTirocinio.jsp";
 	String pageFolder = "";
 %>
 
@@ -33,16 +33,16 @@
 
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 index-container">
 								<div class="panel">
-									<h2 class="text-center">Fai la tua scelta</h2>
+									<h2 class="text-center">Scegli Tirocinio</h2>
 										<p></p>
 									</div>
 							<div class="news-block-seven">
 									<a href="_areaStudent/viewRequest.jsp" class="btn btn-primary btn-lg btn-block"
-										role="button" aria-pressed="true">English Validation</a>
+										role="button" aria-pressed="true">Tirocinio Interno</a>
 									<p></p>
 									<a href="_areaStudent_uvp/viewRequestInternship.jsp"
 										class="btn btn-primary btn-lg btn-block" role="button"
-										aria-pressed="true">Richiesta Tirocinio</a>
+										aria-pressed="true">Tirocinio Esterno</a>
 									<p></p>
 								</div>
 							</div>
