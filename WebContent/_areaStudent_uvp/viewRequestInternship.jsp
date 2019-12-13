@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
 <%@ page import="java.util.*,model.Request"%>
 <%
-	String pageName = "viewRichiestaTirocinio.jsp";
+	String pageName = "viewRequestInternship.jsp";
 	String pageFolder = "_areaStudent_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if(!ck.isAllowed()){
@@ -40,6 +40,7 @@
 											<th class="text-center" align="center">ID</th>
 											<th class="text-center" align="center">Matricola</th>
 											<th class="text-center" align="center">Allegati</th>
+											<th class="text-center" align="center">Tipo di richiesta</th>
 											<th class="text-center" align="center">Stato</th>
 										</tr>
 									</thead>
@@ -93,7 +94,7 @@
 			});
 		</script>
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_viewRichiestaTirocinio.js"></script>
+		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestInternship.js"></script>
 		
 </body>
 </html>
