@@ -52,36 +52,13 @@
 									<p></p>
 								</div>
 							</div>
-							<div class="news-block-seven" id="intInternshipTable">
-								<table id="internshipTable"
-									class="display data-results table table-striped table-hover table-bordered">
+							<div class="news-block-seven" id="internshipTableDiv">
+								<table id="internshipTable" class="display data-results table table-striped table-hover table-bordered">
 									<thead>
-										<tr align="center">
-											<th class="text-center" align="center">ID Docente</th>
-											<th class="text-center" align="center">Nome</th>
-											<th class="text-center" align="center">Sede</th>
-											<th class="text-center" align="center">Scelta</th>
-										</tr>
+									
 									</thead>
 									<tbody id="bodyInternshipTable">
-									</tbody>
-								</table>
-							</div>
-
-							<div class="news-block-seven" id="extInternshipTable">
-								<table id="internshipTable"
-									class="display data-results table table-striped table-hover table-bordered">
-									<thead>
-										<tr align="center">
-											<th class="text-center" align="center">ID Azienda</th>
-											<th class="text-center" align="center">Azienda</th>
-											<th class="text-center" align="center">Sede</th>
-											<th class="text-center" align="center">Data Inizio</th>
-											<th class="text-center" align="center">Scelta</th>
-
-										</tr>
-									</thead>
-									<tbody id="bodyInternshipTable">
+									
 									</tbody>
 								</table>
 							</div>
@@ -95,44 +72,6 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-	<script>
-		jQuery(document)
-				.ready(
-						function($) {
-							$('#internshipTable')
-									.DataTable(
-											{
-												"order" : [ [ 0, "desc" ] ],
-												"lengthMenu" : [ [ 10, -1 ],
-														[ 10, "Tutti" ] ],
-												"autoWidth" : false,
-												"bAutoWidth" : false,
-												"language" : {
-													"sEmptyTable" : "Nessuna Richiesta Presente",
-													"sInfo" : "Vista da _START_ a _END_ di _TOTAL_ elementi",
-													"sInfoEmpty" : "Vista da 0 a 0 di 0 elementi",
-													"sInfoFiltered" : "(filtrati da _MAX_ elementi totali)",
-													"sInfoPostFix" : "",
-													"sInfoThousands" : ".",
-													"sLengthMenu" : "Visualizza _MENU_ elementi",
-													"sLoadingRecords" : "Caricamento...",
-													"sProcessing" : "Elaborazione...",
-													"sSearch" : "Cerca:",
-													"sZeroRecords" : "La ricerca non ha portato alcun risultato.",
-													"oPaginate" : {
-														"sFirst" : "Inizio",
-														"sPrevious" : '<i class="fa fa-caret-left"></i>',
-														"sNext" : '<i class="fa fa-caret-right"></i>',
-														"sLast" : "Fine"
-													},
-													"oAria" : {
-														"sSortAscending" : ": attiva per ordinare la colonna in ordine crescente",
-														"sSortDescending" : ": attiva per ordinare la colonna in ordine decrescente"
-													}
-												}
-											});
-						});
-	</script>
 	<script
 		src="<%=request.getContextPath()%>/js/pages/scripts_internship.js"></script>
 
