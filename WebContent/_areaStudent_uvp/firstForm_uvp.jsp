@@ -6,8 +6,8 @@
 	String pageName = "firstForm_uvp.jsp";
 	String pageFolder = "_areaStudent_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
-	if(!ck.isAllowed()){
-	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
+	if (!ck.isAllowed()) {
+		response.sendRedirect(request.getContextPath() + ck.getUrlRedirect());
 	}
 %>
 
@@ -36,7 +36,8 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven" id="internshipChoice">
-								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 index-container">
+								<div
+									class="col-lg-6 col-md-6 col-sm-12 col-xs-12 index-container">
 									<div class="panel">
 										<h2 class="text-center">Scegli Tirocinio</h2>
 										<p></p>
@@ -51,16 +52,15 @@
 									<p></p>
 								</div>
 							</div>
-							<div class="news-block-seven" id="internshipTableDiv">
+							<div class="news-block-seven" id="intInternshipTable">
 								<table id="internshipTable"
 									class="display data-results table table-striped table-hover table-bordered">
 									<thead>
 										<tr align="center">
-											<th class="text-center" align="center">ID</th>
-											<th class="text-center" align="center">Matricola</th>
-											<th class="text-center" align="center">Allegati</th>
-											<th class="text-center" align="center">Tipo di richiesta</th>
-											<th class="text-center" align="center">Stato</th>
+											<th class="text-center" align="center">ID Docente</th>
+											<th class="text-center" align="center">Nome</th>
+											<th class="text-center" align="center">Sede</th>
+											<th class="text-center" align="center">Scelta</th>
 										</tr>
 									</thead>
 									<tbody id="bodyInternshipTable">
@@ -68,6 +68,23 @@
 								</table>
 							</div>
 
+							<div class="news-block-seven" id="extInternshipTable">
+								<table id="internshipTable"
+									class="display data-results table table-striped table-hover table-bordered">
+									<thead>
+										<tr align="center">
+											<th class="text-center" align="center">ID Azienda</th>
+											<th class="text-center" align="center">Azienda</th>
+											<th class="text-center" align="center">Sede</th>
+											<th class="text-center" align="center">Data Inizio</th>
+											<th class="text-center" align="center">Scelta</th>
+
+										</tr>
+									</thead>
+									<tbody id="bodyInternshipTable">
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
