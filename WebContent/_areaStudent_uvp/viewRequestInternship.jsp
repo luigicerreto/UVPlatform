@@ -34,7 +34,7 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-								<table id="studentTable" class="display data-results table table-striped table-hover table-bordered">
+								<table id="studentTableInternship" class="display data-results table table-striped table-hover table-bordered">
 									<thead>
 										<tr align="center">
 											<th class="text-center" align="center">ID</th>
@@ -44,7 +44,7 @@
 											<th class="text-center" align="center">Stato</th>
 										</tr>
 									</thead>
-									<tbody id="bodyStudentTable">
+									<tbody id="bodyStudentTableInternship">
 									</tbody>
 								</table>
 
@@ -62,7 +62,7 @@
 
 	<script>
 			jQuery(document).ready(function($){
-				$('#studentTable').DataTable( {
+				$('#studentTableInternship').DataTable( {
 			        "order": [[ 0, "desc" ]],
 			        "lengthMenu": [[10, -1], [10, "Tutti"]],
 			        "autoWidth": false,

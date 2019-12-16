@@ -6,18 +6,17 @@ function showData() {
 	$(".preloader").show();
 
 	$.ajax({
-		url : absolutePath + "/ServletStudent",
+		url : absolutePath + "/showRequest",
 		type : "POST",
 		dataType : 'JSON',
 		async : false,
 		data : {
-			"flag" : 4
 		},
 		success : function(msg) {
 			if (!msg.result) {
 				showAlert(1, msg.error);
 			} else {
-				$("#bodyStudentTable").html(msg.content);
+				$("#bodyStudentTableInternship").html(msg.content);
 			}
 		},
 		error : function(msg) {

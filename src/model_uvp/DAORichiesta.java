@@ -27,8 +27,7 @@ public class DAORichiesta {
 		PreparedStatement statement = null;
 		ResultSet resultAttached;
 		ResultSet result;
-		String viewRequest = "use uvplatform;\r\n" + 
-				"Select richiesta.id_request_i, user.SERIAL, richiesta.type, richiesta.STATE\r\n" + 
+		String viewRequest = "Select richiesta.id_request_i, user.SERIAL, richiesta.type, richiesta.STATE\r\n" + 
 				"from request_internship as richiesta inner join internship_i as interno on richiesta.FK_II = interno.id_ii\r\n" + 
 				"inner join user on richiesta.FK_USER1 = user.EMAIL\r\n" + 
 				"where richiesta.FK_USER1 = ?";
@@ -38,18 +37,21 @@ public class DAORichiesta {
 			statement = con.prepareStatement(viewRequest);
 			statement.setString(1, email);
 			result = statement.executeQuery();
-			String attachedQuery="";
+			String attachedQuery="SELECT a.filename AS filename \r\n" + 
+					"FROM attached a \r\n" + 
+					"WHERE a.fk_request_I = ?";
 			List<Attached> attacheds;
 			Attached attac;
 			while(result.next())
 			{
 				
 				statement=con.prepareStatement(attachedQuery);
+				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();
 				attacheds = new ArrayList<Attached>();
-				attac=null;
 				while(resultAttached.next())
 				{
+				attac = new Attached();
 				attac.setFilename(resultAttached.getString(1));
 				attacheds.add(attac);
 				}
@@ -58,6 +60,8 @@ public class DAORichiesta {
 				request1.setAttached(attacheds);
 				request1.setType(result.getString(3));
 				request1.setState(result.getString(4));
+				System.out.println("Gli allegati sono "+attacheds.get(0).getFilename()+ "    "+attacheds.get(1).getFilename());
+			requests.add(request1);
 			}
 			
 		}
