@@ -36,12 +36,11 @@ $(document).ready(function() {
 		
 		// carica i dati dal db
 		$.ajax({
-			url : absolutePath + "/ServletInternship",
+			url : absolutePath + "/InternalTrainee",
 			type : "POST",
 			dataType : 'JSON',
 			async : false,
 			data : {
-				"type" : flag
 			},
 			success : function(msg) {
 				if (!msg.result) {
