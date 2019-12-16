@@ -2,18 +2,20 @@ $(document).ready(function() {
 	$("div#internshipTableDiv").css("display", "none");
 	
 	$('.btn').click(function(){
+		var btnId = $(this).attr('id');
+		var flag = (btnId === "internoBtn") ? 0 : 1;
+
 		$("div#internshipChoice").css("display", "none");
 		$('.panel').css("display", "none");
 		
 		$(".preloader").show();
 		$.ajax({
-			url : absolutePath + "/ServletStudent",
+			url : absolutePath + "/ServletInternship",
 			type : "POST",
 			dataType : 'JSON',
 			async : false,
 			data : {
-				"flag" : 4
-				//"type" : 0
+				"type" : flag
 			},
 			success : function(msg) {
 				if (!msg.result) {
