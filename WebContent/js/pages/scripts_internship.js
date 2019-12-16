@@ -6,7 +6,6 @@ $(document).ready(function() {
 		var flag = (btnId === "internoBtn") ? 0 : 1;
 
 		$("div#internshipChoice").css("display", "none");
-		$('.panel').css("display", "none");
 		
 		$(".preloader").show();
 		$.ajax({

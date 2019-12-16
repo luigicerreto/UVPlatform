@@ -30,43 +30,44 @@
 		</jsp:include>
 
 
-		<div class="sidebar-page-container basePage firstFormPage">
+		<div class="sidebar-page-container basePage indexPage">
 			<div class="auto-container">
 				<div class="row clearfix">
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
-
-
-							<div class="panel">
-								<h2 class="text-center">Scegli Tirocinio</h2>
-								<p></p>
-							</div>
 							<div class="news-block-seven" id="internshipChoice">
-								<a href="#" id="internoBtn"
-									class="btn btn-primary btn-lg btn-block" role="button"
-									aria-pressed="true">Tirocinio Interno</a>
-								<p></p>
-								<a href="#" id="esternoBtn"
-									class="btn btn-primary btn-lg btn-block" role="button"
-									aria-pressed="true">Tirocinio Esterno</a>
-								<p></p>
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 index-container">
+									<div class="panel">
+										<h2 class="text-center">Scegli Tirocinio</h2>
+										<p></p>
+									</div>
+									<a href="#" id="internoBtn"
+										class="btn btn-primary btn-lg btn-block" role="button"
+										aria-pressed="true">Tirocinio Interno</a>
+									<p></p>
+									<a href="#" id="esternoBtn"
+										class="btn btn-primary btn-lg btn-block" role="button"
+										aria-pressed="true">Tirocinio Esterno</a>
+									<p></p>
+								</div>
 							</div>
 							<div class="news-block-seven" id="internshipTableDiv">
-							<table id="internshipTable"
-								class="display data-results table table-striped table-hover table-bordered">
-								<thead>
-									<tr align="center">
-										<th class="text-center" align="center">ID</th>
-										<th class="text-center" align="center">Matricola</th>
-										<th class="text-center" align="center">Allegati</th>
-										<th class="text-center" align="center">Tipo di richiesta</th>
-										<th class="text-center" align="center">Stato</th>
-									</tr>
-								</thead>
-								<tbody id="bodyInternshipTable">
-								</tbody>
-							</table>
+								<table id="internshipTable"
+									class="display data-results table table-striped table-hover table-bordered">
+									<thead>
+										<tr align="center">
+											<th class="text-center" align="center">ID</th>
+											<th class="text-center" align="center">Matricola</th>
+											<th class="text-center" align="center">Allegati</th>
+											<th class="text-center" align="center">Tipo di richiesta</th>
+											<th class="text-center" align="center">Stato</th>
+										</tr>
+									</thead>
+									<tbody id="bodyInternshipTable">
+									</tbody>
+								</table>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -78,40 +79,45 @@
 
 	<jsp:include page="/partials/includes.jsp" />
 	<script>
-			jQuery(document).ready(function($){
-				$('#internshipTable').DataTable( {
-			        "order": [[ 0, "desc" ]],
-			        "lengthMenu": [[10, -1], [10, "Tutti"]],
-			        "autoWidth": false,
-			        "bAutoWidth": false,			        
-			        "language": {
-						    "sEmptyTable":     "Nessuna Richiesta Presente",
-						    "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
-						    "sInfoEmpty":      "Vista da 0 a 0 di 0 elementi",
-						    "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
-						    "sInfoPostFix":    "",
-						    "sInfoThousands":  ".",
-						    "sLengthMenu":     "Visualizza _MENU_ elementi",
-						    "sLoadingRecords": "Caricamento...",
-						    "sProcessing":     "Elaborazione...",
-						    "sSearch":         "Cerca:",
-						    "sZeroRecords":    "La ricerca non ha portato alcun risultato.",
-						    "oPaginate": {
-						        "sFirst":      "Inizio",
-						        "sPrevious":   '<i class="fa fa-caret-left"></i>',
-						        "sNext":       '<i class="fa fa-caret-right"></i>',
-						        "sLast":       "Fine"
-						    },
-						    "oAria": {
-						        "sSortAscending":  ": attiva per ordinare la colonna in ordine crescente",
-						        "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
-						    }
-			        }        
-			    } );
-			});
+		jQuery(document)
+				.ready(
+						function($) {
+							$('#internshipTable')
+									.DataTable(
+											{
+												"order" : [ [ 0, "desc" ] ],
+												"lengthMenu" : [ [ 10, -1 ],
+														[ 10, "Tutti" ] ],
+												"autoWidth" : false,
+												"bAutoWidth" : false,
+												"language" : {
+													"sEmptyTable" : "Nessuna Richiesta Presente",
+													"sInfo" : "Vista da _START_ a _END_ di _TOTAL_ elementi",
+													"sInfoEmpty" : "Vista da 0 a 0 di 0 elementi",
+													"sInfoFiltered" : "(filtrati da _MAX_ elementi totali)",
+													"sInfoPostFix" : "",
+													"sInfoThousands" : ".",
+													"sLengthMenu" : "Visualizza _MENU_ elementi",
+													"sLoadingRecords" : "Caricamento...",
+													"sProcessing" : "Elaborazione...",
+													"sSearch" : "Cerca:",
+													"sZeroRecords" : "La ricerca non ha portato alcun risultato.",
+													"oPaginate" : {
+														"sFirst" : "Inizio",
+														"sPrevious" : '<i class="fa fa-caret-left"></i>',
+														"sNext" : '<i class="fa fa-caret-right"></i>',
+														"sLast" : "Fine"
+													},
+													"oAria" : {
+														"sSortAscending" : ": attiva per ordinare la colonna in ordine crescente",
+														"sSortDescending" : ": attiva per ordinare la colonna in ordine decrescente"
+													}
+												}
+											});
+						});
 	</script>
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_internship.js"></script>
+		src="<%=request.getContextPath()%>/js/pages/scripts_internship.js"></script>
 
 </body>
 </html>
