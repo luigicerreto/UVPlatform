@@ -80,7 +80,8 @@ public class ServletLogin extends HttpServlet {
 						if (userType == 0) { // Profilo Student
 							// cambiato il redirect per la nuova pagina scelta tra tirocinio e english validation
 
-							redirect = request.getContextPath() + "/scelta.jsp"; //Modifica effettuata= redirect su scelta.jsp in modo che l'utente possa scegliere gestione tirocinio o english validation
+							redirect = request.getContextPath() + "/scelta.jsp"; 
+							//Modifica effettuata= redirect su scelta.jsp in modo che l'utente possa scegliere gestione tirocinio o english validation
 							// redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
 							user = new Student(email, name, surname, sex, password, userType);
 						} else if (userType == 1) { // Profilo Secretary
@@ -90,6 +91,11 @@ public class ServletLogin extends HttpServlet {
 							redirect = request.getContextPath() + "/_areaAdmin/viewRequest.jsp";
 							user = new Admin(email, name, surname, sex, password, userType);
 						}
+						else if (userType == 3) { // Profilo docente
+							redirect = request.getContextPath() + "/_areaAdmin/viewRequest.jsp";
+							user = new Admin(email, name, surname, sex, password, userType);
+						}
+						
 						else {
 							throw new NumberFormatException("utente non valido");
 						}

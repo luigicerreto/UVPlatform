@@ -21,7 +21,7 @@ public class DbConnection {
    */
   public DbConnection() {
     this.conn = null;
-    this.databaseName = "uvplatform";
+    this.databaseName = "uvp_test";
     this.userName = "root";
     this.password = "root";
     this.hostPort = 3306;
