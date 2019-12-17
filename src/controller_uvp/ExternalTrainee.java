@@ -59,7 +59,7 @@ public class ExternalTrainee extends HttpServlet {
 				jObj.put("id", a.getId_ie());
 				jObj.put("name", a.getName());
 				jObj.put("place", a.getPlace());
-				jObj.put("date", a.getDate_convention());
+				jObj.put("date", String.valueOf(a.getDate_convention()));
 				jArr.add(jObj);
 			}
 		}
