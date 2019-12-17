@@ -18,7 +18,7 @@ $(document).ready(function() {
 					"<tr align=\"center\">" +
 					"<th class=\"text-center\" align=\"center\">ID Docente</th>" +
 					"<th class=\"text-center\" align=\"center\">Nome</th>" +
-					"<th class=\"text-center\" align=\"center\">Disponibilità</th>" +
+					"<th class=\"text-center\" align=\"center\">Sede</th>" +
 					"<th class=\"text-center\" align=\"center\">Scelta</th>" +
 					"</tr>"
 			);
@@ -37,7 +37,7 @@ $(document).ready(function() {
 		        "columns" : [
 		            { "data" : "id" },
 		            { "data" : "name" },
-		            { "data" : "availability" }
+		            { "data" : "place" }
 		        ],
 		        "language": {
 					    "sEmptyTable":     "Nessun tirocinio interno disponibile",
@@ -66,7 +66,7 @@ $(document).ready(function() {
 					"<th class=\"text-center\" align=\"center\">ID Azienda</th>" +
 					"<th class=\"text-center\" align=\"center\">Azienda</th>" +
 					"<th class=\"text-center\" align=\"center\">Sede</th>" +
-					"<th class=\"text-center\" align=\"center\">Data Inizio</th>" +
+					"<th class=\"text-center\" align=\"center\">Data Stipula</th>" +
 					"<th class=\"text-center\" align=\"center\">Scelta</th>" +
 					"</tr>"
 			);

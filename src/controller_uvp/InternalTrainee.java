@@ -30,7 +30,6 @@ public class InternalTrainee extends HttpServlet {
      */
     public InternalTrainee() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -59,7 +58,7 @@ public class InternalTrainee extends HttpServlet {
 				jObj = new JSONObject();
 				jObj.put("id", a.getId_ii());
 				jObj.put("name", a.getTutorn_name());
-				jObj.put("availability", a.getAvailability());
+				jObj.put("place", a.getPlace());
 				jArr.add(jObj);
 			}
 		}

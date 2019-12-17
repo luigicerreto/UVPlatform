@@ -31,7 +31,6 @@ public class ExternalTrainee extends HttpServlet {
      */
     public ExternalTrainee() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
