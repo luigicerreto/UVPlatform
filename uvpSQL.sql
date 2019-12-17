@@ -78,15 +78,15 @@ primary key(id_ie)
 CREATE TABLE internship_i (
 id_ii int(10) not null AUTO_INCREMENT,
 tutor_name varchar(50) not null,
-theme varchar(50) not null,
+theme varchar(400) not null,
 availability int(3),
-resources varchar(200),
-goals varchar(100),
+resources varchar(400),
+goals varchar(400),
 primary key(id_ii)
 );
 
 CREATE TABLE request_internship (
-id_request_i int(10) not null,
+id_request_i int(10) not null AUTO_INCREMENT,
 type varchar(20) not null,
 FK_USER1 varchar(50) not null,
 FK_USER2 varchar(50) not null,
@@ -230,6 +230,46 @@ INSERT INTO ENTE
 VALUES ('16', '','Gatehouse Awards Ltd','', 1);
 INSERT INTO ENTE
 VALUES ('17', '','LanguageCert','', 1);
+
+INSERT INTO internship_i (id_ii, tutor_name, theme, availability, resources, goals)
+VALUES (1, "Roberto De Prisco", "Mobile computing", 15, "Programmazione Object Oriented", "Padroneggiare Kotlin");
+INSERT INTO internship_i (id_ii, tutor_name, theme, availability, resources, goals)
+VALUES (2, "Annalisa de Bonis", "Algoritmi avanzati in Python", 60, "Progettazione Algoritmi", "Scrivere algoritmi con complessità lineare "); 
+INSERT INTO internship_i (id_ii, tutor_name, theme, availability, resources, goals)
+VALUES (3, "Bruno Carpentieri", "Compressione dati", 5, "Gestione dei dati", "System administrator");
+INSERT INTO internship_i (id_ii, tutor_name, theme, availability, resources, goals)
+VALUES (4, "Giuseppe Polese", "Studio dei Big Data", 2, "Gestione delle basi dati", "Studio dei Big data");
+INSERT INTO internship_i (id_ii, tutor_name, theme, availability, resources, goals)
+VALUES (5, "Salvatore La Torre", "Verifica automatica di correttezza dei programmi", 35, "Per avere un’idea dell’area di riferimentoconsultare il materiale del corso di Tecniche Automatiche per La Correttezza del Software (http://www.disrv.unisa.it/professori/latorre/didattica/TACS/)", "Sviluppare nuove metodologie. Integrare metodologie esistenti. Testare e confrontare metodologie esistenti. Partecipare allo sviluppo di tool di verifica. Ricercare nuovi risultati teorici");
+INSERT INTO internship_i (id_ii, tutor_name, theme, availability, resources, goals)
+VALUES (6, "Monica Sebillo", "Sistemi Informativi Geografici e applicazioni per Mobile GIS", 25, "http://docenti.unisa.it/004827/risorse?categoria=337&risorsa=807", "Sviluppo di servizi di intelligenza territoriale ");
+
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
+VALUES('rdeprisco@unisa.it','Roberto','De Prisco','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
+VALUES('adebonis@unisa.it','Annalisa','De Bonis','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
+VALUES('bcarpentieri@unisa.it','Bruno','Carpentieri','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
+VALUES('gpolese@unisa.it','Giuseppe','Polese','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
+VALUES('storre@unisa.it','Salvatore','la Torre','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
+VALUES('msebillo@unisa.it','Monica','Sebillo','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
+
+
+INSERT INTO perform (FK_USER, id_ii)
+VALUES ("rdeprisco@unisa.it",1);
+INSERT INTO perform (FK_USER, id_ii)
+VALUES ("adebonis@unisa.it",2);
+INSERT INTO perform (FK_USER, id_ii)
+VALUES ("bcarpentieri@unisa.it",3);
+INSERT INTO perform (FK_USER, id_ii)
+VALUES ("gpolese@unisa.it",4);
+INSERT INTO perform (FK_USER, id_ii)
+VALUES ("storre@unisa.it",5);
+INSERT INTO perform (FK_USER, id_ii)
+VALUES ("msebillo@unisa.it",6);
 
 
 
