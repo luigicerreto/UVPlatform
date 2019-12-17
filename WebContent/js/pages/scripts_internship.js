@@ -9,9 +9,12 @@ $(document).ready(function() {
 		
 		var btnId = $(this).attr('id');
 		var flag = (btnId === "internoBtn") ? 0 : 1;
+		var servletUrl;
+		
 
 		// mostra tabella in base alla scelta
-		if(btnId === "internoBtn"){
+		if(flag == 0){ // interno
+			servletUrl = absolutePath + "/InternalTrainee";
 			$("#internshipTable").children("thead").append(
 					"<tr align=\"center\">" +
 					"<th class=\"text-center\" align=\"center\">ID Docente</th>" +
@@ -20,7 +23,8 @@ $(document).ready(function() {
 					"<th class=\"text-center\" align=\"center\">Scelta</th>" +
 					"</tr>"
 			);
-		} else if (btnId === "esternoBtn"){
+		} else if (flag == 1){ // esterno
+			servletUrl = absolutePath + "/ExternalTrainee";
 			$("#internshipTable").children("thead").append(
 					"<tr align=\"center\">" +
 					"<th class=\"text-center\" align=\"center\">ID Azienda</th>" +
@@ -32,30 +36,7 @@ $(document).ready(function() {
 			);
 		}
 		
-		$(".preloader").show();
-		
-		// carica i dati dal db
-		$.ajax({
-			url : absolutePath + "/InternalTrainee",
-			type : "POST",
-			dataType : 'JSON',
-			async : false,
-			data : {
-			},
-			success : function(msg) {
-				if (!msg.result) {
-					showAlert(1, msg.error);
-				} else {
-					$('#bodyInternshipTable').html(msg.content);
-				}
-			},
-			error : function(msg) {
-				showAlert(1, "Impossibile Recuperare i dati.");
-			}
-		});
-		
-		$(".preloader").hide();
-
+		// impostazioni data table
 		$('#internshipTable').DataTable( {
 	        "order": [[ 0, "desc" ]],
 	        "lengthMenu": [[10, -1], [10, "Tutti"]],
@@ -63,8 +44,8 @@ $(document).ready(function() {
 	        "bAutoWidth": false,			        
 	        "language": {
 				    "sEmptyTable":     "Nessun tirocinio disponibile",
-				    "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
-				    "sInfoEmpty":      "Vista da 0 a 0 di 0 elementi",
+				    "sInfo":           "",
+				    "sInfoEmpty":      "",
 				    "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
 				    "sInfoPostFix":    "",
 				    "sInfoThousands":  ".",
@@ -85,5 +66,29 @@ $(document).ready(function() {
 				    }
 	        }        
 	    } );
+		
+		$(".preloader").show();
+		
+		// carica i dati dal db
+		$.ajax({
+			url : servletUrl,
+			type : "POST",
+			dataType : 'JSON',
+			async : false,
+			data : {
+			},
+			success : function(msg) {
+				if (!msg.result) {
+					showAlert(1, msg.error);
+				} else {
+					$('#bodyInternshipTable').html(msg.content);
+				}
+			},
+			error : function(msg) {
+				showAlert(1, "Impossibile Recuperare i dati.");
+			}
+		});
+		
+		$(".preloader").hide();
 	});
 });
