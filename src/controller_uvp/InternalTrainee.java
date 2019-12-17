@@ -56,7 +56,7 @@ public class InternalTrainee extends HttpServlet {
 			internship =  DAOTirocini.viewTraineeInternal();
 			if(internship.size()==0)
 			{
-<<<<<<< HEAD
+
 				content += "<tr>"
 						+ "<td class=\"text-center\"" + "></td>"
 						+ "<td class=\"text-center\"" + "></td>"
@@ -64,16 +64,8 @@ public class InternalTrainee extends HttpServlet {
 						+ "<td class=\"text-center\"" + "></td>"
 						+ "<td class=\"text-center\"" + "></td>"
 						+ "</tr>";
-=======
-
-				content += "<tr role='row'>";
-				content += "    <td class='text-center'>" + a.getId_ii() + "</td>";
-				content += "    <td class='text-center'>" + a.getTutorn_name() + "</td>";
-				content += "    <td class='text-center'>" + a.getPlace() + "</td>";
-				content += "</tr>";
 
 
->>>>>>> refs/remotes/origin/feature_1
 			}
 			else
 				for(InternalInternship a : internship)
