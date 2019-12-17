@@ -88,6 +88,7 @@ primary key(id_ii)
 CREATE TABLE request_internship (
 id_request_i int(10) not null AUTO_INCREMENT,
 type varchar(20) not null,
+STATE varchar(50),
 FK_USER1 varchar(50) not null,
 FK_USER2 varchar(50) not null,
 FK_IE int(10),
