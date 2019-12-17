@@ -1,27 +1,32 @@
 package model_uvp;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 public class ExternalInternship {
 		private int id_ie;
 		private String name;
 		private int duration_convention;
-		private SimpleDateFormat date_convention;
+		private Date date_convention;
 		private int availability;
 		private String info;
+		private String user;
+		private String place;
 		
 		public ExternalInternship() {
 			
 		}
 		
-		public ExternalInternship(int id_ie, String name, int duration_convention, SimpleDateFormat date_convention,
-				int availability, String info) {
+		public ExternalInternship(int id_ie, String name, int duration_convention, Date date_convention,
+				int availability, String info, String user, String place) {
 			this.id_ie = id_ie;
 			this.name = name;
 			this.duration_convention = duration_convention;
 			this.date_convention = date_convention;
 			this.availability = availability;
 			this.info = info;
+			this.user = user;
+			this.place = place;
 		}
 
 		public int getId_ie() {
@@ -48,11 +53,11 @@ public class ExternalInternship {
 			this.duration_convention = duration_convention;
 		}
 
-		public SimpleDateFormat getDate_convention() {
+		public Date getDate_convention() {
 			return date_convention;
 		}
 
-		public void setDate_convention(SimpleDateFormat date_convention) {
+		public void setDate_convention(Date date_convention) {
 			this.date_convention = date_convention;
 		}
 
@@ -70,6 +75,22 @@ public class ExternalInternship {
 
 		public void setInfo(String info) {
 			this.info = info;
+		}
+
+		public String getUser() {
+			return user;
+		}
+
+		public void setUser(String user) {
+			this.user = user;
+		}
+
+		public String getPlace() {
+			return place;
+		}
+
+		public void setPlace(String place) {
+			this.place = place;
 		}
 		
 }

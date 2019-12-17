@@ -35,5 +35,32 @@ public class DAOTirocini {
 
 		return internships;
 	}
+	
+	
+	public static ArrayList<ExternalInternship>  viewTraineeExternal()
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		ExternalInternship internship = null;
+		ArrayList<ExternalInternship> internships = new ArrayList<ExternalInternship>();
+		String viewRequestExternal = "SELECT e.id_ie, e.name, e.duration_convention, e.date_convention, e.availability, e.info, u.EMAIL, u.OFFICE \r\n" + 
+				"FROM internship_e as e inner join do on e.id_ie = do.id_ie \r\n" + 
+				"inner join user as u on do.FK_USER = u.EMAIL";
+		try {
+			statement = con.prepareStatement(viewRequestExternal);
+			result = statement.executeQuery();
+			while(result.next())
+			{
+				internship = new ExternalInternship(result.getInt(1), result.getString(2), result.getInt(3), result.getDate(4), result.getInt(5), result.getString(6), result.getString(7), result.getString(8));
+				internships.add(internship);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return internships;
+	}
 
 }
