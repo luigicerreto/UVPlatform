@@ -1,0 +1,44 @@
+table div.tableButtons {
+  display:flex;
+  flex-grow:1;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+}
+
+table td{
+	text-align: center;
+}
+
+table button.glyphicon-info-sign {
+	font-size: 30px;
+	margin-right: 10px;
+	color: orange;
+}
+
+table label.btn {
+	margin-left: 10px;
+}
+
+.btn span.glyphicon {    			
+	opacity: 0.2;
+}
+
+/* HIDE RADIO */
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + span {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + span {
+	opacity:1;
+  	color: #5CB85C;
+}

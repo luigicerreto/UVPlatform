@@ -1,7 +1,11 @@
 $(document).ready(function() {
 	$("#internshipTableDiv").css("display", "none");
-	
-
+	/*
+	$('label').click(function () {
+		  $(this).removeClass('active')
+		  .end().find('[type="radio"]').prop('checked', false);
+		});
+	*/
 	$('.btn').click(function(){
 		// nasconde i tasti scelta
 		$("div#internshipChoice").css("display", "none");
@@ -37,7 +41,8 @@ $(document).ready(function() {
 		        "columns" : [
 		            { "data" : "id" },
 		            { "data" : "name" },
-		            { "data" : "place" }
+		            { "data" : "place" },
+		            { "data" : "choice" }
 		        ],
 		        "language": {
 					    "sEmptyTable":     "Nessun tirocinio interno disponibile",
@@ -86,7 +91,8 @@ $(document).ready(function() {
 		            { "data" : "id" },
 		            { "data" : "name" },
 		            { "data" : "place" },
-		            { "data" : "date" }
+		            { "data" : "date" },
+		            { "data" : "choice" }
 		        ],
 		        "language": {
 					    "sEmptyTable":     "Nessun tirocinio esterno disponibile",

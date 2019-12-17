@@ -31,6 +31,8 @@
 	rel="stylesheet">
 <link href="<%= request.getContextPath() %>/css/styleEV.css"
 	rel="stylesheet">
+<link href="<%= request.getContextPath() %>/css/styleUVP.css"
+	rel="stylesheet">
 
 <!--Color Themes-->
 <link id="theme-color-file"

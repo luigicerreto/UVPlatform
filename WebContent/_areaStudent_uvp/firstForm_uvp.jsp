@@ -53,7 +53,7 @@
 								</div>
 							</div>
 							<div class="news-block-seven" id="internshipTableDiv">
-								<table id="internshipTable" class="display data-results table table-striped table-hover table-bordered">
+								<table id="internshipTable" class="display data-results table-striped table-hover table-bordered">
 									<thead>
 									
 									</thead>

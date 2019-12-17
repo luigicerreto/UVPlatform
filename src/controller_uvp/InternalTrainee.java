@@ -59,6 +59,13 @@ public class InternalTrainee extends HttpServlet {
 				jObj.put("id", a.getId_ii());
 				jObj.put("name", a.getTutorn_name());
 				jObj.put("place", a.getPlace());
+				jObj.put("choice","<div class=\"tableButtons\">"
+						+ "<button class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\" href=\"#\"></button>"
+						+ "<label class=\"btn btn-default\">" 
+						+ "<input type=\"radio\" name=\"options\" id=\""+a.getId_ii()+"\">" 
+						+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
+						+ "</label>"
+						+ "</div>");
 				jArr.add(jObj);
 			}
 		}
