@@ -14,8 +14,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" >
-
 <jsp:include page="/partials/head.jsp" />
 </head>
 
@@ -74,8 +72,7 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-	<script
-		src="<%=request.getContextPath()%>/js/pages/scripts_internship.js"></script>
+	<script src="<%=request.getContextPath()%>/js/pages/scripts_internship.js"></script>
 
 </body>
 </html>
