@@ -5,12 +5,12 @@ USE uvplatform;
 CREATE TABLE USER (
 EMAIL varchar(50) not null,
 NAME varchar(50) not null,
-SURNAME varchar(50) not null,
+SURNAME varchar(50) ,
 SEX char not null,
 PASSWORD varchar(50) not null,
 USER_TYPE tinyint(1) not null,
 SERIAL char(10),
-OFFICE varchar(50),
+OFFICE varchar(150),
 phone int(10),
 primary key (EMAIL)
 );
@@ -244,18 +244,18 @@ VALUES (5, "Salvatore La Torre", "Verifica automatica di correttezza dei program
 INSERT INTO internship_i (id_ii, tutor_name, theme, availability, resources, goals)
 VALUES (6, "Monica Sebillo", "Sistemi Informativi Geografici e applicazioni per Mobile GIS", 25, "http://docenti.unisa.it/004827/risorse?categoria=337&risorsa=807", "Sviluppo di servizi di intelligenza territoriale ");
 
-INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
-VALUES('rdeprisco@unisa.it','Roberto','De Prisco','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
-INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
-VALUES('adebonis@unisa.it','Annalisa','De Bonis','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
-INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
-VALUES('bcarpentieri@unisa.it','Bruno','Carpentieri','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
-INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
-VALUES('gpolese@unisa.it','Giuseppe','Polese','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
-INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
-VALUES('storre@unisa.it','Salvatore','la Torre','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
-INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
-VALUES('msebillo@unisa.it','Monica','Sebillo','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3');
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('rdeprisco@unisa.it','Roberto','De Prisco','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ADA", 089969719);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('adebonis@unisa.it','Annalisa','De Bonis','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio Turing", 089969219);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('bcarpentieri@unisa.it','Bruno','Carpentieri','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ISIS", 089969319);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('gpolese@unisa.it','Giuseppe','Polese','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ADA", 089969714);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('storre@unisa.it','Salvatore','la Torre','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio di Verifica di Correttezza e SintesiAutomatica di Sistemi Digitali", 089969759);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('msebillo@unisa.it','Monica','Sebillo','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio di Sistemi Informativi Geografici", 089969769);
 
 
 INSERT INTO perform (FK_USER, id_ii)
@@ -270,6 +270,53 @@ INSERT INTO perform (FK_USER, id_ii)
 VALUES ("storre@unisa.it",5);
 INSERT INTO perform (FK_USER, id_ii)
 VALUES ("msebillo@unisa.it",6);
+
+
+
+INSERT INTO internship_e (id_ie, name, duration_convention, date_convention, availability, info)
+VALUES (1, "Kineton	s.r.l", 3, '2017-01-12', 30, "Kineton is here for all your engineering needs. And whether it’s tech, automotive, or communications, we’re on the cutting edge.");
+INSERT INTO internship_e (id_ie, name, duration_convention, date_convention, availability, info)
+VALUES (2, "Mate Consulting	s.r.l.", 5, '2017-09-12', 25, "Creiamo valore aggiunto per i nostri clienti Progettiamo nuove opportunità di business. Sviluppiamo sistemi integrati");
+INSERT INTO internship_e (id_ie, name, duration_convention, date_convention, availability, info)
+VALUES (3, "Italdata S.p.a.", 3, '2017-09-12', 16, "Italdata S.p.A., società nel settore dell'Information & Communication Technology, è specializzata nello sviluppo di servizi e soluzioni nelle aree dell'e-Learning e social networking e dei servizi avanzati per la Mobilità, della sicurezza e delle soluzioni per la business intelligence.");
+INSERT INTO internship_e (id_ie, name, duration_convention, date_convention, availability, info)
+VALUES (4, "TechnoDesig	S.r.l.", 5, '2017-09-22', 5, "La vendita diretta e le consegne in tanti uffici cittadini sono soltanto due dei  nostri fiori all’occhiello , per non parlare della presenza on line caratterizzata da una vasta diponibilità del materiale grazie a un fornito magazzino.");
+INSERT INTO internship_e (id_ie, name, duration_convention, date_convention, availability, info)
+VALUES (5, "Acca Software S.p.a", 10, '2015-11-12', 24, "ACCA è il leader italiano del software tecnico e del BIM. Con i suoi software ha rivoluzionato il mondo dell’edilizia contribuendo alla digitalizzazione dell’attività di ingegneri, geometri, architetti, studi professionali, imprese edili e pubbliche amministrazioni.
+ACCA vanta oggi una gamma di oltre 90 prodotti (molti dei quali diventati in pochi anni veri e propri standard del settore) ed è la prima azienda italiana ad aver lanciato sul mercato software BIM certificati IFC.");
+INSERT INTO internship_e (id_ie, name, duration_convention, date_convention, availability, info)
+VALUES (6, "Espansione	s.r.l.", 2, '2019-09-30', 7, "La mission era ed è semplice ed esplicita: orientare gli operatori della sanità, del termalismo, dell’assistenza socio-sanitaria a mettersi in discussione per migliorarsi, attraverso la formazione continua.");
+
+
+
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@kineton.it','Kineton srl','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Napoli", 089452719);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('consulting@mate.it','Mate consulting','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Salerno", 089452799);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@italdata.it','Italdata spa','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", 089412719);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@technodesign.it','TechnoDesig','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Fisciano", 089152719);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@accasoftware.it','Acca','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", 089456719);
+INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@espansione.com','Espansione srl','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", 088452719);
+
+
+INSERT INTO do(FK_USER, id_ie)
+VALUES ("info@kineton.it", 1);
+INSERT INTO do(FK_USER, id_ie)
+VALUES ("consulting@mate.it", 2);
+INSERT INTO do(FK_USER, id_ie)
+VALUES ("info@italdata.it", 3);
+INSERT INTO do(FK_USER, id_ie)
+VALUES ("info@technodesign.it", 4);
+INSERT INTO do(FK_USER, id_ie)
+VALUES ("info@accasoftware.it", 5);
+INSERT INTO do(FK_USER, id_ie)
+VALUES ("info@espansione.com", 6);
+
+
 
 
 

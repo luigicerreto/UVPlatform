@@ -70,7 +70,7 @@ public class InternalTrainee extends HttpServlet {
 				content += "<tr role='row'>";
 				content += "    <td class='text-center'>" + a.getId_ii() + "</td>";
 				content += "    <td class='text-center'>" + a.getTutorn_name() + "</td>";
-				content += "    <td class='text-center'>" + a.getAvailability() + "</td>";
+				content += "    <td class='text-center'>" + a.getPlace() + "</td>";
 				content += "</tr>";
 
 
