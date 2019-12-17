@@ -41,7 +41,7 @@
 										class="btn btn-primary btn-lg btn-block" role="button"
 										aria-pressed="true">English Validation</a>
 									<p></p>
-									<a href="_areaStudent_uvp/firstForm_uvp.jsp"
+									<a href="_areaStudent_uvp/viewRequestInternship.jsp"
 										class="btn btn-primary btn-lg btn-block" role="button"
 										aria-pressed="true">Richiesta Tirocinio</a>
 									<p></p>

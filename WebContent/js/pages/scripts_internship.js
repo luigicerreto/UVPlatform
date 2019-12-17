@@ -30,7 +30,7 @@ $(document).ready(function() {
 					"<th class=\"text-center\" align=\"center\">ID Azienda</th>" +
 					"<th class=\"text-center\" align=\"center\">Azienda</th>" +
 					"<th class=\"text-center\" align=\"center\">Sede</th>" +
-					"<th class=\"text-center\" align=\"center\">Data Inizio</th>" +
+					"<th class=\"text-center\" align=\"center\">Data Stipula</th>" +
 					"<th class=\"text-center\" align=\"center\">Scelta</th>" +
 					"</tr>"
 			);

@@ -1,5 +1,6 @@
 package controller_uvp;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -23,14 +24,14 @@ import model_uvp.RequestInternship;
 @WebServlet("/InternalTrainee")
 public class InternalTrainee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InternalTrainee() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public InternalTrainee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,34 +49,36 @@ public class InternalTrainee extends HttpServlet {
 		String error = "";
 		String content = "";
 		String redirect = "";
-		
+
 		ArrayList<InternalInternship> internship = new ArrayList<InternalInternship>();
 		try
 		{
-		internship =  DAOTirocini.viewTraineeInternal();
-		if(internship.size()==0)
-		{
-			content += "<tr>"
-					+ "<td class=\"text-center\"" + "></td>"
-					+ "<td class=\"text-center\"" + "></td>"
-					+ "<td class=\"text-center\"" + ">Nessun tirocinio interno disponibile</td>"
-					+ "<td class=\"text-center\"" + "></td>"
-					+ "<td class=\"text-center\"" + "></td>"
-					+ "</tr>";
-		}
-		else
-			for(InternalInternship a : internship)
+			internship =  DAOTirocini.viewTraineeInternal();
+			if(internship.size()==0)
 			{
-
-				content += "<tr role='row'>";
-				content += "    <td class='text-center'>" + a.getId_ii() + "</td>";
-				content += "    <td class='text-center'>" + a.getTutorn_name() + "</td>";
-				content += "    <td class='text-center'>" + a.getAvailability() + "</td>";
-				content += "</tr>";
-
-
+				content += "<tr>"
+						+ "<td class=\"text-center\"" + "></td>"
+						+ "<td class=\"text-center\"" + "></td>"
+						+ "<td class=\"text-center\"" + ">Nessun tirocinio interno disponibile</td>"
+						+ "<td class=\"text-center\"" + "></td>"
+						+ "<td class=\"text-center\"" + "></td>"
+						+ "</tr>";
 			}
-		result=1;
+			else
+				for(InternalInternship a : internship)
+				{
+
+					content += "<tr role='row'>";
+					content += "    <td class='text-center'>" + a.getId_ii() + "</td>";
+					content += "    <td class='text-center'>" + a.getTutorn_name() + "</td>";
+					content += "    <td class='text-center'>" + a.getAvailability() + "</td>";
+					content += " <td class='text-center'>" + 
+					"<button class=\"glyphicon glyphicon-info-sign\" style=\"color:orange\" aria-hidden=\"true\" href=\"#\"></button>" + "</td>";
+					content += "</tr>";
+
+
+				}
+			result=1;
 		}
 		catch(Exception e)
 		{

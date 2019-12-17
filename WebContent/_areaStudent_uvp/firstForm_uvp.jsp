@@ -14,6 +14,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" >
+
 <jsp:include page="/partials/head.jsp" />
 </head>
 
