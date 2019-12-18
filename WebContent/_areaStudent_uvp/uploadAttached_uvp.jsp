@@ -1,24 +1,29 @@
+<%@page import="model_uvp.DAORichiesta"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"
-	import="controller.CheckSession, model.SystemAttribute, controller.Utils, controller.DbConnection, java.sql.Connection, java.sql.ResultSet, java.sql.Statement, java.text.SimpleDateFormat"%>
+	import="controller.CheckSession, model.SystemAttribute, controller.Utils, controller.DbConnection,interfacce.*, java.sql.Connection, java.sql.ResultSet, java.sql.Statement, java.text.SimpleDateFormat"%>
 
 <%
-	String pageName = "uploadAttached_uvp.jsp";
-	String pageFolder = "_areaStudent_uvp";
+	String pageName = "uploadAttached.jsp";
+	String pageFolder = "_areaStudent";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());	
-	Integer idRequest = (Integer) request.getSession().getAttribute("idRequest");
-	if(idRequest == null){
-	  idRequest = new Utils().getLastUserRequestPartiallyCompleted(request.getSession());
-	  request.getSession().setAttribute("idRequest", idRequest);
+	UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
+	Integer idRequest_i = (Integer) request.getSession().getAttribute("idRequest_i");
+	if(idRequest_i == null)
+	{
+		request.getSession().getAttribute("user");
+	  idRequest_i = DAORichiesta.CheckLastPartialRequest(currUser.getEmail());
+	 if(idRequest_i!=0)
+	 {
+	  request.getSession().setAttribute("idRequest_i", idRequest_i);
+	 }
 	}
-	Integer requestNumberMaxUpload = Integer.parseInt(new SystemAttribute().getValueByKey("request-number-max-upload"));	
-	String requestAllowedExtensionUpload = new SystemAttribute().getValueByKey("request-allowed-extension-upload");
-	Integer requestState = new Utils().getRequestState(idRequest);
-	Integer shouldState = Integer.parseInt(new SystemAttribute().getValueByKey("request-partially-completed"));
+	Integer requestNumberMaxUpload = 1;	
+	String requestAllowedExtensionUpload = ".pdf";
 	if(!ck.isAllowed()) {
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
-	else if( idRequest == 0 || requestState != shouldState){
+	else if( idRequest_i == 0){
 		response.sendRedirect(request.getContextPath()+"/_areaStudent/viewRequest.jsp");
 		
 	}
@@ -104,7 +109,7 @@
 								</div>
 
 								<h2>
-									Richiesta N.<%= idRequest %>
+									Richiesta N.<%= idRequest_i %>
 									</h2>
 									<h2>
 										Trascina o premi sull'apposito riquadro per caricare un file

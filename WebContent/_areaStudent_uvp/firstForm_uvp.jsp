@@ -42,18 +42,18 @@
 										<h2 class="text-center">Scegli Tirocinio</h2>
 										<p></p>
 									</div>
-									<a href="#" id="intBtn"
+									<a  id="intBtn"
 										class="btn btn-primary btn-lg btn-block" role="button"
 										aria-pressed="true">Tirocinio Interno</a>
 									<p></p>
-									<a href="#" id="extBtn"
+									<a  id="extBtn"
 										class="btn btn-primary btn-lg btn-block" role="button"
 										aria-pressed="true">Tirocinio Esterno</a>
 									<p></p>
 								</div>
 							</div>
 							<div class="news-block-seven" id="internshipTableDiv">
-								<form id="choiceForm" action="#" method="post">
+								<form id="choiceForm">
 									<table id="internshipTable"
 										class="display data-results table-striped table-hover table-bordered">
 										<thead>
