@@ -31,9 +31,7 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-
-								<div
-									class="col-lg-6 col-md-6 col-sm-12 col-xs-12 login-container">
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 login-container">
 									<div class="panel">
 										<h2 class="text-center">Login</h2>
 										<p class="text-center">Compilare username e password per
@@ -51,10 +49,8 @@
 										<div class="form-group">
 											<button type="submit" class="btn btn-primary btn-submit">Accedi</button>
 											</div>
-									
 									</form>
 								</div>
-
 							</div>
 						</div>
 					</div>

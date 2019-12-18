@@ -7,7 +7,7 @@
 	String pageFolder = request.getParameter("pageFolder");
 	String menu = "";
 	String hiddenMenu = "";
-	String logoRedirect = ""; //tiene traccia del path a cui reindirizzare il sito quando si preme sul logo
+	String logoRedirect = request.getContextPath() + "/choice.jsp"; //tiene traccia del path a cui reindirizzare il sito quando si preme sul logo
 
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) { //cliccando sul logo reinderizza a index se non si è loggati
@@ -38,7 +38,6 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 		}
 	} else if (pageFolder.equals("_areaStudent")) { //se stiamo in una pagina dell'area studente
-		logoRedirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
 
 		if (pageName.equals("viewRequest.jsp")) { //se stiamo in viewRequest
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
@@ -74,8 +73,8 @@
 					+ "/signUp.jsp\">Registrati</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/index.jsp\">Benvenuto</a></li>";
 		}
+
 	} else if (pageFolder.equals("_areaStudent_uvp")) { //se stiamo in una pagina dell'area studente tirocinio
-		logoRedirect = request.getContextPath() + "/_areaStudent_uvp/viewRequestInternship.jsp";
 
 		if (pageName.equals("viewRequestInternship.jsp")) { //se stiamo in viewRequestTirocinio
 			menu += "<li><a href=\"" + request.getContextPath() + "/"
@@ -87,8 +86,8 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/uploadAttached_uvp.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-					+ "/profilo_uvp.jsp\">Profilo</a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
 		}
 		if (pageName.equals("firstForm_uvp.jsp")) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/"
@@ -98,8 +97,8 @@
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/firstForm_uvp.jsp\">Compila Richiesta</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-					+ "/profilo_uvp.jsp\">Profilo</a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
 		}
 		if (pageName.equals("uploadAttached_uvp.jsp")) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
@@ -107,8 +106,17 @@
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/uploadAttached_uvp.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+		}
+		if (pageName.equals("profile_uvp.jsp")) {
+			menu += "<li><a href=\"" + request.getContextPath()
+					+ "/_areaStudent/viewRequest.jsp\">Richiesta EV</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-					+ "/profilo_uvp.jsp\">Profilo</a></li>";
+					+ "/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+			menu += "<li class=\"current\" style=\"float:right\"><a href=\"" + request.getContextPath() + "/"
+					+ pageFolder + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
 		}
 
 		if (pageName.equals("uploadAttached.jsp")) {
@@ -130,6 +138,9 @@
 		} else if (pageName.equals("index.jsp")) { //se ci troviamo in index.jsp
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath()
 					+ "/index.jsp\">Benvenuto</a></li>";
+		} else if (pageName.equals("choice.jsp")) { //se ci troviamo in scelta.jsp
+			menu += "<li class=\"current\"><a href=\"" + request.getContextPath()
+			+ "/logout.jsp\">Disconnetti</a></li>";
 		} else if (pageName.equals("recuperaPassword.jsp")) {
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() //se ci troviamo in recuperaPassword.jsp
 					+ "/recuperaPassword.jsp\">Recupera password</a></li>";

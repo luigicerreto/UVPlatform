@@ -63,7 +63,8 @@
 
 										</tbody>
 									</table>
-									<input type="submit" id="submit1" class="btn btn-success" value="CONTINUA">
+									<input type="submit" id="submit1" class="btn btn-success"
+										value="CONTINUA">
 								</form>
 							</div>
 						</div>
@@ -72,6 +73,13 @@
 			</div>
 		</div>
 		<jsp:include page="/partials/footer.jsp" />
+	</div>
+
+	<div id="details" class="modal">
+		<div id="details-content" class="modal-content animate">
+			<h1 class="popup-h1">DETTAGLI</h1>
+
+		</div>
 	</div>
 	<!--End pagewrapper-->
 

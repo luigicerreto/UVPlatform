@@ -1,7 +1,12 @@
 $(document).ready(function() {
 	var flag;
+	$('#details').css("display", "none");
 	$("#internshipTableDiv").css("display", "none");
 	$('input[type="submit"]').prop("disabled", true);
+	
+	$('button.showDetails').click(function(){
+		$('#details').css("display", "block");
+	});
 	
 	$('#intBtn, #extBtn').click(function(){
 		// nasconde i tasti scelta

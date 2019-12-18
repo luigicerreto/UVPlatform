@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
 
 <%
-	String pageName = "recuperaPassword.jsp";
+	String pageName = "resetPassword.jsp";
 	String pageFolder = "";
 %>
 

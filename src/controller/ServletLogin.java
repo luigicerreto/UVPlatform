@@ -80,7 +80,7 @@ public class ServletLogin extends HttpServlet {
 						if (userType == 0) { // Profilo Student
 							// cambiato il redirect per la nuova pagina scelta tra tirocinio e english validation
 
-							redirect = request.getContextPath() + "/scelta.jsp"; 
+							redirect = request.getContextPath() + "/choice.jsp"; 
 							//Modifica effettuata= redirect su scelta.jsp in modo che l'utente possa scegliere gestione tirocinio o english validation
 							// redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
 							user = new Student(email, name, surname, sex, password, userType);

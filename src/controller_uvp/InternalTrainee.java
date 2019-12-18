@@ -60,7 +60,7 @@ public class InternalTrainee extends HttpServlet {
 				jObj.put("name", a.getTutorn_name());
 				jObj.put("place", a.getPlace());
 				jObj.put("choice","<div class=\"tableButtons\">"
-						+ "<button type =\"button\" class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\" href=\"#\"></button>"
+						+ "<button type =\"button\" class=\"showDetails glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></button>"
 						+ "<label class=\"btn btn-default\">" 
 						+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
 						+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
