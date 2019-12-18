@@ -42,25 +42,29 @@
 										<h2 class="text-center">Scegli Tirocinio</h2>
 										<p></p>
 									</div>
-									<a href="#" id="internoBtn"
+									<a href="#" id="intBtn"
 										class="btn btn-primary btn-lg btn-block" role="button"
 										aria-pressed="true">Tirocinio Interno</a>
 									<p></p>
-									<a href="#" id="esternoBtn"
+									<a href="#" id="extBtn"
 										class="btn btn-primary btn-lg btn-block" role="button"
 										aria-pressed="true">Tirocinio Esterno</a>
 									<p></p>
 								</div>
 							</div>
 							<div class="news-block-seven" id="internshipTableDiv">
-								<table id="internshipTable" class="display data-results table-striped table-hover table-bordered">
-									<thead>
-									
-									</thead>
-									<tbody id="bodyInternshipTable">
-									
-									</tbody>
-								</table>
+								<form action="#" method="post">
+									<table id="internshipTable"
+										class="display data-results table-striped table-hover table-bordered">
+										<thead>
+
+										</thead>
+										<tbody id="bodyInternshipTable">
+
+										</tbody>
+									</table>
+									<input type="submit" id="submit1" class="btn btn-success" value="CONTINUA">
+								</form>
 							</div>
 						</div>
 					</div>
@@ -72,7 +76,8 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-	<script src="<%=request.getContextPath()%>/js/pages/scripts_internship.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/pages/scripts_internship.js"></script>
 
 </body>
 </html>
