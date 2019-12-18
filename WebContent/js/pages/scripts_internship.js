@@ -26,6 +26,50 @@ $(document).ready(function() {
 					"<th class=\"text-center\" align=\"center\">Scelta</th>" +
 					"</tr>"
 			);
+			 
+			$('#internshipTable tbody').on('click', '.prova1' ,function(){
+			    var currow = $(this).closest('tr');
+			    var col1 = $(this).closest('tr').children('td:eq(0)').text();
+			    var col2 = $(this).closest('tr').children('td:eq(1)').text();
+			    var col3 = $(this).closest('tr').children('td:eq(2)').text();
+			    var result= col1 + '\n' + col2 + '\n' + col3;
+			    alert(result);
+			    
+			    
+			    $.ajax(
+						{
+							url : absolutePath + "/",
+							type : "POST",
+							dataType : 'JSON',
+							async : false,
+							data : 
+							{
+								"email" : email,
+							},
+							success : function(msg) 
+							{
+								if (!msg.result) 
+								{
+									showAlert(1,msg.error);
+								} 
+								else 
+								{
+									showAlert(0,msg.content);
+									setTimeout(function() 
+											{
+										window.location.href = msg.redirect;
+											},
+											500);
+								}
+							},
+							error : function(msg) 
+							{
+								showAlert(1,"Impossibile inviare l'email.");
+							}
+						});
+			   });
+			
+			
 			// contenuto tabella
 			$('#internshipTable').DataTable( {
 		        "order": [[ 0, "desc" ]],
@@ -75,6 +119,50 @@ $(document).ready(function() {
 					"<th class=\"text-center\" align=\"center\">Scelta</th>" +
 					"</tr>"
 			);
+			
+			$('#internshipTable tbody').on('click', '.prova1' ,function(){
+			    var currow = $(this).closest('tr');
+			    var col1 = $(this).closest('tr').children('td:eq(0)').text();
+			    var col2 = $(this).closest('tr').children('td:eq(1)').text();
+			    var col3 = $(this).closest('tr').children('td:eq(2)').text();
+			    var col4 = $(this).closest('tr').children('td:eq(3)').text();
+			    var result= col1 + '\n' + col2 + '\n' + col3 + col4;
+			    alert(result);
+			    $.ajax(
+						{
+							url : absolutePath + "/",
+							type : "POST",
+							dataType : 'JSON',
+							async : false,
+							data : 
+							{
+								"email" : email,
+							},
+							success : function(msg) 
+							{
+								if (!msg.result) 
+								{
+									showAlert(1,msg.error);
+								} 
+								else 
+								{
+									showAlert(0,msg.content);
+									setTimeout(function() 
+											{
+										window.location.href = msg.redirect;
+											},
+											500);
+								}
+							},
+							error : function(msg) 
+							{
+								showAlert(1,"Impossibile inviare l'email.");
+							}
+						});
+			    
+			    
+			    
+			   });
 			// contenuto tabella
 			$('#internshipTable').DataTable( {
 		        "order": [[ 0, "desc" ]],
@@ -86,6 +174,7 @@ $(document).ready(function() {
 		        	"url": "/UVPlatform/ExternalTrainee",
 		        	"dataSrc": "data",
 		        	"type": "POST"
+		        	
 		        },
 		        "columns" : [
 		            { "data" : "id" },
@@ -116,4 +205,6 @@ $(document).ready(function() {
 		    });
 		}
 	});
+	
+	
 });

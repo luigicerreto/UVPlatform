@@ -63,7 +63,7 @@ public class ExternalTrainee extends HttpServlet {
 				jObj.put("choice","<div class=\"tableButtons\">"
 						+ "<button class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\" href=\"#\"></button>"
 						+ "<label class=\"btn btn-default\">" 
-						+ "<input type=\"radio\" name=\"options\" id=\""+a.getId_ie()+"\">" 
+						+ "<input type=\"radio\" name=\"options\" class=\"prova1\"id=\""+a.getId_ie()+"\">" 
 						+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
 						+ "</label>"
 						+ "</div>");
