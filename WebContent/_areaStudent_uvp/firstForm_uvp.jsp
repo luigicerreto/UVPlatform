@@ -77,7 +77,6 @@
 
 	<div id="details" class="modal">
 		<div id="details-content" class="modal-content animate">
-			<h1 class="popup-h1">DETTAGLI</h1>
 
 		</div>
 	</div>

@@ -42,6 +42,7 @@ public class InternalTrainee extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
@@ -60,7 +61,7 @@ public class InternalTrainee extends HttpServlet {
 				jObj.put("name", a.getTutorn_name());
 				jObj.put("place", a.getPlace());
 				jObj.put("choice","<div class=\"tableButtons\">"
-						+ "<button type =\"button\" class=\"showDetails glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></button>"
+						+ "<button type =\"button\" class=\"showDetails glyphicon glyphicon-info-sign\" data-toggle=\"modal\" data-target=\"#details\" aria-hidden=\"true\"></button>"
 						+ "<label class=\"btn btn-default\">" 
 						+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
 						+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
