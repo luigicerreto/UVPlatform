@@ -157,7 +157,7 @@ $(document).ready(function() {
 									{
 								window.location.href = msg.redirect;
 									},
-									500);
+									20000000000000000);
 						}
 					},
 					error : function(msg) 

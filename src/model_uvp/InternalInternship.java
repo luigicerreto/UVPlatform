@@ -24,6 +24,9 @@ public InternalInternship(int id_ii, String tutorn_name, String theme, int avail
 	this.goals = goals;
 	this.place = place;
 }
+public InternalInternship() {
+	// TODO Auto-generated constructor stub
+}
 public int getId_ii() {
 	return id_ii;
 }

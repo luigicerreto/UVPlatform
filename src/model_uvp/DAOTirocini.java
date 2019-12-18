@@ -63,46 +63,7 @@ public class DAOTirocini {
 		return internships;
 	}
 
-	public static boolean addRequest(RequestInternship richiesta)
-	{
-		Connection con = new DbConnection().getInstance().getConn();
-		PreparedStatement statement = null;
-		String addRequest = "INSERT INTO `uvplatform`.`request_internship` (`type`, `STATE`, `FK_USER1`, `FK_USER2`, `FK_II`) VALUES \r\n" + 
-				"(?, ?, ?, ?,'?')";
-		try
-		{
-			statement = con.prepareStatement(addRequest);
-			statement.setString(1, richiesta.getType());
-			statement.setString(2, richiesta.getState());
-			statement.setString(3, richiesta.getUser1());
-			statement.setString(4, richiesta.getUser2());
-			if(richiesta.getId_ie()>0)
-			{
-				statement.setInt(5, richiesta.getId_ie());
-			}
-			else
-			{
-				statement.setInt(5, richiesta.getId_ii());
-			}
-			if(statement.executeUpdate()>0)
-			{
-				con.commit();
-				return true;
-			}
-			else
-			{
-				con.rollback();
-				return false;
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return false;
-
-
-	}
+	
 
 
 }

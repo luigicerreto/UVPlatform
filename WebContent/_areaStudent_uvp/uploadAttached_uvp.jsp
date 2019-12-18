@@ -19,7 +19,7 @@
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
 	else if( idRequest == 0 || requestState != shouldState){
-		response.sendRedirect(request.getContextPath()+"/_areaStudent/viewRequest.jsp");
+		response.sendRedirect(request.getContextPath()+"/_areaStudent_uvp/viewRequestInternship.jsp");
 		
 	}
 	
