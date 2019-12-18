@@ -1,12 +1,12 @@
 table div.tableButtons {
-  display:flex;
-  flex-grow:1;
-  flex-direction:row;
-  align-items:center;
-  justify-content:center;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
-table td{
+table td {
 	text-align: center;
 }
 
@@ -20,25 +20,31 @@ table label.btn {
 	margin-left: 10px;
 }
 
-.btn span.glyphicon {    			
+.btn span.glyphicon {
 	opacity: 0.2;
 }
 
+input[type="submit"] {
+	position: fixed;
+	bottom: 13px;
+	right: 20px;
+}
+
 /* HIDE RADIO */
-[type=radio] { 
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
+[type=radio] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
 }
 
 /* IMAGE STYLES */
-[type=radio] + span {
-  cursor: pointer;
+[type=radio]+span {
+	cursor: pointer;
 }
 
 /* CHECKED STYLES */
-[type=radio]:checked + span {
-	opacity:1;
-  	color: #5CB85C;
+[type=radio]:checked+span {
+	opacity: 1;
+	color: #5CB85C;
 }

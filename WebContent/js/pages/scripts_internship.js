@@ -1,19 +1,15 @@
 $(document).ready(function() {
 	$("#internshipTableDiv").css("display", "none");
-	/*
-	$('label').click(function () {
-		  $(this).removeClass('active')
-		  .end().find('[type="radio"]').prop('checked', false);
-		});
-	*/
-	$('.btn').click(function(){
+	$('input[type="submit"]').prop("disabled", true);
+
+	$('#intBtn, #extBtn').click(function(){
 		// nasconde i tasti scelta
 		$("div#internshipChoice").css("display", "none");
 		$("#internshipTableDiv").css("display", "block");
 		
 		// tasto scelta cliccato
 		var btnId = $(this).attr('id');
-		var flag = (btnId === "internoBtn") ? 0 : 1;
+		var flag = (btnId === "intBtn") ? 0 : 1;
 
 		// mostra tabella in base alla scelta
 		if(flag == 0){ // interno
@@ -207,4 +203,9 @@ $(document).ready(function() {
 	});
 	
 	
+
+	$('table').on('change', 'input[type="radio"]', function (e) {
+		$('input[type="submit"]').prop("disabled", false);
+	});
+
 });
