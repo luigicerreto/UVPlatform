@@ -42,7 +42,6 @@ public class addRequest extends HttpServlet {
 		String requestState = "Parzialmente Completata";
 		
 		
-		
 	}
 
 }

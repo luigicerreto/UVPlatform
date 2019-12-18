@@ -53,7 +53,7 @@
 								</div>
 							</div>
 							<div class="news-block-seven" id="internshipTableDiv">
-								<form action="#" method="post">
+								<form id="choiceForm" action="#" method="post">
 									<table id="internshipTable"
 										class="display data-results table-striped table-hover table-bordered">
 										<thead>
