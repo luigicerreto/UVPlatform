@@ -84,10 +84,11 @@
 					+ "/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/firstForm_uvp.jsp\">Compila Richiesta</a></li>";
-					menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-							+ "/uploadAttached_uvp.jsp\">Carica Allegato</a></li>";
-
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/uploadAttached_uvp.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/profilo_uvp.jsp\">Profilo</a></li>";
 		}
 		if (pageName.equals("firstForm_uvp.jsp")) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/"
@@ -97,6 +98,8 @@
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/firstForm_uvp.jsp\">Compila Richiesta</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/profilo_uvp.jsp\">Profilo</a></li>";
 		}
 		if (pageName.equals("uploadAttached_uvp.jsp")) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
@@ -104,6 +107,8 @@
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/uploadAttached_uvp.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/profilo_uvp.jsp\">Profilo</a></li>";
 		}
 
 		if (pageName.equals("uploadAttached.jsp")) {
