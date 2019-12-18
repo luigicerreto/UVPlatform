@@ -5,7 +5,7 @@
 
 <%
 	String pageName = "uploadAttached.jsp";
-	String pageFolder = "_areaStudent";
+	String pageFolder = "_areaStudent_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());	
 	UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 	Integer idRequest_i = (Integer) request.getSession().getAttribute("idRequest_i");
@@ -27,7 +27,7 @@
 		response.sendRedirect(request.getContextPath()+"/_areaStudent/viewRequest.jsp");
 		
 	}
-	
+	/*
   	String name = "";
 	String surname = "";
 	String tipoLaurea = "Magistrale";
@@ -70,7 +70,8 @@
         System.out.println(e.getMessage());
       }      
       
-    } 	    	
+    }
+    */
 %>
 
 <!DOCTYPE html>
@@ -127,15 +128,6 @@
 				</div>
 			</div>
 
-			<input type="hidden" id="name" value="<%= name %>" /> <input
-				type="hidden" id="surname" value="<%= surname %>" /> <input
-				type="hidden" id="tipoLaurea" value="<%= tipoLaurea %>" /> <input
-				type="hidden" id="year" value="<%= year %>" /> <input type="hidden"
-				id="serial" value="<%= serial %>" /> <input type="hidden" id="ente"
-				value="<%= ente %>" /> <input type="hidden" id="certificateSerial"
-				value="<%= certificateSerial %>" /> <input type="hidden" id="level"
-				value="<%= level %>" /> <input type="hidden" id="requestedCfu"
-				value="<%= requestedCfu %>" />
 		</div>
 		<jsp:include page="/partials/footer.jsp" />
 	</div>
@@ -214,7 +206,7 @@
 		</script>
 	<script src="<%= request.getContextPath() %>/js/filesystem_dropzone.js"></script>
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttached.js"></script>
+		src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttached_uvp.js"></script>
 
 </body>
 </html>

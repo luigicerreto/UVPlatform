@@ -50,7 +50,7 @@ public class addRequest extends HttpServlet {
 		String error = "";
 		String content = "";
 		String redirect = "";
-		String requestState = "Parzialmente Completata";
+		final String requestState = "Parzialmente Completata";
 		int id_request;
 		int type_internship;
 		String internship_type;

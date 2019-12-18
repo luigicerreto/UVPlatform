@@ -160,6 +160,7 @@ $(document).ready(function() {
 							showAlert(0,msg.content);
 							setTimeout(function() 
 									{
+								alert(msg.redirect);
 								window.location.href = msg.redirect;
 									},
 									2000);

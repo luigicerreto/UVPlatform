@@ -304,5 +304,67 @@ public class DAORichiesta {
 		}
 		return 0;
 	}
+	
+	public static boolean addAttachment(String Filename, String mail, int idRequest)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String addAttach;
+		
+		addAttach = "INSERT INTO attached (FILENAME, FK_USER, FK_REQUEST,I) VALUES (?, ?, ?) ";
+		try {
+			statement = con.prepareStatement(addAttach);
+			statement.setString(1, Filename);
+			statement.setString(2, mail);
+			statement.setInt(3, idRequest);
+			if(statement.executeUpdate()>0)
+			{
+				con.commit();
+				return true;
+			}
+			else
+			{
+				con.rollback();
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return false;
+	}
+	public static boolean updateState(int idRequest)
+	{
+		final String newState = "In attesa di accettazione";
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String updateS = "UPDATE request_internship\r\n" + 
+				"SET STATE = ?\r\n" + 
+				"WHERE id_request_i = ?;";
+		try {
+			statement = con.prepareStatement(updateS);
+			statement.setString(1, newState);
+			statement.setInt(2, idRequest);
+			if(statement.executeUpdate()>0)
+			{
+				con.commit();
+				return true;
+			}
+			else
+			{
+				con.rollback();
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 }
