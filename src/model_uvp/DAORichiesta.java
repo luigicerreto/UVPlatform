@@ -12,6 +12,7 @@ import com.mysql.cj.protocol.Resultset;
 import controller.DbConnection;
 import controller.Utils;
 import model.Attached;
+import model.SystemAttribute;
 
 
 public class DAORichiesta {
@@ -30,6 +31,7 @@ public class DAORichiesta {
 		PreparedStatement statement = null;
 		ResultSet resultAttached;
 		ResultSet result;
+
 		String viewRequest = "Select richiesta.id_request_i, user.SERIAL, richiesta.type, richiesta.STATE\r\n" + 
 				"				from request_internship as richiesta\r\n" + 
 				"				inner join user on richiesta.FK_USER1 = user.EMAIL \r\n" + 
@@ -47,8 +49,8 @@ public class DAORichiesta {
 			Attached attac;
 			while(result.next())
 			{
-				
-request1 = new RequestInternship();
+
+				request1 = new RequestInternship();
 				statement=con.prepareStatement(attachedQuery);
 				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();
@@ -61,9 +63,9 @@ request1 = new RequestInternship();
 				{
 					while(resultAttached.next())
 					{
-					attac = new Attached();
-					attac.setFilename(resultAttached.getString(1));
-					attacheds.add(attac);
+						attac = new Attached();
+						attac.setFilename(resultAttached.getString(1));
+						attacheds.add(attac);
 					}
 				}
 				request1.setId_request_i(result.getInt(1));
@@ -81,50 +83,81 @@ request1 = new RequestInternship();
 			e.printStackTrace();
 		}
 		return requests;
+
 	}
 
 
 
 
-	public static boolean addRequest(RequestInternship richiesta)
+	public static int addRequest(RequestInternship richiesta)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
-		String addRequest = "INSERT INTO `uvplatform`.`request_internship` (`type`, `STATE`, `FK_USER1`, `FK_USER2`, `FK_II`, `FK_IE`) VALUES \r\n" + 
-				"(?, ?, ?, ?, ?, ?)";
-		try
-		{
-			statement = con.prepareStatement(addRequest);
-			statement.setString(1, richiesta.getType());
-			statement.setString(2, richiesta.getState());
-			statement.setString(3, richiesta.getUser1());
-			statement.setString(4, richiesta.getUser2());
-			if(richiesta.getId_ie()>0)
+		String checkRequest;
+		int messageResult = 0;
+
+		try {
+			checkRequest = "SELECT id_request_i\r\n" + 
+					"FROM request_internship WHERE FK_USER1 = ? AND STATE != ? AND STATE != ? ";
+			statement = con.prepareStatement(checkRequest);
+			statement.setString(1, richiesta.getUser1());
+			statement.setString(2, "Accettata");
+			statement.setString(3, "Rifiutata");
+			ResultSet r = statement.executeQuery();
+			int count = r.last() ? r.getRow() : 0;
+			if (count == 0) 
 			{
-				statement.setNull(5, java.sql.Types.INTEGER);
-				statement.setInt(6, richiesta.getId_ie());
+
+				String addRequest = "INSERT INTO `uvplatform`.`request_internship` (`type`, `STATE`, `FK_USER1`, `FK_USER2`, `FK_II`, `FK_IE`) VALUES \r\n" + 
+						"(?, ?, ?, ?, ?, ?)";
+				try
+				{
+					statement = con.prepareStatement(addRequest);
+					statement.setString(1, richiesta.getType());
+					statement.setString(2, richiesta.getState());
+					statement.setString(3, richiesta.getUser1());
+					statement.setString(4, richiesta.getUser2());
+					if(richiesta.getId_ie()>0)
+					{
+						statement.setNull(5, java.sql.Types.INTEGER);
+						statement.setInt(6, richiesta.getId_ie());
+					}
+					else
+					{
+						statement.setInt(5, richiesta.getId_ii());
+						statement.setNull(6, java.sql.Types.INTEGER);
+					}
+					if(statement.executeUpdate()>0)
+					{
+						con.commit();
+						messageResult = 1;
+						return messageResult;
+					}
+					else
+					{
+						con.rollback();
+						messageResult = 0;
+						return messageResult;
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+
 			}
 			else
 			{
-				statement.setInt(5, richiesta.getId_ii());
-				statement.setNull(6, java.sql.Types.INTEGER);
-			}
-			if(statement.executeUpdate()>0)
-			{
-				con.commit();
-				return true;
-			}
-			else
-			{
-				con.rollback();
-				return false;
+				messageResult = 2; 
+				return messageResult;
 			}
 		}
 		catch(Exception e)
 		{
+			//todo error
 			e.printStackTrace();
 		}
-		return false;
+		return messageResult;
 
 
 	}
@@ -190,55 +223,86 @@ request1 = new RequestInternship();
 		return internship;
 
 	}
-	
-public static String ExternalPerform(int id_request)
-{
-	Connection con = new DbConnection().getInstance().getConn();
-	PreparedStatement statement = null;
-	ResultSet result;
-	String email_azienda = null;
-	ExternalInternship internship = null;
-	String retriveInternship = "SELECT FK_USER FROM uvplatform.do\r\n" + 
-			"WHERE id_ie = ?";
-	try {
-		statement = con.prepareStatement(retriveInternship);
-		statement.setInt(1, id_request);
-		result = statement.executeQuery();
-		if(result.next())
-		{
-			email_azienda = result.getString(1);
-		}
-}
-	catch(Exception e)
-	{
-		e.printStackTrace();
-	}
-return email_azienda;
-}
 
-public static String InternalPerform(int id_request)
-{
-	Connection con = new DbConnection().getInstance().getConn();
-	PreparedStatement statement = null;
-	ResultSet result;
-	String email_docente = null;
-	ExternalInternship internship = null;
-	String retriveInternship = "SELECT FK_USER FROM uvplatform.perform\r\n" + 
-			"WHERE id_ii = ?";
-	try {
-		statement = con.prepareStatement(retriveInternship);
-		statement.setInt(1, id_request);
-		result = statement.executeQuery();
-		if(result.next())
-		{
-			email_docente = result.getString(1);
-		}
-}
-	catch(Exception e)
+	public static String ExternalPerform(int id_request)
 	{
-		e.printStackTrace();
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String email_azienda = null;
+		ExternalInternship internship = null;
+		String retriveInternship = "SELECT FK_USER FROM uvplatform.do\r\n" + 
+				"WHERE id_ie = ?";
+		try {
+			statement = con.prepareStatement(retriveInternship);
+			statement.setInt(1, id_request);
+			result = statement.executeQuery();
+			if(result.next())
+			{
+				email_azienda = result.getString(1);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return email_azienda;
 	}
-return email_docente;
-}
+
+	public static String InternalPerform(int id_request)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String email_docente = null;
+		ExternalInternship internship = null;
+		String retriveInternship = "SELECT FK_USER FROM uvplatform.perform\r\n" + 
+				"WHERE id_ii = ?";
+		try {
+			statement = con.prepareStatement(retriveInternship);
+			statement.setInt(1, id_request);
+			result = statement.executeQuery();
+			if(result.next())
+			{
+				email_docente = result.getString(1);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return email_docente;
+	}
+
+
+	public static int CheckLastPartialRequest(String email)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		int id_request;
+		String email_docente = null;
+		ExternalInternship internship = null;
+		String retriveLR = "SELECT id_request_i FROM request_internship\r\n" + 
+				"WHERE FK_USER1 = ? AND STATE = \"Parzialmente Completata\";";
+		try
+		{
+			statement = con.prepareStatement(retriveLR);
+			statement.setString(1, email);
+			result = statement.executeQuery();
+			if(result.next())
+			{
+				id_request=result.getInt(1);
+				return id_request;
+			}
+			else
+				return 0;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 }

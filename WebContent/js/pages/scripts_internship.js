@@ -157,7 +157,7 @@ $(document).ready(function() {
 									{
 								window.location.href = msg.redirect;
 									},
-									20000000000000000);
+									2000);
 						}
 					},
 					error : function(msg) 
@@ -165,6 +165,7 @@ $(document).ready(function() {
 						showAlert(1,"Impossibile effettuare la richiesta");
 					}
 				});
+		return false;
 	});
 
 });

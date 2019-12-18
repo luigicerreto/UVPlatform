@@ -23,14 +23,14 @@ import model_uvp.RequestInternship;
 @WebServlet("/addRequest")
 public class addRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public addRequest() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public addRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -57,7 +57,8 @@ public class addRequest extends HttpServlet {
 		InternalInternship is_internal;
 		ExternalInternship is_external;
 		RequestInternship newRequest = new RequestInternship();
-		
+		int returnMessage;
+
 		id_request = (Integer.parseInt(request.getParameter("choice")));
 		System.out.println("l'id è "+id_request);
 		type_internship = (Integer.parseInt(request.getParameter("type")));
@@ -67,7 +68,7 @@ public class addRequest extends HttpServlet {
 			is_internal = DAORichiesta.retriveInternship_internal(id_request);
 			newRequest.setUser2(DAORichiesta.InternalPerform(id_request));
 			newRequest.setId_ii(id_request);
-			
+
 		}
 		else
 		{
@@ -79,21 +80,27 @@ public class addRequest extends HttpServlet {
 		newRequest.setType(internship_type);
 		newRequest.setState(requestState);
 		newRequest.setUser1(currUser.getEmail());
-		
-		if(DAORichiesta.addRequest(newRequest))
+		returnMessage=DAORichiesta.addRequest(newRequest);
+		if(returnMessage==1)
 		{
 			result=1;
 			content="Richiesta Parziale presentata con successo";
+		}
+		else if(returnMessage==2)
+		{
+			result=0;
+			error = "Una richiesta gi&agrave; presentata non &egrave; stata ancora conclusa.";
 		}
 		else
 		{
 			result=0;
 			error="Errore nella presentazione della richiesta";
 		}
-			
-		
-		
-		
+
+
+		request.getSession().setAttribute("idRequest_i", newRequest.getId_request_i());
+		System.out.println("L'id request assegnato alla sessione è "+newRequest.getId_request_i());
+
 		redirect = request.getContextPath() + "/uploadAttached_uvp.jsp";
 		JSONObject res = new JSONObject();
 		res.put("result", result);
@@ -103,11 +110,11 @@ public class addRequest extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");
-		
-		
-		
-		
-		
+
+
+
+
+
 	}
 
 }
