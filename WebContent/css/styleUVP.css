@@ -31,7 +31,7 @@ input[type="submit"] {
 }
 
 /* HIDE RADIO */
-[type=radio] {
+table label input[type=radio] {
 	position: absolute;
 	opacity: 0;
 	width: 0;
@@ -39,12 +39,12 @@ input[type="submit"] {
 }
 
 /* IMAGE STYLES */
-[type=radio]+span {
+table label input[type=radio]+span {
 	cursor: pointer;
 }
 
 /* CHECKED STYLES */
-[type=radio]:checked+span {
+table label input[type=radio]:checked+span {
 	opacity: 1;
 	color: #5CB85C;
 }
