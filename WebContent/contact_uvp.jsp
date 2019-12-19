@@ -3,7 +3,7 @@
 
 <%
 	String pageName = "contact_uvp.jsp";
-	String pageFolder = "_areaStudent_uvp";
+	String pageFolder = "";
 %>
 
 <!DOCTYPE html>

@@ -3,7 +3,7 @@
 
 <%
 	String pageName = "profile_uvp.jsp";
-	String pageFolder = "_areaStudent_uvp";
+	String pageFolder = "";
 %>
 
 <!DOCTYPE html>
@@ -64,17 +64,17 @@
 										</div>
 										
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="password"
+											<input type="password" class="form-control" id="vecchiaPassword"
 												placeholder="Vecchia password" minlength="8" required>
 										</div>
 										
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="password"
+											<input type="password" class="form-control" id="nuovaPassword"
 												placeholder="Nuova password" minlength="8" required>
 												</div>
 												
 												<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="password"
+											<input type="password" class="form-control" id="confermaPassword"
 												placeholder="Conferma password" minlength="8" required>
 												</div>
 
