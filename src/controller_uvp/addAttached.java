@@ -16,6 +16,7 @@ import com.mysql.jdbc.PreparedStatement;
 import interfacce.UserInterface;
 import model.SystemAttribute;
 import model_uvp.DAORichiesta;
+import util.notifyStudent;
 
 /**
  * Servlet implementation class addAttached
@@ -82,6 +83,8 @@ public class addAttached extends HttpServlet {
 			error += " Impossibile cambiare stato alla richiesta.";
 			result = 0;
 		}
+		notifyStudent app = new notifyStudent();
+		app.notify(user.getEmail(), idRequest);
 
 
 		JSONObject res = new JSONObject();

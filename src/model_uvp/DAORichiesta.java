@@ -85,6 +85,34 @@ public class DAORichiesta {
 		return requests;
 
 	}
+	public Attached retriveAttached(int idRequest)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet resultAttached;
+		Attached attac = null;
+		String attachedQuery="SELECT a.filename AS filename \r\n" + 
+				"FROM attached a \r\n" + 
+				"WHERE a.fk_request_I = ?";
+		try {
+			statement = con.prepareStatement(attachedQuery);
+			attac = new Attached();
+			statement.setInt(1, idRequest);
+			resultAttached = statement.executeQuery();
+			
+			if(resultAttached.next())
+			{
+				attac = new Attached();
+				attac.setFilename(resultAttached.getString(1));
+			}
+			return attac;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return attac;
+	}
 
 
 
