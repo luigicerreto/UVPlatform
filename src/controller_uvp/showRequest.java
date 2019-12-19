@@ -19,7 +19,12 @@ import model_uvp.DAORichiesta;
 import model_uvp.RequestInternship;
 
 /**
- * Servlet implementation class showRequest
+ * 
+ * Servlet che consente di visualizzare tutte le richieste ad un dato studente.
+ * 
+ * 
+ * @author Antonio Baldi
+ *
  */
 @WebServlet("/showRequest")
 public class showRequest extends HttpServlet {

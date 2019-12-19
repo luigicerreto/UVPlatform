@@ -18,7 +18,14 @@ import model_uvp.InternalInternship;
 import model_uvp.RequestInternship;
 
 /**
- * Servlet implementation class addRequest
+ * 
+ * Servlet per gestire l'aggiunta di una nuova richiesta.
+ * Come parametri necessari ci sono il tipo di richiesta (Interno oppure Esterno)
+ * denominati da "type", e l'identificativo del tirocinio denominato da "choice".
+ * 
+ * 
+ * @author Antonio Baldi
+ *
  */
 @WebServlet("/addRequest")
 public class addRequest extends HttpServlet {

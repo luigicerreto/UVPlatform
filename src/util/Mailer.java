@@ -7,9 +7,28 @@ import java.util.Properties;
 import javax.mail.*;    
 import javax.mail.internet.*;
 
+/**
+ * 
+ * Questa classe gestisce tutto l'invio di e-mail del nostro sistema
+ * 
+ * @author Antonio Baldi
+ *
+ */
+
 public class Mailer{  
 	private static String from = "unisavalidationplatform@gmail.com";
 	private static String password = "unisavalidationPlatfor";
+	
+	/**
+	 * Questa funzione gestisce l'invio di una mail e può essere usata con il
+	 * nome di un file presente nel sistema oppure semplicemente inserendo al suo posto
+	 * una stringa vuota.
+	 * 
+	 * @param to
+	 * @param sub
+	 * @param msg
+	 * @param filename
+	 */
 	public static void send(String to,String sub,String msg, String filename){  
 		//Get properties object    
 		File attach = null;
@@ -46,6 +65,7 @@ public class Mailer{
 				// creates message part
 
 				messageBodyPart.setContent(msg, "text/html");
+				message.setContent(msg, "text/html");
 
 				// creates multi-part
 

@@ -21,7 +21,13 @@ import model_uvp.RequestInternship;
 import model_uvp.User;
 
 /**
- * Servlet implementation class ShowProfile
+ * 
+ * Servlet per la gestione del profilo utente, questa permette
+ * di avere tutti i campi in nella pagina profilo utente
+ * 
+ * 
+ * @author Antonio Baldi
+ *
  */
 @WebServlet("/ShowProfile")
 public class ShowProfile extends HttpServlet {

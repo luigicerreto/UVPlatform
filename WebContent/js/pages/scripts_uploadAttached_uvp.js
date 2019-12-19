@@ -26,16 +26,20 @@ $(document).ready(function()
 						{
 							if (!msg.result) 
 							{
+								
 								showAlert(1,msg.error);
 							} 
 							else 
 							{
 								showAlert(0,msg.content);
+								//TODO
+								//vorrei richiamare notify
 								setTimeout(function() 
 										{
 									window.location.href = msg.redirect;
 										}, 
 										2000);
+								
 							}
 						},
 						error : function(msg) 

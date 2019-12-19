@@ -19,7 +19,14 @@ import model_uvp.DAORichiesta;
 import util.notifyStudent;
 
 /**
- * Servlet implementation class addAttached
+ * 
+ * Servlet per gestire l'aggiunta degli allegati ad una determinata richiesta.
+ * Questa servlet richiede "filenames[]" come parametro della request
+ * e l'identificativo della richiesta come parametro di sessione.
+ * 
+ * 
+ * @author Antonio Baldi
+ *
  */
 @WebServlet("/addAttached")
 public class addAttached extends HttpServlet {
@@ -83,8 +90,7 @@ public class addAttached extends HttpServlet {
 			error += " Impossibile cambiare stato alla richiesta.";
 			result = 0;
 		}
-		notifyStudent app = new notifyStudent();
-		app.notify(user.getEmail(), idRequest);
+		
 
 
 		JSONObject res = new JSONObject();

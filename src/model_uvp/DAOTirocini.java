@@ -7,9 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import controller.DbConnection;
-
+/**
+ * 
+ * @author Antonio
+ *
+ */
 public class DAOTirocini {
 
+	/**
+	 * 
+	 * Questa funzione restituisce tutti i tirocini interni presenti nel database
+	 * 
+	 * @return ArrayList<InternalInternship>
+	 */
 	public ArrayList<InternalInternship>  viewTraineeInternal()
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -37,6 +47,10 @@ public class DAOTirocini {
 	}
 
 
+	/**
+	 * Questa funzione restituisce tutti i tirocini esterni presenti nel database
+	 * @return ArrayList<ExternalInternship>
+	 */
 	public ArrayList<ExternalInternship>  viewTraineeExternal()
 	{
 		Connection con = new DbConnection().getInstance().getConn();

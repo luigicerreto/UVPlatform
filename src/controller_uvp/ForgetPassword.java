@@ -16,7 +16,12 @@ import util.Mailer;
 import util.PasswordGenerator;
 
 /**
- * Servlet implementation class ForgetPassword
+ * 
+ * Servlet per la gestione di password dimenticata. Questa fa si che invia una mail
+ * all'utente interessato con la nuova password generata e la aggiorni nel database
+ * 
+ * @author Antonio Baldi
+ *
  */
 @WebServlet("/ForgetPassword")
 public class ForgetPassword extends HttpServlet {

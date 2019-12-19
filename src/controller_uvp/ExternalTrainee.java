@@ -21,7 +21,13 @@ import model_uvp.InternalInternship;
 import model_uvp.RequestInternship;
 
 /**
- * Servlet implementation class InternalTrainee
+ * 
+ * Servlet per la gestione di un tirocinio esterno. 
+ * 
+ * 
+ * @author Antonio Baldi
+ * @author Carmine Rovito
+ *
  */
 @WebServlet("/ExternalTrainee")
 public class ExternalTrainee extends HttpServlet {

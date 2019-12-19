@@ -3,6 +3,15 @@ package util;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/**
+ * Questa classe gestisce la funzione di generazione di password casuali
+ * 
+ * @author Antonio Baldi
+ * @author Vincenzo Manserra
+ * @author Marco Spagnuolo
+ *
+ */
 public final class PasswordGenerator {
 
     private static final String LOWER = "abcdefghijklmnopqrstuvwxyz";

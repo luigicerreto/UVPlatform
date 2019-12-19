@@ -2,7 +2,11 @@ package model_uvp;
 
 import interfacce.UserInterface;
 import model.Stub;
-
+/**
+ * 
+ * @author Andrea Riccelli
+ *
+ */
 public class User implements UserInterface {
 	private String email;
 	  private String name;

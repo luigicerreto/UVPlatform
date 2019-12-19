@@ -14,14 +14,19 @@ import controller.Utils;
 import model.Attached;
 import model.SystemAttribute;
 
-
+/**
+ * 
+ * @author Antonio Baldi
+ *
+ */
 public class DAORichiesta {
 	/**
 	 * Questa funzione consente di recuperare dal database tutte le informazioni relative
-	 * a tutte le richieste di un dato utente
+	 * a tutte le richieste di un utente dato l'email.
 	 * 
 	 * @author Antonio Baldi
 	 * @param email
+	 * @return ArrayList<RequestInternship>
 	 */
 	public ArrayList<RequestInternship> viewRequests(String email) throws SQLException 
 	{
@@ -85,6 +90,13 @@ public class DAORichiesta {
 		return requests;
 
 	}
+
+	/**
+	 * Questa funzione permette di recuperare gli allegati di una richiesta dato l'id.
+	 * 
+	 * @param idRequest
+	 * @return Attached
+	 */
 	public Attached retriveAttached(int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -99,14 +111,14 @@ public class DAORichiesta {
 			attac = new Attached();
 			statement.setInt(1, idRequest);
 			resultAttached = statement.executeQuery();
-			
+
 			if(resultAttached.next())
 			{
 				attac = new Attached();
 				attac.setFilename(resultAttached.getString(1));
 			}
 			return attac;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,7 +128,14 @@ public class DAORichiesta {
 
 
 
-
+	/**
+	 * 
+	 * Questa funzione permette di aggiungere una richiesta al database
+	 * data una determinata richiesta come parametro.
+	 * 
+	 * @param richiesta
+	 * @return int
+	 */
 	public int addRequest(RequestInternship richiesta)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -190,7 +209,14 @@ public class DAORichiesta {
 
 	}
 
-
+	/**
+	 * 
+	 * Questa funzione permette di recuperare tutte le informazioni relative
+	 * ad un tirocinio interno dato l'id di questo.
+	 * 
+	 * @param id
+	 * @return InternalIntership
+	 */
 	public InternalInternship retriveInternship_internal(int id)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -221,6 +247,13 @@ public class DAORichiesta {
 
 	}
 
+	/**
+	 * Questa funzione permette di recuperare tutte le informazioni relative
+	 * ad un tirocinio esterno dato l'id di questo.
+	 * 
+	 * @param id
+	 * @return ExternalInternship
+	 */
 	public ExternalInternship retriveInternship_external(int id)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -251,7 +284,15 @@ public class DAORichiesta {
 		return internship;
 
 	}
-
+	/**
+	 * 
+	 * Questa funzione restituisce la mail dell'azienda dato l'id del
+	 * tirocinio esterno.
+	 * 
+	 * 
+	 * @param id_request
+	 * @return String
+	 */
 	public String ExternalPerform(int id_request)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -277,6 +318,13 @@ public class DAORichiesta {
 		return email_azienda;
 	}
 
+	/**
+	 * Questa funzione restituisce la mail del docente dato l'id del
+	 * tirocinio interno.
+	 * 
+	 * @param id_request
+	 * @return String
+	 */
 	public String InternalPerform(int id_request)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -303,6 +351,14 @@ public class DAORichiesta {
 	}
 
 
+	/**
+	 * Questa funzione restituisce l'id dell'ultima richiesta in stato
+	 * "Parzialmente completata" di un dato utente tramite il parametro email
+	 * 
+	 * 
+	 * @param email
+	 * @return int
+	 */
 	public int CheckLastPartialRequest(String email)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -331,6 +387,13 @@ public class DAORichiesta {
 		return 0;
 	}
 
+	/**
+	 * 
+	 * Questa funzione restituisce lo Stato di una richiesta dato l'id di questa.
+	 * 
+	 * @param idRequest
+	 * @return String
+	 */
 	public String checkStatus(int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -359,6 +422,16 @@ public class DAORichiesta {
 		return state;
 	}
 
+	/**
+	 * 
+	 * Questa funzione permette di aggiungere un allegato ad una richiesta.
+	 * 
+	 * 
+	 * @param Filename
+	 * @param mail
+	 * @param idRequest
+	 * @return
+	 */
 	public boolean addAttachment(String Filename, String mail, int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -391,6 +464,14 @@ public class DAORichiesta {
 
 		return false;
 	}
+	
+	/**
+	 * Questa funzione permette di avanzare lo stato di una richiesta da 
+	 * "Parzialmente completata" ad "In attesa di accettazione"
+	 * 
+	 * @param idRequest
+	 * @return
+	 */
 	public boolean updateState(int idRequest)
 	{
 		final String newState = "In attesa di accettazione";

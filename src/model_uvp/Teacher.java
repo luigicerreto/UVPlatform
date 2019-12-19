@@ -1,7 +1,11 @@
 package model_uvp;
 
 import interfacce.UserInterface;
-
+/**
+ * 
+ * @author Michele Pirro
+ *
+ */
 public class Teacher implements UserInterface{
 	  private String email;
 	  private String name;

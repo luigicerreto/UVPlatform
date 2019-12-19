@@ -7,7 +7,11 @@ import java.sql.PreparedStatement;
 import controller.DbConnection;
 import controller.Utils;
 
-
+/**
+ * 
+ * @author Antonio Baldi
+ * @author Rosario Di Palma
+ */
 public class DAOUtente {
 	/**
 	 * 
@@ -87,6 +91,14 @@ public class DAOUtente {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * Questo funzione restitutisce un Utente compelto di tutti i suoi campi
+	 * per visualizzarli sull'area utente del sistema
+	 * 
+	 * @param email
+	 * @return User
+	 */
 	public User showUser(String email)
 	{
 		Connection con = new DbConnection().getInstance().getConn();

@@ -1,7 +1,11 @@
 package model_uvp;
 
 import interfacce.UserInterface;
-
+/**
+ * 
+ * @author Michele Pirro
+ *
+ */
 public class Company implements UserInterface{
 	
 	private String email;
@@ -13,7 +17,18 @@ public class Company implements UserInterface{
 	private String serial;
 	private String office;
 	private int phone;	
-	
+	/**
+	 * 
+	 * Bean che consente di gestire le aziende all'interno del sistema
+	 * 
+	 * 
+	 * @param email
+	 * @param name
+	 * @param surname
+	 * @param sex
+	 * @param password
+	 * @param userType
+	 */
 	public Company(String email, String name, String surname, char sex, String password, int userType) {
 		super();
 		this.email = email;

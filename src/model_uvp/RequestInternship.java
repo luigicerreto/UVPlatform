@@ -5,7 +5,11 @@ import model.Attached;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 
+ * @author Andrea Riccelli
+ *
+ */
 public class RequestInternship {
 	private int id_request_i;
 	private String type;
@@ -15,11 +19,11 @@ public class RequestInternship {
 	private int id_ii;
 	private String state;
 	private List<Attached> attached = new ArrayList<>();
-	
+
 	public RequestInternship() {
-		
+
 	}
-	
+
 	public RequestInternship(int id_request_i, String state, String type, String user1, String user2, int id_ie,
 			int id_ii, List<Attached> attached) {
 		this.state=state;
@@ -30,7 +34,7 @@ public class RequestInternship {
 		this.id_request_i=id_request_i;
 		this.user1=user1;
 		this.user2=user2;
-		
+
 	}
 
 	public int getId_request_i() {
@@ -96,5 +100,5 @@ public class RequestInternship {
 	public void setAttached(List<Attached> attached) {
 		this.attached = attached;
 	}
-	
+
 }
