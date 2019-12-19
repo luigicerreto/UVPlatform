@@ -1,6 +1,15 @@
 .resetpassword {
-	color: orange;
-	margin: 41%;
+	color: blue;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.resetpassword:hover {
+	color: blue;
+	text-decoration: underline;
 }
 
 table div.tableButtons {
@@ -58,7 +67,8 @@ i.fa.fa-user {
 	display: flex;
 	flex-grow: 1;
 	flex-direction: row;
-	align-items: center;
+	float:left;
+	margin-right: 5px;
 	justify-content: center;
 	font-size: 30px;
 }
@@ -68,8 +78,8 @@ i.fa.fa-envelope {
 	flex-grow: 1;
 	flex-direction: row;
 	float:left;
-	text-align: right;
-	margin-right:6px;
+	margin-right: 5px;
+	justify-content: center;
 	font-size: 30px;
 }
 

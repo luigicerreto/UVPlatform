@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"
-	import="controller.CheckSession , controller.Utils "%>
+	import="controller.CheckSession , controller.Utils , interfacce.UserInterface "%>
 
 <%
 	String pageName = request.getParameter("pageName");
@@ -8,7 +8,8 @@
 	String menu = "";
 	String hiddenMenu = "";
 	String logoRedirect = request.getContextPath() + "/choice.jsp"; //tiene traccia del path a cui reindirizzare il sito quando si preme sul logo
-
+	UserInterface user = (UserInterface) session.getAttribute("user");
+	
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) { //cliccando sul logo reinderizza a index se non si è loggati
 		logoRedirect = request.getContextPath() + ck.getUrlRedirect();
@@ -49,7 +50,7 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/uploadAttached.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 
 		}
@@ -62,7 +63,7 @@
 					+ "/uploadAttached.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 			
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 
@@ -72,8 +73,8 @@
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/uploadAttached.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
 		}
 		if (pageName.equals("signUp.jsp")) {
 			logoRedirect = request.getContextPath() + ck.getUrlRedirect(); //siccome signUp è raggiungibile solo quando non sono loggato
@@ -94,7 +95,7 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/uploadAttached_uvp.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 		if (pageName.equals("firstForm_uvp.jsp")) {
@@ -105,7 +106,7 @@
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/firstForm_uvp.jsp\">Compila Richiesta</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 		if (pageName.equals("uploadAttached_uvp.jsp")) {
@@ -114,7 +115,7 @@
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/uploadAttached_uvp.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 		if (pageName.equals("profile_uvp.jsp")) {
@@ -123,7 +124,7 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li class=\"current\" style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 		if(pageName.equals("contact_uvp.jsp")){
@@ -132,7 +133,7 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 			+ "/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li class=\"current\" style=\"float:right\"><a href=\"" + request.getContextPath() +"/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 
@@ -140,8 +141,8 @@
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/uploadAttached.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
 		}
 		if (pageName.equals("signUp.jsp")) {
 			logoRedirect = request.getContextPath() + ck.getUrlRedirect(); //siccome signUp è raggiungibile solo quando non sono loggato
@@ -171,7 +172,7 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li class=\"current\" style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 		else if(pageName.equals("contact_uvp.jsp")){
@@ -180,7 +181,7 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 			+ "/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
-			menu += "<li class=\"current\" style=\"float:right\"><a href=\"" + request.getContextPath() +"/profile_uvp.jsp\"><i class=\"fa fa-user\"></i></a></li>";
+			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() +"/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 
