@@ -14,6 +14,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import model.Attached;
+import model_uvp.DAORichiesta;
 import model_uvp.DAOTirocini;
 import model_uvp.ExternalInternship;
 import model_uvp.InternalInternship;
@@ -48,11 +49,12 @@ public class ExternalTrainee extends HttpServlet {
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
+		DAOTirocini queryobj = new DAOTirocini();
 		
 		ArrayList<ExternalInternship> internship = new ArrayList<ExternalInternship>();
 		try
 		{
-		internship =  DAOTirocini.viewTraineeExternal();
+		internship =  queryobj.viewTraineeExternal();
 		if(internship.size()>0)
 			for(ExternalInternship a : internship)
 			{

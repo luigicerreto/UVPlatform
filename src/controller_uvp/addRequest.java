@@ -58,6 +58,8 @@ public class addRequest extends HttpServlet {
 		ExternalInternship is_external;
 		RequestInternship newRequest = new RequestInternship();
 		int returnMessage;
+		DAORichiesta queryobj = new DAORichiesta();
+
 
 		id_request = (Integer.parseInt(request.getParameter("choice")));
 		System.out.println("l'id è "+id_request);
@@ -65,23 +67,23 @@ public class addRequest extends HttpServlet {
 		if(type_internship==0)
 		{
 			internship_type = "Tirocinio Interno";
-			is_internal = DAORichiesta.retriveInternship_internal(id_request);
-			newRequest.setUser2(DAORichiesta.InternalPerform(id_request));
+			is_internal = queryobj.retriveInternship_internal(id_request);
+			newRequest.setUser2(queryobj.InternalPerform(id_request));
 			newRequest.setId_ii(id_request);
 
 		}
 		else
 		{
 			internship_type = "Tirocinio Esterno";
-			is_external = DAORichiesta.retriveInternship_external(id_request);
-			newRequest.setUser2(DAORichiesta.ExternalPerform(id_request));
+			is_external = queryobj.retriveInternship_external(id_request);
+			newRequest.setUser2(queryobj.ExternalPerform(id_request));
 			newRequest.setId_ie(id_request);
 			
 		}
 		newRequest.setType(internship_type);
 		newRequest.setState(requestState);
 		newRequest.setUser1(currUser.getEmail());
-		returnMessage=DAORichiesta.addRequest(newRequest);
+		returnMessage=queryobj.addRequest(newRequest);
 		if(returnMessage==1)
 		{
 			result=1;
@@ -99,9 +101,7 @@ public class addRequest extends HttpServlet {
 		}
 
 		
-		request.getSession().setAttribute("idRequest_i", DAORichiesta.CheckLastPartialRequest(currUser.getEmail()));
-		System.out.println("l'id della funzione del cazzo è "+ DAORichiesta.CheckLastPartialRequest(currUser.getEmail()));
-		System.out.println("L'id request assegnato alla sessione è "+newRequest.getId_request_i());
+		request.getSession().setAttribute("idRequest_i", queryobj.CheckLastPartialRequest(currUser.getEmail()));
 
 		redirect = request.getContextPath() + "/uploadAttached_uvp.jsp";
 		JSONObject res = new JSONObject();

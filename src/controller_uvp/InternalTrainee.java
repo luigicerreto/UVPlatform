@@ -47,11 +47,12 @@ public class InternalTrainee extends HttpServlet {
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
-		
 		ArrayList<InternalInternship> internship = new ArrayList<InternalInternship>();
+		DAOTirocini queryobj = new DAOTirocini();
+		
 		try
 		{
-		internship =  DAOTirocini.viewTraineeInternal();
+		internship =  queryobj.viewTraineeInternal();
 		
 		if(internship.size()>0)
 			for(InternalInternship a : internship)

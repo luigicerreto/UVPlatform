@@ -54,16 +54,17 @@ public class ForgetPassword extends HttpServlet {
 		String nuovaPsw = generatorePassword.generate(12);
 		String text = "La tua nuova password è:\n\n"+nuovaPsw+
 				"\n\n\nAccedi alla tua pagina utente per modificare la password";
+		DAOUtente queryobj = new DAOUtente();
 		try
 		{
-			if(!DAOUtente.checkMail(mail))
+			if(!queryobj.checkMail(mail))
 			{
 				result=0;
 				error = "L'Email inserita non e' registrata";
 			}
 			else
 			{
-				if(DAOUtente.updatePassword(mail, nuovaPsw))
+				if(queryobj.updatePassword(mail, nuovaPsw))
 				{
 					Mailer.send(mail,subject,text);  
 					result=1;

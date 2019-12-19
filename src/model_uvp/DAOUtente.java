@@ -22,7 +22,7 @@ public class DAOUtente {
 	 * @return Boolean
 	 * @throws SQLException
 	 */
-	public static boolean updatePassword(String email, String nuovaPsw) throws SQLException 
+	public boolean updatePassword(String email, String nuovaPsw) throws SQLException 
 	{
 		String newPassword = new Utils().generatePwd(nuovaPsw);
 		Connection con = new DbConnection().getInstance().getConn();
@@ -62,7 +62,7 @@ public class DAOUtente {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static boolean checkMail(String email) throws SQLException 
+	public boolean checkMail(String email) throws SQLException 
 	{
 
 		Connection con = new DbConnection().getInstance().getConn();

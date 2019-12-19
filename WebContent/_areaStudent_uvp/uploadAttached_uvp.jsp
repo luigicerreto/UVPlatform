@@ -25,55 +25,11 @@
 	if(!ck.isAllowed()) {
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
-	else if( idRequest_i == 0){
+	else if( idRequest_i == 0 || (!DAORichiesta.checkStatus(idRequest_i).equals("Parzialmente Completata"))){
 		response.sendRedirect(request.getContextPath()+"/_areaStudent_uvp/viewRequestInternship.jsp");
 		
 	}
-	/*
-  	String name = "";
-	String surname = "";
-	String tipoLaurea = "Magistrale";
-	String year = "";	
-	String serial = "";
-	String ente = "";
-	String certificateSerial = "";
-	String level = "";
-	String requestedCfu = "";
-
-	Connection conn = new DbConnection().getInstance().getConn();
-    if (conn != null) {
-
-      try {
-        Statement stmt = conn.createStatement();
-        String sql;
-        sql = "SELECT r.id_request, r.serial, u.name, u.surname, r.year, r.certificate_serial, "
-            + "r.level, r.release_date, r.expiry_date, r.requested_cfu, "
-            + "r.validated_cfu, e.name AS ente " + "FROM request r "
-            + "     INNER JOIN ente e ON r.fk_certifier = e.id_ente "
-            + "     INNER JOIN state s ON r.fk_state = s.id_state "
-            + "     INNER JOIN user u ON r.fk_user = u.email ";
-
-        ResultSet r = stmt.executeQuery(sql);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-        while (r.next()) {
-	    	name = r.getString("name");
-	    	surname = r.getString("surname");
-          	if(r.getInt("requested_cfu") == 3){
-	    	  tipoLaurea = "Triennale";	  
-	    	}
-          	year = sdf.format(r.getDate("year"))+ " / " + (Integer.parseInt(sdf.format(r.getDate("year")))+1);
-          	serial = r.getString("serial");
-          	ente = r.getString("ente");
-          	certificateSerial = r.getString("certificate_serial");
-          	level = r.getString("level");
-          	requestedCfu = r.getString("requested_cfu");
-        }
-      } catch (Exception e) {
-        System.out.println(e.getMessage());
-      }      
-      
-    }
-    */
+	
 %>
 
 <!DOCTYPE html>

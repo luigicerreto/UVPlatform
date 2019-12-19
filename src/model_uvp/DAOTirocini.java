@@ -10,7 +10,7 @@ import controller.DbConnection;
 
 public class DAOTirocini {
 
-	public static ArrayList<InternalInternship>  viewTraineeInternal()
+	public ArrayList<InternalInternship>  viewTraineeInternal()
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -37,7 +37,7 @@ public class DAOTirocini {
 	}
 
 
-	public static ArrayList<ExternalInternship>  viewTraineeExternal()
+	public ArrayList<ExternalInternship>  viewTraineeExternal()
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;

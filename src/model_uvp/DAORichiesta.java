@@ -23,7 +23,7 @@ public class DAORichiesta {
 	 * @author Antonio Baldi
 	 * @param email
 	 */
-	public static ArrayList<RequestInternship> viewRequests(String email) throws SQLException 
+	public ArrayList<RequestInternship> viewRequests(String email) throws SQLException 
 	{
 		ArrayList<RequestInternship> requests = new ArrayList<RequestInternship>();
 		RequestInternship request1 = null;
@@ -89,7 +89,7 @@ public class DAORichiesta {
 
 
 
-	public static int addRequest(RequestInternship richiesta)
+	public int addRequest(RequestInternship richiesta)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -163,7 +163,7 @@ public class DAORichiesta {
 	}
 
 
-	public static InternalInternship retriveInternship_internal(int id)
+	public InternalInternship retriveInternship_internal(int id)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -193,7 +193,7 @@ public class DAORichiesta {
 
 	}
 
-	public static ExternalInternship retriveInternship_external(int id)
+	public ExternalInternship retriveInternship_external(int id)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -224,7 +224,7 @@ public class DAORichiesta {
 
 	}
 
-	public static String ExternalPerform(int id_request)
+	public String ExternalPerform(int id_request)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -249,7 +249,7 @@ public class DAORichiesta {
 		return email_azienda;
 	}
 
-	public static String InternalPerform(int id_request)
+	public String InternalPerform(int id_request)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -275,14 +275,12 @@ public class DAORichiesta {
 	}
 
 
-	public static int CheckLastPartialRequest(String email)
+	public int CheckLastPartialRequest(String email)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
 		int id_request;
-		String email_docente = null;
-		ExternalInternship internship = null;
 		String retriveLR = "SELECT id_request_i FROM request_internship\r\n" + 
 				"WHERE FK_USER1 = ? AND STATE = \"Parzialmente Completata\";";
 		try
@@ -304,14 +302,42 @@ public class DAORichiesta {
 		}
 		return 0;
 	}
-	
-	public static boolean addAttachment(String Filename, String mail, int idRequest)
+
+	public String checkStatus(int idRequest)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String state="";
+		String retriveLR = "SELECT STATE FROM request_internship\r\n" + 
+				"WHERE id_request_i = ?";
+		try
+		{
+			statement = con.prepareStatement(retriveLR);
+			statement.setInt(1, idRequest);
+			result = statement.executeQuery();
+			if(result.next())
+			{
+				state=result.getString(1);
+				return state;
+			}
+			else
+				return state;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return state;
+	}
+
+	public boolean addAttachment(String Filename, String mail, int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
 		String addAttach;
-		
+
 		addAttach = "INSERT INTO attached (FILENAME, FK_USER, FK_REQUEST_I) VALUES (?, ?, ?) ";
 		try {
 			statement = con.prepareStatement(addAttach);
@@ -332,12 +358,12 @@ public class DAORichiesta {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
+
+
 		return false;
 	}
-	public static boolean updateState(int idRequest)
+	public boolean updateState(int idRequest)
 	{
 		final String newState = "In attesa di accettazione";
 		Connection con = new DbConnection().getInstance().getConn();

@@ -54,12 +54,14 @@ public class showRequest extends HttpServlet {
 		String redirect = "";
 		ArrayList<RequestInternship> richieste;
 		List<Attached> allegati;
+		DAORichiesta queryobj = new DAORichiesta();
+		
 		if (currUser != null) 
 		{
 			email = currUser.getEmail();
 			try
 			{
-			richieste = DAORichiesta.viewRequests(email);
+			richieste = queryobj.viewRequests(email);
 
 			if(richieste.size()==0)
 			{

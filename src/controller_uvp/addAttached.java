@@ -50,7 +50,7 @@ public class addAttached extends HttpServlet {
 		String error = "";
 		String content = "";
 		String redirect = "";
-
+		DAORichiesta queryobj = new DAORichiesta();
 		String addAttach;
 		PreparedStatement statement;
 
@@ -64,7 +64,7 @@ public class addAttached extends HttpServlet {
 		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
 		System.out.println("l'id nella servlet allegati è "+idRequest);
 
-		if(DAORichiesta.addAttachment(filenames[0], user.getEmail(), idRequest))
+		if(queryobj.addAttachment(filenames[0], user.getEmail(), idRequest))
 		{
 			content = "Allegati inseriti con successo.";
 		}
@@ -73,7 +73,7 @@ public class addAttached extends HttpServlet {
 			error = " Impossibile inserire l'allegato ." + filenames[0];
 			result = 0;
 		}
-		if(DAORichiesta.updateState(idRequest))
+		if(queryobj.updateState(idRequest))
 		{
 			result = 1;
 		}
