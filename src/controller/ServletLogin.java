@@ -18,6 +18,8 @@ import interfacce.UserInterface;
 import model.Admin;
 import model.Secretary;
 import model.Student;
+import model_uvp.Company;
+import model_uvp.Teacher;
 
 /**
  * Servlet implementation class Login
@@ -90,10 +92,12 @@ public class ServletLogin extends HttpServlet {
 						} else if (userType == 2) { // Profilo Admin
 							redirect = request.getContextPath() + "/_areaAdmin/viewRequest.jsp";
 							user = new Admin(email, name, surname, sex, password, userType);
-						}
-						else if (userType == 3) { // Profilo docente
-							redirect = request.getContextPath() + "/_areaAdmin/viewRequest.jsp";
-							user = new Admin(email, name, surname, sex, password, userType);
+						} else if (userType == 3) { // Profilo docente
+							redirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestTeacher.jsp";
+							user =  new Teacher(email, name, surname, sex, password, userType);
+						} else if (userType == 4) { // Profilo Azienda
+							redirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestCompany.jsp";
+							user =  new Company(email, name, surname, sex, password, userType);
 						}
 						
 						else {

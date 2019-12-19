@@ -1,41 +1,34 @@
 package model_uvp;
 
-public class Teacher {
+import interfacce.UserInterface;
+
+public class Teacher implements UserInterface{
 	  private String email;
 	  private String name;
 	  private String surname;
 	  private char sex;
 	  private String password;
 	  private int userType;
-	  private String ufficio;
-	  private int telefono;
-	  private int id_teacher;
+	  private String serial;
+	  private String office;
+	  private int phone;
 	  
 	  
-	public Teacher(String email, String name, String surname, char sex, String password, int userType, String ufficio,
-			int telefono,int id_teacher) {
+	public Teacher(String email, String name, String surname, char sex, String password, int userType) {
 		this.email = email;
 		this.name = name;
 		this.surname = surname;
 		this.sex = sex;
 		this.password = password;
 		this.userType = userType;
-		this.ufficio = ufficio;
-		this.telefono = telefono;
-		this.id_teacher=id_teacher;
+		this.serial= serial;
+		this.office= office;
+		this.phone= phone;
 	}
+	
+	public Teacher() {}
 
-
-	public int getId_teacher() {
-		return id_teacher;
-	}
-
-
-	public void setId_docente(int id_teacher) {
-		this.id_teacher = id_teacher;
-	}
-
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -94,25 +87,40 @@ public class Teacher {
 	public void setUserType(int userType) {
 		this.userType = userType;
 	}
-
-
-	public String getUfficio() {
-		return ufficio;
+	
+	public String getSerial() {
+		return serial;
+	}
+	
+	public void setSerial(String serial) {
+		 this.serial= serial;
 	}
 
 
-	public void setUfficio(String ufficio) {
-		this.ufficio = ufficio;
+	public String getOffice() {
+		return office;
 	}
 
 
-	public int getTelefono() {
-		return telefono;
+	public void setOffice(String office) {
+		this.office = office;
 	}
 
 
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
+	public int getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+
+	@Override
+	public boolean validate() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	  
 }
