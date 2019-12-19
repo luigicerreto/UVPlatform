@@ -45,7 +45,7 @@
 										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<input type="text" class="form-control" id="surname"
-												 minlength="1" maxlength="20" required>
+												 minlength="1" maxlength="20" value="david" required >
 										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<input type="email" class="form-control" id="email"

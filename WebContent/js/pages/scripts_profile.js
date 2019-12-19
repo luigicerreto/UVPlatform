@@ -1,6 +1,6 @@
 $(document).ready(
 		function() {
-		$('#name,#surname,#email,#serial').prop("disabled", true);
+		$('#name,#surname,#email,#serial,#phone').prop("disabled", true);
 	
 		$(document).on('submit','#signUp',function(e) {
 				var name = $("#name").val();

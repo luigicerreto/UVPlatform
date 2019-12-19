@@ -21,7 +21,6 @@
 	}
 	Integer requestNumberMaxUpload = 1;	
 	String requestAllowedExtensionUpload = ".pdf";
-	System.out.println("l'id request è "+idRequest_i);
 	if(!ck.isAllowed()) {
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}

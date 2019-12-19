@@ -84,7 +84,6 @@ public class showRequest extends HttpServlet {
 					allegati = a.getAttached();
 					for (Attached b : allegati)
 					{
-						System.out.println(b.getFilename()+" file in servlet");
 						content += "<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>";
 					}
 					content += "    </td>";

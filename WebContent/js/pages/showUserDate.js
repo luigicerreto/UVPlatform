@@ -6,7 +6,7 @@ function showDataUser() {
 	$(".preloader").show();
 
 	$.ajax({
-		url : absolutePath + "/showProfile",
+		url : absolutePath + "/ShowProfile",
 		type : "POST",
 		dataType : 'JSON',
 		async : false,
@@ -15,18 +15,18 @@ function showDataUser() {
 		success : function(msg) {
 			if (!msg.result) {
 				showAlert(1, msg.error);
-			} else 
+			}
+			else 
 			{
-				document.getElementById("name").innerHTML = msg.name;
-				$("#name").text(msg.name);
-				$("#surname").html(msg.surname);
-				$("#email").value(msg.email)
-				$("#phone").html(msg.phone);
-				
+				$("#name").val(msg.name);
+				$("#surname").val(msg.surname);
+				$("#email").val(msg.email)
+				$("#phone").val(msg.phone);
+
 			}
 		},
 		error : function(msg) {
-			showAlert(1, "Impossibile Recuperare i dati.");
+			showAlert(1, "Impossibile Recuperhhhhhare i dati.");
 		}
 	});
 

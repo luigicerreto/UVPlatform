@@ -25,4 +25,5 @@ function showData() {
 	});
 
 	$(".preloader").hide();
+	return false;
 } 

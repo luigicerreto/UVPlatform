@@ -57,26 +57,34 @@ public class ShowProfile extends HttpServlet {
 		ArrayList<RequestInternship> richieste;
 		List<Attached> allegati;
 		DAOUtente queryobj = new DAOUtente();
-		User userDate;
-		
+		User userDate = null;
+		JSONObject res = new JSONObject();
+		try
+		{
+			
 		userDate = queryobj.showUser(currUser.getEmail());
-		if(userDate.getEmail().isEmpty())
+		if(userDate == null)
 		{
 			result = 0;
 			error = "Errore nel caricamento dei dati";
 		}
 		else
 		{
+			res.put("name", userDate.getName());
+			res.put("surname", userDate.getSurname());
+			res.put("email", userDate.getEmail());
+			res.put("phone", userDate.getPhone());
 			result = 1;
 		}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		
-		JSONObject res = new JSONObject();
+		
 		res.put("result", result);
 		res.put("error", error);
-		res.put("name", userDate.getName());
-		res.put("surname", userDate.getSurname());
-		res.put("email", userDate.getEmail());
-		res.put("phone", userDate.getPhone());
 		res.put("redirect", redirect);
 		PrintWriter out = response.getWriter();
 		out.println(res);
