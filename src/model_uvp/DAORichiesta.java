@@ -312,7 +312,7 @@ public class DAORichiesta {
 		ResultSet result;
 		String addAttach;
 		
-		addAttach = "INSERT INTO attached (FILENAME, FK_USER, FK_REQUEST,I) VALUES (?, ?, ?) ";
+		addAttach = "INSERT INTO attached (FILENAME, FK_USER, FK_REQUEST_I) VALUES (?, ?, ?) ";
 		try {
 			statement = con.prepareStatement(addAttach);
 			statement.setString(1, Filename);

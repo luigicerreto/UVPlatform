@@ -76,6 +76,7 @@ public class addRequest extends HttpServlet {
 			is_external = DAORichiesta.retriveInternship_external(id_request);
 			newRequest.setUser2(DAORichiesta.ExternalPerform(id_request));
 			newRequest.setId_ie(id_request);
+			
 		}
 		newRequest.setType(internship_type);
 		newRequest.setState(requestState);
@@ -97,8 +98,9 @@ public class addRequest extends HttpServlet {
 			error="Errore nella presentazione della richiesta";
 		}
 
-
-		request.getSession().setAttribute("idRequest_i", newRequest.getId_request_i());
+		
+		request.getSession().setAttribute("idRequest_i", DAORichiesta.CheckLastPartialRequest(currUser.getEmail()));
+		System.out.println("l'id della funzione del cazzo è "+ DAORichiesta.CheckLastPartialRequest(currUser.getEmail()));
 		System.out.println("L'id request assegnato alla sessione è "+newRequest.getId_request_i());
 
 		redirect = request.getContextPath() + "/uploadAttached_uvp.jsp";
@@ -110,6 +112,8 @@ public class addRequest extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");
+		
+		
 
 
 

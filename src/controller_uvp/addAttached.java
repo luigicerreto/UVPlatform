@@ -1,16 +1,21 @@
 package controller_uvp;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.mysql.jdbc.PreparedStatement;
 
 import interfacce.UserInterface;
 import model.SystemAttribute;
+import model_uvp.DAORichiesta;
 
 /**
  * Servlet implementation class addAttached
@@ -51,62 +56,45 @@ public class addAttached extends HttpServlet {
 
 
 		String[] filenames = request.getParameterValues("filenames[]");
-		if (filenames.length != 1 
-				|| !filenames[0].endsWith(".pdf")) 
-				{
+		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 
+		{
 			throw new IllegalArgumentException("Valore non corretto");
-				}
+		}
 		Integer idRequest = (Integer) request.getSession().getAttribute("idRequest_i");
 		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
 		System.out.println("l'id nella servlet allegati è "+idRequest);
-		result = 1;
-		//TODO
-		/*
-			try {
-				for (int i = 0; i < filenames.length; i++) {
-					addAttach = " INSERT INTO attached " + " (filename, fk_request, fk_user) " + " VALUES "
-							+ " (?, ?, ?) ";
-					statement = conn.prepareStatement(addAttach);
-					statement.setString(1, filenames[i]);
-					statement.setInt(2, idRequest);
-					statement.setString(3, user.getEmail());
-					if (statement.executeUpdate() > 0) {
-						result *= 1;
-					} else {
-						error += " Impossibile inserire l'allegato ." + filenames[i];
-						result *= 0;
-					}
-				}
 
-				if (result == 1) {
-					Integer newState =
-							Integer.parseInt(new SystemAttribute().getValueByKey("request-working-secretary"));
-					addAttach = " UPDATE request SET fk_state = ? WHERE id_request = ?; ";
-					statement = conn.prepareStatement(addAttach);
-					statement.setInt(1, newState);
-					statement.setInt(2, idRequest);
-					if (statement.executeUpdate() > 0) {
-						result = 1;
-						redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
-						content = "Allegati inseriti con successo.";
-					} else {
-						error += " Impossibile cambiare stato alla richiesta.";
-						result = 0;
-					}
-				}
+		if(DAORichiesta.addAttachment(filenames[0], user.getEmail(), idRequest))
+		{
+			content = "Allegati inseriti con successo.";
+		}
+		else
+		{
+			error = " Impossibile inserire l'allegato ." + filenames[0];
+			result = 0;
+		}
+		if(DAORichiesta.updateState(idRequest))
+		{
+			result = 1;
+		}
+		else
+		{
+			error += " Impossibile cambiare stato alla richiesta.";
+			result = 0;
+		}
 
-				if (result == 0) {
-					conn.rollback();
-					result *= 0;
-				} else {
-					conn.commit();
-				}
 
-			} catch (Exception e) {
-				error += e.getMessage();
-				result *= 0;
-			}
-		 */
+		JSONObject res = new JSONObject();
+		res.put("result", result);
+		res.put("error", error);
+		res.put("content", content);
+		res.put("redirect", redirect);
+		PrintWriter out = response.getWriter();
+		out.println(res);
+		response.setContentType("json");
+
+
+
 	}
 
 }

@@ -9,7 +9,8 @@
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());	
 	UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 	Integer idRequest_i = (Integer) request.getSession().getAttribute("idRequest_i");
-	if(idRequest_i == null)
+	System.out.println("l'id request dalla sessione "+idRequest_i);
+	if(idRequest_i == null )
 	{
 		request.getSession().getAttribute("user");
 	  idRequest_i = DAORichiesta.CheckLastPartialRequest(currUser.getEmail());
@@ -20,11 +21,12 @@
 	}
 	Integer requestNumberMaxUpload = 1;	
 	String requestAllowedExtensionUpload = ".pdf";
+	System.out.println("l'id request è "+idRequest_i);
 	if(!ck.isAllowed()) {
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
 	else if( idRequest_i == 0){
-		response.sendRedirect(request.getContextPath()+"/_areaStudent/viewRequest.jsp");
+		response.sendRedirect(request.getContextPath()+"/_areaStudent_uvp/viewRequestInternship.jsp");
 		
 	}
 	/*
