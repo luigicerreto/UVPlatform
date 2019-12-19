@@ -69,7 +69,6 @@ public class addRequest extends HttpServlet {
 
 
 		id_request = (Integer.parseInt(request.getParameter("choice")));
-		System.out.println("l'id è "+id_request);
 		type_internship = (Integer.parseInt(request.getParameter("type")));
 		if(type_internship==0)
 		{

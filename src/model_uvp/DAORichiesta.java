@@ -78,7 +78,6 @@ public class DAORichiesta {
 				request1.setAttached(attacheds);
 				request1.setType(result.getString(3));
 				request1.setState(result.getString(4));
-				//System.out.println("Gli allegati sono "+attacheds.get(0).getFilename()+ "    "+attacheds.get(1).getFilename());
 				requests.add(request1);
 			}
 

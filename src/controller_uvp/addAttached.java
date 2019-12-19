@@ -16,6 +16,7 @@ import com.mysql.jdbc.PreparedStatement;
 import interfacce.UserInterface;
 import model.SystemAttribute;
 import model_uvp.DAORichiesta;
+import util.Mailer;
 import util.notifyStudent;
 
 /**
@@ -70,11 +71,23 @@ public class addAttached extends HttpServlet {
 		}
 		Integer idRequest = (Integer) request.getSession().getAttribute("idRequest_i");
 		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
-		System.out.println("l'id nella servlet allegati è "+idRequest);
 
 		if(queryobj.addAttachment(filenames[0], user.getEmail(), idRequest))
 		{
 			content = "Allegati inseriti con successo.";
+			notifyStudent notify = new notifyStudent();
+			new Thread(() -> {
+				try {
+					notify.notify(user.getEmail(), idRequest);
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				} catch (ServletException e) {
+					
+					e.printStackTrace();
+				} 
+			}).start();
+			
 		}
 		else
 		{

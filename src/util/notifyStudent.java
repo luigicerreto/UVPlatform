@@ -51,7 +51,6 @@ public class notifyStudent {
 		file = queryobj.retriveAttached(idRequest);
 		String basePath = 
 		        new SystemAttribute().getValueByKey("request-upload-path") + "\\" + idRequest + "\\";
-		System.out.println("Il percorso è "+basePath+file.getFilename());
 		Mailer.send(mail,object,text,basePath+file.getFilename());  
 		
 		

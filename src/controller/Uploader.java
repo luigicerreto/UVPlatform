@@ -62,12 +62,10 @@ public class Uploader extends HttpServlet {
 
 		String folderName;
 		folderName=String.valueOf(request.getSession().getAttribute("idRequest"));
-		System.out.println("folder dasmdmsa "+folderName);
 		if(folderName.equals("null"))
 		{
 			folderName = String.valueOf(request.getSession().getAttribute("idRequest_i"));
 		}
-		System.out.println("folder dopo l'if "+folderName);
 
 		filePath = new SystemAttribute().getValueByKey("request-upload-path")
 				+ "\\" + folderName + "\\";

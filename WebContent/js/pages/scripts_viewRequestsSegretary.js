@@ -44,7 +44,7 @@ $(document)
 														setTimeout(
 																function() {
 																	showData();
-																}, 2000);
+																}, 1000);
 													}
 												},
 												error : function(msg) {

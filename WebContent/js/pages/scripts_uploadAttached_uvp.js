@@ -32,13 +32,11 @@ $(document).ready(function()
 							else 
 							{
 								showAlert(0,msg.content);
-								//TODO
-								//vorrei richiamare notify
 								setTimeout(function() 
 										{
 									window.location.href = msg.redirect;
 										}, 
-										2000);
+										1000);
 								
 							}
 						},

@@ -40,7 +40,7 @@ $(document)
 										setTimeout(
 												function() {
 													window.location.href = msg.redirect;
-												}, 2000);
+												}, 1000);
 									}
 								},
 								error : function(msg) {

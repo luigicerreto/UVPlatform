@@ -72,7 +72,10 @@ public class ForgetPassword extends HttpServlet {
 			{
 				if(queryobj.updatePassword(mail, nuovaPsw))
 				{
-					Mailer.send(mail,subject,text,"");  
+					new Thread(() -> {
+						Mailer.send(mail,subject,text,"");  
+					}).start();
+					
 					result=1;
 					content = "Email inviata correttamente";
 				}
