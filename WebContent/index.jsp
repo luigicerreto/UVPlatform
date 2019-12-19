@@ -43,8 +43,8 @@
 										class="btn btn-primary btn-lg btn-block" role="button"
 										aria-pressed="true">Registrati</a>
 									<p></p>
-									<a href="./recuperaPassword.jsp"
-										class="btn btn-primary btn-lg btn-block" role="button"
+									<a href="./resetPassword.jsp" class="resetpassword"
+										 role="button"
 										aria-pressed="true">Recupera password</a>
 									<p></p>
 								</div>
