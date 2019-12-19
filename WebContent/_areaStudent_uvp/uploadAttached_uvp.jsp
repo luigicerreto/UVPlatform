@@ -9,11 +9,11 @@
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());	
 	UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 	Integer idRequest_i = (Integer) request.getSession().getAttribute("idRequest_i");
-	System.out.println("l'id request dalla sessione "+idRequest_i);
+	DAORichiesta queryobj = new DAORichiesta();
 	if(idRequest_i == null )
 	{
 		request.getSession().getAttribute("user");
-	  idRequest_i = DAORichiesta.CheckLastPartialRequest(currUser.getEmail());
+	  idRequest_i = queryobj.CheckLastPartialRequest(currUser.getEmail());
 	 if(idRequest_i!=0)
 	 {
 	  request.getSession().setAttribute("idRequest_i", idRequest_i);
@@ -25,7 +25,7 @@
 	if(!ck.isAllowed()) {
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
-	else if( idRequest_i == 0 || (!DAORichiesta.checkStatus(idRequest_i).equals("Parzialmente Completata"))){
+	else if( idRequest_i == 0 || (!queryobj.checkStatus(idRequest_i).equals("Parzialmente Completata"))){
 		response.sendRedirect(request.getContextPath()+"/_areaStudent_uvp/viewRequestInternship.jsp");
 		
 	}

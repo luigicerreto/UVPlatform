@@ -86,5 +86,32 @@ public class DAOUtente {
 		}
 		return false;
 	}
+	
+	public User showUser(String email)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		User userDate = new User();
+		String checkUser = "SELECT NAME, SURNAME, phone "
+				+ "FROM user where EMAIL = ?;";
+		try {
+			statement = con.prepareStatement(checkUser);
+			statement.setString(1, email);
+			result = statement.executeQuery();
+			if(result.next())
+			{
+				userDate.setEmail(email);
+				userDate.setName(result.getString(1));
+				userDate.setSurname(result.getString(2));
+				userDate.setPhone(result.getInt(3));
+				return userDate;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

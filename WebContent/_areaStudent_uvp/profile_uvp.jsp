@@ -12,7 +12,7 @@
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="">
+<body onLoad="showDataUser()">
 	<div class="page-wrapper">
 
 		<!-- Preloader -->
@@ -100,6 +100,8 @@
 	<jsp:include page="/partials/includes.jsp" />
 	<script
 		src="<%= request.getContextPath() %>/js/pages/scripts_profile.js"></script>
+	<script 
+	src="<%= request.getContextPath()%>/js/pages/showUserDate.js"></script>
 
 </body>
 </html>
