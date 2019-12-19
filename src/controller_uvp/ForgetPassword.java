@@ -58,7 +58,8 @@ public class ForgetPassword extends HttpServlet {
 		PasswordGenerator generatorePassword = new PasswordGenerator();
 		String nuovaPsw = generatorePassword.generate(12);
 		String text = "La tua nuova password è:\n\n"+nuovaPsw+
-				"\n\n\nAccedi alla tua pagina utente per modificare la password";
+				"\nAccedi alla tua pagina utente per modificare la password"
+				+ "\n http://localhost:8080/UVPlatform/index.jsp ";
 		DAOUtente queryobj = new DAOUtente();
 		try
 		{
@@ -89,8 +90,6 @@ public class ForgetPassword extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		//TODO
-		//redirect non funziona.
 		redirect = request.getContextPath() + "/login.jsp";
 		JSONObject res = new JSONObject();
 		res.put("result", result);
