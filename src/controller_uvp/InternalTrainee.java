@@ -68,7 +68,7 @@ public class InternalTrainee extends HttpServlet {
 				jObj.put("place", a.getPlace());
 				jObj.put("choice","<div class=\"tableButtons\">"
 						+ "<button type =\"button\" class=\"showDetails\" data-toggle=\"modal\" data-target=\"#details\"><i class=\"fa fa-info-circle\"></i></button>"
-						+ "<label class=\"btn btn-default\">" 
+						+ "<label class=\"selectInternship btn btn-default\">" 
 						+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
 						+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
 						+ "</label>"

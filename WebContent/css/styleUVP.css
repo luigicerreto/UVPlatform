@@ -8,7 +8,7 @@
 }
 
 textarea {
-  resize: none;
+	resize: none;
 }
 
 .resetpassword:hover {
@@ -32,7 +32,7 @@ table label.btn {
 	margin-left: 10px;
 }
 
-.btn span.glyphicon {
+label.selectInternship span.glyphicon {
 	opacity: 0.2;
 }
 
@@ -157,9 +157,41 @@ h1.details {
 	color: orange;
 }
 
-.form-contact{
+.form-contact {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+
+label.actionInternship span.acceptBtn {
+	transition: 0.2s;
+}
+
+label.actionInternship:hover span.acceptBtn {
+	color: green;
+}
+
+label.actionInternship span.refuseBtn {
+	transition: 0.2s;
+}
+
+label.actionInternship:hover span.refuseBtn {
+	color: red;
+}
+
+label.actionInternship span.uploadBtn {
+	transition: 0.2s;
+}
+
+label.actionInternship:hover span.uploadBtn {
+	color: orange;
+}
+
+label.actionInternship span.downloadBtn {
+	transition: 0.2s;
+}
+
+label.actionInternship:hover span.downloadBtn {
+	color: orange;
 }
