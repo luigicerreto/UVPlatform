@@ -15,7 +15,7 @@ public class User implements UserInterface {
 	  private String password;
 	  private int userType;
 	  private int serial;
-	  private int phone;
+	  private String phone;
 	  
 
 	  
@@ -25,7 +25,7 @@ public class User implements UserInterface {
 	 }
 	  
 	 public User(String email, String name, String surname, char sex,String password, int userType,
-			 int serial, int phone) {
+			 int serial, String phone) {
 		 
 		 this.email=email;
 		 this.name=name;
@@ -46,12 +46,12 @@ public class User implements UserInterface {
 		this.serial = serial;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
-		this.phone = phone;
+	public void setPhone(String string) {
+		this.phone = string;
 	}
 
 	@Override

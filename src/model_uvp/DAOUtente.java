@@ -116,7 +116,7 @@ public class DAOUtente {
 				userDate.setEmail(email);
 				userDate.setName(result.getString(1));
 				userDate.setSurname(result.getString(2));
-				userDate.setPhone(result.getInt(3));
+				userDate.setPhone(result.getString(3));
 				return userDate;
 			}
 		} catch (SQLException e) {

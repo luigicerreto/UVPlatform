@@ -11,7 +11,7 @@ PASSWORD varchar(50) not null,
 USER_TYPE tinyint(1) not null,
 SERIAL char(10),
 OFFICE varchar(150),
-phone int(10),
+phone varchar(10),
 primary key (EMAIL)
 );
 
@@ -246,17 +246,17 @@ INSERT INTO internship_i (id_ii, tutor_name, theme, availability, resources, goa
 VALUES (6, "Monica Sebillo", "Sistemi Informativi Geografici e applicazioni per Mobile GIS", 25, "http://docenti.unisa.it/004827/risorse?categoria=337&risorsa=807", "Sviluppo di servizi di intelligenza territoriale ");
 
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('rdeprisco@unisa.it','Roberto','De Prisco','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ADA", 089969719);
+VALUES('rdeprisco@unisa.it','Roberto','De Prisco','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ADA", "089969719");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('adebonis@unisa.it','Annalisa','De Bonis','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio Turing", 089969219);
+VALUES('adebonis@unisa.it','Annalisa','De Bonis','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio Turing", "089969219");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('bcarpentieri@unisa.it','Bruno','Carpentieri','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ISIS", 089969319);
+VALUES('bcarpentieri@unisa.it','Bruno','Carpentieri','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ISIS", "089969319");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('gpolese@unisa.it','Giuseppe','Polese','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ADA", 089969714);
+VALUES('gpolese@unisa.it','Giuseppe','Polese','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ADA", "089969714");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('storre@unisa.it','Salvatore','la Torre','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio di Verifica di Correttezza e SintesiAutomatica di Sistemi Digitali", 089969759);
+VALUES('storre@unisa.it','Salvatore','la Torre','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio di Verifica di Correttezza e SintesiAutomatica di Sistemi Digitali", "089969759");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('msebillo@unisa.it','Monica','Sebillo','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio di Sistemi Informativi Geografici", 089969769);
+VALUES('msebillo@unisa.it','Monica','Sebillo','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio di Sistemi Informativi Geografici", "089969769");
 
 
 INSERT INTO perform (FK_USER, id_ii)
@@ -291,17 +291,17 @@ VALUES (6, "Espansione	s.r.l.", 2, '2019-09-30', 7, "La mission era ed è sempli
 
 
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@kineton.it','Kineton srl','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Napoli", 089452719);
+VALUES('info@kineton.it','Kineton srl','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Napoli", "089452719");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('consulting@mate.it','Mate consulting','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Salerno", 089452799);
+VALUES('consulting@mate.it','Mate consulting','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Salerno", "089452799");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@italdata.it','Italdata spa','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", 089412719);
+VALUES('info@italdata.it','Italdata spa','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", "089412719");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@technodesign.it','TechnoDesig','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Fisciano", 089152719);
+VALUES('info@technodesign.it','TechnoDesig','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Fisciano", "089152719");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@accasoftware.it','Acca','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", 089456719);
+VALUES('info@accasoftware.it','Acca','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", "089456719");
 INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@espansione.com','Espansione srl','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", 088452719);
+VALUES('info@espansione.com','Espansione srl','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", "088452719");
 
 
 INSERT INTO do(FK_USER, id_ie)
