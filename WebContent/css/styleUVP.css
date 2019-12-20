@@ -24,12 +24,6 @@ table td {
 	text-align: center;
 }
 
-table button.glyphicon-info-sign {
-	font-size: 30px;
-	margin-right: 10px;
-	color: orange;
-}
-
 table label.btn {
 	margin-left: 10px;
 }
@@ -63,11 +57,20 @@ table label input[type=radio]:checked+span {
 	color: #5CB85C;
 }
 
+i.fa.fa-info-circle {
+	font-size: 30px;
+	transition: 0.2s;
+}
+
+i.fa.fa-info-circle:hover {
+	color: orange;
+}
+
 i.fa.fa-user {
 	display: flex;
 	flex-grow: 1;
 	flex-direction: row;
-	float:left;
+	float: left;
 	margin-right: 5px;
 	justify-content: center;
 	font-size: 30px;
@@ -77,13 +80,11 @@ i.fa.fa-envelope {
 	display: flex;
 	flex-grow: 1;
 	flex-direction: row;
-	float:left;
+	float: left;
 	margin-right: 5px;
 	justify-content: center;
 	font-size: 30px;
 }
-
-
 
 div#phoneNumber {
 	display: flex;
@@ -108,9 +109,6 @@ div#phoneNumber i:hover {
 /* The Modal (background) */
 .modal {
 	display: none;
-	position: fixed;
-	left: 0;
-	top: 0;
 	overflow: hidden;
 	overflow-y: auto;
 	width: 100%;
@@ -120,8 +118,7 @@ div#phoneNumber i:hover {
 /* Modal Content Box */
 .modal-content {
 	background-color: rgba(255, 255, 255, 1);
-	color: rgba(255, 255, 255, 1);
-	margin: 10% auto 10% auto;
+	margin: 12% auto 8% auto;
 	border: 2px solid orange;
 	border-radius: 15px;
 	width: 50%;
@@ -129,16 +126,29 @@ div#phoneNumber i:hover {
 	padding: 1%;
 }
 
-/* Add Zoom Animation */
-.animate {
-	animation: zoom 0.6s
+.modal .header {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
-@
-keyframes zoom {
-	from {transform: scale(0)
+h1.details {
+	text-align: center;
 }
 
-to {
-	transform: scale(1)
+.close {
+	position: fixed;
+	top: 0;
+	right: 0;
+	margin: 5px;
+	font-size: 30px;
+	transition: 0.2s;
+	opacity: 0.5;
+	font-size: 30px;
+	font-size: 30px;
+}
+
+.close:hover {
+	opacity: 1;
+	color: orange;
 }

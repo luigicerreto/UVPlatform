@@ -42,13 +42,11 @@
 										<h2 class="text-center">Scegli Tirocinio</h2>
 										<p></p>
 									</div>
-									<a  id="intBtn"
-										class="btn btn-primary btn-lg btn-block" role="button"
-										aria-pressed="true">Tirocinio Interno</a>
+									<a id="intBtn" class="btn btn-primary btn-lg btn-block"
+										role="button" aria-pressed="true">Tirocinio Interno</a>
 									<p></p>
-									<a  id="extBtn"
-										class="btn btn-primary btn-lg btn-block" role="button"
-										aria-pressed="true">Tirocinio Esterno</a>
+									<a id="extBtn" class="btn btn-primary btn-lg btn-block"
+										role="button" aria-pressed="true">Tirocinio Esterno</a>
 									<p></p>
 								</div>
 							</div>
@@ -75,9 +73,15 @@
 		<jsp:include page="/partials/footer.jsp" />
 	</div>
 
-	<div id="details" class="modal">
-		<div id="details-content" class="modal-content animate">
-
+	<div id="details" class="modal fade" tabindex="-1" role="dialog">
+		<div id="details-content" class="modal-content modal-dialog">
+			<div class="header">
+				<h1 class="details">DETTAGLI TIROCINIO</h1>
+				<button type="button" class="close" data-dismiss="modal">
+					<i class="fa fa-times-circle"></i>
+				</button>
+			</div>
+			<div class="info"></div>
 		</div>
 	</div>
 	<!--End pagewrapper-->

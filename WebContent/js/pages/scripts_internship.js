@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	var flag;
-	$('#details').css("display", "none");
 	$("#internshipTableDiv").css("display", "none");
 	$('input[type="submit"]').prop("disabled", true);
 	
@@ -29,12 +28,9 @@ $(document).ready(function() {
 					"</tr>"
 			);
 
-
-
-
 			// contenuto tabella
 			$('#internshipTable').DataTable( {
-				"order": [[ 0, "desc" ]],
+				"order": [[ 0, "asc" ]],
 				"lengthMenu": [[10, -1], [10, "Tutti"]],
 				"autoWidth": false,
 				"bAutoWidth": false,
@@ -82,14 +78,9 @@ $(document).ready(function() {
 					"</tr>"
 			);
 
-			$('#internshipTable tbody').on('click', '.prova1' ,function(){
-
-
-
-			});
 			// contenuto tabella
 			$('#internshipTable').DataTable( {
-				"order": [[ 0, "desc" ]],
+				"order": [[ 0, "asc" ]],
 				"lengthMenu": [[10, -1], [10, "Tutti"]],
 				"autoWidth": false,
 				"bAutoWidth": false,
@@ -129,8 +120,6 @@ $(document).ready(function() {
 			});
 		}
 	});
-
-
 
 	$('table').on('change', 'input[type="radio"]', function (e) {
 		$('input[type="submit"]').prop("disabled", false);
