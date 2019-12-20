@@ -18,7 +18,7 @@
 	if (pageFolder.equals("_areaAdmin")&& ck.isAllowed()) { //se stiamo in una pagina dell'area admin
 		logoRedirect = request.getContextPath() + "/_areaAdmin/viewRequest.jsp";
 
-		if (pageName.equals("viewRequest.jsp")) {
+		if (pageName.equals("viewRequest.jsp")&& ck.isAllowed()) {
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/viewRequest.jsp\">Richieste EV</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
@@ -31,16 +31,16 @@
 	} else if (pageFolder.equals("_areaSecretary")&& ck.isAllowed()) { //se stiamo in una pagina dell'area segreteria
 		logoRedirect = request.getContextPath() + "/_areaSecretary/viewRequest.jsp";
 
-		if (pageName.equals("viewRequest.jsp")) { //pagina delle richieste
+		if (pageName.equals("viewRequest.jsp")&& ck.isAllowed()) { //pagina delle richieste
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/viewRequest.jsp\">Richieste EV</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/\">Richieste Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 		}
-	} else if (pageFolder.equals("_areaStudent")) { //se stiamo in una pagina dell'area studente
+	} else if (pageFolder.equals("_areaStudent")&& ck.isAllowed()) { //se stiamo in una pagina dell'area studente
 
-		if (pageName.equals("viewRequest.jsp")) { //se stiamo in viewRequest
+		if (pageName.equals("viewRequest.jsp")&& ck.isAllowed()) { //se stiamo in viewRequest
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/viewRequest.jsp\">Richieste EV</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/"
@@ -85,7 +85,7 @@
 
 	} else if (pageFolder.equals("_areaStudent_uvp") && ck.isAllowed()) { //se stiamo in una pagina dell'area studente tirocinio
 
-		if (pageName.equals("viewRequestInternship.jsp")) { //se stiamo in viewRequestTirocinio
+		if (pageName.equals("viewRequestInternship.jsp")&& ck.isAllowed()) { //se stiamo in viewRequestTirocinio
 			menu += "<li><a href=\"" + request.getContextPath() + "/"
 					+ "_areaStudent/viewRequest.jsp\">Richieste EV</a></li>";
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
@@ -98,7 +98,7 @@
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath() + "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
-		if (pageName.equals("firstForm_uvp.jsp")) {
+		if (pageName.equals("firstForm_uvp.jsp")&& ck.isAllowed()) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/"
 					+ "_areaStudent/viewRequest.jsp\">Richieste EV</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
@@ -153,7 +153,7 @@
 		
 		else if (pageFolder.equals("_areaCompany_uvp")&& ck.isAllowed()) { //se stiamo in una pagina dell'area Azienda
 
-			if (pageName.equals("viewRequestCompany.jsp")) { //se stiamo in viewRequestCompany
+			if (pageName.equals("viewRequestCompany.jsp")&& ck.isAllowed()) { //se stiamo in viewRequestCompany
 				menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "/viewRequestCompany.jsp\">Richieste Tirocinio</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
