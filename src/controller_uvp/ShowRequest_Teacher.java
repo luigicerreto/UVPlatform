@@ -45,6 +45,7 @@ public class ShowRequest_Teacher extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
@@ -79,9 +80,20 @@ public class ShowRequest_Teacher extends HttpServlet {
 						jObj.put("name",nome);
 						jObj.put("surname", cognome);
 						jObj.put("type", a.getType());
-						jObj.put("azioni", "<label class=\"btn btn-default\">" 
-						+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
-						+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
+						jObj.put("azioni", "<label class=\"actionInternship btn btn-default\">" + 
+								"<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii() +"\">" + 
+								"<span class=\"acceptBtn glyphicon glyphicon-ok\"></span>" + 
+								"</label><label class=\"actionInternship btn btn-default\">" 
+						+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
+						+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
+						+ "</label>"
+						+ "<label class=\"actionInternship btn btn-default\">"
+						+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
+						+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+						+ "</label>"
+						+ "<label class=\"actionInternship btn btn-default\">"
+						+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
+						+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 						+ "</label>");
 						jArr.add(jObj);
 

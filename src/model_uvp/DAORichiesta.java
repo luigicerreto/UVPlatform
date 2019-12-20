@@ -463,7 +463,7 @@ public class DAORichiesta {
 
 		return false;
 	}
-	
+
 	/**
 	 * Questa funzione permette di avanzare lo stato di una richiesta da 
 	 * "Parzialmente completata" ad "In attesa di accettazione"
@@ -500,7 +500,7 @@ public class DAORichiesta {
 		}
 		return false;
 	}
-	
+
 	public ArrayList<RequestInternship> viewRequestsTeacher(String email) throws SQLException 
 	{
 		ArrayList<RequestInternship> requests = new ArrayList<RequestInternship>();
@@ -625,7 +625,7 @@ public class DAORichiesta {
 		return requests;
 
 	}
-	
+
 	public boolean acceptByTeach_Company(int idRequest)
 	{
 		final String newState = "In elaborazione dalla Segreteria";
@@ -655,7 +655,7 @@ public class DAORichiesta {
 		}
 		return false;
 	}
-	
+
 	public boolean rejectByTeach_Company(int idRequest)
 	{
 		final String newState = "Rifiutata e conclusa";
@@ -684,6 +684,53 @@ public class DAORichiesta {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public String refreshAttachment(String Filename, int idRequest)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String addAttach;
+		String mail = null;
+		String retrivemail = "SELECT FK_USER "
+				+ "FROM attached"
+				+ "WHERE FK_REQUEST_I = ? ";
+
+		addAttach = "UPDATE attached \r\n" + 
+				"SET FILENAME = ? \r\n" + 
+				"WHERE FK_REQUEST_I = ?";
+		try {
+			statement = con.prepareStatement(addAttach);
+			statement.setString(1, Filename);
+			statement.setInt(2, idRequest);
+			if(statement.executeUpdate()>0)
+			{
+				con.commit();
+				
+				statement = con.prepareStatement(retrivemail);
+				statement.setInt(1, idRequest);
+				result = statement.executeQuery();
+				if(result.next())
+				{
+					mail = result.getString(1);
+				}
+				return mail;
+				
+			}
+			else
+			{
+				con.rollback();
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+		return null;
 	}
 
 }
