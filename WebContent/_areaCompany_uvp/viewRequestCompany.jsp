@@ -43,6 +43,7 @@
 											<th class="text-center" align="center">Nome</th>
 											<th class="text-center" align="center">Cognome</th>
 											<th class="text-center" align="center">Tipo di richiesta</th>
+											<th class="text-center" align="center">Stato</th>
 											<th class="text-center" align="center">Azioni</th>
 										</tr>
 									</thead>
