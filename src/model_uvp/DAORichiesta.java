@@ -626,7 +626,7 @@ public class DAORichiesta {
 
 	}
 	
-	public boolean updateStateByTeach_Company(int idRequest)
+	public boolean acceptByTeach_Company(int idRequest)
 	{
 		final String newState = "In elaborazione dalla Segreteria";
 		Connection con = new DbConnection().getInstance().getConn();
