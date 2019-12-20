@@ -4,8 +4,8 @@
 	import="controller.CheckSession, model.SystemAttribute, controller.Utils, controller.DbConnection,interfacce.*, java.sql.Connection, java.sql.ResultSet, java.sql.Statement, java.text.SimpleDateFormat"%>
 
 <%
-	String pageName = "uploadAttached.jsp";
-	String pageFolder = "_areaStudent_uvp";
+	String pageName = "uploadAttachedCompany.jsp";
+	String pageFolder = "_areaCompany_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());	
 	UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 	Integer idRequest_i = (Integer) request.getSession().getAttribute("idRequest_i");
