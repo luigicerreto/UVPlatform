@@ -34,7 +34,8 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-								<table id="TeacherTableInternship" class="display data-results table table-striped table-hover table-bordered">
+								<table id="TeacherTableInternship"
+									class="display data-results table table-striped table-hover table-bordered">
 									<thead>
 										<tr align="center">
 											<th class="text-center" align="center">ID</th>
@@ -43,6 +44,7 @@
 											<th class="text-center" align="center">Nome</th>
 											<th class="text-center" align="center">Cognome</th>
 											<th class="text-center" align="center">Tipo di richiesta</th>
+											<th class="text-center" align="center">Stato</th>
 											<th class="text-center" align="center">Azioni</th>
 										</tr>
 									</thead>

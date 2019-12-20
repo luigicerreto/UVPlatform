@@ -56,58 +56,59 @@ public class ShowRequest_Teacher extends HttpServlet {
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
-		
+
 		if (currUser != null) 
 		{
 			email = currUser.getEmail();
 			try
 			{
 				richieste = queryobj.viewRequestsTeacher(email);
-				
-					for(RequestInternship a : richieste)
-					{
-						jObj = new JSONObject();
-						jObj.put("id",a.getId_request_i());
-						jObj.put("Tirocinio", a.getUser1());	
-						allegati = a.getAttached();
-						for (Attached b : allegati)
-						{
-							jObj.put("attached","<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
-						}
-						int index = a.getUser2().indexOf("+");
-						String nome = a.getUser2().substring(0, index);
-						String cognome = a.getUser2().substring(index+1);
-						jObj.put("name",nome);
-						jObj.put("surname", cognome);
-						jObj.put("type", a.getType());
-						jObj.put("azioni", "<label class=\"actionInternship btn btn-default\">" + 
-								"<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii() +"\">" + 
-								"<span class=\"acceptBtn glyphicon glyphicon-ok\"></span>" + 
-								"</label><label class=\"actionInternship btn btn-default\">" 
-						+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
-						+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
-						+ "</label>"
-						+ "<label class=\"actionInternship btn btn-default\">"
-						+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
-						+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
-						+ "</label>"
-						+ "<label class=\"actionInternship btn btn-default\">"
-						+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
-						+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
-						+ "</label>"
-						+ "<label class=\"actionInternship btn btn-default\">"
-					      + "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
-					      + "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
-					      + "</label>");
-						jArr.add(jObj);
 
+				for(RequestInternship a : richieste)
+				{
+					jObj = new JSONObject();
+					jObj.put("id",a.getId_request_i());
+					jObj.put("Tirocinio", a.getUser1());	
+					allegati = a.getAttached();
+					for (Attached b : allegati)
+					{
+						jObj.put("attached","<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
 					}
-				
+					int index = a.getUser2().indexOf("+");
+					String nome = a.getUser2().substring(0, index);
+					String cognome = a.getUser2().substring(index+1);
+					jObj.put("name",nome);
+					jObj.put("surname", cognome);
+					jObj.put("type", a.getType());
+					jObj.put("state",a.getState());
+					jObj.put("azioni", "<label class=\"actionInternship btn btn-default\">" + 
+							"<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i() +"\">" + 
+							"<span class=\"acceptBtn glyphicon glyphicon-ok\"></span>" + 
+							"</label><label class=\"actionInternship btn btn-default\">" 
+							+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i()+"\">" 
+							+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
+							+ "</label>"
+							+ "<label class=\"actionInternship btn btn-default\">"
+							+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i()+"\">" 
+							+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+							+ "</label>"
+							+ "<label class=\"actionInternship btn btn-default\">"
+							+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i()+"\">" 
+							+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
+							+ "</label>"
+							+ "<label class=\"actionInternship btn btn-default\">"
+							+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i()+"\">" 
+							+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+							+ "</label>");
+					jArr.add(jObj);
+
+				}
+
 			}
 			catch(Exception e)
 			{
-				
-				
+
+
 				e.printStackTrace();
 			}
 			mainObj.put("data", jArr);

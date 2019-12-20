@@ -21,7 +21,9 @@ $(document).ready(function() {
 			{ "data" : "name" },
 			{ "data" : "surname" },
 			{ "data" : "type" },
+			{ "data" : "state" },
 			{ "data" : "azioni" },
+			
 			
 			],
 			"language": {
