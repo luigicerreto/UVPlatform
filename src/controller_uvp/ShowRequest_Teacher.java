@@ -67,7 +67,7 @@ public class ShowRequest_Teacher extends HttpServlet {
 					{
 						jObj = new JSONObject();
 						jObj.put("id",a.getId_request_i());
-						jObj.put("theme", a.getUser1());	
+						jObj.put("Tirocinio", a.getUser1());	
 						allegati = a.getAttached();
 						for (Attached b : allegati)
 						{

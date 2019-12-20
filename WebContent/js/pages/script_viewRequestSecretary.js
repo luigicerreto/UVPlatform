@@ -16,7 +16,7 @@ $(document).ready(function() {
 		},
 		"columns" : [
 			{ "data" : "id" },
-			{ "data" : "Tirocinio" },
+			{ "data" : "theme" },
 			{ "data" : "attached" },
 			{ "data" : "name" },
 			{ "data" : "surname" },
