@@ -119,7 +119,8 @@ public class ServletSignup extends HttpServlet {
 
 						stmt.setString(7, serial);
 						if (stmt.executeUpdate() > 0) {
-							redirect = request.getContextPath() + "/scelta.jsp"; // modifica effettuata per effettuare la scelta di english validation o tirocinio esterno
+							// modifica effettuata per effettuare la scelta di english validation o tirocinio esterno
+							redirect = request.getContextPath() + "/choice.jsp"; 
 							// redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
 							user = new Student(email, name, surname, sex, password, userType);
 							request.getSession().setAttribute("user", user);

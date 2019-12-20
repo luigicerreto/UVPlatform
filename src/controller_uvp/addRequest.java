@@ -109,7 +109,7 @@ public class addRequest extends HttpServlet {
 		
 		request.getSession().setAttribute("idRequest_i", queryobj.CheckLastPartialRequest(currUser.getEmail()));
 
-		redirect = request.getContextPath() + "/uploadAttached_uvp.jsp";
+		redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached_uvp.jsp";
 		JSONObject res = new JSONObject();
 		res.put("result", result);
 		res.put("error", error);
