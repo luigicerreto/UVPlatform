@@ -35,52 +35,22 @@
 								<div
 									class="col-lg-6 col-md-6 col-sm-12 col-xs-12 signUp-container">
 									<div class="panel">
-										<h2 class="text-center">Il mio profilo</h2>
+										<h2 class="text-center">Contattaci</h2>
 										<p></p>
 									</div>
 									<form id="signUp">
-										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 disabled">
-											<input type="text" class="form-control" id="name"
-												minlength="1" maxlength="20" required>
+										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+											<input type="text" class="form-control" id="oggetto" placeholder="Oggetto"
+												 maxlength="30" required>
 										</div>
-										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="text" class="form-control" id="surname"
-												 minlength="1" maxlength="20" required>
-										</div>
-										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="email" class="form-control" id="email"
-												 minlength="1" required>
-										</div>
-										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="text" class="form-control" id="serial"
-												 minlength="10" maxlength="10" required>
-										</div>
+										<div class="form-group col-sm-12">
+											<input type="text" class="form-control" id="testo" placeholder="Testo"
+												  maxlength="180" required>
+												 </div>
 										
-										<div id="phoneNumber" class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="text" class="form-control" id="phone"
-												placeholder="Telefono" minlength="10" maxlength="10" required></input>
-												<i class="fa fa-edit"></i>
-											
-										</div>
-										
-										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="password"
-												placeholder="Vecchia password" minlength="8" required>
-										</div>
-										
-										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="password"
-												placeholder="Nuova password" minlength="8" required>
-												</div>
-												
-												<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="password"
-												placeholder="Conferma password" minlength="8" required>
-												</div>
-
 										<div
 											class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-											<button type="submit" class="btn btn-primary btn-submit">Conferma</button>
+											<button type="submit" class="btn btn-primary btn-submit">Invia</button>
 										</div>
 
 										<div class="clearfix"></div>
