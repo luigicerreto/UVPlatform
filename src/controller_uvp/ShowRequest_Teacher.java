@@ -94,7 +94,11 @@ public class ShowRequest_Teacher extends HttpServlet {
 						+ "<label class=\"actionInternship btn btn-default\">"
 						+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
 						+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
-						+ "</label>");
+						+ "</label>"
+						+ "<label class=\"actionInternship btn btn-default\">"
+					      + "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
+					      + "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+					      + "</label>");
 						jArr.add(jObj);
 
 					}
