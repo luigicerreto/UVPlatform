@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
@@ -48,73 +49,55 @@ public class showRequest_Company extends HttpServlet {
 		// TODO Auto-generated method stub
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		String email="";
-		Integer result = 0;
-		String error = "";
-		String content = "";
-		String redirect = "";
 		ArrayList<RequestInternship> richieste;
 		List<Attached> allegati;
 		DAORichiesta queryobj = new DAORichiesta();
+		JSONObject jObj;
+		JSONArray jArr = new JSONArray();
+		JSONObject mainObj = new JSONObject();
 
 		if (currUser != null) 
 		{
 			email = currUser.getEmail();
-			System.out.println("l'email è "+email);
+			
 			try
 			{
 				richieste = queryobj.viewRequestsCompany(email);
 
-				if(richieste.size()==0)
-				{
-					content += "<tr>"
-							+ "<td class=\"text-center\"" + "></td>"
-							+ "<td class=\"text-center\"" + "></td>"
-							+ "<td class=\"text-center\"" + ">Nessuna Richiesta Presente</td>"
-							+ "<td class=\"text-center\"" + "></td>"
-							+ "<td class=\"text-center\"" + "></td>"
-							+ "</tr>";
-				}
-				else
 					for(RequestInternship a : richieste)
 					{
 
-						content += "<tr role='row'>";
-						content += "    <td class='text-center'>" + a.getId_request_i() + "</td>";
-						content += "    <td class='text-center'>" + a.getUser1() + "</td>";
-						content += "    <td class='text-center'>";
+						jObj = new JSONObject();
+						jObj.put("id",a.getId_request_i());
 						allegati = a.getAttached();
 						for (Attached b : allegati)
 						{
-							content += "<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>";
+							jObj.put("attached","<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
 						}
-						content += "    </td>";
+						jObj.put("theme", a.getUser1());	
 						int index = a.getUser2().indexOf("+");
 						String nome = a.getUser2().substring(0, index);
 						String cognome = a.getUser2().substring(index+1);
-						content += "    <td class='text-center'>" + nome + "</td>";
-						content += "    <td class='text-center'>" + cognome + "</td>";
-						content += "    <td class='text-center'>" + a.getType() + "</td>";
+						jObj.put("name",nome);
+						jObj.put("surname", cognome);
+						jObj.put("type", a.getType());
+						jArr.add(jObj);
 						
-						content += "</tr>";
+		
 					
 
 					}
-				result=1;
+				
 			}
 			catch(Exception e)
 			{
 				
-				error = "catch";
-				result=0;
+				
 				e.printStackTrace();
 			}
-			JSONObject res = new JSONObject();
-			res.put("result", result);
-			res.put("error", error);
-			res.put("content", content);
-			res.put("redirect", redirect);
+			mainObj.put("data", jArr);
 			PrintWriter out = response.getWriter();
-			out.println(res);
+			out.println(mainObj);
 			response.setContentType("json");
 		}
 	}

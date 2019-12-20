@@ -39,7 +39,7 @@
 										<tr align="center">
 											<th class="text-center" align="center">ID</th>
 											<th class="text-center" align="center">Allegati</th>
-											<th class="text-center" align="center">Matricola</th>
+											<th class="text-center" align="center">Tema</th>
 											<th class="text-center" align="center">Nome</th>
 											<th class="text-center" align="center">Cognome</th>
 											<th class="text-center" align="center">Tipo di richiesta</th>
@@ -62,39 +62,6 @@
 
 	<jsp:include page="/partials/includes.jsp" />
 
-	<script>
-			jQuery(document).ready(function($){
-				$('#CompanyTableInternship').DataTable( {
-			        "order": [[ 0, "desc" ]],
-			        "lengthMenu": [[10, -1], [10, "Tutti"]],
-			        "autoWidth": false,
-			        "bAutoWidth": false,			        
-			        "language": {
-						    "sEmptyTable":     "Nessuna Richiesta Presente",
-						    "sInfo":           "",
-						    "sInfoEmpty":      "",
-						    "sInfoFiltered":   "",
-						    "sInfoPostFix":    "",
-						    "sInfoThousands":  ".",
-						    "sLengthMenu":     "Visualizza _MENU_ elementi",
-						    "sLoadingRecords": "Caricamento...",
-						    "sProcessing":     "Elaborazione...",
-						    "sSearch":         "Cerca:",
-						    "sZeroRecords":    "La ricerca non ha portato alcun risultato.",
-						    "oPaginate": {
-						        "sFirst":      "Inizio",
-						        "sPrevious":   '<i class="fa fa-caret-left"></i>',
-						        "sNext":       '<i class="fa fa-caret-right"></i>',
-						        "sLast":       "Fine"
-						    },
-						    "oAria": {
-						        "sSortAscending":  ": attiva per ordinare la colonna in ordine crescente",
-						        "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
-						    }
-			        }        
-			    } );
-			});
-		</script>
 	<script
 		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestCompany.js"></script>
 

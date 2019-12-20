@@ -1,29 +1,46 @@
 $(document).ready(function() {
 
-});
-
-function showData() {
-	$(".preloader").show();
-
-	$.ajax({
-		url : absolutePath + "/ShowRequest_Teacher",
-		type : "POST",
-		dataType : 'JSON',
-		async : false,
-		data : {
+	
+	
+	// contenuto tabella
+	$('#TeacherTableInternship').DataTable( {
+		"order": [[ 0, "asc" ]],
+		"lengthMenu": [[10, -1], [10, "Tutti"]],
+		"autoWidth": false,
+		"bAutoWidth": false,
+		"processing": true,
+		"ajax": {
+			"url": absolutePath + "/ShowRequest_Teacher",
+			"dataSrc": "data",
+			"type": "POST"
 		},
-		success : function(msg) {
-			if (!msg.result) {
-				showAlert(1, msg.error);
-			} else {
-				$("#bodyTeacherTableInternship").html(msg.content);
-			}
-		},
-		error : function(msg) {
-			showAlert(1, "Impossibile Recuperare i dati.");
-		}
+		"columns" : [
+			{ "data" : "id" },
+			{ "data" : "theme" },
+			{ "data" : "attached" },
+			{ "data" : "name" },
+			{ "data" : "surname" },
+			{ "data" : "type" },
+			],
+			"language": {
+				"sEmptyTable":     "Nessun tirocinio interno disponibile",
+				"sInfo":           "",
+				"sInfoEmpty":      "",
+				"sInfoFiltered":   "",
+				"sInfoPostFix":    "",
+				"sInfoThousands":  ".",
+				"sLengthMenu":     "Visualizza _MENU_ elementi",
+				"sLoadingRecords": "Caricamento...",
+				"sProcessing":     "Elaborazione...",
+				"sSearch":         "Cerca:",
+				"sZeroRecords":    "La ricerca non ha portato alcun risultato.",
+				"oPaginate": {
+					"sFirst":      "Inizio",
+					"sPrevious":   '<i class="fa fa-caret-left"></i>',
+					"sNext":       '<i class="fa fa-caret-right"></i>',
+					"sLast":       "Fine"
+				}
+			}        
 	});
-
-	$(".preloader").hide();
-	return false;
-} 
+	
+});
