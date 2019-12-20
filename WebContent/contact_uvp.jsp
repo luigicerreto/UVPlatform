@@ -4,6 +4,10 @@
 <%
 	String pageName = "contact_uvp.jsp";
 	String pageFolder = "";
+	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
+	if(!ck.isAllowed()){
+	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
+	}
 %>
 
 <!DOCTYPE html>
@@ -70,8 +74,7 @@
 	<jsp:include page="/partials/includes.jsp" />
 	<script
 		src="<%= request.getContextPath() %>/js/pages/scripts_profile.js"></script>
-	<script 
-	src="<%= request.getContextPath()%>/js/pages/showUserDate.js"></script>
+	<script src="<%= request.getContextPath()%>/js/pages/showUserDate.js"></script>
 
 </body>
 </html>

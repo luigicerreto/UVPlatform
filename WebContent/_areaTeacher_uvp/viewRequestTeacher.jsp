@@ -34,17 +34,19 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-								<table id="studentTableInternship" class="display data-results table table-striped table-hover table-bordered">
+								<table id="TeacherTableInternship" class="display data-results table table-striped table-hover table-bordered">
 									<thead>
 										<tr align="center">
 											<th class="text-center" align="center">ID</th>
-											<th class="text-center" align="center">Matricola</th>
+											<th class="text-center" align="center">Tema</th>
 											<th class="text-center" align="center">Allegati</th>
+											<th class="text-center" align="center">Nome</th>
+											<th class="text-center" align="center">Cognome</th>
 											<th class="text-center" align="center">Tipo di richiesta</th>
-											<th class="text-center" align="center">Stato</th>
+											<th class="text-center" align="center">Azioni</th>
 										</tr>
 									</thead>
-									<tbody id="bodyStudentTableInternship">
+									<tbody id="bodyTeacherTableInternship">
 									</tbody>
 								</table>
 
@@ -62,7 +64,7 @@
 
 	<script>
 			jQuery(document).ready(function($){
-				$('#studentTableInternship').DataTable( {
+				$('#TeacherTableInternship').DataTable( {
 			        "order": [[ 0, "desc" ]],
 			        "lengthMenu": [[10, -1], [10, "Tutti"]],
 			        "autoWidth": false,
@@ -94,7 +96,7 @@
 			});
 		</script>
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestInternship.js"></script>
+		src="<%= request.getContextPath() %>/js/pages/script_viewRequestTeacher.js"></script>
 
 </body>
 </html>

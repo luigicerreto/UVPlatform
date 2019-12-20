@@ -9,7 +9,6 @@
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
 	}
 %>
-
 <!DOCTYPE html>
 <html>
 <head>

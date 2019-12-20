@@ -6,7 +6,7 @@ function showData() {
 	$(".preloader").show();
 
 	$.ajax({
-		url : absolutePath + "/showRequest_Company",
+		url : absolutePath + "/ShowRequest_Teacher",
 		type : "POST",
 		dataType : 'JSON',
 		async : false,
@@ -16,7 +16,7 @@ function showData() {
 			if (!msg.result) {
 				showAlert(1, msg.error);
 			} else {
-				$("#bodyCompanyTableInternship").html(msg.content);
+				$("#bodyTeacherTableInternship").html(msg.content);
 			}
 		},
 		error : function(msg) {
