@@ -7,6 +7,10 @@
 	justify-content: center;
 }
 
+textarea {
+  resize: none;
+}
+
 .resetpassword:hover {
 	color: blue;
 	text-decoration: underline;
@@ -151,4 +155,11 @@ h1.details {
 .close:hover {
 	opacity: 1;
 	color: orange;
+}
+
+.form-contact{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
