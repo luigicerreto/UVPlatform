@@ -79,6 +79,10 @@ public class ShowRequest_Teacher extends HttpServlet {
 						jObj.put("name",nome);
 						jObj.put("surname", cognome);
 						jObj.put("type", a.getType());
+						jObj.put("azioni", "<label class=\"btn btn-default\">" 
+						+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
+						+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
+						+ "</label>");
 						jArr.add(jObj);
 
 					}

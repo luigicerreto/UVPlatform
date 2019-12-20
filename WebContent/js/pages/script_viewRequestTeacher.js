@@ -21,6 +21,8 @@ $(document).ready(function() {
 			{ "data" : "name" },
 			{ "data" : "surname" },
 			{ "data" : "type" },
+			{ "data" : "azioni" },
+			
 			],
 			"language": {
 				"sEmptyTable":     "Nessun tirocinio interno disponibile",

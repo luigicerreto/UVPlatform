@@ -626,9 +626,39 @@ public class DAORichiesta {
 
 	}
 	
-	public boolean updateStateByTeach_Company(int idRequest)
+	public boolean acceptByTeach_Company(int idRequest)
 	{
 		final String newState = "In elaborazione dalla Segreteria";
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String updateS = "UPDATE request_internship\r\n" + 
+				"SET STATE = ?\r\n" + 
+				"WHERE id_request_i = ?;";
+		try {
+			statement = con.prepareStatement(updateS);
+			statement.setString(1, newState);
+			statement.setInt(2, idRequest);
+			if(statement.executeUpdate()>0)
+			{
+				con.commit();
+				return true;
+			}
+			else
+			{
+				con.rollback();
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean rejectByTeach_Company(int idRequest)
+	{
+		final String newState = "Rifiutata e conclusa";
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
