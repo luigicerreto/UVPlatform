@@ -124,7 +124,9 @@ public class CheckSession implements Serializable {
       else if (userType == 0 && this.pageFolder.equals("_areaStudent_uvp")) {
           this.setAllowed(true);
       }
+     
     }
+     
     return allowed;
   }
 
