@@ -50,8 +50,7 @@ public class ShowRequest_Teacher extends HttpServlet {
 		// TODO Auto-generated method stub
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		String email="";
-		ArrayList<RequestInternship> richieste;
-		List<Attached> allegati;
+		ArrayList<RequestInternship> requests;
 		DAORichiesta queryobj = new DAORichiesta();
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
@@ -62,55 +61,50 @@ public class ShowRequest_Teacher extends HttpServlet {
 			email = currUser.getEmail();
 			try
 			{
-				richieste = queryobj.viewRequestsTeacher(email);
+				requests = queryobj.viewRequestsTeacher(email);
 
-				for(RequestInternship a : richieste)
+				for(RequestInternship a : requests)
 				{
 					jObj = new JSONObject();
 					jObj.put("id",a.getId_request_i());
-					jObj.put("Tirocinio", a.getUser1());	
-					allegati = a.getAttached();
-					for (Attached b : allegati)
+					jObj.put("theme", a.getTheme());
+					for (Attached b : a.getAttached())
 					{
 						jObj.put("attached","<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
-					}
-					int index = a.getUser2().indexOf("+");
-					String nome = a.getUser2().substring(0, index);
-					String cognome = a.getUser2().substring(index+1);
-					jObj.put("name",nome);
-					jObj.put("surname", cognome);
+					}					
+					jObj.put("name",a.getUserName());
+					jObj.put("surname", a.getUserSurname());
 					jObj.put("type", a.getType());
 					jObj.put("state",a.getState());
-					jObj.put("azioni", "<label class=\"actionInternship btn btn-default\">" + 
-							"<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i() +"\">" + 
-							"<span class=\"acceptBtn glyphicon glyphicon-ok\"></span>" + 
-							"</label><label class=\"actionInternship btn btn-default\">" 
-							+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i()+"\">" 
+					jObj.put("actions", ""
+							+ "<label class=\"actionInternship btn btn-default\">" 
+							+ "<input type=\"button\" id=\""+a.getId_request_i() +"\">"
+							+ "<span class=\"acceptBtn glyphicon glyphicon-ok\"></span>" 
+							+ "</label>"
+							+ "<label class=\"actionInternship btn btn-default\">" 
+							+ "<input type=\"button\" id=\""+a.getId_request_i()+"\">" 
 							+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
 							+ "</label>"
 							+ "<label class=\"actionInternship btn btn-default\">"
-							+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i()+"\">" 
+							+ "<input type=\"button\" id=\""+a.getId_request_i()+"\">" 
 							+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
 							+ "</label>"
 							+ "<label class=\"actionInternship btn btn-default\">"
-							+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i()+"\">" 
+							+ "<input type=\"button\" id=\""+a.getId_request_i()+"\">" 
 							+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 							+ "</label>"
 							+ "<label class=\"actionInternship btn btn-default\">"
-							+ "<input type=\"button\" class=\"prova1\" name=\"options\" id=\""+a.getId_request_i()+"\">" 
+							+ "<input type=\"button\" id=\""+a.getId_request_i()+"\">" 
 							+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 							+ "</label>");
 					jArr.add(jObj);
-
 				}
-
 			}
 			catch(Exception e)
 			{
-
-
 				e.printStackTrace();
 			}
+			
 			mainObj.put("data", jArr);
 			PrintWriter out = response.getWriter();
 			out.println(mainObj);

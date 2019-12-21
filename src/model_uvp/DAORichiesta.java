@@ -74,7 +74,7 @@ public class DAORichiesta {
 					}
 				}
 				request1.setId_request_i(result.getInt(1));
-				request1.setUser1(result.getString(2));
+				request1.setTheme(result.getString(2));
 				request1.setAttached(attacheds);
 				request1.setType(result.getString(3));
 				request1.setState(result.getString(4));
@@ -146,7 +146,7 @@ public class DAORichiesta {
 			checkRequest = "SELECT id_request_i\r\n" + 
 					"FROM request_internship WHERE FK_USER1 = ? AND STATE != ? AND STATE != ? ";
 			statement = con.prepareStatement(checkRequest);
-			statement.setString(1, richiesta.getUser1());
+			statement.setString(1, richiesta.getTheme());
 			statement.setString(2, "Accettata");
 			statement.setString(3, "Rifiutata");
 			ResultSet r = statement.executeQuery();
@@ -161,8 +161,8 @@ public class DAORichiesta {
 					statement = con.prepareStatement(addRequest);
 					statement.setString(1, richiesta.getType());
 					statement.setString(2, richiesta.getState());
-					statement.setString(3, richiesta.getUser1());
-					statement.setString(4, richiesta.getUser2());
+					statement.setString(3, richiesta.getTheme());
+					statement.setString(4, richiesta.getUserFullName());
 					if(richiesta.getId_ie()>0)
 					{
 						statement.setNull(5, java.sql.Types.INTEGER);
@@ -547,9 +547,9 @@ public class DAORichiesta {
 					}
 				}
 				request1.setId_request_i(result.getInt(1));
-				request1.setUser1(result.getString(2));
+				request1.setTheme(result.getString(2));
 				request1.setAttached(attacheds);
-				request1.setUser2(result.getString(3)+"+"+result.getString(4));
+				request1.setUserFullName(result.getString(3)+"+"+result.getString(4));
 				request1.setType(result.getString(5));
 				request1.setState(result.getString(6));
 				requests.add(request1);
@@ -609,9 +609,9 @@ public class DAORichiesta {
 					}
 				}
 				request1.setId_request_i(result.getInt(1));
-				request1.setUser1(result.getString(2));
+				request1.setTheme(result.getString(2));
 				request1.setAttached(attacheds);
-				request1.setUser2(result.getString(3)+"+"+result.getString(4));
+				request1.setUserFullName(result.getString(3)+"+"+result.getString(4));
 				request1.setType(result.getString(5));
 				request1.setState(result.getString(6));
 				requests.add(request1);

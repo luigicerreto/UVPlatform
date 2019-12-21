@@ -84,7 +84,7 @@ public class showRequest extends HttpServlet {
 
 					content += "<tr role='row'>";
 					content += "    <td class='text-center'>" + a.getId_request_i() + "</td>";
-					content += "    <td class='text-center'>" + a.getUser1() + "</td>";
+					content += "    <td class='text-center'>" + a.getTheme() + "</td>";
 					content += "    <td class='text-center'>";
 					allegati = a.getAttached();
 					for (Attached b : allegati)
