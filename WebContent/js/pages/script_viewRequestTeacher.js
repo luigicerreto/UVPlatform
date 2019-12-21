@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// contenuto tabella
-	$('#TeacherTableInternship').DataTable( {
+	var table = $('#TeacherTableInternship').DataTable( {
 		"order": [[ 0, "asc" ]],
 		"lengthMenu": [[10, -1], [10, "Tutti"]],
 		"autoWidth": false,
@@ -22,7 +22,7 @@ $(document).ready(function() {
 			{ "data" : "actions" },
 			],
 			"language": {
-				"sEmptyTable":     "Nessun tirocinio interno disponibile",
+				"sEmptyTable":     "Nessuna richiesta di tirocinio",
 				"sInfo":           "",
 				"sInfoEmpty":      "",
 				"sInfoFiltered":   "",
@@ -41,5 +41,71 @@ $(document).ready(function() {
 				}
 			}        
 	});
-	
+	// azioni tirocinio
+	$(document).on('click', 'label', function(e){
+		e.stopPropagation();
+		e.preventDefault();
+
+		var action = $(this).children("input").data("action");
+		var id_request = $(this).children("input").attr("id");
+
+		if(!($(this).attr('disabled') == "disabled")){
+			if(action === "accept"){ // accetta richiesta
+				$.ajax({
+					url : absolutePath + "/forwardToSecretary",
+					type : "POST",
+					dataType : 'JSON',
+					async : false,
+					data : {
+						"id_request" : id_request
+					},
+					success : function(msg) {
+						if (!msg.result) {
+							showAlert(1,msg.error);
+							table.ajax.reload();
+						} else {
+							showAlert(0,msg.content);
+							table.ajax.reload();
+						}
+					},
+					error : function(msg) {
+						showAlert(1,"Si è verificato un errore.");
+						table.ajax.reload();
+					}
+				});
+			} else if (action === "reject"){ // rifiuta richiesta
+				$.ajax({
+					url : absolutePath + "/rejectRequest",
+					type : "POST",
+					dataType : 'JSON',
+					async : false,
+					data : {
+						"id_request" : id_request
+					},
+					success : function(msg) {
+						if (!msg.result) {
+							showAlert(1,msg.error);
+							table.ajax.reload();
+						} else {
+							showAlert(0,msg.content);
+							table.ajax.reload();
+						}
+					},
+					error : function(msg) {
+						showAlert(1,"Si è verificato un errore.");
+						table.ajax.reload();
+					}
+				});
+			} else if (action === "upload"){
+
+
+			} else if (action === "download"){
+
+
+			} else if (action === "info"){
+
+
+			}
+		}
+	});
 });

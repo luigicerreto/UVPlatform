@@ -69,11 +69,15 @@ public class showRequest_Company extends HttpServlet {
 
 					jObj = new JSONObject();
 					jObj.put("id", a.getId_request_i());
-					for (Attached b : a.getAttached())
-					{
-						jObj.put("attached","<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
+					jObj.put("theme", a.getTheme());
+					
+					if(a.getAttached().isEmpty()) {
+						jObj.put("attached", "-");
 					}
-					jObj.put("theme", a.getTheme());	
+					else 
+						for (Attached b : a.getAttached())
+							jObj.put("attached","<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");					
+
 					jObj.put("name", a.getUserName());
 					jObj.put("surname", a.getUserSurname());
 					jObj.put("type", a.getType());

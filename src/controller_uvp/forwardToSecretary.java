@@ -16,14 +16,14 @@ import model_uvp.DAORichiesta;
 /**
  * Servlet implementation class updateStateToSegreteria
  */
-@WebServlet("/acceptToSegreteria")
-public class acceptToSegreteria extends HttpServlet {
+@WebServlet("/forwardToSecretary")
+public class forwardToSecretary extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public acceptToSegreteria() {
+    public forwardToSecretary() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +32,21 @@ public class acceptToSegreteria extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Integer result = 0;
 		String error = "";
 		String content = "";
 		String redirect = "";
-		int id_request = (Integer.parseInt(request.getParameter("choice")));
+		
+		int id_request = (Integer.parseInt(request.getParameter("id_request")));
 		DAORichiesta queryobj = new DAORichiesta();
 		
 		if(queryobj.acceptByTeach_Company(id_request))
@@ -61,6 +62,7 @@ public class acceptToSegreteria extends HttpServlet {
 		
 		
 		JSONObject res = new JSONObject();
+		
 		res.put("result", result);
 		res.put("error", error);
 		res.put("content", content);
