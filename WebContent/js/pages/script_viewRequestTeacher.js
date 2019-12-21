@@ -1,7 +1,4 @@
 $(document).ready(function() {
-
-	
-	
 	// contenuto tabella
 	$('#TeacherTableInternship').DataTable( {
 		"order": [[ 0, "asc" ]],
@@ -16,15 +13,13 @@ $(document).ready(function() {
 		},
 		"columns" : [
 			{ "data" : "id" },
-			{ "data" : "Tirocinio" },
+			{ "data" : "theme" },
 			{ "data" : "attached" },
 			{ "data" : "name" },
 			{ "data" : "surname" },
 			{ "data" : "type" },
 			{ "data" : "state" },
-			{ "data" : "azioni" },
-			
-			
+			{ "data" : "actions" },
 			],
 			"language": {
 				"sEmptyTable":     "Nessun tirocinio interno disponibile",

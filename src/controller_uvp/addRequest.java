@@ -74,7 +74,7 @@ public class addRequest extends HttpServlet {
 		{
 			internship_type = "Tirocinio Interno";
 			is_internal = queryobj.retriveInternship_internal(id_request);
-			newRequest.setUser2(queryobj.InternalPerform(id_request));
+			newRequest.setUserFullName(queryobj.InternalPerform(id_request));
 			newRequest.setId_ii(id_request);
 
 		}
@@ -82,13 +82,13 @@ public class addRequest extends HttpServlet {
 		{
 			internship_type = "Tirocinio Esterno";
 			is_external = queryobj.retriveInternship_external(id_request);
-			newRequest.setUser2(queryobj.ExternalPerform(id_request));
+			newRequest.setUserFullName(queryobj.ExternalPerform(id_request));
 			newRequest.setId_ie(id_request);
 			
 		}
 		newRequest.setType(internship_type);
 		newRequest.setState(requestState);
-		newRequest.setUser1(currUser.getEmail());
+		newRequest.setTheme(currUser.getEmail());
 		returnMessage=queryobj.addRequest(newRequest);
 		if(returnMessage==1)
 		{
