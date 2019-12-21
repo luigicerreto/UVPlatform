@@ -716,7 +716,6 @@ public class DAORichiesta {
 					mail = result.getString(1);
 				}
 				return mail;
-				
 			}
 			else
 			{
@@ -727,9 +726,6 @@ public class DAORichiesta {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
-
 		return null;
 	}
 

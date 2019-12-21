@@ -97,7 +97,8 @@ $(document).ready(function() {
 					}
 				});
 			} else if (action === "upload"){
-
+				var url_redirect = absolutePath + "/_areaTeacher_uvp/uploadAttachedTeacher_uvp.jsp?id_request=" + id_request;
+					$(window.location).attr('href', url_redirect);
 
 			} else if (action === "download"){
 

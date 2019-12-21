@@ -49,22 +49,23 @@ public class refreshAttached extends HttpServlet {
 		String error = "";
 		String content = "";
 		String redirect = "";
+		
 		DAORichiesta queryobj = new DAORichiesta();
 		String addAttach;
 		PreparedStatement statement;
 
 
 		String[] filenames = request.getParameterValues("filenames[]");
+
 		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 
 		{
 			throw new IllegalArgumentException("Valore non corretto");
 		}
-		Integer idRequest = (Integer) request.getSession().getAttribute("idRequest_i");
+
+		Integer idRequest = Integer.parseInt(request.getParameter("id_request"));
 		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
 		String emailNotify = queryobj.refreshAttachment(filenames[0], idRequest);
-		if(emailNotify.equals(null))
-		{
-			content = "Allegati inseriti con successo.";
+		if(emailNotify != null){
 			notifyStudent notify = new notifyStudent();
 			new Thread(() -> {
 				try {
@@ -77,24 +78,20 @@ public class refreshAttached extends HttpServlet {
 					e.printStackTrace();
 				} 
 			}).start();
-
+			content = "Allegati inseriti con successo.";
 		}
-		else
-		{
-			error = " Impossibile inserire l'allegato ." + filenames[0];
+		else {
+			error = "Impossibile inserire l'allegato: " + filenames[0];
 			result = 0;
 		}
-		if(queryobj.updateState(idRequest))
-		{
+		
+		if(queryobj.updateState(idRequest)){
 			result = 1;
 		}
-		else
-		{
+		else {
 			error += " Impossibile cambiare stato alla richiesta.";
 			result = 0;
 		}
-
-
 
 		JSONObject res = new JSONObject();
 		res.put("result", result);
@@ -104,9 +101,6 @@ public class refreshAttached extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");
-
-
-
 	}
 }
 

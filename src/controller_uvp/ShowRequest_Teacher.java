@@ -80,7 +80,8 @@ public class ShowRequest_Teacher extends HttpServlet {
 					jObj.put("surname", a.getUserSurname());
 					jObj.put("type", a.getType());
 					jObj.put("state",a.getState());
-					if(a.getState().equalsIgnoreCase("parzialmente completata"))
+					if(a.getState().equalsIgnoreCase("parzialmente completata") ||
+							a.getState().equalsIgnoreCase("in attesa di accettazione"))
 						jObj.put("actions", ""
 								+ "<label class=\"actionInternship btn btn-default\">" 
 								+ "<input type=\"button\" data-action=\"accept\" id=\""+a.getId_request_i() +"\">"
