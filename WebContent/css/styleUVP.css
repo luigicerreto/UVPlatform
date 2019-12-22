@@ -196,10 +196,10 @@ label.actionInternship:hover span.downloadBtn {
 	color: orange;
 }
 
-label.actionInternship span.infoBtn {
+label.infoInternship span.infoBtn {
  transition: 0.2s;
 }
 
-label.actionInternship:hover span.infoBtn {
+label.infoInternship:hover span.infoBtn {
  color: orange;
 }

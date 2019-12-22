@@ -42,7 +42,7 @@ $(document).ready(function() {
 			}        
 	});
 	// azioni tirocinio
-	$(document).on('click', 'label', function(e){
+	$(document).on('click', 'label.actionInternship', function(e){
 		e.stopPropagation();
 		e.preventDefault();
 
@@ -96,16 +96,13 @@ $(document).ready(function() {
 						table.ajax.reload();
 					}
 				});
-			} else if (action === "upload"){
+			} else if (action === "upload"){ // carica allegato
 				var url_redirect = absolutePath + "/_areaTeacher_uvp/uploadAttachedTeacher_uvp.jsp?id_request=" + id_request;
-					$(window.location).attr('href', url_redirect);
-
-			} else if (action === "download"){
-
-
-			} else if (action === "info"){
-
-
+				$(window.location).attr('href', url_redirect);
+			} else if (action === "download"){ // scarica allegato
+				var filename = $(this).parent().parent().find('td:eq(2)').text();
+				var url_download = absolutePath + "/Downloader?filename=" + filename + "&idRequest=" + id_request;
+				$(window.location).attr('href', url_download);
 			}
 		}
 	});
