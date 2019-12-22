@@ -471,9 +471,9 @@ public class DAORichiesta {
 	 * @param idRequest
 	 * @return
 	 */
-	public boolean updateState(int idRequest)
+	public boolean updateState(int idRequest, String newStatus)
 	{
-		final String newState = "[DOCENTE] In attesa di accettazione";
+		final String newState = newStatus;
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
@@ -625,7 +625,7 @@ public class DAORichiesta {
 		return requests;
 
 	}
-	
+
 	public ArrayList<RequestInternship> getRequestsSecretary() throws SQLException 
 	{
 		ArrayList<RequestInternship> requests = new ArrayList<RequestInternship>();
@@ -722,7 +722,7 @@ public class DAORichiesta {
 		}
 		return false;
 	}
-	
+
 	public boolean acceptBySecretary(int idRequest)
 	{
 		final String newState = "[ADMIN] In attesa di accettazione";
@@ -783,16 +783,11 @@ public class DAORichiesta {
 		return false;
 	}
 
-	public String refreshAttachment(String Filename, int idRequest)
+	public String updateAttached(String Filename, int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
-		ResultSet result;
 		String addAttach;
-		String mail = null;
-		String retrivemail = "SELECT FK_USER "
-				+ "FROM attached"
-				+ "WHERE FK_REQUEST_I = ? ";
 
 		addAttach = "UPDATE attached \r\n" + 
 				"SET FILENAME = ? \r\n" + 
@@ -804,15 +799,7 @@ public class DAORichiesta {
 			if(statement.executeUpdate()>0)
 			{
 				con.commit();
-				
-				statement = con.prepareStatement(retrivemail);
-				statement.setInt(1, idRequest);
-				result = statement.executeQuery();
-				if(result.next())
-				{
-					mail = result.getString(1);
-				}
-				return mail;
+				return this.getEmailByRequest(idRequest);
 			}
 			else
 			{
@@ -826,4 +813,27 @@ public class DAORichiesta {
 		return null;
 	}
 
+	public String getEmailByRequest(int idRequest)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String sql = "SELECT FK_USER FROM attached WHERE FK_REQUEST_I = ? ";
+
+		try {
+			statement = con.prepareStatement(sql);
+			statement.setInt(1, idRequest);
+			result = statement.executeQuery();
+
+			int size = result.last() ? result.getRow() : 0;
+
+			if(size>0)
+				return result.getString(1);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

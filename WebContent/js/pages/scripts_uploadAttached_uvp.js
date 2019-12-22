@@ -34,7 +34,7 @@ $(document).ready(function()
 								showAlert(0,msg.content);
 								setTimeout(function() 
 										{
-									window.location.href = msg.redirect;
+									window.location.href = absolutePath + "/_areaStudent_uvp/viewRequestInternship.jsp";
 										}, 
 										1000);
 								
