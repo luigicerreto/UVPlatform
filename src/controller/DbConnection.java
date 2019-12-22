@@ -21,16 +21,16 @@ public class DbConnection {
    */
   public DbConnection() {
     this.conn = null;
-    this.databaseName = "englishvalidation";
+    this.databaseName = "uvplatform";
     this.userName = "root";
-    this.password = "password";
+    this.password = "root";
     this.hostPort = 3306;
     this.hostName = "localhost";
 
     try {
       Class.forName("com.mysql.jdbc.Driver");
       String url = "jdbc:mysql://" + this.hostName + ":" + this.hostPort + "/" + this.databaseName
-          + "?useSSL=false";
+          + "?allowPublicKeyRetrieval=true" + "&useSSL=false";
       this.conn = DriverManager.getConnection(url, this.userName, this.password);
       this.conn.setAutoCommit(false);
     } catch (Exception exc) {

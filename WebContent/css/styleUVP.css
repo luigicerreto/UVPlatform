@@ -1,0 +1,205 @@
+.resetpassword {
+	color: blue;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+textarea {
+	resize: none;
+}
+
+.resetpassword:hover {
+	color: blue;
+	text-decoration: underline;
+}
+
+table div.tableButtons {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+table td {
+	text-align: center;
+}
+
+table label.btn {
+	margin-left: 10px;
+}
+
+label.selectInternship span.glyphicon {
+	opacity: 0.2;
+}
+
+input[type="submit"] {
+	position: fixed;
+	bottom: 13px;
+	right: 20px;
+}
+
+/* HIDE RADIO */
+table label input[type=radio] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* IMAGE STYLES */
+table label input[type=radio]+span {
+	cursor: pointer;
+}
+
+/* CHECKED STYLES */
+table label input[type=radio]:checked+span {
+	opacity: 1;
+	color: #5CB85C;
+}
+
+i.fa.fa-info-circle {
+	font-size: 30px;
+	transition: 0.2s;
+}
+
+i.fa.fa-info-circle:hover {
+	color: orange;
+}
+
+i.fa.fa-user {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: row;
+	float: left;
+	margin-right: 5px;
+	justify-content: center;
+	font-size: 30px;
+}
+
+i.fa.fa-envelope {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: row;
+	float: left;
+	margin-right: 5px;
+	justify-content: center;
+	font-size: 30px;
+}
+
+div#phoneNumber {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+div#phoneNumber i {
+	opacity: 0.5;
+	margin-left: -25px;
+	font-size: 25px;
+	transition: 0.5s;
+}
+
+div#phoneNumber i:hover {
+	opacity: 1;
+	color: #5CB85C;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none;
+	overflow: hidden;
+	overflow-y: auto;
+	width: 100%;
+	height: 100%;
+}
+
+/* Modal Content Box */
+.modal-content {
+	background-color: rgba(255, 255, 255, 1);
+	margin: 12% auto 8% auto;
+	border: 2px solid orange;
+	border-radius: 15px;
+	width: 50%;
+	height: 50%;
+	padding: 1%;
+}
+
+.modal .header {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+h1.details {
+	text-align: center;
+}
+
+.close {
+	position: fixed;
+	top: 0;
+	right: 0;
+	margin: 5px;
+	font-size: 30px;
+	transition: 0.2s;
+	opacity: 0.5;
+	font-size: 30px;
+	font-size: 30px;
+}
+
+.close:hover {
+	opacity: 1;
+	color: orange;
+}
+
+.form-contact {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+label.actionInternship span.acceptBtn {
+	transition: 0.2s;
+}
+
+label.actionInternship:hover span.acceptBtn {
+	color: green;
+}
+
+label.actionInternship span.refuseBtn {
+	transition: 0.2s;
+}
+
+label.actionInternship:hover span.refuseBtn {
+	color: red;
+}
+
+label.actionInternship span.uploadBtn {
+	transition: 0.2s;
+}
+
+label.actionInternship:hover span.uploadBtn {
+	color: orange;
+}
+
+label.actionInternship span.downloadBtn {
+	transition: 0.2s;
+}
+
+label.actionInternship:hover span.downloadBtn {
+	color: orange;
+}
+
+label.infoInternship span.infoBtn {
+ transition: 0.2s;
+}
+
+label.infoInternship:hover span.infoBtn {
+ color: orange;
+}

@@ -99,6 +99,6 @@
 			});
 		</script>
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestsSegretary.js"></script>
+		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestsSecretary.js"></script>
 </body>
 </html>
