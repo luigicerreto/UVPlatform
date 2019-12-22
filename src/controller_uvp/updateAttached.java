@@ -18,16 +18,16 @@ import model_uvp.DAORichiesta;
 import util.notifyStudent;
 
 /**
- * Servlet implementation class refreshAttached
+ * Servlet implementation class updateAttached
  */
-@WebServlet("/refreshAttached")
-public class refreshAttached extends HttpServlet {
+@WebServlet("/updateAttached")
+public class updateAttached extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public refreshAttached() {
+	public updateAttached() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -43,6 +43,7 @@ public class refreshAttached extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Integer result = 0;
@@ -51,10 +52,6 @@ public class refreshAttached extends HttpServlet {
 		String redirect = "";
 		
 		DAORichiesta queryobj = new DAORichiesta();
-		String addAttach;
-		PreparedStatement statement;
-
-
 		String[] filenames = request.getParameterValues("filenames[]");
 
 		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 
@@ -63,8 +60,7 @@ public class refreshAttached extends HttpServlet {
 		}
 
 		Integer idRequest = Integer.parseInt(request.getParameter("id_request"));
-		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
-		String emailNotify = queryobj.refreshAttachment(filenames[0], idRequest);
+		String emailNotify = queryobj.updateAttached(filenames[0], idRequest);
 		if(emailNotify != null){
 			notifyStudent notify = new notifyStudent();
 			new Thread(() -> {
@@ -78,20 +74,15 @@ public class refreshAttached extends HttpServlet {
 					e.printStackTrace();
 				} 
 			}).start();
+			
 			content = "Allegati inseriti con successo.";
+			result = 1;
 		}
 		else {
 			error = "Impossibile inserire l'allegato: " + filenames[0];
 			result = 0;
 		}
 		
-		if(queryobj.updateState(idRequest)){
-			result = 1;
-		}
-		else {
-			error += " Impossibile cambiare stato alla richiesta.";
-			result = 0;
-		}
 
 		JSONObject res = new JSONObject();
 		res.put("result", result);

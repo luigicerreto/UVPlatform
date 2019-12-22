@@ -52,6 +52,7 @@ public class addAttached extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
@@ -74,36 +75,30 @@ public class addAttached extends HttpServlet {
 
 		if(queryobj.addAttachment(filenames[0], user.getEmail(), idRequest))
 		{
-			content = "Allegati inseriti con successo.";
+
 			notifyStudent notify = new notifyStudent();
 			new Thread(() -> {
 				try {
 					notify.notify(user.getEmail(), idRequest);
 				} catch (IOException e) {
-					
+
 					e.printStackTrace();
 				} catch (ServletException e) {
-					
+
 					e.printStackTrace();
 				} 
 			}).start();
-			
+
+			if(queryobj.updateState(idRequest, "[DOCENTE] In attesa di accettazione")) {	
+				content = "Allegati inseriti con successo.";
+				result = 1;
+			}
 		}
 		else
 		{
 			error = " Impossibile inserire l'allegato ." + filenames[0];
 			result = 0;
 		}
-		if(queryobj.updateState(idRequest))
-		{
-			result = 1;
-		}
-		else
-		{
-			error += " Impossibile cambiare stato alla richiesta.";
-			result = 0;
-		}
-		
 
 
 		JSONObject res = new JSONObject();
@@ -114,9 +109,5 @@ public class addAttached extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");
-
-
-
 	}
-
 }

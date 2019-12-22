@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 		if (filenames.length > 0){
 			$.ajax({
-				url : absolutePath + "/refreshAttached",
+				url : absolutePath + "/updateAttached",
 				type : "POST",
 				dataType : 'JSON',
 				async : false,

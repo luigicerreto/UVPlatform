@@ -97,7 +97,7 @@ $(document).ready(function() {
 					}
 				});
 			} else if (action === "upload"){ // carica allegato
-				var url_redirect = absolutePath + "/_areaTeacher_uvp/uploadAttachedSecretary_uvp.jsp?id_request=" + id_request;
+				var url_redirect = absolutePath + "/_areaSecretary/uploadAttachedSecretary_uvp.jsp?id_request=" + id_request;
 				$(window.location).attr('href', url_redirect);
 			} else if (action === "download"){ // scarica allegato
 				var filename = $(this).parent().parent().find('td:eq(2)').text();

@@ -99,7 +99,7 @@
 		</script>
 	<script src="<%= request.getContextPath() %>/js/filesystem_dropzone.js"></script>
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_refreshAttached_uvp.js"></script>
+		src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttachedTeacher_uvp.js"></script>
 
 </body>
 </html>
