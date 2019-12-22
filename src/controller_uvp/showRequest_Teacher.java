@@ -22,14 +22,14 @@ import model_uvp.RequestInternship;
 /**
  * Servlet implementation class ShowRequest_Teacher
  */
-@WebServlet("/ShowRequest_Teacher")
-public class ShowRequest_Teacher extends HttpServlet {
+@WebServlet("/showRequest_Teacher")
+public class showRequest_Teacher extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ShowRequest_Teacher() {
+	public showRequest_Teacher() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -83,7 +83,7 @@ public class ShowRequest_Teacher extends HttpServlet {
 					jObj.put("type", a.getType());
 					jObj.put("state",a.getState());
 					if(a.getState().equalsIgnoreCase("parzialmente completata") ||
-							a.getState().equalsIgnoreCase("in attesa di accettazione"))
+							a.getState().equalsIgnoreCase("[DOCENTE] In attesa di accettazione"))
 						jObj.put("actions", ""
 								+ "<label class=\"actionInternship btn btn-default\">" 
 								+ "<input type=\"button\" data-action=\"accept\" id=\""+a.getId_request_i() +"\">"

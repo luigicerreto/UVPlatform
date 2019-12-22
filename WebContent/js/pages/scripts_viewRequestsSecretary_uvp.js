@@ -1,13 +1,13 @@
 $(document).ready(function() {
 	// contenuto tabella
-	var table = $('#TeacherTableInternship').DataTable( {
+	var table = $('#SecretaryTableInternship').DataTable( {
 		"order": [[ 0, "asc" ]],
 		"lengthMenu": [[10, -1], [10, "Tutti"]],
 		"autoWidth": false,
 		"bAutoWidth": false,
 		"processing": true,
 		"ajax": {
-			"url": absolutePath + "/ShowRequest_Teacher",
+			"url": absolutePath + "/showRequest_Secretary",
 			"dataSrc": "data",
 			"type": "POST"
 		},
@@ -52,7 +52,7 @@ $(document).ready(function() {
 		if(!($(this).attr('disabled') == "disabled")){
 			if(action === "accept"){ // accetta richiesta
 				$.ajax({
-					url : absolutePath + "/forwardToSecretary",
+					url : absolutePath + "/forwardToAdmin",
 					type : "POST",
 					dataType : 'JSON',
 					async : false,
@@ -97,7 +97,7 @@ $(document).ready(function() {
 					}
 				});
 			} else if (action === "upload"){ // carica allegato
-				var url_redirect = absolutePath + "/_areaTeacher_uvp/uploadAttachedTeacher_uvp.jsp?id_request=" + id_request;
+				var url_redirect = absolutePath + "/_areaTeacher_uvp/uploadAttachedSecretary_uvp.jsp?id_request=" + id_request;
 				$(window.location).attr('href', url_redirect);
 			} else if (action === "download"){ // scarica allegato
 				var filename = $(this).parent().parent().find('td:eq(2)').text();
