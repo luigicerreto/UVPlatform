@@ -635,17 +635,15 @@ public class DAORichiesta {
 		ResultSet resultAttached;
 		ResultSet result;
 
-		String viewRequest = "(Select richiesta.id_request_i, i.theme, user.NAME, user.SURNAME, richiesta.type, richiesta.STATE\r\n"
+		String viewRequest = "(select richiesta.id_request_i, i.theme, user.NAME, user.SURNAME, richiesta.type, richiesta.STATE\r\n"
 				+ "from request_internship as richiesta\r\n" 
 				+ "inner join user on richiesta.FK_USER1 = user.EMAIL "
-				+ "inner join internship_i as i on richiesta.FK_II =  i.id_ii \r\n"
-				+ "where richiesta.STATE = \"[SEGRETERIA] In attesa di accettazione\")"
+				+ "inner join internship_i as i on richiesta.FK_II =  i.id_ii)"
 				+ "UNION"
-				+ "(Select richiesta.id_request_i, null, user.NAME, user.SURNAME, richiesta.type, richiesta.STATE\r\n"
+				+ "(select richiesta.id_request_i, null, user.NAME, user.SURNAME, richiesta.type, richiesta.STATE\r\n"
 				+ "from request_internship as richiesta\r\n" 
 				+ "inner join user on richiesta.FK_USER1 = user.EMAIL "
-				+ "inner join internship_e as e on richiesta.FK_IE =  e.id_ie \r\n"
-				+ "where richiesta.STATE = \"[SEGRETERIA] In attesa di accettazione\")";
+				+ "inner join internship_e as e on richiesta.FK_IE =  e.id_ie)";
 		try 
 		{
 

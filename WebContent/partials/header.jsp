@@ -230,6 +230,8 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/index.jsp\">Benvenuto</a></li>";
 		} else if (pageName.equals("profile_uvp.jsp") && ck.isAllowed()) {
 			if (user.getUserType() == 3) {
+				logoRedirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestCompany.jsp";
+				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "_areaCompany_uvp/viewRequestCompany.jsp\">Richiesta Tirocinio</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
@@ -239,6 +241,8 @@
 						+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 
 			} else if (user.getUserType() == 4) {
+				logoRedirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestTeacher.jsp";
+				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "_areaTeacher_uvp/viewRequestTeacher.jsp\">Richiesta Tirocinio</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
@@ -247,6 +251,8 @@
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 			} else if (user.getUserType() == 1) {
+				logoRedirect = request.getContextPath() + "/_areaSecretary/viewRequest.jsp";
+				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "_areaSecretary/viewRequest.jsp\">Richiesta EV</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
@@ -271,6 +277,8 @@
 		} else if (pageName.equals("contact_uvp.jsp") && ck.isAllowed()) {
 
 			if (user.getUserType() == 3) {
+				logoRedirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestCompany.jsp";
+				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "_areaCompany_uvp/viewRequestCompany.jsp\">Richiesta Tirocinio</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
@@ -280,6 +288,8 @@
 						+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 
 			} else if (user.getUserType() == 4) {
+				logoRedirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestTeacher.jsp";
+				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "_areaTeacher_uvp/viewRequestTeacher.jsp\">Richiesta Tirocinio</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
@@ -288,6 +298,8 @@
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 			} else if (user.getUserType() == 1) {
+				logoRedirect = request.getContextPath() + "/_areaSecretary/viewRequest.jsp";
+				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "_areaSecretary/viewRequest.jsp\">Richiesta EV</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
