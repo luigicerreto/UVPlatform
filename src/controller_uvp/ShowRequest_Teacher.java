@@ -52,6 +52,7 @@ public class ShowRequest_Teacher extends HttpServlet {
 		String email="";
 		ArrayList<RequestInternship> requests;
 		DAORichiesta queryobj = new DAORichiesta();
+		List<String> attached = new ArrayList<>();
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
@@ -70,12 +71,13 @@ public class ShowRequest_Teacher extends HttpServlet {
 					jObj.put("theme", a.getTheme());
 
 					if(a.getAttached().isEmpty()) {
-						jObj.put("attached", "-");
+						jObj.put("attached", "");
 					}
 					else 
 						for (Attached b : a.getAttached())
-							jObj.put("attached","<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");					
-
+							attached.add("<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
+							
+					jObj.put("attached", attached);					
 					jObj.put("name",a.getUserName());
 					jObj.put("surname", a.getUserSurname());
 					jObj.put("type", a.getType());
@@ -99,8 +101,8 @@ public class ShowRequest_Teacher extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
-								+ "<label class=\"actionInternship btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"info\" id=\""+a.getId_request_i()+"\">" 
+								+ "<label class=\"infoInternship btn btn-default\">"
+								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>");
 					else
@@ -121,10 +123,11 @@ public class ShowRequest_Teacher extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
-								+ "<label class=\"actionInternship btn btn-default\" disabled>"
-								+ "<input type=\"button\" data-action=\"info\" id=\""+a.getId_request_i()+"\">" 
+								+ "<label class=\"infoInternship btn btn-default\">"
+								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>");
+					
 					jArr.add(jObj);
 				}
 			}

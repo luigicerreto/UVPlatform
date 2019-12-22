@@ -59,6 +59,18 @@
 		</div>
 		<jsp:include page="/partials/footer.jsp" />
 	</div>
+	
+	<div id="details" class="modal fade" role="dialog">
+		<div id="details-content" class="modal-content modal-dialog">
+			<div class="header">
+				<h1 class="details">DETTAGLI RICHIESTA</h1>
+				<button type="button" class="close" data-dismiss="modal">
+					<i class="fa fa-times-circle"></i>
+				</button>
+			</div>
+			<div class="info"></div>
+		</div>
+	</div>
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
