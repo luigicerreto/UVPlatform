@@ -14,19 +14,19 @@ import org.json.simple.JSONObject;
 import model_uvp.DAORichiesta;
 
 /**
- * Servlet implementation class rejectRequest
+ * Servlet implementation class updateStateToSegreteria
  */
-@WebServlet("/rejectRequest")
-public class rejectRequest extends HttpServlet {
+@WebServlet("/forwardToAdmin")
+public class forwardToAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public rejectRequest() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public forwardToAdmin() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,22 +45,22 @@ public class rejectRequest extends HttpServlet {
 		String error = "";
 		String content = "";
 		String redirect = "";
-
+		
 		int id_request = (Integer.parseInt(request.getParameter("id_request")));
 		DAORichiesta queryobj = new DAORichiesta();
-
-		if(queryobj.rejectByTeacher_Company_Secretary(id_request))
+		
+		if(queryobj.acceptBySecretary(id_request))
 		{
 			result = 1;
-			content = "Richiesta rifiutata";
+			content = "Richiesta accettata ed inoltrata all'admin";
 		}
 		else
 		{
 			result = 0;
 			error = "Errore nell'elaborazione della richiesta";
 		}
-
-
+		
+		
 		JSONObject res = new JSONObject();
 		
 		res.put("result", result);

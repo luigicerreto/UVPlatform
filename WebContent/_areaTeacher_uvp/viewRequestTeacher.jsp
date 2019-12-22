@@ -76,7 +76,7 @@
 	<jsp:include page="/partials/includes.jsp" />
 
 	<script
-		src="<%= request.getContextPath() %>/js/pages/script_viewRequestTeacher.js"></script>
+		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestTeacher.js"></script>
 
 </body>
 </html>

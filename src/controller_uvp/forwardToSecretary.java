@@ -49,10 +49,10 @@ public class forwardToSecretary extends HttpServlet {
 		int id_request = (Integer.parseInt(request.getParameter("id_request")));
 		DAORichiesta queryobj = new DAORichiesta();
 		
-		if(queryobj.acceptByTeach_Company(id_request))
+		if(queryobj.acceptByTeacher_Company(id_request))
 		{
 			result = 1;
-			content = "Richiesta accettata";
+			content = "Richiesta accettata ed inoltrata alla segreteria";
 		}
 		else
 		{

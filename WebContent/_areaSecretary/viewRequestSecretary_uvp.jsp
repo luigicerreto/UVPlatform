@@ -34,19 +34,20 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-								<table id="TeacherTableInternship" class="display data-results table table-striped table-hover table-bordered">
+								<table id="SecretaryTableInternship" class="display data-results table table-striped table-hover table-bordered">
 									<thead>
 										<tr align="center">
 											<th class="text-center" align="center">ID</th>
+											<th class="text-center" align="center">Tema</th>
 											<th class="text-center" align="center">Allegati</th>
-											<th class="text-center" align="center">Tirocinio</th>
 											<th class="text-center" align="center">Nome</th>
 											<th class="text-center" align="center">Cognome</th>
 											<th class="text-center" align="center">Tipo di richiesta</th>
+											<th class="text-center" align="center">Stato</th>
 											<th class="text-center" align="center">Azioni</th>
 										</tr>
 									</thead>
-									<tbody id="bodyTeacherTableInternship">
+									<tbody id="bodySecretaryTableInternship">
 									</tbody>
 								</table>
 
@@ -58,12 +59,24 @@
 		</div>
 		<jsp:include page="/partials/footer.jsp" />
 	</div>
+	
+	<div id="details" class="modal fade" role="dialog">
+		<div id="details-content" class="modal-content modal-dialog">
+			<div class="header">
+				<h1 class="details">DETTAGLI RICHIESTA</h1>
+				<button type="button" class="close" data-dismiss="modal">
+					<i class="fa fa-times-circle"></i>
+				</button>
+			</div>
+			<div class="info"></div>
+		</div>
+	</div>
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
 
 	<script
-		src="<%= request.getContextPath() %>/js/pages/script_viewRequestSecretary.js"></script>
+		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestsSecretary_uvp.js"></script>
 
 </body>
 </html>
