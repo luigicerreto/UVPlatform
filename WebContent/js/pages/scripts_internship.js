@@ -19,6 +19,7 @@ $(document).ready(function() {
 					"<tr align=\"center\">" +
 					"<th class=\"text-center\" align=\"center\">ID Docente</th>" +
 					"<th class=\"text-center\" align=\"center\">Nome</th>" +
+					"<th class=\"text-center\" align=\"center\">Tema</th>" +
 					"<th class=\"text-center\" align=\"center\">Sede</th>" +
 					"<th class=\"text-center\" align=\"center\">Scelta</th>" +
 					"</tr>"
@@ -39,6 +40,7 @@ $(document).ready(function() {
 				"columns" : [
 					{ "data" : "id" },
 					{ "data" : "name" },
+					{ "data" : "theme" },
 					{ "data" : "place" },
 					{ "data" : "choice" }
 					],
@@ -68,8 +70,8 @@ $(document).ready(function() {
 					"<tr align=\"center\">" +
 					"<th class=\"text-center\" align=\"center\">ID Azienda</th>" +
 					"<th class=\"text-center\" align=\"center\">Azienda</th>" +
-					"<th class=\"text-center\" align=\"center\">Sede</th>" +
 					"<th class=\"text-center\" align=\"center\">Data Stipula</th>" +
+					"<th class=\"text-center\" align=\"center\">Durata</th>" +
 					"<th class=\"text-center\" align=\"center\">Scelta</th>" +
 					"</tr>"
 			);
@@ -90,8 +92,8 @@ $(document).ready(function() {
 				"columns" : [
 					{ "data" : "id" },
 					{ "data" : "name" },
-					{ "data" : "place" },
-					{ "data" : "date" },
+					{ "data" : "date_convention" },
+					{ "data" : "duration_convention" },
 					{ "data" : "choice" }
 					],
 					"language": {

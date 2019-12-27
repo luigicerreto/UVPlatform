@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.List;
@@ -35,14 +36,12 @@ public class showRequest extends HttpServlet {
 	 */
 	public showRequest() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -51,74 +50,52 @@ public class showRequest extends HttpServlet {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
-		String email="";
-		Integer result = 0;
-		String error = "";
-		String content = "";
-		String redirect = "";
-		ArrayList<RequestInternship> richieste;
-		List<Attached> allegati;
+		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user");
+		JSONObject jObj;
+		JSONArray jArr = new JSONArray();
+		JSONObject mainObj = new JSONObject();
+		ArrayList<RequestInternship> requests;
+		List<String> attached;
 		DAORequest queryobj = new DAORequest();
-		
-		if (currUser != null) 
-		{
-			email = currUser.getEmail();
-			try
-			{
-			richieste = queryobj.viewRequests(email);
 
-			if(richieste.size()==0)
-			{
-				content += "<tr>"
-						+ "<td class=\"text-center\"" + "></td>"
-						+ "<td class=\"text-center\"" + "></td>"
-						+ "<td class=\"text-center\"" + ">Nessuna Richiesta Presente</td>"
-						+ "<td class=\"text-center\"" + "></td>"
-						+ "<td class=\"text-center\"" + "></td>"
-						+ "</tr>";
-			}
-			else
-				for(RequestInternship a : richieste)
-				{
+		if (currUser != null){
+			try {
+				requests = queryobj.viewRequests(currUser.getEmail());
 
-					content += "<tr role='row'>";
-					content += "    <td class='text-center'>" + a.getId_request_i() + "</td>";
-					content += "    <td class='text-center'>" + a.getTheme() + "</td>";
-					content += "    <td class='text-center'>";
-					allegati = a.getAttached();
-					for (Attached b : allegati)
-					{
-						content += "<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>";
+				if(requests.size()>0)
+					for(RequestInternship a : requests){
+						
+						attached = new ArrayList<>();
+						jObj = new JSONObject();
+						jObj.put("id", a.getId_request_i());
+						jObj.put("user_serial", a.getUserSerial());
+
+						if(a.getAttached().isEmpty()) {
+							jObj.put("attached", "");
+						}
+						else 
+							for (Attached b : a.getAttached())
+								attached.add("<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
+								
+						jObj.put("attached", attached);
+						jObj.put("type", a.getType());
+						jObj.put("status", a.getStatus());
+						jObj.put("actions", ""
+								+ "<label class=\"infoInternship btn btn-default\">"
+								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
+								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+								+ "</label>");
+						jArr.add(jObj);
 					}
-					content += "    </td>";
-					content += "    <td class='text-center'>" + a.getType() + "</td>";
-					content += "    <td class='text-center'>" + a.getState() + "</td>";
-					content += "</tr>";
-
-
-				}
-			result=1;
 			}
-			catch(Exception e)
-			{
-				error = "catch";
-				result=0;
+			catch(Exception e){
 				e.printStackTrace();
 			}
 
-
-
-			JSONObject res = new JSONObject();
-			res.put("result", result);
-			res.put("error", error);
-			res.put("content", content);
-			res.put("redirect", redirect);
+			mainObj.put("data", jArr);
 			PrintWriter out = response.getWriter();
-			out.println(res);
+			out.println(mainObj);
 			response.setContentType("json");
-
-
 		}
 	}
 }

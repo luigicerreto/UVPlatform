@@ -52,7 +52,7 @@ public class showRequest_Company extends HttpServlet {
 		String email="";
 		ArrayList<RequestInternship> requests;
 		DAORequest queryobj = new DAORequest();
-		List<String> attached = new ArrayList<>();
+		List<String> attached;
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
@@ -67,10 +67,10 @@ public class showRequest_Company extends HttpServlet {
 
 				for(RequestInternship a : requests)
 				{
-
+					attached = new ArrayList<>();
 					jObj = new JSONObject();
 					jObj.put("id", a.getId_request_i());
-					jObj.put("theme", a.getTheme());
+					jObj.put("theme", a.getUserSerial());
 					
 					if(a.getAttached().isEmpty()) {
 						jObj.put("attached", "");
@@ -83,9 +83,9 @@ public class showRequest_Company extends HttpServlet {
 					jObj.put("name", a.getUserName());
 					jObj.put("surname", a.getUserSurname());
 					jObj.put("type", a.getType());
-					jObj.put("state",a.getState());
-					if(a.getState().equalsIgnoreCase("parzialmente completata") ||
-							a.getState().equalsIgnoreCase("[AZIENDA] In attesa di accettazione"))
+					jObj.put("state",a.getStatus());
+					if(a.getStatus().equalsIgnoreCase("parzialmente completata") ||
+							a.getStatus().equalsIgnoreCase("[AZIENDA] In attesa di accettazione"))
 						jObj.put("actions", ""
 								+ "<label class=\"actionInternship btn btn-default\">" 
 								+ "<input type=\"button\" data-action=\"accept\" id=\""+a.getId_request_i() +"\">"

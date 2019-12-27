@@ -1,8 +1,8 @@
 package model_uvp;
-import interfacce.UserInterface;
+
 import model.Attached;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -13,26 +13,27 @@ import java.util.List;
 public class RequestInternship {
 	private int id_request_i;
 	private String type;
-	private String theme;
+	private String userEmail;
 	private String userFullName;
+	private String userSerial;
 	private int id_ie;
 	private int id_ii;
-	private String state;
+	private String status;
 	private List<Attached> attached = new ArrayList<>();
 
 	public RequestInternship() {
 
 	}
 
-	public RequestInternship(int id_request_i, String state, String type, String theme, String userFullName, int id_ie,
+	public RequestInternship(int id_request_i, String status, String type, String userSerial, String userFullName, int id_ie,
 			int id_ii, List<Attached> attached) {
-		this.state=state;
+		this.status=status;
 		this.attached=attached;
 		this.id_ie=id_ie;
 		this.id_ii=id_ii;
 		this.type=type;
 		this.id_request_i=id_request_i;
-		this.theme=theme;
+		this.userSerial=userSerial;
 		this.userFullName=userFullName;
 
 	}
@@ -51,14 +52,6 @@ public class RequestInternship {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public String getTheme() {
-		return theme;
-	}
-
-	public void setTheme(String theme) {
-		this.theme = theme;
 	}
 
 	public String getUserName() {
@@ -93,12 +86,12 @@ public class RequestInternship {
 		this.id_ii = id_ii;
 	}
 
-	public String getState() {
-		return state;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public List<Attached> getAttached() {
@@ -109,4 +102,19 @@ public class RequestInternship {
 		this.attached = attached;
 	}
 
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	
+	public String getUserSerial() {
+		return userSerial;
+	}
+
+	public void setUserSerial(String userSerial) {
+		this.userSerial = userSerial;
+	}
 }

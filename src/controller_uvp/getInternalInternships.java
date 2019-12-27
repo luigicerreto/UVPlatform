@@ -66,6 +66,7 @@ public class getInternalInternships extends HttpServlet {
 				jObj = new JSONObject();
 				jObj.put("id", a.getId());
 				jObj.put("name", a.getTutorn_name());
+				jObj.put("theme", a.getTheme());
 				jObj.put("place", a.getPlace());
 				jObj.put("choice","<div class=\"tableButtons\">"
 						+ "<button type =\"button\" class=\"showDetails\" data-toggle=\"modal\" data-target=\"#details\"><i class=\"fa fa-info-circle\"></i></button>"

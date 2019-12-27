@@ -13,9 +13,6 @@ import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
 import model_uvp.DAORequest;
-import model_uvp.ExternalInternship;
-import model_uvp.InternalInternship;
-import model_uvp.Internship;
 import model_uvp.RequestInternship;
 
 /**
@@ -37,22 +34,20 @@ public class addRequest extends HttpServlet {
 	 */
 	public addRequest() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		Integer result = 0;
 		String error = "";
@@ -61,7 +56,6 @@ public class addRequest extends HttpServlet {
 		final String requestState = "Parzialmente Completata";
 		int id_request;
 		int type_internship;
-		Internship internship = null;
 		RequestInternship newRequest = new RequestInternship();
 		int returnMessage;
 		DAORequest queryobj = new DAORequest();
@@ -69,40 +63,30 @@ public class addRequest extends HttpServlet {
 
 		id_request = (Integer.parseInt(request.getParameter("choice")));
 		type_internship = (Integer.parseInt(request.getParameter("type")));
-		if(type_internship==0)
-		{
-			internship = queryobj.retrieveInternalInternship(id_request);
+		
+		if(type_internship==0){
 			newRequest.setUserFullName(queryobj.InternalPerform(id_request));
 			newRequest.setType("Tirocinio Interno");
 			newRequest.setId_ii(id_request);
-
-		}
-		else
-		{
-			internship = queryobj.retrieveExternalInternship(id_request);
+		} else {
 			newRequest.setUserFullName(queryobj.ExternalPerform(id_request));
 			newRequest.setType("Tirocinio Esterno");
 			newRequest.setId_ie(id_request);
+		}
 
-		}
-		
-		newRequest.setState(requestState);
-		newRequest.setTheme(currUser.getEmail());
+		newRequest.setStatus(requestState);
+		newRequest.setUserEmail(currUser.getEmail());
 		returnMessage=queryobj.addRequest(newRequest);
-		if(returnMessage==1)
-		{
+
+		if(returnMessage == 1) {
 			result = 1;
-			content = "Richiesta Parziale presentata con successo";
-		}
-		else if(returnMessage==2)
-		{
+			content = "Richiesta parziale presentata con successo!";
+		} else if(returnMessage == 2) {
 			result = 0;
-			error = "Una richiesta presentata non &egrave; stata ancora conclusa.";
-		}
-		else
-		{
+			error = "Hai una richiesta ancora non conclusa!";
+		} else {
 			result = 0;
-			error = "Errore nella presentazione della richiesta";
+			error = "Errore nella presentazione della richiesta!";
 		}
 
 
@@ -117,13 +101,5 @@ public class addRequest extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");
-
-
-
-
-
-
-
 	}
-
 }

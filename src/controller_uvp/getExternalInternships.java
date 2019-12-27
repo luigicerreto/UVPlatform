@@ -62,15 +62,15 @@ public class getExternalInternships extends HttpServlet {
 
 		try
 		{
-			internship =  (ArrayList<ExternalInternship>) ((ArrayList<?>) queryobj.viewInternalInternships());
+			internship =  (ArrayList<ExternalInternship>) ((ArrayList<?>) queryobj.viewExternalInternships());
 			if(internship.size()>0)
 				for(ExternalInternship a : internship)
 				{
 					jObj = new JSONObject();
 					jObj.put("id", a.getId());
 					jObj.put("name", a.getName());
-					jObj.put("place", a.getInfo());
-					jObj.put("date", String.valueOf(a.getDate_convention()));
+					jObj.put("date_convention", String.valueOf(a.getDate_convention()));
+					jObj.put("duration_convention", a.getDuration_convention());
 					jObj.put("choice","<div class=\"tableButtons\">"
 							+ "<button type =\"button\" class=\"showDetails\" data-toggle=\"modal\" data-target=\"#details\"><i class=\"fa fa-info-circle\"></i></button>"
 							+ "<label class=\"btn btn-default\">" 
