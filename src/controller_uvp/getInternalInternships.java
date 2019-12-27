@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 import model.Attached;
 import model_uvp.DAOInternship;
 import model_uvp.InternalInternship;
+import model_uvp.Internship;
 import model_uvp.RequestInternship;
 
 /**
@@ -26,14 +27,14 @@ import model_uvp.RequestInternship;
  * @author Carmine Rovito
  *
  */
-@WebServlet("/InternalTrainee")
-public class InternalTrainee extends HttpServlet {
+@WebServlet("/getInternalInternships")
+public class getInternalInternships extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InternalTrainee() {
+    public getInternalInternships() {
         super();
     }
 
@@ -52,24 +53,24 @@ public class InternalTrainee extends HttpServlet {
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
-		ArrayList<InternalInternship> internship = new ArrayList<InternalInternship>();
 		DAOInternship queryobj = new DAOInternship();
+		
+		ArrayList<InternalInternship> internship;
 		
 		try
 		{
-		internship =  queryobj.viewTraineeInternal();
-		
+		internship =  (ArrayList<InternalInternship>) ((ArrayList<?>) queryobj.viewInternalInternships());
 		if(internship.size()>0)
 			for(InternalInternship a : internship)
 			{
 				jObj = new JSONObject();
-				jObj.put("id", a.getId_ii());
+				jObj.put("id", a.getId());
 				jObj.put("name", a.getTutorn_name());
 				jObj.put("place", a.getPlace());
 				jObj.put("choice","<div class=\"tableButtons\">"
 						+ "<button type =\"button\" class=\"showDetails\" data-toggle=\"modal\" data-target=\"#details\"><i class=\"fa fa-info-circle\"></i></button>"
 						+ "<label class=\"selectInternship btn btn-default\">" 
-						+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId_ii()+"\">" 
+						+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId()+"\">" 
 						+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
 						+ "</label>"
 						+ "</div>");

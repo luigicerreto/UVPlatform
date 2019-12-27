@@ -15,6 +15,7 @@ import interfacce.UserInterface;
 import model_uvp.DAORequest;
 import model_uvp.ExternalInternship;
 import model_uvp.InternalInternship;
+import model_uvp.Internship;
 import model_uvp.RequestInternship;
 
 /**
@@ -60,9 +61,7 @@ public class addRequest extends HttpServlet {
 		final String requestState = "Parzialmente Completata";
 		int id_request;
 		int type_internship;
-		String internship_type;
-		InternalInternship is_internal;
-		ExternalInternship is_external;
+		Internship internship = null;
 		RequestInternship newRequest = new RequestInternship();
 		int returnMessage;
 		DAORequest queryobj = new DAORequest();
@@ -72,41 +71,41 @@ public class addRequest extends HttpServlet {
 		type_internship = (Integer.parseInt(request.getParameter("type")));
 		if(type_internship==0)
 		{
-			internship_type = "Tirocinio Interno";
-			is_internal = queryobj.retriveInternship_internal(id_request);
+			internship = queryobj.retrieveInternalInternship(id_request);
 			newRequest.setUserFullName(queryobj.InternalPerform(id_request));
+			newRequest.setType("Tirocinio Interno");
 			newRequest.setId_ii(id_request);
 
 		}
 		else
 		{
-			internship_type = "Tirocinio Esterno";
-			is_external = queryobj.retriveInternship_external(id_request);
+			internship = queryobj.retrieveExternalInternship(id_request);
 			newRequest.setUserFullName(queryobj.ExternalPerform(id_request));
+			newRequest.setType("Tirocinio Esterno");
 			newRequest.setId_ie(id_request);
-			
+
 		}
-		newRequest.setType(internship_type);
+		
 		newRequest.setState(requestState);
 		newRequest.setTheme(currUser.getEmail());
 		returnMessage=queryobj.addRequest(newRequest);
 		if(returnMessage==1)
 		{
-			result=1;
-			content="Richiesta Parziale presentata con successo";
+			result = 1;
+			content = "Richiesta Parziale presentata con successo";
 		}
 		else if(returnMessage==2)
 		{
-			result=0;
-			error = "Una richiesta gi&agrave; presentata non &egrave; stata ancora conclusa.";
+			result = 0;
+			error = "Una richiesta presentata non &egrave; stata ancora conclusa.";
 		}
 		else
 		{
-			result=0;
-			error="Errore nella presentazione della richiesta";
+			result = 0;
+			error = "Errore nella presentazione della richiesta";
 		}
 
-		
+
 		request.getSession().setAttribute("idRequest_i", queryobj.checkLastPartialRequest(currUser.getEmail()));
 
 		redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached_uvp.jsp";
@@ -118,8 +117,8 @@ public class addRequest extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");
-		
-		
+
+
 
 
 

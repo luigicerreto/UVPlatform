@@ -32,7 +32,7 @@ $(document).ready(function() {
 				"bAutoWidth": false,
 				"processing": true,
 				"ajax": {
-					"url": "/UVPlatform/InternalTrainee",
+					"url": "/UVPlatform/getInternalInternships",
 					"dataSrc": "data",
 					"type": "POST"
 				},
@@ -82,7 +82,7 @@ $(document).ready(function() {
 				"bAutoWidth": false,
 				"processing": true,
 				"ajax": {
-					"url": "/UVPlatform/ExternalTrainee",
+					"url": "/UVPlatform/getExternalInternships",
 					"dataSrc": "data",
 					"type": "POST"
 
