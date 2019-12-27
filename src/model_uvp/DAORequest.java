@@ -10,15 +10,14 @@ import java.util.List;
 
 
 import controller.DbConnection;
-import controller.Utils;
 import model.Attached;
-import model.SystemAttribute;
 
 /**
  * 
  * @author Antonio Baldi
  *
  */
+@SuppressWarnings("static-access")
 public class DAORequest {
 	/**
 	 * Questa funzione consente di recuperare dal database tutte le informazioni relative
@@ -119,13 +118,10 @@ public class DAORequest {
 			return attac;
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return attac;
 	}
-
-
 
 	/**
 	 * 
@@ -200,12 +196,9 @@ public class DAORequest {
 		}
 		catch(Exception e)
 		{
-			//todo error
 			e.printStackTrace();
 		}
 		return messageResult;
-
-
 	}
 
 	/**
@@ -275,13 +268,10 @@ public class DAORequest {
 				internship.setInfo(result.getString(6));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		}
-
 		return internship;
-
 	}
 	/**
 	 * 
@@ -298,7 +288,6 @@ public class DAORequest {
 		PreparedStatement statement = null;
 		ResultSet result;
 		String email_azienda = null;
-		ExternalInternship internship = null;
 		String retriveInternship = "SELECT FK_USER FROM uvplatform.do\r\n" + 
 				"WHERE id_ie = ?";
 		try {
@@ -330,7 +319,6 @@ public class DAORequest {
 		PreparedStatement statement = null;
 		ResultSet result;
 		String email_docente = null;
-		ExternalInternship internship = null;
 		String retriveInternship = "SELECT FK_USER FROM uvplatform.perform\r\n" + 
 				"WHERE id_ii = ?";
 		try {
@@ -358,7 +346,7 @@ public class DAORequest {
 	 * @param email
 	 * @return int
 	 */
-	public int CheckLastPartialRequest(String email)
+	public int checkLastPartialRequest(String email)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -426,22 +414,21 @@ public class DAORequest {
 	 * Questa funzione permette di aggiungere un allegato ad una richiesta.
 	 * 
 	 * 
-	 * @param Filename
+	 * @param filename
 	 * @param mail
 	 * @param idRequest
-	 * @return
+	 * @return true se l'allegato viene aggiunto correttamente, false altrimenti
 	 */
-	public boolean addAttachment(String Filename, String mail, int idRequest)
+	public boolean addAttached(String filename, String mail, int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
-		ResultSet result;
 		String addAttach;
 
 		addAttach = "INSERT INTO attached (FILENAME, FK_USER, FK_REQUEST_I) VALUES (?, ?, ?) ";
 		try {
 			statement = con.prepareStatement(addAttach);
-			statement.setString(1, Filename);
+			statement.setString(1, filename);
 			statement.setString(2, mail);
 			statement.setInt(3, idRequest);
 			if(statement.executeUpdate()>0)
@@ -455,50 +442,47 @@ public class DAORequest {
 				return false;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
-
 		return false;
 	}
 
 	/**
-	 * Questa funzione permette di avanzare lo stato di una richiesta da 
-	 * "Parzialmente completata" ad "In attesa di accettazione"
 	 * 
+	 * Questa funzione permette di aggiornare gli allegati di una.
+	 * 
+	 * 
+	 * @param filename
 	 * @param idRequest
-	 * @return
+	 * @return email dell'utente se gli allegati vengono aggiornati, null altrimenti
 	 */
-	public boolean updateState(int idRequest, String newStatus)
+	public String updateAttached(String filename, int idRequest)
 	{
-		final String newState = newStatus;
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
-		ResultSet result;
-		String updateS = "UPDATE request_internship\r\n" + 
-				"SET STATE = ?\r\n" + 
-				"WHERE id_request_i = ?;";
+		String addAttach;
+
+		addAttach = "UPDATE attached \r\n" + 
+				"SET FILENAME = ? \r\n" + 
+				"WHERE FK_REQUEST_I = ?";
 		try {
-			statement = con.prepareStatement(updateS);
-			statement.setString(1, newState);
+			statement = con.prepareStatement(addAttach);
+			statement.setString(1, filename);
 			statement.setInt(2, idRequest);
 			if(statement.executeUpdate()>0)
 			{
 				con.commit();
-				return true;
+				return this.getEmailByRequest(idRequest);
 			}
 			else
 			{
 				con.rollback();
-				return false;
+				return null;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 
 	public ArrayList<RequestInternship> viewRequestsTeacher(String email) throws SQLException 
@@ -554,15 +538,15 @@ public class DAORequest {
 				request1.setState(result.getString(6));
 				requests.add(request1);
 			}
-
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		return requests;
-
 	}
+
+
 	public ArrayList<RequestInternship> viewRequestsCompany(String email) throws SQLException 
 	{
 		ArrayList<RequestInternship> requests = new ArrayList<RequestInternship>();
@@ -616,17 +600,15 @@ public class DAORequest {
 				request1.setState(result.getString(6));
 				requests.add(request1);
 			}
-
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		return requests;
-
 	}
 
-	public ArrayList<RequestInternship> getRequestsSecretary() throws SQLException 
+	public ArrayList<RequestInternship> viewRequestsSecretary() throws SQLException 
 	{
 		ArrayList<RequestInternship> requests = new ArrayList<RequestInternship>();
 		RequestInternship request1 = null;
@@ -693,18 +675,23 @@ public class DAORequest {
 
 	}
 
-	public boolean acceptByTeacher_Company(int idRequest)
+	/**
+	 * Questa funzione permette di cambiare lo stato di una richiesta
+	 * 
+	 * @param idRequest
+	 * @param newStatus
+	 * @return true se lo stato della richiesta viene cambiato, false altrimenti
+	 */
+	public boolean setStatus(int idRequest, String newStatus)
 	{
-		final String newState = "[SEGRETERIA] In attesa di accettazione";
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
-		ResultSet result;
 		String updateS = "UPDATE request_internship\r\n" + 
 				"SET STATE = ?\r\n" + 
 				"WHERE id_request_i = ?;";
 		try {
 			statement = con.prepareStatement(updateS);
-			statement.setString(1, newState);
+			statement.setString(1, newStatus);
 			statement.setInt(2, idRequest);
 			if(statement.executeUpdate()>0)
 			{
@@ -717,102 +704,60 @@ public class DAORequest {
 				return false;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
 	}
 
-	public boolean acceptBySecretary(int idRequest)
+	/**
+	 * Questa funzione permette a docente ed azienda di accettare una richiesta
+	 * @param idRequest
+	 * @return true se lo stato della richiesta viene cambiato, false altrimenti
+	 */ 
+	public boolean acceptRequestByProf_Company(int idRequest)
 	{
-		final String newState = "[ADMIN] In attesa di accettazione";
-		Connection con = new DbConnection().getInstance().getConn();
-		PreparedStatement statement = null;
-		ResultSet result;
-		String updateS = "UPDATE request_internship\r\n" + 
-				"SET STATE = ?\r\n" + 
-				"WHERE id_request_i = ?;";
-		try {
-			statement = con.prepareStatement(updateS);
-			statement.setString(1, newState);
-			statement.setInt(2, idRequest);
-			if(statement.executeUpdate()>0)
-			{
-				con.commit();
-				return true;
-			}
-			else
-			{
-				con.rollback();
-				return false;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+		final String newStatus = "[SEGRETERIA] In attesa di accettazione";
+		return this.setStatus(idRequest, newStatus);
 	}
 
-	public boolean rejectByTeacher_Company_Secretary(int idRequest)
+	/**
+	 * Questa funzione permette alla segreteria di accettare una richiesta
+	 * @param idRequest
+	 * @return true se lo stato della richiesta viene cambiato, false altrimenti
+	 */
+	public boolean acceptRequestBySecretary(int idRequest)
 	{
-		final String newState = "Rifiutata e conclusa";
-		Connection con = new DbConnection().getInstance().getConn();
-		PreparedStatement statement = null;
-		ResultSet result;
-		String updateS = "UPDATE request_internship\r\n" + 
-				"SET STATE = ?\r\n" + 
-				"WHERE id_request_i = ?;";
-		try {
-			statement = con.prepareStatement(updateS);
-			statement.setString(1, newState);
-			statement.setInt(2, idRequest);
-			if(statement.executeUpdate()>0)
-			{
-				con.commit();
-				return true;
-			}
-			else
-			{
-				con.rollback();
-				return false;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+		final String newStatus = "[ADMIN] In attesa di accettazione";
+		return this.setStatus(idRequest, newStatus);
 	}
 
-	public String updateAttached(String Filename, int idRequest)
+	/**
+	 * Questa funzione permette all'admin di accettare una richiesta
+	 * @param idRequest
+	 * @return true se lo stato della richiesta viene cambiato, false altrimenti
+	 */
+	public boolean acceptRequestByAdmin(int idRequest)
 	{
-		Connection con = new DbConnection().getInstance().getConn();
-		PreparedStatement statement = null;
-		String addAttach;
-
-		addAttach = "UPDATE attached \r\n" + 
-				"SET FILENAME = ? \r\n" + 
-				"WHERE FK_REQUEST_I = ?";
-		try {
-			statement = con.prepareStatement(addAttach);
-			statement.setString(1, Filename);
-			statement.setInt(2, idRequest);
-			if(statement.executeUpdate()>0)
-			{
-				con.commit();
-				return this.getEmailByRequest(idRequest);
-			}
-			else
-			{
-				con.rollback();
-				return null;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		final String newStatus = "[CONCLUSA] Accettata";
+		return this.setStatus(idRequest, newStatus);
 	}
 
+	/**
+	 * Questa funzione permette a docente, azienda, segreteria ed admin di rifiutare una richiesta
+	 * @param idRequest
+	 * @return true se lo stato della richiesta viene cambiato, false altrimenti
+	 */
+	public boolean rejectRequest(int idRequest)
+	{
+		final String newStatus = "[CONCLUSA] Rifiutata";
+		return this.setStatus(idRequest, newStatus);
+	}
+
+	/**
+	 * Questa funzione permette di ottenere l'email dell'utente che ha effettuato la richiesta
+	 * @param idRequest
+	 * @return true se lo stato della richiesta viene cambiato, false altrimenti
+	 */
 	public String getEmailByRequest(int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -831,12 +776,16 @@ public class DAORequest {
 				return result.getString(1);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Questa funzione permette di ottenere il tipo di una richiesta
+	 * @param idRequest
+	 * @return
+	 */
 	public String getRequestTypeById(int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -855,7 +804,6 @@ public class DAORequest {
 				return result.getString(1);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

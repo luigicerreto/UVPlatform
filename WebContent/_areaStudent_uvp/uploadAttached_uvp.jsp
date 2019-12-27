@@ -13,7 +13,7 @@
 	if(idRequest_i == null )
 	{
 		request.getSession().getAttribute("user");
-	  idRequest_i = queryobj.CheckLastPartialRequest(currUser.getEmail());
+	  idRequest_i = queryobj.checkLastPartialRequest(currUser.getEmail());
 	 if(idRequest_i!=0)
 	 {
 	  request.getSession().setAttribute("idRequest_i", idRequest_i);

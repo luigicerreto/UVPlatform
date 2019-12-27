@@ -74,7 +74,7 @@ public class addAttached extends HttpServlet {
 		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
 		String requestType = queryobj.getRequestTypeById(idRequest);
 
-		if(queryobj.addAttachment(filenames[0], user.getEmail(), idRequest))
+		if(queryobj.addAttached(filenames[0], user.getEmail(), idRequest))
 		{
 
 			notifyStudent notify = new notifyStudent();
@@ -91,13 +91,13 @@ public class addAttached extends HttpServlet {
 			}).start();
 
 			if(requestType.equalsIgnoreCase("tirocinio interno")) {
-				if(queryobj.updateState(idRequest, "[DOCENTE] In attesa di accettazione")) {	
+				if(queryobj.setStatus(idRequest, "[DOCENTE] In attesa di accettazione")) {	
 					content = "Allegati inseriti con successo.";
 					result = 1;
 				} 
 			}
 			else if (requestType.equalsIgnoreCase("tirocinio esterno")) {
-				if(queryobj.updateState(idRequest, "[AZIENDA] In attesa di accettazione")) {	
+				if(queryobj.setStatus(idRequest, "[AZIENDA] In attesa di accettazione")) {	
 					content = "Allegati inseriti con successo.";
 					result = 1;
 				}
