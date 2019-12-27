@@ -49,7 +49,7 @@ public class rejectRequest extends HttpServlet {
 		int id_request = (Integer.parseInt(request.getParameter("id_request")));
 		DAORequest queryobj = new DAORequest();
 
-		if(queryobj.rejectByTeacher_Company_Secretary(id_request))
+		if(queryobj.rejectRequest(id_request))
 		{
 			result = 1;
 			content = "Richiesta rifiutata";

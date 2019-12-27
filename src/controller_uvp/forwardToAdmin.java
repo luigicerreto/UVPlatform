@@ -49,7 +49,7 @@ public class forwardToAdmin extends HttpServlet {
 		int id_request = (Integer.parseInt(request.getParameter("id_request")));
 		DAORequest queryobj = new DAORequest();
 		
-		if(queryobj.acceptBySecretary(id_request))
+		if(queryobj.acceptRequestBySecretary(id_request))
 		{
 			result = 1;
 			content = "Richiesta accettata ed inoltrata all'admin";

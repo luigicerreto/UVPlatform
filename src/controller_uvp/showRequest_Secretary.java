@@ -60,7 +60,7 @@ public class showRequest_Secretary extends HttpServlet {
 		{
 			try
 			{
-				requests = queryobj.getRequestsSecretary();
+				requests = queryobj.viewRequestsSecretary();
 
 				for(RequestInternship a : requests)
 				{
