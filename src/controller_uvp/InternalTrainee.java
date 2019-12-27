@@ -14,7 +14,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import model.Attached;
-import model_uvp.DAOTirocini;
+import model_uvp.DAOInternship;
 import model_uvp.InternalInternship;
 import model_uvp.RequestInternship;
 
@@ -53,7 +53,7 @@ public class InternalTrainee extends HttpServlet {
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
 		ArrayList<InternalInternship> internship = new ArrayList<InternalInternship>();
-		DAOTirocini queryobj = new DAOTirocini();
+		DAOInternship queryobj = new DAOInternship();
 		
 		try
 		{

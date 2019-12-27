@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
 import model.Attached;
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
 import model_uvp.RequestInternship;
 
 /**
@@ -50,7 +50,7 @@ public class showRequest_Secretary extends HttpServlet {
 		// TODO Auto-generated method stub
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		ArrayList<RequestInternship> requests;
-		DAORichiesta queryobj = new DAORichiesta();
+		DAORequest queryobj = new DAORequest();
 		List<String> attached = new ArrayList<>();
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();

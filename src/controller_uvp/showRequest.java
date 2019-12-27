@@ -15,7 +15,7 @@ import org.json.simple.JSONObject;
 import java.util.List;
 import interfacce.UserInterface;
 import model.Attached;
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
 import model_uvp.RequestInternship;
 
 /**
@@ -59,7 +59,7 @@ public class showRequest extends HttpServlet {
 		String redirect = "";
 		ArrayList<RequestInternship> richieste;
 		List<Attached> allegati;
-		DAORichiesta queryobj = new DAORichiesta();
+		DAORequest queryobj = new DAORequest();
 		
 		if (currUser != null) 
 		{

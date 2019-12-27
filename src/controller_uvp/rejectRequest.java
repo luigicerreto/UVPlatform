@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
 
 /**
  * Servlet implementation class rejectRequest
@@ -47,7 +47,7 @@ public class rejectRequest extends HttpServlet {
 		String redirect = "";
 
 		int id_request = (Integer.parseInt(request.getParameter("id_request")));
-		DAORichiesta queryobj = new DAORichiesta();
+		DAORequest queryobj = new DAORequest();
 
 		if(queryobj.rejectByTeacher_Company_Secretary(id_request))
 		{

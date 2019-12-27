@@ -15,7 +15,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import interfacce.UserInterface;
 import model.SystemAttribute;
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
 import util.Mailer;
 import util.notifyStudent;
 
@@ -60,7 +60,7 @@ public class addAttached extends HttpServlet {
 		String error = "";
 		String content = "";
 		String redirect = "";
-		DAORichiesta queryobj = new DAORichiesta();
+		DAORequest queryobj = new DAORequest();
 		String addAttach;
 		PreparedStatement statement;
 
@@ -72,6 +72,7 @@ public class addAttached extends HttpServlet {
 		}
 		Integer idRequest = (Integer) request.getSession().getAttribute("idRequest_i");
 		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
+		String requestType = queryobj.getRequestTypeById(idRequest);
 
 		if(queryobj.addAttachment(filenames[0], user.getEmail(), idRequest))
 		{
@@ -89,9 +90,17 @@ public class addAttached extends HttpServlet {
 				} 
 			}).start();
 
-			if(queryobj.updateState(idRequest, "[DOCENTE] In attesa di accettazione")) {	
-				content = "Allegati inseriti con successo.";
-				result = 1;
+			if(requestType.equalsIgnoreCase("tirocinio interno")) {
+				if(queryobj.updateState(idRequest, "[DOCENTE] In attesa di accettazione")) {	
+					content = "Allegati inseriti con successo.";
+					result = 1;
+				} 
+			}
+			else if (requestType.equalsIgnoreCase("tirocinio esterno")) {
+				if(queryobj.updateState(idRequest, "[AZIENDA] In attesa di accettazione")) {	
+					content = "Allegati inseriti con successo.";
+					result = 1;
+				}
 			}
 		}
 		else

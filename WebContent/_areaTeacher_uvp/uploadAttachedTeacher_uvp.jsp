@@ -1,4 +1,4 @@
-<%@page import="model_uvp.DAORichiesta"%>
+<%@page import="model_uvp.DAORequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"
 	import="controller.CheckSession, model.SystemAttribute, controller.Utils, controller.DbConnection,interfacce.*, java.sql.Connection, java.sql.ResultSet, java.sql.Statement, java.text.SimpleDateFormat"%>
