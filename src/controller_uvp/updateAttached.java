@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import com.mysql.jdbc.PreparedStatement;
 
 import interfacce.UserInterface;
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
 import util.notifyStudent;
 
 /**
@@ -51,7 +51,7 @@ public class updateAttached extends HttpServlet {
 		String content = "";
 		String redirect = "";
 		
-		DAORichiesta queryobj = new DAORichiesta();
+		DAORequest queryobj = new DAORequest();
 		String[] filenames = request.getParameterValues("filenames[]");
 
 		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 

@@ -14,7 +14,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import controller.Downloader;
 import model.Attached;
 import model.SystemAttribute;
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
 import model_uvp.RequestInternship;
 
 /**
@@ -28,7 +28,7 @@ public class notifyStudent {
 	
 	
 	final private String object = "Stato della richiesta";
-	private String text = "La tua richiesta è ";
+	private String text = "La tua richiesta ï¿½ ";
 
 	/**
 	 * 
@@ -45,7 +45,7 @@ public class notifyStudent {
 	{
 		String id = String.valueOf(idRequest);
 		Attached file = new Attached();
-		DAORichiesta queryobj = new DAORichiesta();
+		DAORequest queryobj = new DAORequest();
 		
 		text+=queryobj.checkStatus(idRequest)+"\n";
 		file = queryobj.retriveAttached(idRequest);

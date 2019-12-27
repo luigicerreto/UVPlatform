@@ -49,7 +49,7 @@ $(document).ready(function() {
 		var action = $(this).children("input").data("action");
 		var id_request = $(this).children("input").attr("id");
 
-		//if(!($(this).attr('disabled') == "disabled")){
+		if(!($(this).attr('disabled') == "disabled")){
 			if(action === "accept"){ // accetta richiesta
 				$.ajax({
 					url : absolutePath + "/forwardToSecretary",
@@ -104,6 +104,6 @@ $(document).ready(function() {
 				var url_download = absolutePath + "/Downloader?filename=" + filename + "&idRequest=" + id_request;
 				$(window.location).attr('href', url_download);
 			}
-		//}
+		}
 	});
 });

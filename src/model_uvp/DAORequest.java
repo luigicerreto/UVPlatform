@@ -19,7 +19,7 @@ import model.SystemAttribute;
  * @author Antonio Baldi
  *
  */
-public class DAORichiesta {
+public class DAORequest {
 	/**
 	 * Questa funzione consente di recuperare dal database tutte le informazioni relative
 	 * a tutte le richieste di un utente dato l'email.
@@ -819,6 +819,30 @@ public class DAORichiesta {
 		PreparedStatement statement = null;
 		ResultSet result;
 		String sql = "SELECT FK_USER FROM attached WHERE FK_REQUEST_I = ? ";
+
+		try {
+			statement = con.prepareStatement(sql);
+			statement.setInt(1, idRequest);
+			result = statement.executeQuery();
+
+			int size = result.last() ? result.getRow() : 0;
+
+			if(size>0)
+				return result.getString(1);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String getRequestTypeById(int idRequest)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String sql = "select type from request_internship where id_request_i = ?";
 
 		try {
 			statement = con.prepareStatement(sql);

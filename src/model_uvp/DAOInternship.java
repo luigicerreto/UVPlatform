@@ -12,7 +12,7 @@ import controller.DbConnection;
  * @author Antonio
  *
  */
-public class DAOTirocini {
+public class DAOInternship {
 
 	/**
 	 * 

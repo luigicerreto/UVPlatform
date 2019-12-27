@@ -12,7 +12,7 @@ import controller.Utils;
  * @author Antonio Baldi
  * @author Rosario Di Palma
  */
-public class DAOUtente {
+public class DAOUser {
 	/**
 	 * 
 	 * Questo metodo serve per aggiornare la password nel database dato
@@ -58,7 +58,7 @@ public class DAOUtente {
 	/**
 	 * 
 	 * Questo metodo serve per controllare se la mail passata come paramentro
-	 * è presente nel database.
+	 * ï¿½ presente nel database.
 	 * 
 	 * @author Antonio Baldi
 	 * @author Rosario Di Palma

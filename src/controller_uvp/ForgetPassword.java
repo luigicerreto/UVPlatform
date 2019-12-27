@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import model_uvp.DAOUtente;
+import model_uvp.DAOUser;
 import util.Mailer;
 import util.PasswordGenerator;
 
@@ -57,10 +57,10 @@ public class ForgetPassword extends HttpServlet {
 		String subject = "Password autogenerata";
 		PasswordGenerator generatorePassword = new PasswordGenerator();
 		String nuovaPsw = generatorePassword.generate(12);
-		String text = "La tua nuova password è:\n\n"+nuovaPsw+
+		String text = "La tua nuova password ï¿½:\n\n"+nuovaPsw+
 				"\nAccedi alla tua pagina utente per modificare la password"
 				+ "\n http://localhost:8080/UVPlatform/index.jsp ";
-		DAOUtente queryobj = new DAOUtente();
+		DAOUser queryobj = new DAOUser();
 		try
 		{
 			if(!queryobj.checkMail(mail))

@@ -1,7 +1,7 @@
-<%@page import="model_uvp.DAORichiesta"%>
+<%@page import="model_uvp.DAORequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"
-	import="controller.CheckSession, model.SystemAttribute, controller.Utils, controller.DbConnection,interfacce.*, java.sql.Connection, java.sql.ResultSet, java.sql.Statement, java.text.SimpleDateFormat"%>
+	import="controller.CheckSession,model.SystemAttribute,controller.Utils,controller.DbConnection,interfacce.*,java.sql.Connection,java.sql.ResultSet,java.sql.Statement,java.text.SimpleDateFormat"%>
 
 <%
 	String pageName = "uploadAttached.jsp";
@@ -9,7 +9,7 @@
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());	
 	UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 	Integer idRequest_i = (Integer) request.getSession().getAttribute("idRequest_i");
-	DAORichiesta queryobj = new DAORichiesta();
+	DAORequest queryobj = new DAORequest();
 	if(idRequest_i == null )
 	{
 		request.getSession().getAttribute("user");
@@ -28,7 +28,6 @@
 		response.sendRedirect(request.getContextPath()+"/_areaStudent_uvp/viewRequestInternship.jsp");
 		
 	}
-	
 %>
 
 <!DOCTYPE html>

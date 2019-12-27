@@ -15,8 +15,8 @@ import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
 import model.Attached;
-import model_uvp.DAORichiesta;
-import model_uvp.DAOUtente;
+import model_uvp.DAORequest;
+import model_uvp.DAOUser;
 import model_uvp.RequestInternship;
 import model_uvp.User;
 
@@ -62,7 +62,7 @@ public class ShowProfile extends HttpServlet {
 		String redirect = "";
 		ArrayList<RequestInternship> richieste;
 		List<Attached> allegati;
-		DAOUtente queryobj = new DAOUtente();
+		DAOUser queryobj = new DAOUser();
 		User userDate = null;
 		JSONObject res = new JSONObject();
 		try

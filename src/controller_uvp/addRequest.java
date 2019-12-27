@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
 import model_uvp.ExternalInternship;
 import model_uvp.InternalInternship;
 import model_uvp.RequestInternship;
@@ -65,7 +65,7 @@ public class addRequest extends HttpServlet {
 		ExternalInternship is_external;
 		RequestInternship newRequest = new RequestInternship();
 		int returnMessage;
-		DAORichiesta queryobj = new DAORichiesta();
+		DAORequest queryobj = new DAORequest();
 
 
 		id_request = (Integer.parseInt(request.getParameter("choice")));

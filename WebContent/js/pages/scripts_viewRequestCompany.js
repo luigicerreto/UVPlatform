@@ -1,9 +1,6 @@
 $(document).ready(function() {
-
-	
-	
 	// contenuto tabella
-	$('#CompanyTableInternship').DataTable( {
+	var table = $('#CompanyTableInternship').DataTable( {
 		"order": [[ 0, "asc" ]],
 		"lengthMenu": [[10, -1], [10, "Tutti"]],
 		"autoWidth": false,
@@ -16,18 +13,16 @@ $(document).ready(function() {
 		},
 		"columns" : [
 			{ "data" : "id" },
-			{ "data" : "attached" },
 			{ "data" : "theme" },
+			{ "data" : "attached" },
 			{ "data" : "name" },
 			{ "data" : "surname" },
 			{ "data" : "type" },
 			{ "data" : "state" },
-			{ "data" : "azioni" },
-			
+			{ "data" : "actions" },
 			],
-			
 			"language": {
-				"sEmptyTable":     "Nessun tirocinio interno disponibile",
+				"sEmptyTable":     "Nessuna richiesta di tirocinio",
 				"sInfo":           "",
 				"sInfoEmpty":      "",
 				"sInfoFiltered":   "",
@@ -44,7 +39,71 @@ $(document).ready(function() {
 					"sNext":       '<i class="fa fa-caret-right"></i>',
 					"sLast":       "Fine"
 				}
-			}        
+			}          
 	});
-	
+	// azioni tirocinio
+	$(document).on('click', 'label.actionInternship', function(e){
+		e.stopPropagation();
+		e.preventDefault();
+
+		var action = $(this).children("input").data("action");
+		var id_request = $(this).children("input").attr("id");
+
+		if(!($(this).attr('disabled') == "disabled")){
+			if(action === "accept"){ // accetta richiesta
+				$.ajax({
+					url : absolutePath + "/forwardToSecretary",
+					type : "POST",
+					dataType : 'JSON',
+					async : false,
+					data : {
+						"id_request" : id_request
+					},
+					success : function(msg) {
+						if (!msg.result) {
+							showAlert(1,msg.error);
+							table.ajax.reload();
+						} else {
+							showAlert(0,msg.content);
+							table.ajax.reload();
+						}
+					},
+					error : function(msg) {
+						showAlert(1,"Si è verificato un errore.");
+						table.ajax.reload();
+					}
+				});
+			} else if (action === "reject"){ // rifiuta richiesta
+				$.ajax({
+					url : absolutePath + "/rejectRequest",
+					type : "POST",
+					dataType : 'JSON',
+					async : false,
+					data : {
+						"id_request" : id_request
+					},
+					success : function(msg) {
+						if (!msg.result) {
+							showAlert(1,msg.error);
+							table.ajax.reload();
+						} else {
+							showAlert(0,msg.content);
+							table.ajax.reload();
+						}
+					},
+					error : function(msg) {
+						showAlert(1,"Si è verificato un errore.");
+						table.ajax.reload();
+					}
+				});
+			} else if (action === "upload"){ // carica allegato
+				var url_redirect = absolutePath + "/_areaTeacher_uvp/uploadAttachedCompany_uvp.jsp?id_request=" + id_request;
+				$(window.location).attr('href', url_redirect);
+			} else if (action === "download"){ // scarica allegato
+				var filename = $(this).parent().parent().find('td:eq(2)').text();
+				var url_download = absolutePath + "/Downloader?filename=" + filename + "&idRequest=" + id_request;
+				$(window.location).attr('href', url_download);
+			}
+		}
+	});
 });
