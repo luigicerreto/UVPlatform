@@ -12,21 +12,21 @@ import controller.DbConnection;
  * @author Antonio
  *
  */
+@SuppressWarnings("static-access")
 public class DAOInternship {
 
 	/**
 	 * 
 	 * Questa funzione restituisce tutti i tirocini interni presenti nel database
 	 * 
-	 * @return ArrayList<InternalInternship>
+	 * @return ArrayList<Internship>
 	 */
-	public ArrayList<InternalInternship>  viewTraineeInternal()
+	public ArrayList<Internship>  viewInternalInternships()
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
-		InternalInternship internship = null;
-		ArrayList<InternalInternship> internships = new ArrayList<InternalInternship>();
+		ArrayList<Internship> internships = new ArrayList<>();
 		String viewRequestInternal = "SELECT i.id_ii, i.tutor_name, i.theme, i.availability, i.resources, i.goals, u.office\r\n" + 
 				"from internship_i as i  inner join perform as p on i.id_ii = p.id_ii\r\n" + 
 				"inner join user as u on p.FK_USER = u.EMAIL";
@@ -35,29 +35,32 @@ public class DAOInternship {
 			result = statement.executeQuery();
 			while(result.next())
 			{
-				internship = new InternalInternship(result.getInt(1), result.getString(2), result.getString(3), result.getInt(4), result.getString(5), result.getString(6), result.getString(7));
-				internships.add(internship);
+				internships.add(new InternalInternship(
+						result.getInt(1),		// id
+						result.getString(2),	// tutor name
+						result.getString(3), 	// theme
+						result.getInt(4), 		// availability
+						result.getString(5),	// resources
+						result.getString(6),	// goals
+						result.getString(7)));	// place
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return internships;
 	}
 
 
 	/**
 	 * Questa funzione restituisce tutti i tirocini esterni presenti nel database
-	 * @return ArrayList<ExternalInternship>
+	 * @return ArrayList<Internship>
 	 */
-	public ArrayList<ExternalInternship>  viewTraineeExternal()
+	public ArrayList<Internship>  viewExternalInternships()
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
-		ExternalInternship internship = null;
-		ArrayList<ExternalInternship> internships = new ArrayList<ExternalInternship>();
+		ArrayList<Internship> internships = new ArrayList<>();
 		String viewRequestExternal = "SELECT e.id_ie, e.name, e.duration_convention, e.date_convention, e.availability, e.info, u.EMAIL, u.OFFICE \r\n" + 
 				"FROM internship_e as e inner join do on e.id_ie = do.id_ie \r\n" + 
 				"inner join user as u on do.FK_USER = u.EMAIL";
@@ -66,18 +69,17 @@ public class DAOInternship {
 			result = statement.executeQuery();
 			while(result.next())
 			{
-				internship = new ExternalInternship(result.getInt(1), result.getString(2), result.getInt(3), result.getDate(4), result.getInt(5), result.getString(6), result.getString(7), result.getString(8));
-				internships.add(internship);
+				internships.add(new ExternalInternship(
+						result.getInt(1),		// id
+						result.getString(2),	// name
+						result.getInt(3), 		// duration convention
+						result.getDate(4), 		// date convention
+						result.getInt(5),		// availability
+						result.getString(6)));	// info
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return internships;
 	}
-
-	
-
-
 }

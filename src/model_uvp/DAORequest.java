@@ -209,26 +209,29 @@ public class DAORequest {
 	 * @param id
 	 * @return InternalIntership
 	 */
-	public InternalInternship retriveInternship_internal(int id)
+	public Internship retrieveInternalInternship(int id)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
-		InternalInternship internship = new InternalInternship();
+		Internship internship = null;
 		String retriveInternship = "SELECT * FROM uvplatform.internship_i\r\n" + 
 				"Where id_ii =?;";
+
 		try {
 			statement = con.prepareStatement(retriveInternship);
 			statement.setInt(1, id);
 			result = statement.executeQuery();
 			if(result.next())
 			{
-				internship.setId_ii(result.getInt(1));
-				internship.setTutorn_name(result.getString(2));
-				internship.setTheme(result.getString(3));
-				internship.setAvailability(result.getInt(4));
-				internship.setResources(result.getString(5));
-				internship.setGoals(result.getString(6));
+				internship = new InternalInternship(
+						result.getInt(1),		// id
+						result.getString(2),	// tutor name
+						result.getString(3), 	// theme
+						result.getInt(4), 		// availability
+						result.getString(5),	// resources
+						result.getString(6),	// goals
+						result.getString(7));	// place
 			}
 		}
 		catch(Exception e)
@@ -246,12 +249,12 @@ public class DAORequest {
 	 * @param id
 	 * @return ExternalInternship
 	 */
-	public ExternalInternship retriveInternship_external(int id)
+	public Internship retrieveExternalInternship(int id)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
-		ExternalInternship internship = new ExternalInternship();
+		Internship internship = null;
 		String retriveInternship = "SELECT * FROM uvplatform.internship_e\r\n" + 
 				"Where id_ie =?;";
 		try {
@@ -260,12 +263,13 @@ public class DAORequest {
 			result = statement.executeQuery();
 			if(result.next())
 			{
-				internship.setId_ie(result.getInt(1));
-				internship.setName(result.getString(2));
-				internship.setDuration_convention(result.getInt(3));
-				internship.setDate_convention(result.getDate(4));
-				internship.setAvailability(result.getInt(5));
-				internship.setInfo(result.getString(6));
+				internship = new ExternalInternship(
+						result.getInt(1),		// id
+						result.getString(2),	// name
+						result.getInt(3), 		// duration convention
+						result.getDate(4), 		// date convention
+						result.getInt(5),		// availability
+						result.getString(6));	// info
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

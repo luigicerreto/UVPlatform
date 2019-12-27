@@ -15,9 +15,10 @@ import org.json.simple.JSONObject;
 
 import model.Attached;
 import model_uvp.DAORequest;
-import model_uvp.DAOInternship;
 import model_uvp.ExternalInternship;
 import model_uvp.InternalInternship;
+import model_uvp.DAOInternship;
+import model_uvp.Internship;
 import model_uvp.RequestInternship;
 
 /**
@@ -29,16 +30,16 @@ import model_uvp.RequestInternship;
  * @author Carmine Rovito
  *
  */
-@WebServlet("/ExternalTrainee")
-public class ExternalTrainee extends HttpServlet {
+@WebServlet("/getExternalInternships")
+public class getExternalInternships extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ExternalTrainee() {
-        super();
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public getExternalInternships() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -56,28 +57,29 @@ public class ExternalTrainee extends HttpServlet {
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
 		DAOInternship queryobj = new DAOInternship();
-		
-		ArrayList<ExternalInternship> internship = new ArrayList<ExternalInternship>();
+
+		ArrayList<ExternalInternship> internship;
+
 		try
 		{
-		internship =  queryobj.viewTraineeExternal();
-		if(internship.size()>0)
-			for(ExternalInternship a : internship)
-			{
-				jObj = new JSONObject();
-				jObj.put("id", a.getId_ie());
-				jObj.put("name", a.getName());
-				jObj.put("place", a.getPlace());
-				jObj.put("date", String.valueOf(a.getDate_convention()));
-				jObj.put("choice","<div class=\"tableButtons\">"
-						+ "<button type =\"button\" class=\"showDetails\" data-toggle=\"modal\" data-target=\"#details\"><i class=\"fa fa-info-circle\"></i></button>"
-						+ "<label class=\"btn btn-default\">" 
-						+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId_ie()+"\">" 
-						+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
-						+ "</label>"
-						+ "</div>");
-				jArr.add(jObj);
-			}
+			internship =  (ArrayList<ExternalInternship>) ((ArrayList<?>) queryobj.viewInternalInternships());
+			if(internship.size()>0)
+				for(ExternalInternship a : internship)
+				{
+					jObj = new JSONObject();
+					jObj.put("id", a.getId());
+					jObj.put("name", a.getName());
+					jObj.put("place", a.getInfo());
+					jObj.put("date", String.valueOf(a.getDate_convention()));
+					jObj.put("choice","<div class=\"tableButtons\">"
+							+ "<button type =\"button\" class=\"showDetails\" data-toggle=\"modal\" data-target=\"#details\"><i class=\"fa fa-info-circle\"></i></button>"
+							+ "<label class=\"btn btn-default\">" 
+							+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId()+"\">" 
+							+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
+							+ "</label>"
+							+ "</div>");
+					jArr.add(jObj);
+				}
 		}
 		catch(Exception e)
 		{
