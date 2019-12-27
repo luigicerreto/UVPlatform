@@ -73,10 +73,10 @@ public class DAORequest {
 					}
 				}
 				request1.setId_request_i(result.getInt(1));
-				request1.setTheme(result.getString(2));
+				request1.setUserSerial(result.getString(2));
 				request1.setAttached(attacheds);
 				request1.setType(result.getString(3));
-				request1.setState(result.getString(4));
+				request1.setStatus(result.getString(4));
 				requests.add(request1);
 			}
 
@@ -128,155 +128,58 @@ public class DAORequest {
 	 * Questa funzione permette di aggiungere una richiesta al database
 	 * data una determinata richiesta come parametro.
 	 * 
-	 * @param richiesta
+	 * @param req
 	 * @return int
 	 */
-	public int addRequest(RequestInternship richiesta)
+	public int addRequest(RequestInternship req)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		String checkRequest;
-		int messageResult = 0;
 
 		try {
-			checkRequest = "SELECT id_request_i\r\n" + 
-					"FROM request_internship WHERE FK_USER1 = ? AND STATE != ? AND STATE != ? ";
+			checkRequest = "SELECT id_request_i FROM request_internship WHERE FK_USER1 = ? AND STATE NOT LIKE '%Accettata%' AND STATE NOT LIKE '%Rifiutata%' ";
 			statement = con.prepareStatement(checkRequest);
-			statement.setString(1, richiesta.getTheme());
-			statement.setString(2, "Accettata");
-			statement.setString(3, "Rifiutata");
+			statement.setString(1, req.getUserEmail());
 			ResultSet r = statement.executeQuery();
 			int count = r.last() ? r.getRow() : 0;
-			if (count == 0) 
-			{
+			if (count == 0){
 
-				String addRequest = "INSERT INTO `uvplatform`.`request_internship` (`type`, `STATE`, `FK_USER1`, `FK_USER2`, `FK_II`, `FK_IE`) VALUES \r\n" + 
-						"(?, ?, ?, ?, ?, ?)";
-				try
-				{
+				String addRequest = "INSERT INTO request_internship (type, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) VALUES (?, ?, ?, ?, ?, ?)";
+				try {
 					statement = con.prepareStatement(addRequest);
-					statement.setString(1, richiesta.getType());
-					statement.setString(2, richiesta.getState());
-					statement.setString(3, richiesta.getTheme());
-					statement.setString(4, richiesta.getUserFullName());
-					if(richiesta.getId_ie()>0)
-					{
+					statement.setString(1, req.getType());
+					statement.setString(2, req.getStatus());
+					statement.setString(3, req.getUserEmail());
+					statement.setString(4, req.getUserFullName());
+					if(req.getId_ie() != 0) {
 						statement.setNull(5, java.sql.Types.INTEGER);
-						statement.setInt(6, richiesta.getId_ie());
-					}
-					else
-					{
-						statement.setInt(5, richiesta.getId_ii());
+						statement.setInt(6, req.getId_ie());
+					} else {
+						statement.setInt(5, req.getId_ii());
 						statement.setNull(6, java.sql.Types.INTEGER);
 					}
-					if(statement.executeUpdate()>0)
-					{
+
+					if(statement.executeUpdate()>0) {
 						con.commit();
-						messageResult = 1;
-						return messageResult;
-					}
-					else
-					{
+						return 1;
+					} else {
 						con.rollback();
-						messageResult = 0;
-						return messageResult;
+						return 0;
 					}
 				}
-				catch(Exception e)
-				{
+				catch(Exception e){
 					e.printStackTrace();
 				}
-
+			} else {
+				return 2;
 			}
-			else
-			{
-				messageResult = 2; 
-				return messageResult;
-			}
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e){
 			e.printStackTrace();
 		}
-		return messageResult;
+		return 0;
 	}
 
-	/**
-	 * 
-	 * Questa funzione permette di recuperare tutte le informazioni relative
-	 * ad un tirocinio interno dato l'id di questo.
-	 * 
-	 * @param id
-	 * @return InternalIntership
-	 */
-	public Internship retrieveInternalInternship(int id)
-	{
-		Connection con = new DbConnection().getInstance().getConn();
-		PreparedStatement statement = null;
-		ResultSet result;
-		Internship internship = null;
-		String retriveInternship = "SELECT * FROM uvplatform.internship_i\r\n" + 
-				"Where id_ii =?;";
-
-		try {
-			statement = con.prepareStatement(retriveInternship);
-			statement.setInt(1, id);
-			result = statement.executeQuery();
-			if(result.next())
-			{
-				internship = new InternalInternship(
-						result.getInt(1),		// id
-						result.getString(2),	// tutor name
-						result.getString(3), 	// theme
-						result.getInt(4), 		// availability
-						result.getString(5),	// resources
-						result.getString(6),	// goals
-						result.getString(7));	// place
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return internship;
-
-	}
-
-	/**
-	 * Questa funzione permette di recuperare tutte le informazioni relative
-	 * ad un tirocinio esterno dato l'id di questo.
-	 * 
-	 * @param id
-	 * @return ExternalInternship
-	 */
-	public Internship retrieveExternalInternship(int id)
-	{
-		Connection con = new DbConnection().getInstance().getConn();
-		PreparedStatement statement = null;
-		ResultSet result;
-		Internship internship = null;
-		String retriveInternship = "SELECT * FROM uvplatform.internship_e\r\n" + 
-				"Where id_ie =?;";
-		try {
-			statement = con.prepareStatement(retriveInternship);
-			statement.setInt(1, id);
-			result = statement.executeQuery();
-			if(result.next())
-			{
-				internship = new ExternalInternship(
-						result.getInt(1),		// id
-						result.getString(2),	// name
-						result.getInt(3), 		// duration convention
-						result.getDate(4), 		// date convention
-						result.getInt(5),		// availability
-						result.getString(6));	// info
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		}
-		return internship;
-	}
 	/**
 	 * 
 	 * Questa funzione restituisce la mail dell'azienda dato l'id del
@@ -535,11 +438,11 @@ public class DAORequest {
 					}
 				}
 				request1.setId_request_i(result.getInt(1));
-				request1.setTheme(result.getString(2));
+				request1.setUserSerial(result.getString(2));
 				request1.setAttached(attacheds);
 				request1.setUserFullName(result.getString(3)+"+"+result.getString(4));
 				request1.setType(result.getString(5));
-				request1.setState(result.getString(6));
+				request1.setStatus(result.getString(6));
 				requests.add(request1);
 			}
 		}
@@ -597,11 +500,11 @@ public class DAORequest {
 					}
 				}
 				request1.setId_request_i(result.getInt(1));
-				request1.setTheme(result.getString(2));
+				request1.setUserSerial(result.getString(2));
 				request1.setAttached(attacheds);
 				request1.setUserFullName(result.getString(3)+"+"+result.getString(4));
 				request1.setType(result.getString(5));
-				request1.setState(result.getString(6));
+				request1.setStatus(result.getString(6));
 				requests.add(request1);
 			}
 		}
@@ -662,11 +565,11 @@ public class DAORequest {
 					}
 				}
 				request1.setId_request_i(result.getInt(1));
-				request1.setTheme(result.getString(2));
+				request1.setUserSerial(result.getString(2));
 				request1.setAttached(attacheds);
 				request1.setUserFullName(result.getString(3)+"+"+result.getString(4));
 				request1.setType(result.getString(5));
-				request1.setState(result.getString(6));
+				request1.setStatus(result.getString(6));
 				requests.add(request1);
 			}
 

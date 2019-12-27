@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	// contenuto tabella
 	var table = $('#TeacherTableInternship').DataTable( {
-		"order": [[ 0, "asc" ]],
+		"order": [[ 0, "desc" ]],
 		"lengthMenu": [[10, -1], [10, "Tutti"]],
 		"autoWidth": false,
 		"bAutoWidth": false,
