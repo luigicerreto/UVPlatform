@@ -206,10 +206,10 @@ label.infoInternship:hover span.infoBtn {
 @keyframes shadow-pulse
 {
   0% {
-    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 0px rgba(255, 165, 0, 0.75);
   }
   100% {
-    box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 35px rgba(255, 165, 0, 0);
   }
 }
 

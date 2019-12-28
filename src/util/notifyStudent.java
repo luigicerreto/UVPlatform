@@ -1,21 +1,11 @@
 package util;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-
-import controller.Downloader;
 import model.Attached;
-import model.SystemAttribute;
 import model_uvp.DAORequest;
-import model_uvp.RequestInternship;
 
 /**
  * Questa classe gestisce la notifica allo studente.
@@ -27,8 +17,8 @@ import model_uvp.RequestInternship;
 public class notifyStudent {
 	
 	
-	final private String object = "Stato della richiesta";
-	private String text = "La tua richiesta � ";
+	private String object = "Aggiornamento della richiesta ";
+	private String text = "È cambiato lo stato della tua richiesta: ";
 
 	/**
 	 * 
@@ -43,17 +33,14 @@ public class notifyStudent {
 	 */
 	public void notify(String mail, int idRequest) throws IOException, ServletException
 	{
-		String id = String.valueOf(idRequest);
 		Attached file = new Attached();
 		DAORequest queryobj = new DAORequest();
 		
-		text+=queryobj.checkStatus(idRequest)+"\n";
-		file = queryobj.retriveAttached(idRequest);
-		String basePath = 
-		        new SystemAttribute().getValueByKey("request-upload-path") + "\\" + idRequest + "\\";
-		Mailer.send(mail,object,text,basePath+file.getFilename());  
-		
-		
+		object += "n." + idRequest;
+		text += queryobj.checkStatus(idRequest)+ "\n";
+		file = queryobj.retrieveLatestAttached(idRequest);
+		String basePath = System.getProperty("user.home") + "/" + "Desktop" + "/uploads/" + idRequest + "/";
+		//String basePath = new SystemAttribute().getValueByKey("request-upload-path") + "\\" + idRequest + "\\";
+		Mailer.send(mail, object, text, basePath+file.getFilename());
 	}
-
 }

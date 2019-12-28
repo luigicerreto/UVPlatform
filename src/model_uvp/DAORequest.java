@@ -95,15 +95,13 @@ public class DAORequest {
 	 * @param idRequest
 	 * @return Attached
 	 */
-	public Attached retriveAttached(int idRequest)
+	public Attached retrieveLatestAttached(int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet resultAttached;
 		Attached attac = null;
-		String attachedQuery="SELECT a.filename AS filename \r\n" + 
-				"FROM attached a \r\n" + 
-				"WHERE a.fk_request_I = ?";
+		String attachedQuery="SELECT a.filename FROM attached a WHERE a.fk_request_I = ? ORDER BY a.id_attached DESC";
 		try {
 			statement = con.prepareStatement(attachedQuery);
 			attac = new Attached();
