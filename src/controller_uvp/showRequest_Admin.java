@@ -20,19 +20,19 @@ import model_uvp.DAORequest;
 import model_uvp.RequestInternship;
 
 /**
- * Servlet implementation class ShowRequest_Teacher
+ * Servlet implementation class showRequest_Admin
  */
-@WebServlet("/showRequest_Secretary")
-public class showRequest_Secretary extends HttpServlet {
+@WebServlet("/showRequest_Admin")
+public class showRequest_Admin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public showRequest_Secretary() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public showRequest_Admin() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,7 +45,6 @@ public class showRequest_Secretary extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
@@ -56,7 +55,7 @@ public class showRequest_Secretary extends HttpServlet {
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
 
-		if (currUser != null && (currUser.getUserType() == 1)) 
+		if (currUser != null) 
 		{
 			try
 			{
@@ -81,7 +80,7 @@ public class showRequest_Secretary extends HttpServlet {
 					jObj.put("surname", a.getUserSurname());
 					jObj.put("type", a.getType());
 					jObj.put("state",a.getStatus());
-					if(a.getStatus().equalsIgnoreCase("[SEGRETERIA] In attesa di accettazione")) {
+					if(a.getStatus().equalsIgnoreCase("[ADMIN] In attesa di accettazione")) {
 						jObj.put("actions", ""
 								+ "<label class=\"actionInternship btn btn-default\">" 
 								+ "<input type=\"button\" data-action=\"accept\" id=\""+a.getId_request_i() +"\">"
@@ -90,14 +89,6 @@ public class showRequest_Secretary extends HttpServlet {
 								+ "<label class=\"actionInternship btn btn-default\">" 
 								+ "<input type=\"button\" data-action=\"reject\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
-								+ "</label>"
-								+ "<label class=\"actionInternship btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
-								+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
-								+ "</label>"
-								+ "<label class=\"actionInternship btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
-								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
 								+ "<label class=\"infoInternship btn btn-default\">"
 								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
@@ -113,14 +104,6 @@ public class showRequest_Secretary extends HttpServlet {
 								+ "<label class=\"actionInternship btn btn-default\" disabled>" 
 								+ "<input type=\"button\" data-action=\"reject\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
-								+ "</label>"
-								+ "<label class=\"actionInternship btn btn-default\" disabled>"
-								+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
-								+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
-								+ "</label>"
-								+ "<label class=\"actionInternship btn btn-default\" disabled>"
-								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
-								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
 								+ "<label class=\"infoInternship btn btn-default\">"
 								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
@@ -142,4 +125,6 @@ public class showRequest_Secretary extends HttpServlet {
 		}
 	}
 }
+
+
 
