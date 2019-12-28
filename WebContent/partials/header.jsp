@@ -22,7 +22,17 @@
 			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/viewRequest.jsp\">Richieste EV</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-					+ "/\">Richieste Tirocinio</a></li>";
+					+ "/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Utenti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Docenti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Aziende</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+		}
+		if (pageName.equals("viewRequestInternship.jsp") && ck.isAllowed()) {
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/viewRequest.jsp\">Richieste EV</a></li>";
+			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
+					+ "/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Utenti</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Docenti</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Aziende</a></li>";
