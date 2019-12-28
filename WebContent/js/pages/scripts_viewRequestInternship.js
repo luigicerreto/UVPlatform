@@ -47,9 +47,11 @@ $(document).ready(function() {
 		var action = $(this).children("input").data("action");
 		var id_request = $(this).children("input").attr("id");
 
-		if (action === "upload"){ // carica allegato
-			var url_redirect = absolutePath + "/_areaStudent_uvp/uploadAttached_uvp.jsp?id_request=" + id_request;
-			$(window.location).attr('href', url_redirect);
+		if(!($(this).attr('disabled') == "disabled")){
+			if (action === "upload"){ // carica allegato
+				var url_redirect = absolutePath + "/_areaStudent_uvp/uploadAttached_uvp.jsp?id_request=" + id_request;
+				$(window.location).attr('href', url_redirect);
+			}
 		}
 	});
 });

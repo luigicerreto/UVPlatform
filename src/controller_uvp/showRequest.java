@@ -83,7 +83,7 @@ public class showRequest extends HttpServlet {
 						if(a.getStatus().equalsIgnoreCase("parzialmente completata") ||
 								a.getStatus().equalsIgnoreCase("in attesa di caricamento registro di tirocinio"))
 							jObj.put("actions", ""
-									+ "<label class=\"actionInternship btn btn-default\">"
+									+ "<label class=\"actionInternship btn btn-default pulse\">"
 									+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
 									+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
 									+ "</label>"
