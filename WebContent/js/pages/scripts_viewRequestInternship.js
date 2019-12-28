@@ -14,7 +14,7 @@ $(document).ready(function() {
 		"columns" : [
 			{ "data" : "id" },
 			{ "data" : "user_serial" },
-			{ "data" : "attached" },
+			{ "data" : "attached", "render": "[<br>]" },
 			{ "data" : "type" },
 			{ "data" : "status" },
 			{ "data" : "actions" }
@@ -39,5 +39,17 @@ $(document).ready(function() {
 				}
 			}        
 	});
+	// azioni tirocinio
+	$(document).on('click', 'label.actionInternship', function(e){
+		e.stopPropagation();
+		e.preventDefault();
 
+		var action = $(this).children("input").data("action");
+		var id_request = $(this).children("input").attr("id");
+
+		if (action === "upload"){ // carica allegato
+			var url_redirect = absolutePath + "/_areaStudent_uvp/uploadAttached_uvp.jsp?id_request=" + id_request;
+			$(window.location).attr('href', url_redirect);
+		}
+	});
 });

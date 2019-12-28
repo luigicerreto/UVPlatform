@@ -11,23 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import com.mysql.jdbc.PreparedStatement;
-
 import interfacce.UserInterface;
-import model.SystemAttribute;
 import model_uvp.DAORequest;
-import util.Mailer;
 import util.notifyStudent;
 
-/**
- * 
+/** 
  * Servlet per gestire l'aggiunta degli allegati ad una determinata richiesta.
  * Questa servlet richiede "filenames[]" come parametro della request
  * e l'identificativo della richiesta come parametro di sessione.
  * 
- * 
  * @author Antonio Baldi
- *
  */
 @WebServlet("/addAttached")
 public class addAttached extends HttpServlet {
@@ -38,14 +31,12 @@ public class addAttached extends HttpServlet {
 	 */
 	public addAttached() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -54,61 +45,59 @@ public class addAttached extends HttpServlet {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
 		Integer result = 0;
 		String error = "";
 		String content = "";
 		String redirect = "";
 		DAORequest queryobj = new DAORequest();
-		String addAttach;
-		PreparedStatement statement;
 
-
+		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
+		Integer id_request = Integer.parseInt(request.getParameter("id_request"));
+		boolean new_request = Boolean.parseBoolean(request.getParameter("new_request"));
+		String type_request = queryobj.getRequestTypeById(id_request);
 		String[] filenames = request.getParameterValues("filenames[]");
+
 		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 
 		{
 			throw new IllegalArgumentException("Valore non corretto");
 		}
-		Integer idRequest = (Integer) request.getSession().getAttribute("idRequest_i");
-		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
-		String requestType = queryobj.getRequestTypeById(idRequest);
 
-		if(queryobj.addAttached(filenames[0], user.getEmail(), idRequest))
-		{
-
+		// aggiunge l'allegato e notifica lo studente
+		if(queryobj.addAttached(filenames[0], user.getEmail(), id_request)) {
 			notifyStudent notify = new notifyStudent();
 			new Thread(() -> {
 				try {
-					notify.notify(user.getEmail(), idRequest);
-				} catch (IOException e) {
-
+					notify.notify(user.getEmail(), id_request);
+				} catch (Exception e) {
 					e.printStackTrace();
-				} catch (ServletException e) {
-
-					e.printStackTrace();
-				} 
+				}
 			}).start();
 
-			if(requestType.equalsIgnoreCase("tirocinio interno")) {
-				if(queryobj.setStatus(idRequest, "[DOCENTE] In attesa di accettazione")) {	
-					content = "Allegati inseriti con successo.";
+			if(new_request) { // se viene inserito il primo allegato
+				if(type_request.equalsIgnoreCase("tirocinio interno")) {
+					if(queryobj.setStatus(id_request, "[DOCENTE] In attesa di accettazione")) {	
+						content = "Allegato inserito con successo";
+						result = 1;
+					}
+				} else if (type_request.equalsIgnoreCase("tirocinio esterno")) {
+					if(queryobj.setStatus(id_request, "[AZIENDA] In attesa di accettazione")) {	
+						content = "Allegato inserito con successo";
+						result = 1;
+					}
+				} else {
+					error = "Impossibile inserire l'allegato";
+					result = 0;
+				}
+			} else { // se viene inserito un allegato aggiuntivo
+				if(queryobj.setStatus(id_request, "[SEGRETERIA] In attesa di accettazione")) {	
+					content = "Allegato inserito con successo";
 					result = 1;
-				} 
-			}
-			else if (requestType.equalsIgnoreCase("tirocinio esterno")) {
-				if(queryobj.setStatus(idRequest, "[AZIENDA] In attesa di accettazione")) {	
-					content = "Allegati inseriti con successo.";
-					result = 1;
+				} else {
+					error = "Impossibile inserire l'allegato";
+					result = 0;
 				}
 			}
 		}
-		else
-		{
-			error = " Impossibile inserire l'allegato ." + filenames[0];
-			result = 0;
-		}
-
 
 		JSONObject res = new JSONObject();
 		res.put("result", result);

@@ -64,7 +64,7 @@ public class showRequest extends HttpServlet {
 
 				if(requests.size()>0)
 					for(RequestInternship a : requests){
-						
+
 						attached = new ArrayList<>();
 						jObj = new JSONObject();
 						jObj.put("id", a.getId_request_i());
@@ -75,16 +75,33 @@ public class showRequest extends HttpServlet {
 						}
 						else 
 							for (Attached b : a.getAttached())
-								attached.add("<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
-								
+								attached.add("<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a>");
+
 						jObj.put("attached", attached);
 						jObj.put("type", a.getType());
 						jObj.put("status", a.getStatus());
-						jObj.put("actions", ""
-								+ "<label class=\"infoInternship btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
-								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
-								+ "</label>");
+						if(a.getStatus().equalsIgnoreCase("parzialmente completata") ||
+								a.getStatus().equalsIgnoreCase("in attesa di caricamento registro di tirocinio"))
+							jObj.put("actions", ""
+									+ "<label class=\"actionInternship btn btn-default\">"
+									+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
+									+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+									+ "</label>"
+									+ "<label class=\"infoInternship btn btn-default\">"
+									+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
+									+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+									+ "</label>");
+						else {
+							jObj.put("actions", ""
+									+ "<label class=\"actionInternship btn btn-default\" disabled>"
+									+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
+									+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+									+ "</label>"
+									+ "<label class=\"infoInternship btn btn-default\">"
+									+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
+									+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+									+ "</label>");
+						}
 						jArr.add(jObj);
 					}
 			}

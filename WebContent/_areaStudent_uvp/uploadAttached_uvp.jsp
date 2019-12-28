@@ -6,28 +6,14 @@
 <%
 	String pageName = "uploadAttached.jsp";
 	String pageFolder = "_areaStudent_uvp";
-	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());	
-	UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
-	Integer idRequest_i = (Integer) request.getSession().getAttribute("idRequest_i");
-	DAORequest queryobj = new DAORequest();
-	if(idRequest_i == null )
-	{
-		request.getSession().getAttribute("user");
-	  idRequest_i = queryobj.checkLastPartialRequest(currUser.getEmail());
-	 if(idRequest_i!=0)
-	 {
-	  request.getSession().setAttribute("idRequest_i", idRequest_i);
-	 }
+	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
+	if (!ck.isAllowed()) {
+		response.sendRedirect(request.getContextPath() + ck.getUrlRedirect());
 	}
-	Integer requestNumberMaxUpload = 1;	
+	Integer id_request = Integer.parseInt(request.getParameter("id_request"));
+	Boolean new_request = Boolean.parseBoolean(request.getParameter("new_request"));
+	Integer requestNumberMaxUpload = 1;
 	String requestAllowedExtensionUpload = ".pdf";
-	if(!ck.isAllowed()) {
-	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
-	}
-	else if( idRequest_i == 0 || (!queryobj.checkStatus(idRequest_i).equals("Parzialmente Completata"))){
-		response.sendRedirect(request.getContextPath()+"/_areaStudent_uvp/viewRequestInternship.jsp");
-		
-	}
 %>
 
 <!DOCTYPE html>
@@ -48,8 +34,8 @@
 
 
 		<jsp:include page="/partials/header.jsp">
-			<jsp:param name="pageName" value="<%= pageName %>" />
-			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
+			<jsp:param name="pageName" value="<%=pageName%>" />
+			<jsp:param name="pageFolder" value="<%=pageFolder%>" />
 		</jsp:include>
 
 
@@ -59,25 +45,29 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
+								<%
+									if (new_request) {
+								%>
 								<div class="form-group">
 									<button type="button"
 										class="btn btn-primary btn-submit generatePDF"
 										onclick="createPdf()">Genera PDF</button>
 								</div>
-
+								<%
+									}
+								%>
 								<h2>
-									Richiesta N.<%= idRequest_i %>
-									</h2>
-									<h2>
-										Trascina o premi sull'apposito riquadro per caricare un file
-										</h2>
-										<div action='<%= request.getContextPath() + "/Uploader" %>'
-											class='dropzoneUploader'></div>
+									Richiesta N.<%=id_request%>
+								</h2>
+								<h2>Trascina o premi sull'apposito riquadro per caricare un
+									file</h2>
+								<div action='<%=request.getContextPath() + "/Uploader?id_request=" + id_request%>'
+									class='dropzoneUploader'></div>
 
-										<div class="form-group">
-											<button type="submit" class="btn btn-primary btn-submit"
-												id='aggiungiAllegati'>Concludi</button>
-										</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-submit"
+										id='aggiungiAllegati'>Concludi</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -159,10 +149,10 @@
 					  }		  						
 				});					
 			});
-		</script>
-	<script src="<%= request.getContextPath() %>/js/filesystem_dropzone.js"></script>
+	</script>
+	<script src="<%=request.getContextPath()%>/js/filesystem_dropzone.js"></script>
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttached_uvp.js"></script>
+		src="<%=request.getContextPath()%>/js/pages/scripts_uploadAttached_uvp.js"></script>
 
 </body>
 </html>

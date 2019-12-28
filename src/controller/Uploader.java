@@ -62,13 +62,13 @@ public class Uploader extends HttpServlet {
 
 		String folderName;
 		folderName=String.valueOf(request.getSession().getAttribute("idRequest"));
-		if(folderName.equals("null"))
+		if(folderName == null || folderName.equals("null"))
 		{
-			folderName = String.valueOf(request.getSession().getAttribute("idRequest_i"));
+			folderName = request.getParameter("id_request");
 		}
 
-		filePath = new SystemAttribute().getValueByKey("request-upload-path")
-				+ "\\" + folderName + "\\";
+        filePath = System.getProperty("user.home") + "/" + "Desktop" + "/uploads/" + folderName + "/";
+		//filePath = new SystemAttribute().getValueByKey("request-upload-path") + "\\" + folderName + "\\";
 		File file = new File(filePath);
 		if (!file.exists()) {
 			if (!file.mkdir()) {
@@ -112,7 +112,6 @@ public class Uploader extends HttpServlet {
 					}
 					fi.write(file);
 					content += fileName;
-					// System.out.println(filePath + fileName);
 					result = 1;
 				}
 			}
@@ -120,8 +119,6 @@ public class Uploader extends HttpServlet {
 			result = 0;
 			error = ex.getMessage();
 		}
-
-
 
 		JSONObject res = new JSONObject();
 		res.put("result", result);
