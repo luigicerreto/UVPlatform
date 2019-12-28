@@ -82,4 +82,60 @@ public class DAOInternship {
 		}
 		return internships;
 	}
+	
+	/**
+	 * Questa funzione restituisce i dati di un particolare tirocinio
+	 * @return Internship
+	 */
+	public Internship  getInternshipData(int idInternship, int typeInternship)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		int resultSize;
+	
+		String external = "SELECT e.id_ie, e.name, e.duration_convention, e.date_convention, e.availability, e.info, u.EMAIL, u.OFFICE \r\n" + 
+				"FROM internship_e as e inner join do on e.id_ie = do.id_ie \r\n" + 
+				"inner join user as u on do.FK_USER = u.EMAIL WHERE e.id_ie = ?";
+		
+		String internal = "SELECT i.id_ii, i.tutor_name, i.theme, i.availability, i.resources, i.goals, u.office\r\n" + 
+				"from internship_i as i  inner join perform as p on i.id_ii = p.id_ii\r\n" + 
+				"inner join user as u on p.FK_USER = u.EMAIL WHERE i.id_ii = ?";
+		
+		try {
+			if(typeInternship == 0) { // internal
+				statement = con.prepareStatement(internal);
+				statement.setInt(1, idInternship);
+				result = statement.executeQuery();
+				resultSize = result.last() ? result.getRow() : 0;
+				if(resultSize == 1) {
+					return new InternalInternship(
+							result.getInt(1),		// id
+							result.getString(2),	// tutor name
+							result.getString(3), 	// theme
+							result.getInt(4), 		// availability
+							result.getString(5),	// resources
+							result.getString(6),	// goals
+							result.getString(7));	// place
+				}
+			} else if (typeInternship == 1) { // external
+				statement = con.prepareStatement(external);
+				statement.setInt(1, idInternship);
+				result = statement.executeQuery();
+				resultSize = result.last() ? result.getRow() : 0;
+				if(resultSize == 1) {
+					return new ExternalInternship(
+							result.getInt(1),		// id
+							result.getString(2),	// name
+							result.getInt(3), 		// duration convention
+							result.getDate(4), 		// date convention
+							result.getInt(5),		// availability
+							result.getString(6));	// info
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
