@@ -72,8 +72,8 @@ public class getExternalInternships extends HttpServlet {
 					jObj.put("date_convention", String.valueOf(a.getDate_convention()));
 					jObj.put("duration_convention", a.getDuration_convention());
 					jObj.put("choice","<div class=\"tableButtons\">"
-							+ "<button type =\"button\" class=\"showDetails\" data-toggle=\"modal\" data-target=\"#details\"><i class=\"fa fa-info-circle\"></i></button>"
-							+ "<label class=\"btn btn-default\">" 
+							+ "<button type =\"button\" class=\"showDetails\" id=\""+a.getId()+"\" data-toggle=\"modal\" data-target=\"#details\"><i class=\"fa fa-info-circle\"></i></button>"
+							+ "<label class=\"selectInternship btn btn-default\">" 
 							+ "<input type=\"radio\" class=\"prova1\" name=\"options\" id=\""+a.getId()+"\">" 
 							+ "<span class=\"glyphicon glyphicon-ok\"></span>" 
 							+ "</label>"
