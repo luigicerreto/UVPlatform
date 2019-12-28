@@ -14,7 +14,7 @@ $(document).ready(function() {
 		"columns" : [
 			{ "data" : "id" },
 			{ "data" : "theme" },
-			{ "data" : "attached" },
+			{ "data" : "attached", "render": "[<br>]" },
 			{ "data" : "name" },
 			{ "data" : "surname" },
 			{ "data" : "type" },

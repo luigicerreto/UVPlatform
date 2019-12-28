@@ -259,8 +259,7 @@ public class DAORequest {
 		PreparedStatement statement = null;
 		ResultSet result;
 		int id_request;
-		String retriveLR = "SELECT id_request_i FROM request_internship\r\n" + 
-				"WHERE FK_USER1 = ? AND STATE = \"Parzialmente Completata\";";
+		String retriveLR = "SELECT id_request_i FROM request_internship WHERE FK_USER1 = ? AND STATE = \"Parzialmente completata\";";
 		try
 		{
 			statement = con.prepareStatement(retriveLR);
@@ -330,9 +329,8 @@ public class DAORequest {
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
-		String addAttach;
-
-		addAttach = "INSERT INTO attached (FILENAME, FK_USER, FK_REQUEST_I) VALUES (?, ?, ?) ";
+		String addAttach = "INSERT INTO attached (FILENAME, FK_USER, FK_REQUEST_I) VALUES (?, ?, ?) ";
+		
 		try {
 			statement = con.prepareStatement(addAttach);
 			statement.setString(1, filename);
@@ -623,7 +621,7 @@ public class DAORequest {
 	 */ 
 	public boolean acceptRequestByProf_Company(int idRequest)
 	{
-		final String newStatus = "[SEGRETERIA] In attesa di accettazione";
+		final String newStatus = "In attesa di caricamento Registro di Tirocinio";
 		return this.setStatus(idRequest, newStatus);
 	}
 

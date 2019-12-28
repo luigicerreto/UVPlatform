@@ -53,18 +53,17 @@ public class addRequest extends HttpServlet {
 		String error = "";
 		String content = "";
 		String redirect = "";
-		final String requestState = "Parzialmente Completata";
 		int id_request;
-		int type_internship;
+		int type_request;
 		RequestInternship newRequest = new RequestInternship();
 		int returnMessage;
 		DAORequest queryobj = new DAORequest();
 
 
 		id_request = (Integer.parseInt(request.getParameter("choice")));
-		type_internship = (Integer.parseInt(request.getParameter("type")));
+		type_request = (Integer.parseInt(request.getParameter("type")));
 		
-		if(type_internship==0){
+		if(type_request==0){
 			newRequest.setUserFullName(queryobj.InternalPerform(id_request));
 			newRequest.setType("Tirocinio Interno");
 			newRequest.setId_ii(id_request);
@@ -74,25 +73,26 @@ public class addRequest extends HttpServlet {
 			newRequest.setId_ie(id_request);
 		}
 
-		newRequest.setStatus(requestState);
+		newRequest.setStatus("Parzialmente completata");
 		newRequest.setUserEmail(currUser.getEmail());
 		returnMessage=queryobj.addRequest(newRequest);
 
 		if(returnMessage == 1) {
 			result = 1;
-			content = "Richiesta parziale presentata con successo!";
+			content = "Richiesta parziale presentata";
 		} else if(returnMessage == 2) {
 			result = 0;
-			error = "Hai una richiesta ancora non conclusa!";
+			error = "Hai una richiesta ancora non conclusa";
 		} else {
 			result = 0;
-			error = "Errore nella presentazione della richiesta!";
+			error = "Errore nella presentazione della richiesta";
 		}
 
 
-		request.getSession().setAttribute("idRequest_i", queryobj.checkLastPartialRequest(currUser.getEmail()));
-
-		redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached_uvp.jsp";
+		int partial_request = queryobj.checkLastPartialRequest(currUser.getEmail());
+		redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached_uvp.jsp?id_request=" 
+					+ partial_request + "&new_request=true";
+		
 		JSONObject res = new JSONObject();
 		res.put("result", result);
 		res.put("error", error);

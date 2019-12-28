@@ -31,14 +31,12 @@ public class showRequest_Secretary extends HttpServlet {
 	 */
 	public showRequest_Secretary() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -47,7 +45,6 @@ public class showRequest_Secretary extends HttpServlet {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		ArrayList<RequestInternship> requests;
 		DAORequest queryobj = new DAORequest();
@@ -74,7 +71,7 @@ public class showRequest_Secretary extends HttpServlet {
 					}
 					else 
 						for (Attached b : a.getAttached())
-							attached.add("<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
+							attached.add("<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a>");
 							
 					jObj.put("attached", attached);					
 					jObj.put("name",a.getUserName());
