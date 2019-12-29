@@ -83,7 +83,6 @@ public class updateAttached extends HttpServlet {
 			result = 0;
 		}
 		
-
 		JSONObject res = new JSONObject();
 		res.put("result", result);
 		res.put("error", error);

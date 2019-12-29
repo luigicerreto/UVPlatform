@@ -10,6 +10,7 @@ import java.util.List;
 
 
 import controller.DbConnection;
+import interfacce.UserInterface;
 import model.Attached;
 
 /**
@@ -363,13 +364,10 @@ public class DAORequest {
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
-		String addAttach;
-
-		addAttach = "UPDATE attached \r\n" + 
-				"SET FILENAME = ? \r\n" + 
-				"WHERE FK_REQUEST_I = ?";
+		String sql = "UPDATE attached SET FILENAME = ? WHERE FK_REQUEST_I = ? ORDER BY id_attached LIMIT 1";
+		
 		try {
-			statement = con.prepareStatement(addAttach);
+			statement = con.prepareStatement(sql);
 			statement.setString(1, filename);
 			statement.setInt(2, idRequest);
 			if(statement.executeUpdate()>0)
@@ -382,6 +380,37 @@ public class DAORequest {
 				con.rollback();
 				return null;
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * Questa funzione permette di ottenere gli allegati di una richiesta
+	 * 
+	 * 
+	 * @param filename
+	 * @param idRequest
+	 * @return email dell'utente se gli allegati vengono aggiornati, null altrimenti
+	 */
+	public List<String> retrieveAttached(int idRequest)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		List<String> filenames = new ArrayList<>();
+		String sql = "SELECT filename FROM attached WHERE FK_REQUEST_I = ?";
+		
+		try {
+			statement = con.prepareStatement(sql);
+			statement.setInt(1, idRequest);
+			result = statement.executeQuery();
+			while(result.next()) {
+				filenames.add(result.getString(1));
+			}
+			return filenames;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -683,7 +712,46 @@ public class DAORequest {
 		}
 		return null;
 	}
+	
+	/**
+	 * Questa funzione permette di ottenere i dati di un utente data una richiesta
+	 * @param idRequest
+	 * @return true se lo stato della richiesta viene cambiato, false altrimenti
+	 */
+	public UserInterface getUserByRequest(int idRequest)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String sql = "SELECT user.EMAIL, user.NAME, user.SURNAME, user.SEX, user.PASSWORD, user.USER_TYPE, "
+				+ "user.SERIAL, user.PHONE "
+				+ "FROM request_internship as req INNER JOIN user on req.FK_USER1 = user.EMAIL "
+				+ "WHERE req.id_request_i = ?";
 
+		try {
+			statement = con.prepareStatement(sql);
+			statement.setInt(1, idRequest);
+			result = statement.executeQuery();
+
+			int size = result.last() ? result.getRow() : 0;
+
+			if(size>0)
+				return new User(result.getString(1), 	// email
+						result.getString(2),			// name
+						result.getString(3),			// surname
+						result.getString(4).charAt(0),	// sex
+						result.getString(5),			// password
+						result.getInt(6),				// user type
+						result.getString(7),			// serial
+						result.getString(8)				// phone
+						);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
 	/**
 	 * Questa funzione permette di ottenere il tipo di una richiesta
 	 * @param idRequest
