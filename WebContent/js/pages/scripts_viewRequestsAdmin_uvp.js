@@ -52,7 +52,7 @@ $(document).ready(function() {
 		if(!($(this).attr('disabled') == "disabled")){
 			if(action === "accept"){ // accetta richiesta
 				$.ajax({
-					url : absolutePath + "/finishInternship",
+					url : absolutePath + "/validateRequest",
 					type : "POST",
 					dataType : 'JSON',
 					async : false,
