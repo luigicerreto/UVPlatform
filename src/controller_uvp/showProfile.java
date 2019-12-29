@@ -29,14 +29,14 @@ import model_uvp.User;
  * @author Antonio Baldi
  *
  */
-@WebServlet("/ShowProfile")
-public class ShowProfile extends HttpServlet {
+@WebServlet("/showProfile")
+public class showProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowProfile() {
+    public showProfile() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,6 +52,7 @@ public class ShowProfile extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		

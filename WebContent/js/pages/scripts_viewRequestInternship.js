@@ -51,6 +51,9 @@ $(document).ready(function() {
 			if (action === "upload"){ // carica allegato
 				var url_redirect = absolutePath + "/_areaStudent_uvp/uploadAttached_uvp.jsp?id_request=" + id_request;
 				$(window.location).attr('href', url_redirect);
+			} else if (action === "download"){ // scarica allegato
+				var url_download = absolutePath + "/Downloader?idRequest=" + id_request;
+				$(window.location).attr('href', url_download);
 			}
 		}
 	});

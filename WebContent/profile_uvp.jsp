@@ -15,7 +15,7 @@
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="showDataUser()">
+<body>
 	<div class="page-wrapper">
 
 		<!-- Preloader -->
@@ -42,44 +42,45 @@
 										<p></p>
 									</div>
 									<form id="signUp">
-										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 disabled">
+										<div
+											class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 disabled">
 											<input type="text" class="form-control" id="name"
 												minlength="1" maxlength="20" required>
 										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<input type="text" class="form-control" id="surname"
-												 minlength="1" maxlength="20" required >
+												minlength="1" maxlength="20" required>
 										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<input type="email" class="form-control" id="email"
-												 minlength="1" required>
+												minlength="1" required>
 										</div>
-										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="text" class="form-control" id="serial"
-												 minlength="10" maxlength="10" required>
-										</div>
-										
-										<div id="phoneNumber" class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+										<div id="phoneNumber"
+											class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<input type="text" class="form-control" id="phone"
-												placeholder="Telefono" minlength="10" maxlength="10" required></input>
-												<i class="fa fa-edit"></i>
-											
+												placeholder="Telefono" minlength="10" maxlength="10"
+												required></input> <i class="fa fa-edit"></i>
+
 										</div>
-										
+
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="vecchiaPassword"
-												placeholder="Vecchia password" minlength="8" required>
+											<input type="password" class="form-control"
+												id="vecchiaPassword" placeholder="Vecchia password"
+												minlength="8" required>
 										</div>
-										
+
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="nuovaPassword"
-												placeholder="Nuova password" minlength="8" required>
-												</div>
-												
-												<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="password" class="form-control" id="confermaPassword"
-												placeholder="Conferma password" minlength="8" required>
-												</div>
+											<input type="password" class="form-control"
+												id="nuovaPassword" placeholder="Nuova password"
+												minlength="8" required>
+										</div>
+
+										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<input type="password" class="form-control"
+												id="confermaPassword" placeholder="Conferma password"
+												minlength="8" required>
+										</div>
 
 										<div
 											class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -89,7 +90,6 @@
 										<div class="clearfix"></div>
 									</form>
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -103,8 +103,8 @@
 	<jsp:include page="/partials/includes.jsp" />
 	<script
 		src="<%= request.getContextPath() %>/js/pages/scripts_profile.js"></script>
-	<script 
-	src="<%= request.getContextPath()%>/js/pages/showUserDate.js"></script>
+	<script
+		src="<%= request.getContextPath()%>/js/pages/scripts_showProfile.js"></script>
 
 </body>
 </html>

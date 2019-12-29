@@ -4,7 +4,7 @@
 	import="controller.CheckSession,model.SystemAttribute,controller.Utils,controller.DbConnection,interfacce.*,java.sql.Connection,java.sql.ResultSet,java.sql.Statement,java.text.SimpleDateFormat"%>
 
 <%
-	String pageName = "uploadAttached.jsp";
+	String pageName = "uploadAttached_uvp.jsp";
 	String pageFolder = "_areaStudent_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) {
