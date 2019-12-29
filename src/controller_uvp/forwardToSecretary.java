@@ -52,7 +52,7 @@ public class forwardToSecretary extends HttpServlet {
 		if(queryobj.acceptRequestByProf_Company(id_request))
 		{
 			result = 1;
-			content = "Richiesta accettata ed inoltrata alla segreteria";
+			content = "Richiesta accettata";
 		}
 		else
 		{

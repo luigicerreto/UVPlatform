@@ -137,7 +137,7 @@ public class DAORequest {
 		String checkRequest;
 
 		try {
-			checkRequest = "SELECT id_request_i FROM request_internship WHERE FK_USER1 = ? AND STATE NOT LIKE '%Accettata%' AND STATE NOT LIKE '%Rifiutata%' ";
+			checkRequest = "SELECT id_request_i FROM request_internship WHERE FK_USER1 = ? AND STATE NOT LIKE '%CONCLUSA%'";
 			statement = con.prepareStatement(checkRequest);
 			statement.setString(1, req.getUserEmail());
 			ResultSet r = statement.executeQuery();
@@ -670,7 +670,7 @@ public class DAORequest {
 	 */
 	public boolean acceptRequestByAdmin(int idRequest)
 	{
-		final String newStatus = "[CONCLUSA] Accettata";
+		final String newStatus = "[CONCLUSA] Convalidata";
 		return this.setStatus(idRequest, newStatus);
 	}
 
@@ -681,7 +681,7 @@ public class DAORequest {
 	 */
 	public boolean rejectRequest(int idRequest)
 	{
-		final String newStatus = "[CONCLUSA] Rifiutata";
+		final String newStatus = "[CONCLUSA] Non convalidata";
 		return this.setStatus(idRequest, newStatus);
 	}
 

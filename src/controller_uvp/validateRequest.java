@@ -16,14 +16,14 @@ import model_uvp.DAORequest;
 /**
  * Servlet implementation class finishInternship
  */
-@WebServlet("/finishInternship")
-public class finishInternship extends HttpServlet {
+@WebServlet("/validateRequest")
+public class validateRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public finishInternship() {
+    public validateRequest() {
         super();
         // TODO Auto-generated constructor stub
     }
