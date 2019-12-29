@@ -100,8 +100,7 @@ $(document).ready(function() {
 				var url_redirect = absolutePath + "/_areaTeacher_uvp/uploadAttachedCompany_uvp.jsp?id_request=" + id_request;
 				$(window.location).attr('href', url_redirect);
 			} else if (action === "download"){ // scarica allegato
-				var filename = $(this).parent().parent().find('td:eq(2)').text();
-				var url_download = absolutePath + "/Downloader?filename=" + filename + "&idRequest=" + id_request;
+				var url_download = absolutePath + "/Downloader?idRequest=" + id_request;
 				$(window.location).attr('href', url_download);
 			}
 		}
