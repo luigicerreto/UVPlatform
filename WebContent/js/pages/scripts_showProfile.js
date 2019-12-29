@@ -1,12 +1,6 @@
 $(document).ready(function() {
-
-});
-
-function showDataUser() {
-	$(".preloader").show();
-
 	$.ajax({
-		url : absolutePath + "/ShowProfile",
+		url : absolutePath + "/showProfile",
 		type : "POST",
 		dataType : 'JSON',
 		async : false,
@@ -26,9 +20,7 @@ function showDataUser() {
 			}
 		},
 		error : function(msg) {
-			showAlert(1, "Impossibile Recuperhhhhhare i dati.");
+			showAlert(1, "Impossibile Recuperare i dati");
 		}
 	});
-
-	$(".preloader").hide();
-} 
+});

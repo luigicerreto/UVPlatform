@@ -138,8 +138,6 @@
 					+ "/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/firstForm_uvp.jsp\">Compila Richiesta</a></li>";
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-					+ "/uploadAttached_uvp.jsp\">Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
@@ -162,8 +160,7 @@
 		if (pageName.equals("uploadAttached_uvp.jsp") && ck.isAllowed()) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 					+ "/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
-			menu += "<li class=\"current\"><a href=\"" + request.getContextPath() + "/" + pageFolder
-					+ "_areaStudent_uvp/uploadAttached_uvp.jsp\">Carica Allegato</a></li>";
+			menu += "<li class=\"current\"><a>Carica Allegato</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";

@@ -114,7 +114,7 @@ public class showRequest_Admin extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
 								+ "</label>"
-								+ "<label class=\"actionInternship btn btn-default\" disabled>"
+								+ "<label class=\"actionInternship btn btn-default\">"
 								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
