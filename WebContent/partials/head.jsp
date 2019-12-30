@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <meta charset="utf-8">
-<title>English Validation - Universit&agrave; degli Studi di
+<title>UVP - Universit&agrave; degli Studi di
 	Salerno</title>
 
 <!-- Stylesheets -->
