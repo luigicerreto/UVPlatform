@@ -3,6 +3,7 @@ package model_uvp;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import controller.DbConnection;
 import controller.Utils;
@@ -11,6 +12,7 @@ import controller.Utils;
  * 
  * @author Antonio Baldi
  * @author Rosario Di Palma
+ * @author Carmine
  */
 public class DAOUser {
 	/**
@@ -90,7 +92,7 @@ public class DAOUser {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 
 	 * Questo funzione restitutisce un Utente compelto di tutti i suoi campi
@@ -126,4 +128,36 @@ public class DAOUser {
 		return null;
 	}
 
+	/**
+	 * 
+	 */
+	public ArrayList<User> viewUsers(){
+		Connection con = new DbConnection().getInstance().getConn();
+		ArrayList<User> users = new ArrayList<>();
+		PreparedStatement stmt;
+		ResultSet result;
+
+		String sql = "SELECT email, name, surname, sex, password, user_type, serial, phone FROM user WHERE user_type = \"0\"";
+
+		try {
+			stmt = con.prepareStatement(sql);
+			result = stmt.executeQuery();
+
+			while(result.next())
+				users.add(new User(
+						result.getString(1), 			// email
+						result.getString(2),			// name
+						result.getString(3),			// surname
+						result.getString(4).charAt(0),	// sex
+						result.getString(5),			// password
+						result.getInt(6),				// user type
+						result.getString(7),			// serial
+						result.getString(8)				// phone
+						));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
 }

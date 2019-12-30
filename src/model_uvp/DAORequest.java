@@ -329,7 +329,7 @@ public class DAORequest {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		String addAttach = "INSERT INTO attached (FILENAME, FK_USER, FK_REQUEST_I) VALUES (?, ?, ?) ";
-		
+
 		try {
 			statement = con.prepareStatement(addAttach);
 			statement.setString(1, filename);
@@ -365,7 +365,7 @@ public class DAORequest {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		String sql = "UPDATE attached SET FILENAME = ? WHERE FK_REQUEST_I = ? ORDER BY id_attached LIMIT 1";
-		
+
 		try {
 			statement = con.prepareStatement(sql);
 			statement.setString(1, filename);
@@ -385,7 +385,7 @@ public class DAORequest {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 
 	 * Questa funzione permette di ottenere gli allegati di una richiesta
@@ -402,7 +402,7 @@ public class DAORequest {
 		ResultSet result;
 		List<String> filenames = new ArrayList<>();
 		String sql = "SELECT filename FROM attached WHERE FK_REQUEST_I = ?";
-		
+
 		try {
 			statement = con.prepareStatement(sql);
 			statement.setInt(1, idRequest);
@@ -712,7 +712,7 @@ public class DAORequest {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Questa funzione permette di ottenere i dati di un utente data una richiesta
 	 * @param idRequest
@@ -751,7 +751,7 @@ public class DAORequest {
 		return null;
 	}
 
-	
+
 	/**
 	 * Questa funzione permette di ottenere il tipo di una richiesta
 	 * @param idRequest
