@@ -215,30 +215,16 @@ label.infoInternship:hover span.infoBtn {
 	color: orange;
 }
 
-@
-keyframes shadow-pulse { 0% {
-	box-shadow: 0 0 0 0px rgba(255, 165, 0, 0.75);
+@keyframes shadow-pulse 
+{ 
+	0% { 
+		box-shadow: 0 0 0 0px rgba(255, 165, 0, 0.75); 
+	}
+	100% { 
+		box-shadow: 0 0 0 35px rgba(255, 165, 0, 0); 
+	}
 }
 
-100%
-{
-box-shadow
-:
- 
-0
-0
-0
-35
-px
- 
-rgba
-(255
-,
-165,
-0,
-0);
-}
-}
 .pulse {
 	color: #fff;
 	background: orange;

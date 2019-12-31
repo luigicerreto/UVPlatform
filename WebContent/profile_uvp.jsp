@@ -63,18 +63,18 @@
 
 											<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 												<input type="password" class="form-control"
-													id="vecchiaPassword" placeholder="Vecchia password"
+													id="currentpwd" placeholder="Password attuale"
 													required>
 											</div>
 											<div
 												class="grid-right form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 												<input type="password" class="form-control"
-													id="nuovaPassword" placeholder="Nuova password" required>
+													id="newpwd" placeholder="Nuova password" required>
 											</div>
 											<div
 												class="grid-left form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 												<input type="password" class="form-control"
-													id="confermaPassword" placeholder="Conferma password"
+													id="verifypwd" placeholder="Conferma password"
 													required>
 											</div>
 											<div
