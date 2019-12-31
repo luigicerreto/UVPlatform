@@ -59,8 +59,7 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-
-	<script
-		src="<%=request.getContextPath()%>/js/pages/scripts_viewUsers_uvp.js"></script>
+	
+	<script src="<%=request.getContextPath()%>/js/pages/scripts_viewUsers_uvp.js"></script>
 </body>
 </html>

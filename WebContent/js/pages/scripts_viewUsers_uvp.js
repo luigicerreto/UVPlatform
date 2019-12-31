@@ -39,4 +39,47 @@ $(document).ready(function() {
 				}
 			}        
 	});
+
+	// azioni sull'utente
+	$(document).on('click', 'i', function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		
+		var div = $(this).parent();
+		var input = $(div).children("input[type='text']");
+		
+
+		if($(this).hasClass('fa-check')) {
+			$.ajax({
+				url : absolutePath + "/editUser",
+				type : "POST",
+				dataType : 'JSON',
+				async : false,
+				data : {
+					"value" : $(input).val(),
+					"field" : $(input).data('field'),
+					"email" : $(div).attr('id')
+				},
+				success : function(msg) {
+					if (!msg.result) {
+						showAlert(1,msg.error);
+						table.ajax.reload();
+					} else {
+						$(input).attr('disabled', true);
+						showAlert(0,msg.content);
+						table.ajax.reload();
+					}
+				},
+				error : function(msg) {
+					showAlert(1,"Impossibile effettuare le modifiche");
+					table.ajax.reload();
+				}
+			});
+		}
+		else if ($(this).hasClass('fa-edit')){
+			$(input).attr('disabled', false);
+		}
+		
+		$(this).toggleClass("fa-edit fa-check", "slow");
+	});
 });

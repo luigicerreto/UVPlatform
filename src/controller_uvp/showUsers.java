@@ -65,11 +65,29 @@ public class showUsers extends HttpServlet {
 					for(User u : users){
 						jObj = new JSONObject();
 						jObj.put("email", u.getEmail());
-						jObj.put("name", u.getName());
-						jObj.put("surname", u.getSurname());
+						jObj.put("name", 
+								"<div class='edit-info' id='" + u.getEmail()+ "'"
+								+"class='form-group col-lg-6 col-md-6 col-sm-12 col-xs-12'>"
+								+"<input type='text' class='form-control' data-field='name'"
+								+"value='" + u.getName() + "' minlength='10' maxlength='10'"
+								+"required disabled></input> <i class='fa fa-edit'></i>"
+								+ "</div>");
+						jObj.put("surname", 
+								"<div class='edit-info' id='" + u.getEmail()+ "'"
+								+"class='form-group col-lg-6 col-md-6 col-sm-12 col-xs-12'>"
+								+"<input type='text' class='form-control' data-field='surname'"
+								+"value='" + u.getSurname() + "' minlength='10' maxlength='10'"
+								+"required disabled></input> <i class='fa fa-edit'></i>"
+								+ "</div>");
 						jObj.put("sex", String.valueOf(u.getSex()));
 						jObj.put("serial", u.getSerial());
-						jObj.put("phone", u.getPhone());
+						jObj.put("phone", 
+								"<div class='edit-info' id='" + u.getEmail()+ "'"
+								+"class='form-group col-lg-6 col-md-6 col-sm-12 col-xs-12'>"
+								+"<input type='text' class='form-control' data-field='phone'"
+								+"value='" + u.getPhone() + "' minlength='10' maxlength='10'"
+								+"required disabled></input> <i class='fa fa-edit'></i>"
+								+ "</div>");
 
 						jArr.add(jObj);
 					}
