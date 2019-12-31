@@ -32,14 +32,14 @@ import model_uvp.User;
 @WebServlet("/showProfile")
 public class showProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public showProfile() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public showProfile() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,48 +55,40 @@ public class showProfile extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
-		String email="";
 		Integer result = 0;
 		String error = "";
 		String redirect = "";
-		ArrayList<RequestInternship> richieste;
-		List<Attached> allegati;
 		DAOUser queryobj = new DAOUser();
-		User userDate = null;
+		User user = null;
 		JSONObject res = new JSONObject();
-		try
-		{
+
+		try{
+			user = queryobj.getUser(currUser.getEmail());
 			
-		userDate = queryobj.showUser(currUser.getEmail());
-		if(userDate == null)
-		{
-			result = 0;
-			error = "Errore nel caricamento dei dati";
-		}
-		else
-		{
-			res.put("name", userDate.getName());
-			res.put("surname", userDate.getSurname());
-			res.put("email", userDate.getEmail());
-			res.put("phone", userDate.getPhone());
-			result = 1;
-		}
+			if(user == null) {
+				result = 0;
+				error = "Errore nel caricamento dei dati";
+			} else {
+				res.put("name", user.getName());
+				res.put("surname", user.getSurname());
+				res.put("email", user.getEmail());
+				res.put("phone", user.getPhone());
+				result = 1;
+			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		
-		
+
+
 		res.put("result", result);
 		res.put("error", error);
 		res.put("redirect", redirect);
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");
-		
 	}
-
 }

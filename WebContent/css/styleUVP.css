@@ -91,14 +91,17 @@ i.fa.fa-envelope {
 }
 
 div .edit-info {
-	width: 90%;
-	margin-left: 5%;
-	margin-right: 5%;
 	display: flex;
 	flex-grow: 1;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+}
+
+table div.edit-info {
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
 }
 
 div .edit-info i {
@@ -113,6 +116,12 @@ div .edit-info i:hover {
 	color: green;
 }
 
+div .edit-info i.fa.fa-phone {
+	position: absolute;
+	left: 15px;
+	opacity: 0.5;
+	font-size: 25px;
+}
 /* The Modal (background) */
 .modal {
 	display: none;
@@ -206,20 +215,64 @@ label.infoInternship:hover span.infoBtn {
 	color: orange;
 }
 
-@keyframes shadow-pulse
-{
-  0% {
-    box-shadow: 0 0 0 0px rgba(255, 165, 0, 0.75);
-  }
-  100% {
-    box-shadow: 0 0 0 35px rgba(255, 165, 0, 0);
-  }
+@
+keyframes shadow-pulse { 0% {
+	box-shadow: 0 0 0 0px rgba(255, 165, 0, 0.75);
 }
 
-.pulse
+100%
 {
-  color: #fff;
-  background: orange;
-  border-radius: 50%;
-  animation: shadow-pulse 1s infinite;
+box-shadow
+:
+ 
+0
+0
+0
+35
+px
+ 
+rgba
+(255
+,
+165,
+0,
+0);
+}
+}
+.pulse {
+	color: #fff;
+	background: orange;
+	border-radius: 50%;
+	animation: shadow-pulse 1s infinite;
+}
+
+.profile {
+	display: flex;
+	flex-direction: row;
+}
+
+.profile .left-section {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	align-items: center;
+	margin-top: 15px;
+}
+
+.profile .left-section > * {
+	width: 90%;
+}
+
+.profile .right-section {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	align-items: center;
+	border: 1px solid darkgrey;
+	border-radius: 10px;
+}
+
+.profile .right-section > * {
+	width: 90%;
+	margin: auto;
 }
