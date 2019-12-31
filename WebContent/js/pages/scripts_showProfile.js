@@ -16,7 +16,6 @@ $(document).ready(function() {
 				$("#surname").val(msg.surname);
 				$("#email").val(msg.email)
 				$("#phone").val(msg.phone);
-
 			}
 		},
 		error : function(msg) {

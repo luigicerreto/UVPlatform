@@ -95,39 +95,40 @@ public class DAOUser {
 
 	/**
 	 * 
-	 * Questo funzione restitutisce un Utente compelto di tutti i suoi campi
-	 * per visualizzarli sull'area utente del sistema
-	 * 
-	 * @param email
-	 * @return User
 	 */
-	public User showUser(String email)
-	{
+	public User getUser(String email){
 		Connection con = new DbConnection().getInstance().getConn();
-		PreparedStatement statement = null;
+		ArrayList<User> users = new ArrayList<>();
+		PreparedStatement stmt;
 		ResultSet result;
-		User userDate = new User();
-		String checkUser = "SELECT NAME, SURNAME, phone "
-				+ "FROM user where EMAIL = ?;";
+
+		String sql = "SELECT email, name, surname, sex, password, user_type, serial, COALESCE(phone,'') as phone "
+				+ "FROM user WHERE email = ?";
+
 		try {
-			statement = con.prepareStatement(checkUser);
-			statement.setString(1, email);
-			result = statement.executeQuery();
-			if(result.next())
-			{
-				userDate.setEmail(email);
-				userDate.setName(result.getString(1));
-				userDate.setSurname(result.getString(2));
-				userDate.setPhone(result.getString(3));
-				return userDate;
-			}
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, email);
+			result = stmt.executeQuery();
+			
+			int size = result.last() ? result.getRow() : 0;
+			
+			if(size>0)
+				return new User(
+						result.getString(1), 			// email
+						result.getString(2),			// name
+						result.getString(3),			// surname
+						result.getString(4).charAt(0),	// sex
+						result.getString(5),			// password
+						result.getInt(6),				// user type
+						result.getString(7),			// serial
+						result.getString(8)				// phone
+						);
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
-
 	/**
 	 * 
 	 */
