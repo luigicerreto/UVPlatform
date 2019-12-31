@@ -90,7 +90,10 @@ i.fa.fa-envelope {
 	font-size: 30px;
 }
 
-div#phoneNumber {
+div .edit-info {
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
 	display: flex;
 	flex-grow: 1;
 	flex-direction: row;
@@ -98,16 +101,16 @@ div#phoneNumber {
 	justify-content: center;
 }
 
-div#phoneNumber i {
+div .edit-info i {
 	opacity: 0.5;
 	margin-left: -25px;
 	font-size: 25px;
 	transition: 0.5s;
 }
 
-div#phoneNumber i:hover {
+div .edit-info i:hover {
 	opacity: 1;
-	color: #5CB85C;
+	color: green;
 }
 
 /* The Modal (background) */

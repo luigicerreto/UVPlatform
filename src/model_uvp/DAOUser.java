@@ -137,7 +137,8 @@ public class DAOUser {
 		PreparedStatement stmt;
 		ResultSet result;
 
-		String sql = "SELECT email, name, surname, sex, password, user_type, serial, phone FROM user WHERE user_type = \"0\"";
+		String sql = "SELECT email, name, surname, sex, password, user_type, serial, COALESCE(phone,'') as phone "
+				+ "FROM user WHERE user_type = \"0\"";
 
 		try {
 			stmt = con.prepareStatement(sql);
@@ -159,5 +160,32 @@ public class DAOUser {
 			e.printStackTrace();
 		}
 		return users;
+	}
+	
+	/**
+	 * 
+	 */
+	public boolean editUser(String email, String parameter, String value){
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement stmt;
+
+		String sql = "UPDATE user SET " + parameter + " = ? WHERE email = ?";
+
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, value);
+			stmt.setString(2, email);
+			
+			if(stmt.executeUpdate()==1) {
+				con.commit();
+				return true;
+			} else {
+				con.rollback();
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
