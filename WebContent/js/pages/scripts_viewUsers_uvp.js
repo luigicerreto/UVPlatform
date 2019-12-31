@@ -41,7 +41,7 @@ $(document).ready(function() {
 	});
 
 	// azioni sull'utente
-	$(document).on('click', 'i', function(e){
+	$(document).on('click', 'div.edit-info i', function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		
@@ -80,6 +80,6 @@ $(document).ready(function() {
 			$(input).attr('disabled', false);
 		}
 		
-		$(this).toggleClass("fa-edit fa-check", "slow");
+		$(this).toggleClass("fa-edit fa-check");
 	});
 });

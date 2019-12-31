@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import controller.Utils;
 import interfacce.UserInterface;
 import model_uvp.DAOUser;
+import model_uvp.User;
 
 
 /** 
@@ -49,28 +51,53 @@ public class editUser extends HttpServlet {
 		String content = "";
 
 		DAOUser queryobj = new DAOUser();
+		Utils utils = new Utils();
 
 		String email = request.getParameter("email");
 		String field = request.getParameter("field");
 		String value = request.getParameter("value");
-		
-		System.out.println("VAL: " + value + "PARAM: " + field + " EMAIL: " + email);
 
-		if (currUser != null && currUser.getUserType() == 2){
-			try {
-				if(queryobj.editUser(email, field, value)) {
-					result = 1;
-					content = "Modifica effettuata";
-				} else {
-					result = 0;
-					content = "Non è stato possibile effettuare alcuna modifica";
+
+		if (currUser != null){
+			if(field.equals("password")) { // se modifica la password
+				String currentPwd = request.getParameter("current_pwd");
+				String currentPwdHashed = utils.generatePwd(currentPwd);
+				String newPwdHashed = utils.generatePwd(value);
+
+				try {
+					User u = queryobj.getUser(email);
+
+					if(u.getPassword().equals(currentPwdHashed)) {
+						if(queryobj.editUser(email, field, newPwdHashed)) {
+							result = 1;
+							content = "Password modificata";
+						} else {
+							result = 0;
+							error = "Non è stato possibile modificare la password";
+						}
+					} else {
+						result = 0;
+						error = "Password attuale errata";
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch(Exception e){
-				e.printStackTrace();
+			} else { // se modifica qualsiasi altra info
+				try {
+					if(queryobj.editUser(email, field, value)) {
+						result = 1;
+						content = "Modifica effettuata";
+					} else {
+						result = 0;
+						error = "Non è stato possibile effettuare alcuna modifica";
+					}
+				} catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 		} else {
 			result = 0;
-			content = "Non è stato possibile effettuare alcuna modifica";
+			error = "Non è stato possibile effettuare alcuna modifica";
 		}
 
 		JSONObject res = new JSONObject();
