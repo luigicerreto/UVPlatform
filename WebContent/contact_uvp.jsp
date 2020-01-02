@@ -41,7 +41,7 @@
 										<p></p>
 									</div>
 									<div class="form-contact">
-										<form action="/ServletContact">
+										<form id="Contact">
 											<input type="text" size="50" class="form-control"
 												id="oggetto" placeholder="Oggetto" maxlength="30" required>
 											<p></p>
@@ -66,7 +66,6 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-	<script src="<%=request.getContextPath()%>/js/pages/scripts_profile.js"></script>
-	<script src="<%=request.getContextPath()%>/js/pages/showUserDate.js"></script>
+	<script src="<%=request.getContextPath()%>/js/pages/scripts_Contact.js"></script>
 </body>
 </html>
