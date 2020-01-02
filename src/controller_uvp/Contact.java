@@ -1,11 +1,15 @@
 package controller_uvp;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
 import util.Mailer;
@@ -38,18 +42,31 @@ public class Contact extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Integer result = 0;
+		String error = "";
+		String content = "";
+		String redirect = "";
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		String email = currUser.getEmail();
 		String object = request.getParameter("object");
 		String text = "La mail è "+email+" \n"+ request.getParameter("text");
 		
-		System.out.println(" la mail utente qui è "+email);
-		System.out.println("L'object è "+object);
-		System.out.println("il test è "+text);
 		
 		new Thread(() -> {
 			Mailer.send(email,object,text,"");  
 		}).start();
+		
+		result=1;
+		content = "Email inviata correttamente";
+		redirect = request.getContextPath() + "/choice.jsp";
+		JSONObject res = new JSONObject();
+		res.put("result", result);
+		res.put("error", error);
+		res.put("content", content);
+		res.put("redirect", redirect);
+		PrintWriter out = response.getWriter();
+		out.println(res);
+		response.setContentType("json");
 		
 		
 	}
