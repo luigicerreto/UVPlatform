@@ -163,6 +163,68 @@ public class DAOUser {
 		return users;
 	}
 	
+	public ArrayList<User> viewTeachers(){
+		Connection con = new DbConnection().getInstance().getConn();
+		ArrayList<User> users = new ArrayList<>();
+		PreparedStatement stmt;
+		ResultSet result;
+
+		String sql = "SELECT email, name, surname, sex, password, user_type, office, COALESCE(phone,'') as phone "
+				+ "FROM user WHERE user_type = \"3\"";
+
+		try {
+			stmt = con.prepareStatement(sql);
+			result = stmt.executeQuery();
+
+			while(result.next())
+				users.add(new User(
+						result.getString(1), 			// email
+						result.getString(2),			// name
+						result.getString(3),			// surname
+						result.getString(4).charAt(0),	// sex
+						result.getString(5),			// password
+						result.getInt(6),				// user type
+						result.getString(7),			// office
+						result.getString(8)		        // phone
+						));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
+	public ArrayList<User> viewCompanies(){
+		Connection con = new DbConnection().getInstance().getConn();
+		ArrayList<User> users = new ArrayList<>();
+		PreparedStatement stmt;
+		ResultSet result;
+
+		String sql = "SELECT email, name, surname, sex, password, user_type, office, COALESCE(phone,'') as phone "
+				+ "FROM user WHERE user_type = \"4\"";
+
+		try {
+			stmt = con.prepareStatement(sql);
+			result = stmt.executeQuery();
+
+			while(result.next())
+				users.add(new User(
+						result.getString(1), 			// email
+						result.getString(2),			// name
+						result.getString(3),			// surname
+						result.getString(4).charAt(0),	// sex
+						result.getString(5),			// password
+						result.getInt(6),				// user type
+						result.getString(7),			// office
+						result.getString(8)		        // phone
+						));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
 	/**
 	 * 
 	 */
