@@ -64,7 +64,8 @@ public class Downloader extends HttpServlet {
 		List<String> filenames = null;
 
 		int idRequest = Integer.parseInt(request.getParameter("idRequest"));
-		String basePath = System.getProperty("user.home") + "/" + "Desktop" + "/uploads/" + idRequest + "/";
+		
+		String basePath = System.getProperty("user.home") + "/" + "git" + "/UVPlatform/uploads/" + idRequest + "/";
 		//String basePath = new SystemAttribute().getValueByKey("request-upload-path") + "\\" + idRequest + "\\";
 		
 		String filename = request.getParameter("filename");

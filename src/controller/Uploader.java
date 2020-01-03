@@ -67,7 +67,7 @@ public class Uploader extends HttpServlet {
 			folderName = request.getParameter("id_request");
 		}
 
-        filePath = System.getProperty("user.home") + "/" + "Desktop" + "/uploads/" + folderName + "/";
+        filePath = System.getProperty("user.home") + "/" + "git" + "/UVPlatform/uploads/" + folderName + "/";
 		//filePath = new SystemAttribute().getValueByKey("request-upload-path") + "\\" + folderName + "\\";
 		File file = new File(filePath);
 		if (!file.exists()) {
