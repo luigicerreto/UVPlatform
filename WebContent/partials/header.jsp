@@ -22,24 +22,40 @@
 			menu += "<li class=\"current\"><a>Richieste EV</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewUser.jsp\">Utenti</a></li>";
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Docenti</a></li>";
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Aziende</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewTeacher.jsp\">Docenti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewCompany.jsp\">Aziende</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 		}
 		if (pageName.equals("viewRequestInternship.jsp") && ck.isAllowed()) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewRequest.jsp\">Richieste EV</a></li>";
 			menu += "<li class=\"current\"><a>Richieste Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewUser.jsp\">Utenti</a></li>";
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Docenti</a></li>";
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Aziende</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewTeacher.jsp\">Docenti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewCompany.jsp\">Aziende</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 		}
 		if (pageName.equals("viewUser.jsp") && ck.isAllowed()) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewRequest.jsp\">Richieste EV</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
 			menu += "<li class=\"current\"><a>Utenti</a></li>";
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Docenti</a></li>";
-			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/\">Aziende</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewTeacher.jsp\">Docenti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewCompany.jsp\">Aziende</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+		}
+		if (pageName.equals("viewTeacher.jsp") && ck.isAllowed()) {
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewRequest.jsp\">Richieste EV</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewUser.jsp\">Utenti</a></li>";
+			menu += "<li class=\"current\"><a>Docenti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewCompany.jsp\">Aziende</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+		}
+		if (pageName.equals("viewCompany.jsp") && ck.isAllowed()) {
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewRequest.jsp\">Richieste EV</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewUser.jsp\">Utenti</a></li>";
+			menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder + "/viewTeacher.jsp\">Docenti</a></li>";
+			menu += "<li class=\"current\"><a>Aziende</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 		}
 		if (pageName.equals("uploadAttachedAdmin_uvp.jsp") && ck.isAllowed()) {
