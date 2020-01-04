@@ -97,7 +97,7 @@ public class Downloader extends HttpServlet {
 			
 			response.setContentType("Content-type: text/zip");
 			response.setHeader("Content-Disposition",
-					"attachment; filename=" + user_dir + "_REQUEST_" + id_request + ".zip");
+					"attachment; filename=" + user_dir + "_IDREQ_" + id_request + ".zip");
 
 			List<File> files = new ArrayList<>();
 

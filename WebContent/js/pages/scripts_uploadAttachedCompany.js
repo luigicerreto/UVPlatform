@@ -16,7 +16,8 @@ $(document).ready(function() {
 				data : 
 				{
 					"filenames" : filenames,
-					"id_request" : id_request
+					"id_request" : id_request,
+					"flag": "1"
 				},
 				success : function(msg){
 					if (!msg.result){
@@ -25,7 +26,7 @@ $(document).ready(function() {
 					else {
 						showAlert(0,msg.content);
 						setTimeout(function(){
-							window.location.href = absolutePath + "/_areaTeacher_uvp/viewRequestTeacher.jsp";
+							window.location.href = absolutePath + "/_areaTeacher_uvp/viewRequestCompany.jsp";
 						},1000);
 					}
 				},

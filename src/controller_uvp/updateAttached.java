@@ -29,14 +29,12 @@ public class updateAttached extends HttpServlet {
 	 */
 	public updateAttached() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -45,23 +43,30 @@ public class updateAttached extends HttpServlet {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Integer result = 0;
 		String error = "";
 		String content = "";
 		String redirect = "";
-		
+
 		DAORequest queryobj = new DAORequest();
+		String status = null;
+
 		String[] filenames = request.getParameterValues("filenames[]");
+		Integer idRequest = Integer.parseInt(request.getParameter("id_request"));
+		String flag = request.getParameter("flag");
 
 		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 
 		{
 			throw new IllegalArgumentException("Valore non corretto");
 		}
 
-		Integer idRequest = Integer.parseInt(request.getParameter("id_request"));
 		String emailNotify = queryobj.updateAttached(filenames[0], idRequest);
 		if(emailNotify != null){
+			if (flag != null) {
+				if (flag.equals("0")) status = "[DOCENTE] Richiesta firmata";
+				else if (flag.equals("1"))  status = "[AZIENDA] Richiesta firmata";
+				queryobj.setStatus(idRequest, status);
+			}
 			notifyStudent notify = new notifyStudent();
 			new Thread(() -> {
 				try {
@@ -74,7 +79,7 @@ public class updateAttached extends HttpServlet {
 					e.printStackTrace();
 				} 
 			}).start();
-			
+
 			content = "Allegati inseriti con successo.";
 			result = 1;
 		}
@@ -82,7 +87,7 @@ public class updateAttached extends HttpServlet {
 			error = "Impossibile inserire l'allegato: " + filenames[0];
 			result = 0;
 		}
-		
+
 		JSONObject res = new JSONObject();
 		res.put("result", result);
 		res.put("error", error);
