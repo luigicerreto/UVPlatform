@@ -74,7 +74,7 @@ public class showRequest_Company extends HttpServlet {
 					}
 					else 
 						for (Attached b : a.getAttached())
-							attached.add("<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
+							attached.add("<a href='" + request.getContextPath() + "/Downloader?flag=1&filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a>");
 							
 					jObj.put("attached", attached);
 					jObj.put("name", a.getUserName());

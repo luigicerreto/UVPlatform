@@ -10,6 +10,7 @@
 	if (!ck.isAllowed()) {
 		response.sendRedirect(request.getContextPath() + ck.getUrlRedirect());
 	}
+
 	Integer id_request = Integer.parseInt(request.getParameter("id_request"));
 	Boolean new_request = Boolean.parseBoolean(request.getParameter("new_request"));
 	Integer requestNumberMaxUpload = 1;
