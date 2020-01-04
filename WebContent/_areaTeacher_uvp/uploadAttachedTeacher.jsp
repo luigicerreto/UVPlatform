@@ -10,8 +10,7 @@
 	if (!ck.isAllowed()) {
 		response.sendRedirect(request.getContextPath() + ck.getUrlRedirect());
 	}
-	UserInterface currUser = (UserInterface) request.getSession().getAttribute("user");
-
+	
 	Integer id_request = Integer.parseInt(request.getParameter("id_request"));
 	Integer requestNumberMaxUpload = 1;
 	String requestAllowedExtensionUpload = ".pdf";
@@ -44,7 +43,7 @@
 								</h2>
 								<h2>Trascina o premi sull'apposito riquadro per caricare un
 									file</h2>
-								<div action='<%= request.getContextPath() + "/Uploader" %>'
+								<div action='<%=request.getContextPath() + "/Uploader?id_request=" + id_request%>'
 									class='dropzoneUploader'></div>
 
 								<div class="form-group">
@@ -99,7 +98,7 @@
 		</script>
 	<script src="<%= request.getContextPath() %>/js/filesystem_dropzone.js"></script>
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttachedTeacher_uvp.js"></script>
+		src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttachedTeacher.js"></script>
 
 </body>
 </html>

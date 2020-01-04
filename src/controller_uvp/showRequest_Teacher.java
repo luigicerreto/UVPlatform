@@ -75,14 +75,35 @@ public class showRequest_Teacher extends HttpServlet {
 						for (Attached b : a.getAttached())
 							attached.add("<a href='" + request.getContextPath() + "/Downloader?flag=1&filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a>");
 
-							
+
 					jObj.put("attached", attached);					
 					jObj.put("name",a.getUserName());
 					jObj.put("surname", a.getUserSurname());
 					jObj.put("type", a.getType());
 					jObj.put("state",a.getStatus());
-					if(a.getStatus().equalsIgnoreCase("parzialmente completata") ||
-							a.getStatus().equalsIgnoreCase("[DOCENTE] In attesa di accettazione"))
+					if(a.getStatus().equals("[DOCENTE] In attesa di accettazione"))
+						jObj.put("actions", ""
+								+ "<label class=\"actionInternship btn btn-default\" disabled>" 
+								+ "<input type=\"button\" data-action=\"accept\" id=\""+a.getId_request_i() +"\">"
+								+ "<span class=\"acceptBtn glyphicon glyphicon-ok\"></span>" 
+								+ "</label>"
+								+ "<label class=\"actionInternship btn btn-default\" disabled>" 
+								+ "<input type=\"button\" data-action=\"reject\" id=\""+a.getId_request_i()+"\">" 
+								+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
+								+ "</label>"
+								+ "<label class=\"actionInternship btn btn-default\">"
+								+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
+								+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+								+ "</label>"
+								+ "<label class=\"actionInternship btn btn-default\">"
+								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
+								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
+								+ "</label>"
+								+ "<label class=\"infoInternship btn btn-default\">"
+								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
+								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+								+ "</label>");
+					else if(a.getStatus().equals("[DOCENTE] Richiesta firmata"))
 						jObj.put("actions", ""
 								+ "<label class=\"actionInternship btn btn-default\">" 
 								+ "<input type=\"button\" data-action=\"accept\" id=\""+a.getId_request_i() +"\">"
@@ -126,7 +147,7 @@ public class showRequest_Teacher extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>");
-					
+
 					jArr.add(jObj);
 				}
 			}

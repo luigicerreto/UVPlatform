@@ -71,5 +71,4 @@ public class forwardToSecretary extends HttpServlet {
 		out.println(res);
 		response.setContentType("json");
 	}
-
 }

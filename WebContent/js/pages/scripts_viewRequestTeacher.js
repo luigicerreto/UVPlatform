@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() {	
 	// contenuto tabella
 	var table = $('#TeacherTableInternship').DataTable( {
 		"order": [[ 0, "desc" ]],
@@ -97,7 +97,7 @@ $(document).ready(function() {
 					}
 				});
 			} else if (action === "upload"){ // carica allegato
-				var url_redirect = absolutePath + "/_areaTeacher_uvp/uploadAttachedTeacher_uvp.jsp?id_request=" + id_request;
+				var url_redirect = absolutePath + "/_areaTeacher_uvp/uploadAttachedTeacher.jsp?id_request=" + id_request;
 				$(window.location).attr('href', url_redirect);
 			} else if (action === "download"){ // scarica allegato
 				var url_download = absolutePath + "/Downloader?flag=1&idRequest=" + id_request;
