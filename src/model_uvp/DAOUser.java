@@ -98,7 +98,6 @@ public class DAOUser {
 	 */
 	public User getUser(String email){
 		Connection con = new DbConnection().getInstance().getConn();
-		ArrayList<User> users = new ArrayList<>();
 		PreparedStatement stmt;
 		ResultSet result;
 
@@ -129,6 +128,82 @@ public class DAOUser {
 		}
 		return null;
 	}
+	
+
+	/**
+	 * 
+	 */
+	public User getUserByRequestInternship(int idRequest){
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement stmt;
+		ResultSet result;
+
+		String sql = "SELECT email, name, surname, sex, password, user_type, serial, COALESCE(phone,'') as phone "
+				+ "FROM user INNER JOIN request_internship ON user.email = request_internship.fk_user1 "
+				+ "WHERE id_request_i = ?";
+
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, idRequest);
+			result = stmt.executeQuery();
+			
+			int size = result.last() ? result.getRow() : 0;
+			
+			if(size>0)
+				return new User(
+						result.getString(1), 			// email
+						result.getString(2),			// name
+						result.getString(3),			// surname
+						result.getString(4).charAt(0),	// sex
+						result.getString(5),			// password
+						result.getInt(6),				// user type
+						result.getString(7),			// serial
+						result.getString(8)				// phone
+						);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 */
+	public User getUserByRequestEV(int idRequest){
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement stmt;
+		ResultSet result;
+
+		String sql = "SELECT user.email, user.name, user.surname, user.sex, user.password, user.user_type, user.serial, COALESCE(phone,'') as phone "
+				+ "FROM user INNER JOIN request ON user.email = request.fk_user "
+				+ "WHERE id_request = ?";
+
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, idRequest);
+			result = stmt.executeQuery();
+			
+			int size = result.last() ? result.getRow() : 0;
+			
+			if(size>0)
+				return new User(
+						result.getString(1), 			// email
+						result.getString(2),			// name
+						result.getString(3),			// surname
+						result.getString(4).charAt(0),	// sex
+						result.getString(5),			// password
+						result.getInt(6),				// user type
+						result.getString(7),			// serial
+						result.getString(8)				// phone
+						);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * 
 	 */

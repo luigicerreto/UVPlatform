@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.*;
-import java.sql.Timestamp;
 import java.util.*;
 
 import javax.servlet.ServletException;
@@ -9,13 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.SystemAttribute;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import org.json.simple.JSONObject;
+
+import model_uvp.DAORequest;
+import model_uvp.DAOUser;
+import model_uvp.User;
 
 
 /**
@@ -24,12 +26,6 @@ import org.json.simple.JSONObject;
 @WebServlet("/Uploader")
 public class Uploader extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private boolean isMultipart;
-	private String filePath;
-	private int maxFileSize = 50 * 102400;
-	private int maxMemSize = 4 * 1024;
-	@SuppressWarnings("unused")
-	private File file;
 
 	/**
 	 * constructor.
@@ -37,7 +33,6 @@ public class Uploader extends HttpServlet {
 	 */
 	public Uploader() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -53,27 +48,47 @@ public class Uploader extends HttpServlet {
 	 * method doPost.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@SuppressWarnings({"unchecked", "unused", "rawtypes"})
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		boolean isMultipart;
+		String basePath;
+		int maxFileSize = 50 * 102400;
+		int maxMemSize = 4 * 1024;
+
 		Integer result = 0;
 		String error = "";
 		String content = "";
 
-		String folderName;
-		folderName=String.valueOf(request.getSession().getAttribute("idRequest"));
-		if(folderName == null || folderName.equals("null"))
+		DAOUser daouser = new DAOUser();
+		User user = null;
+		String user_dir = null;
+		int id_request;
+		
+		String param = String.valueOf(request.getSession().getAttribute("idRequest"));
+
+		if(param == null || param.equals("null"))
 		{
-			folderName = request.getParameter("id_request");
+			id_request = Integer.parseInt(request.getParameter("id_request"));
+			user = daouser.getUserByRequestInternship(id_request);
+			user_dir = user.getName().toUpperCase() + "_" + user.getSurname().toUpperCase() + "_" + user.getSerial();
+			basePath = System.getProperty("user.home") 
+					+ "/git/UVPlatform/uploads/internship/" 
+					+ user_dir + "/" + id_request + "/";
+		} else {
+			id_request = Integer.parseInt(param);
+			user = daouser.getUserByRequestEV(id_request);
+			user_dir = user.getName().toUpperCase() + "_" + user.getSurname().toUpperCase() + "_" + user.getSerial();
+			basePath = System.getProperty("user.home") 
+					+ "/git/UVPlatform/uploads/english_validation/" 
+					+ user_dir + "/" + id_request + "/";
 		}
 
-        filePath = System.getProperty("user.home") + "/" + "git" + "/UVPlatform/uploads/" + folderName + "/";
-		//filePath = new SystemAttribute().getValueByKey("request-upload-path") + "\\" + folderName + "\\";
-		File file = new File(filePath);
+		File file = new File(basePath);
 		if (!file.exists()) {
-			if (!file.mkdir()) {
+			if (!file.mkdirs()) {
 				result = 0;
-				error = "error Creazione Cartella per l'upload dei file";
+				error = "Errore creazione cartella per l'upload dei file";
 			}
 		}
 
@@ -81,12 +96,11 @@ public class Uploader extends HttpServlet {
 		response.setContentType("text/html");
 		if (!isMultipart) {
 			result = 0;
-			error = "No file uploaded";
+			error = "Nessun file caricato";
 		}
 
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(maxMemSize);
-		factory.setRepository(new File("c:\\temp"));
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(maxFileSize);
 
@@ -97,18 +111,11 @@ public class Uploader extends HttpServlet {
 			while (i.hasNext()) {
 				FileItem fi = (FileItem) i.next();
 				if (!fi.isFormField()) {
-					// Get the uploaded file parameters
-					Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-					String fieldName = fi.getFieldName();
-					String fileName = timestamp.getTime() + "-" + fi.getName().replaceAll("\\s+", "");
-					String contentType = fi.getContentType();
-					boolean isInMemory = fi.isInMemory();
-					long sizeInBytes = fi.getSize();
-					// Write the file
+					String fileName = fi.getName().replaceAll("\\s+", "");
 					if (fileName.lastIndexOf("\\") >= 0) {
-						file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\")));
+						file = new File(basePath + fileName.substring(fileName.lastIndexOf("\\")));
 					} else {
-						file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\") + 1));
+						file = new File(basePath + fileName.substring(fileName.lastIndexOf("\\") + 1));
 					}
 					fi.write(file);
 					content += fileName;
@@ -127,5 +134,4 @@ public class Uploader extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println(res);
 	}
-
 }

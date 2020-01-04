@@ -13,7 +13,9 @@ import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
 import model_uvp.DAORequest;
+import model_uvp.DAOUser;
 import model_uvp.RequestInternship;
+import model_uvp.User;
 
 /**
  * 
@@ -48,51 +50,52 @@ public class addRequest extends HttpServlet {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		Integer result = 0;
 		String error = "";
 		String content = "";
 		String redirect = "";
-		int id_request;
-		int type_request;
-		RequestInternship newRequest = new RequestInternship();
-		int returnMessage;
-		DAORequest queryobj = new DAORequest();
 
+		RequestInternship req = new RequestInternship();
+		DAORequest daoreq = new DAORequest();
+		DAOUser daouser = new DAOUser();
 
-		id_request = (Integer.parseInt(request.getParameter("choice")));
-		type_request = (Integer.parseInt(request.getParameter("type")));
-		
-		if(type_request==0){
-			newRequest.setUserFullName(queryobj.InternalPerform(id_request));
-			newRequest.setType("Tirocinio Interno");
-			newRequest.setId_ii(id_request);
+		User user = daouser.getUser(((UserInterface) request.getSession().getAttribute("user")).getEmail());
+		int id_request = (Integer.parseInt(request.getParameter("choice")));
+		int type_request = (Integer.parseInt(request.getParameter("type")));
+
+		if (user != null) {
+			if(type_request==0){
+				req.setUserFullName(daoreq.InternalPerform(id_request));
+				req.setType("Tirocinio Interno");
+				req.setId_ii(id_request);
+			} else {
+				req.setUserFullName(daoreq.ExternalPerform(id_request));
+				req.setType("Tirocinio Esterno");
+				req.setId_ie(id_request);
+			}
+
+			req.setStatus("Parzialmente completata");
+			req.setUserEmail(user.getEmail());
+			int return_val=daoreq.addRequest(req);
+
+			if(return_val == 1) {
+				result = 1;
+				content = "Richiesta parziale presentata";
+			} else if(return_val == 2) {
+				result = 0;
+				error = "Hai una richiesta ancora non conclusa";
+			} else {
+				result = 0;
+				error = "Errore nella presentazione della richiesta";
+			}
 		} else {
-			newRequest.setUserFullName(queryobj.ExternalPerform(id_request));
-			newRequest.setType("Tirocinio Esterno");
-			newRequest.setId_ie(id_request);
+			result = 0;
+			error = "Si è verificato un errore";
 		}
 
-		newRequest.setStatus("Parzialmente completata");
-		newRequest.setUserEmail(currUser.getEmail());
-		returnMessage=queryobj.addRequest(newRequest);
-
-		if(returnMessage == 1) {
-			result = 1;
-			content = "Richiesta parziale presentata";
-		} else if(returnMessage == 2) {
-			result = 0;
-			error = "Hai una richiesta ancora non conclusa";
-		} else {
-			result = 0;
-			error = "Errore nella presentazione della richiesta";
-		}
-
-
-		int partial_request = queryobj.checkLastPartialRequest(currUser.getEmail());
 		redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached_uvp.jsp?id_request=" 
-					+ partial_request + "&new_request=true";
-		
+				+ daoreq.checkLastPartialRequest(user.getEmail()) + "&new_request=true";
+
 		JSONObject res = new JSONObject();
 		res.put("result", result);
 		res.put("error", error);

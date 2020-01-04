@@ -52,7 +52,7 @@ $(document).ready(function() {
 				var url_redirect = absolutePath + "/_areaStudent_uvp/uploadAttached_uvp.jsp?id_request=" + id_request;
 				$(window.location).attr('href', url_redirect);
 			} else if (action === "download"){ // scarica allegato
-				var url_download = absolutePath + "/Downloader?idRequest=" + id_request;
+				var url_download = absolutePath + "/Downloader?flag=1&idRequest=" + id_request;
 				$(window.location).attr('href', url_download);
 			}
 		}

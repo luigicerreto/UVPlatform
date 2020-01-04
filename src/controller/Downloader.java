@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -20,15 +19,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.SystemAttribute;
 import model_uvp.DAORequest;
+import model_uvp.DAOUser;
 import model_uvp.User;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.json.simple.JSONObject;
-
 import interfacce.UserInterface;
 
 
@@ -38,8 +31,6 @@ import interfacce.UserInterface;
 @WebServlet("/Downloader")
 public class Downloader extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@SuppressWarnings("unused")
-	private File file;
 
 	/**
 	 * constructor.
@@ -52,31 +43,61 @@ public class Downloader extends HttpServlet {
 
 	/**
 	 * method doGet.
+	 * @throws IOException 
+	 * @throws ServletException 
 	 * 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		doPost(request, response);
+	}
+		
+
+	/**
+	 * method doPost.
+	 * @throws IOException 
+	 * @throws ServletException 
+	 * 
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		OutputStream outputStream = null;
 		InputStream in = null;
-		DAORequest queryobj = new DAORequest();
+		DAORequest daoreq = new DAORequest();
+		DAOUser daouser = new DAOUser();
+		
+		User user = null;
+		String user_dir = null;
+		String basePath = null;
 		List<String> filenames = null;
 
-		int idRequest = Integer.parseInt(request.getParameter("idRequest"));
-		
-		String basePath = System.getProperty("user.home") + "/" + "git" + "/UVPlatform/uploads/" + idRequest + "/";
-		//String basePath = new SystemAttribute().getValueByKey("request-upload-path") + "\\" + idRequest + "\\";
-		
+		String flag = request.getParameter("flag");
+		Integer id_request = Integer.parseInt(request.getParameter("idRequest"));
 		String filename = request.getParameter("filename");
 		
+		if(flag != null && flag.equals("1")) 
+		{
+			user = daouser.getUserByRequestInternship(id_request);
+			user_dir = user.getName().toUpperCase() + "_" + user.getSurname().toUpperCase() + "_" + user.getSerial();
+			basePath = System.getProperty("user.home") 
+					+ "/git/UVPlatform/uploads/internship/" 
+					+ user_dir + "/" + id_request + "/";
+		} else {
+			user = daouser.getUserByRequestEV(id_request);
+			user_dir = user.getName().toUpperCase() + "_" + user.getSurname().toUpperCase() + "_" + user.getSerial();
+			basePath = System.getProperty("user.home") 
+					+ "/git/UVPlatform/uploads/english_validation/" 
+					+ user_dir + "/" + id_request + "/";
+		}
+		
 		if(filename == null || filename.equals("null")) { // download come zip
-			filenames = queryobj.retrieveAttached(idRequest);
-			UserInterface u = queryobj.getUserByRequest(idRequest);
+			filenames = daoreq.retrieveAttached(id_request);
 			
 			response.setContentType("Content-type: text/zip");
 			response.setHeader("Content-Disposition",
-					"attachment; filename="+u.getName().toUpperCase()+ "_"+u.getSurname().toUpperCase()+"_REQUEST_"+idRequest+".zip");
+					"attachment; filename=" + user_dir + "_REQUEST_" + id_request + ".zip");
 
 			List<File> files = new ArrayList<>();
 
@@ -91,7 +112,6 @@ public class Downloader extends HttpServlet {
 			for (File file : files) {
 				zos.putNextEntry(new ZipEntry(file.getName()));
 
-				// Get the file
 				FileInputStream fis = null;
 				try {
 					fis = new FileInputStream(file);
@@ -130,17 +150,5 @@ public class Downloader extends HttpServlet {
 				}
 			}
 		}
-	}
-
-
-	/**
-	 * method doPost.
-	 * 
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	@SuppressWarnings({"unchecked", "unused", "rawtypes"})
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
 	}
 }
