@@ -16,13 +16,9 @@
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="showDataUser()">
+<body>
 	<div class="page-wrapper">
-
-		<!-- Preloader -->
-		<!-- <div class="preloader"></div>  -->
-
-
+	
 		<jsp:include page="/partials/header.jsp">
 			<jsp:param name="pageName" value="<%=pageName%>" />
 			<jsp:param name="pageFolder" value="<%=pageFolder%>" />
