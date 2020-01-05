@@ -17,18 +17,13 @@
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="">
+<body>
 	<div class="page-wrapper">
-
-		<!-- Preloader -->
-		<!-- <div class="preloader"></div>  -->
-
 
 		<jsp:include page="/partials/header.jsp">
 			<jsp:param name="pageName" value="<%=pageName%>" />
 			<jsp:param name="pageFolder" value="<%=pageFolder%>" />
 		</jsp:include>
-
 
 		<div class="sidebar-page-container basePage indexPage">
 			<div class="auto-container">

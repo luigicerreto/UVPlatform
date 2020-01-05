@@ -1,8 +1,37 @@
 $(document).ready(function() {
+	$(".dropzoneUploader").dropzone({
+		maxFiles: 1,
+		acceptedFiles: ".pdf",
+		accept: function(file, done){
+			done();
+		},
+		init: function() {		
+			this.on("maxfilesexceeded", function(file, errorMessage){
+				this.removeFile(file);
+				showAlert(1, errorMessage);		    	  
+			});
+
+			this.on("error", function(file, errorMessage) {
+				this.removeFile(file);
+				showAlert(1, errorMessage);
+			});
+
+			this.on("success", function(file, response) {
+				var msg = jQuery.parseJSON(response);
+				if(!msg.result){
+					showAlert(1, msg.error);
+				}	            		    
+				else{
+					file.previewElement.querySelector("[data-dz-name]").innerHTML = msg.content;
+				}
+			});
+		}		  						
+	});	
+
 	$(document).on('click','#aggiungiAllegati', function(e){
 		var filenames = [];
 		var id_request = new URLSearchParams(window.location.search).get('id_request');
-		
+
 		$(".dz-filename").each(	function(index, element){
 			filenames.push($(this).text());
 		});

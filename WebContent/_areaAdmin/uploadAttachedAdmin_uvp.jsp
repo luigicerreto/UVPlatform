@@ -1,7 +1,6 @@
-<%@page import="model_uvp.DAORequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"
-	import="controller.CheckSession, model.SystemAttribute, controller.Utils, controller.DbConnection,interfacce.*, java.sql.Connection, java.sql.ResultSet, java.sql.Statement, java.text.SimpleDateFormat"%>
+	import="controller.CheckSession"%>
 
 <%
 	String pageName = "uploadAttachedAdmin.jsp";
@@ -10,11 +9,8 @@
 	if (!ck.isAllowed()) {
 		response.sendRedirect(request.getContextPath() + ck.getUrlRedirect());
 	}
-	UserInterface currUser = (UserInterface) request.getSession().getAttribute("user");
-
+	
 	Integer id_request = Integer.parseInt(request.getParameter("id_request"));
-	Integer requestNumberMaxUpload = 1;
-	String requestAllowedExtensionUpload = ".pdf";
 %>
 
 <!DOCTYPE html>
@@ -25,11 +21,11 @@
 
 <body>
 	<div class="page-wrapper">
+	
 		<jsp:include page="/partials/header.jsp">
 			<jsp:param name="pageName" value="<%= pageName %>" />
 			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
 		</jsp:include>
-
 
 		<div class="sidebar-page-container basePage uploadAttachedPage">
 			<div class="auto-container">
@@ -63,41 +59,7 @@
 
 	<jsp:include page="/partials/includes.jsp" />
 	
-	<script>
-			$( document ).ready(function() {	
-				$(".dropzoneUploader").dropzone({
-					  maxFiles: <%= requestNumberMaxUpload %>,
-					  acceptedFiles: "<%= requestAllowedExtensionUpload %>",
-					  accept: function(file, done){
-					    done();
-					  },
-					  init: function() {		
-					      this.on("maxfilesexceeded", function(file, errorMessage){
-					    	  this.removeFile(file);
-					    	  showAlert(1, errorMessage);		    	  
-					      });
-	                      
-					      this.on("error", function(file, errorMessage) {
-					    	  this.removeFile(file);
-					    	  showAlert(1, errorMessage);
-	                      });
-	                    
-						  this.on("success", function(file, response) {
-							  var msg = jQuery.parseJSON(response);
-						  	  if(!msg.result){
-						  		showAlert(1, msg.error);
-						  	  }	            		    
-						  	  else{
-						  		file.previewElement.querySelector("[data-dz-name]").innerHTML = msg.content;
-						  	  }
-						  });
-					  }		  						
-				});					
-			});
-		</script>
 	<script src="<%= request.getContextPath() %>/js/filesystem_dropzone.js"></script>
-	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttachedAdmin_uvp.js"></script>
-
+	<script src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttachedAdmin_uvp.js"></script>
 </body>
 </html>
