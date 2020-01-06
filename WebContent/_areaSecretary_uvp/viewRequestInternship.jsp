@@ -45,7 +45,6 @@
 									<tbody id="bodySecretaryTableInternship">
 									</tbody>
 								</table>
-
 							</div>
 						</div>
 					</div>
