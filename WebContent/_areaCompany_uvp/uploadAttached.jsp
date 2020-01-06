@@ -86,7 +86,7 @@
 					else {
 						showAlert(0,msg.content);
 						setTimeout(function(){
-							window.location.href = absolutePath + "/_areaTeacher_uvp/viewRequestCompany.jsp";
+							window.location.href = absolutePath + "/_areaCompany_uvp/viewRequestInternship.jsp";
 						},1000);
 					}
 				},
