@@ -10,6 +10,7 @@ import controller.DbConnection;
 /**
  * 
  * @author Antonio
+ * @author Carmine
  *
  */
 @SuppressWarnings("static-access")
@@ -27,9 +28,8 @@ public class DAOInternship {
 		PreparedStatement statement = null;
 		ResultSet result;
 		ArrayList<Internship> internships = new ArrayList<>();
-		String viewRequestInternal = "SELECT i.id_ii, i.tutor_name, i.theme, i.availability, i.resources, i.goals, u.office\r\n" + 
-				"from internship_i as i  inner join perform as p on i.id_ii = p.id_ii\r\n" + 
-				"inner join user as u on p.FK_USER = u.EMAIL";
+		String viewRequestInternal = "SELECT I.ID_II, I.TUTOR_NAME, I.THEME, I.AVAILABILITY, I.RESOURCES, I.GOALS, U.OFFICE " + 
+				"FROM INTERNSHIP_I AS I INNER JOIN USER AS U ON I.FK_TUTOR = U.EMAIL";
 		try {
 			statement = con.prepareStatement(viewRequestInternal);
 			result = statement.executeQuery();
@@ -61,9 +61,8 @@ public class DAOInternship {
 		PreparedStatement statement = null;
 		ResultSet result;
 		ArrayList<Internship> internships = new ArrayList<>();
-		String viewRequestExternal = "SELECT e.id_ie, e.name, e.duration_convention, e.date_convention, e.availability, e.info, u.EMAIL, u.OFFICE \r\n" + 
-				"FROM internship_e as e inner join do on e.id_ie = do.id_ie \r\n" + 
-				"inner join user as u on do.FK_USER = u.EMAIL";
+		String viewRequestExternal = "SELECT E.ID_IE, E.NAME, E.DURATION_CONVENTION, E.DATE_CONVENTION, E.AVAILABILITY, E.INFO, U.EMAIL, U.OFFICE " + 
+				"FROM INTERNSHIP_E AS E INNER JOIN USER AS U ON E.FK_TUTOR = U.EMAIL";
 		try {
 			statement = con.prepareStatement(viewRequestExternal);
 			result = statement.executeQuery();
@@ -82,7 +81,7 @@ public class DAOInternship {
 		}
 		return internships;
 	}
-	
+
 	/**
 	 * Questa funzione restituisce i dati di un particolare tirocinio
 	 * @return Internship
@@ -93,15 +92,13 @@ public class DAOInternship {
 		PreparedStatement statement = null;
 		ResultSet result;
 		int resultSize;
-	
-		String external = "SELECT e.id_ie, e.name, e.duration_convention, e.date_convention, e.availability, e.info, u.EMAIL, u.OFFICE \r\n" + 
-				"FROM internship_e as e inner join do on e.id_ie = do.id_ie \r\n" + 
-				"inner join user as u on do.FK_USER = u.EMAIL WHERE e.id_ie = ?";
-		
-		String internal = "SELECT i.id_ii, i.tutor_name, i.theme, i.availability, i.resources, i.goals, u.office\r\n" + 
-				"from internship_i as i  inner join perform as p on i.id_ii = p.id_ii\r\n" + 
-				"inner join user as u on p.FK_USER = u.EMAIL WHERE i.id_ii = ?";
-		
+
+		String external = "SELECT E.ID_IE, E.NAME, E.DURATION_CONVENTION, E.DATE_CONVENTION, E.AVAILABILITY, E.INFO, U.EMAIL, U.OFFICE " + 
+				"FROM INTERNSHIP_E AS E INNER JOIN USER AS U ON E.FK_TUTOR = U.EMAIL WHERE E.ID_IE = ?";
+
+		String internal = "SELECT I.ID_II, I.TUTOR_NAME, I.THEME, I.AVAILABILITY, I.RESOURCES, I.GOALS, U.OFFICE " + 
+				"FROM INTERNSHIP_I AS I INNER JOIN USER AS U ON I.FK_TUTOR = U.EMAIL WHERE I.ID_II = ?";
+
 		try {
 			if(typeInternship == 0) { // internal
 				statement = con.prepareStatement(internal);
@@ -137,5 +134,64 @@ public class DAOInternship {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * Questa funzione restituisce la mail dell'azienda dato l'id del tirocinio esterno.
+	 * 
+	 * @param id_internship
+	 * @return String
+	 */
+	public String getCompanyEmailByExternal(int id_internship)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String email_azienda = null;
+		String retriveInternship = "SELECT FK_TUTOR FROM INTERNSHIP_E WHERE ID_IE = ?";
+		try {
+			statement = con.prepareStatement(retriveInternship);
+			statement.setInt(1, id_internship);
+			result = statement.executeQuery();
+			if(result.next())
+			{
+				email_azienda = result.getString(1);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return email_azienda;
+	}
+
+	/**
+	 * Questa funzione restituisce la mail del docente dato l'id del tirocinio interno.
+	 * 
+	 * @param id_internship
+	 * @return String
+	 */
+	public String getTeacherEmailByInternal(int id_internship)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		String email_docente = null;
+		String sql = "SELECT FK_TUTOR FROM INTERNSHIP_I WHERE ID_II = ?";
+
+		try {
+			statement = con.prepareStatement(sql);
+			statement.setInt(1, id_internship);
+			result = statement.executeQuery();
+			if(result.next())
+			{
+				email_docente = result.getString(1);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return email_docente;
 	}
 }

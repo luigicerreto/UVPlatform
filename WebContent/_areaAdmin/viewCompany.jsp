@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
-<%@ page
-	import="java.util.*,model.Request,controller.DbConnection,controller.ServletAdmin,java.sql.ResultSet,java.sql.Statement"%>
 
 <%
 	String pageName = "viewCompany.jsp";
@@ -47,6 +45,9 @@
 
 									</tbody>
 								</table>
+								<button onclick="window.location.href = 'addUser.jsp'" type="button" class="btn btn-default" style="background:green" aria-label="Left Align">
+								<span class="glyphicon glyphicon-plus" style="color:white" aria-hidden="true"></span>
+                               </button>
 							</div>
 						</div>
 					</div>

@@ -37,7 +37,7 @@ public class notifyStudent {
 		DAORequest queryobj = new DAORequest();
 		
 		object += "n." + idRequest;
-		text += queryobj.checkStatus(idRequest)+ "\n";
+		text += queryobj.getStatus(idRequest)+ "\n";
 		file = queryobj.retrieveLatestAttached(idRequest);
 		String basePath = System.getProperty("user.home") + "/" + "Desktop" + "/uploads/" + idRequest + "/";
 		//String basePath = new SystemAttribute().getValueByKey("request-upload-path") + "\\" + idRequest + "\\";

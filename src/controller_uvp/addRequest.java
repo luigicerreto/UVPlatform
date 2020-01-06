@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
+import model_uvp.DAOInternship;
 import model_uvp.DAORequest;
 import model_uvp.DAOUser;
 import model_uvp.RequestInternship;
@@ -58,6 +59,7 @@ public class addRequest extends HttpServlet {
 		RequestInternship req = new RequestInternship();
 		DAORequest daoreq = new DAORequest();
 		DAOUser daouser = new DAOUser();
+		DAOInternship daoint = new DAOInternship();
 
 		User user = daouser.getUser(((UserInterface) request.getSession().getAttribute("user")).getEmail());
 		int id_request = (Integer.parseInt(request.getParameter("choice")));
@@ -65,11 +67,11 @@ public class addRequest extends HttpServlet {
 
 		if (user != null) {
 			if(type_request==0){
-				req.setUserFullName(daoreq.InternalPerform(id_request));
+				req.setUserFullName(daoint.getTeacherEmailByInternal(id_request));
 				req.setType("Tirocinio Interno");
 				req.setId_ii(id_request);
 			} else {
-				req.setUserFullName(daoreq.ExternalPerform(id_request));
+				req.setUserFullName(daoint.getCompanyEmailByExternal(id_request));
 				req.setType("Tirocinio Esterno");
 				req.setId_ie(id_request);
 			}
