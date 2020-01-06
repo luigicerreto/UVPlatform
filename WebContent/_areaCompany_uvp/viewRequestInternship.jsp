@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
 <%@ page import="java.util.*,model.Request"%>
 <%
-	String pageName = "viewRequestCompany.jsp";
+	String pageName = "viewRequestInternship.jsp";
 	String pageFolder = "_areaCompany_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if(!ck.isAllowed()){
@@ -15,18 +15,13 @@
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="showData()">
+<body>
 	<div class="page-wrapper">
-
-		<!-- Preloader -->
-		<!--  <div class="preloader"></div> -->
-
 
 		<jsp:include page="/partials/header.jsp">
 			<jsp:param name="pageName" value="<%= pageName %>" />
 			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
 		</jsp:include>
-
 
 		<div class="sidebar-page-container basePage viewRequestStudent">
 			<div class="auto-container">
@@ -76,7 +71,7 @@
 	<jsp:include page="/partials/includes.jsp" />
 
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestCompany.js"></script>
+		src="<%= request.getContextPath() %>/js/pages_uvp/scripts_viewRequestCompany.js"></script>
 
 </body>
 </html>

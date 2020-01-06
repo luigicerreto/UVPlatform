@@ -62,6 +62,6 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-	<script src="<%=request.getContextPath()%>/js/pages/scripts_Contact.js"></script>
+	<script src="<%=request.getContextPath()%>/js/pages_uvp/scripts_contact.js"></script>
 </body>
 </html>

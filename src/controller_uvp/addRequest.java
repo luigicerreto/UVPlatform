@@ -95,7 +95,7 @@ public class addRequest extends HttpServlet {
 			error = "Si è verificato un errore";
 		}
 
-		redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached_uvp.jsp?id_request=" 
+		redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached.jsp?id_request=" 
 				+ daoreq.checkLastPartialRequest(user.getEmail()) + "&new_request=true";
 
 		JSONObject res = new JSONObject();

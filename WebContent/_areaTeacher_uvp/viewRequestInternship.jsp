@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
-<%@ page import="java.util.*,model.Request"%>
+	
 <%
-	String pageName = "viewRequestSecretary_uvp.jsp";
-	String pageFolder = "_areaSecretary";
+	String pageName = "viewRequestInternship.jsp";
+	String pageFolder = "_areaTeacher_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if(!ck.isAllowed()){
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
@@ -15,18 +15,13 @@
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="showData()">
+<body>
 	<div class="page-wrapper">
-
-		<!-- Preloader -->
-		<!--  <div class="preloader"></div> -->
-
 
 		<jsp:include page="/partials/header.jsp">
 			<jsp:param name="pageName" value="<%= pageName %>" />
 			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
 		</jsp:include>
-
 
 		<div class="sidebar-page-container basePage viewRequestStudent">
 			<div class="auto-container">
@@ -34,7 +29,8 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-								<table id="SecretaryTableInternship" class="display data-results table table-striped table-hover table-bordered">
+								<table id="TeacherTableInternship"
+									class="display data-results table table-striped table-hover table-bordered">
 									<thead>
 										<tr align="center">
 											<th class="text-center" align="center">ID</th>
@@ -47,10 +43,9 @@
 											<th class="text-center" align="center">Azioni</th>
 										</tr>
 									</thead>
-									<tbody id="bodySecretaryTableInternship">
+									<tbody id="bodyTeacherTableInternship">
 									</tbody>
 								</table>
-
 							</div>
 						</div>
 					</div>
@@ -76,7 +71,7 @@
 	<jsp:include page="/partials/includes.jsp" />
 
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestsSecretary_uvp.js"></script>
+		src="<%= request.getContextPath() %>/js/pages_uvp/scripts_viewRequestTeacher.js"></script>
 
 </body>
 </html>

@@ -3,8 +3,8 @@
 	import="controller.CheckSession"%>
 
 <%
-	String pageName = "uploadAttachedAdmin.jsp";
-	String pageFolder = "_areaAdmin";
+	String pageName = "uploadAttached.jsp";
+	String pageFolder = "_areaTeacher_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) {
 		response.sendRedirect(request.getContextPath() + ck.getUrlRedirect());
@@ -21,11 +21,11 @@
 
 <body>
 	<div class="page-wrapper">
-	
 		<jsp:include page="/partials/header.jsp">
 			<jsp:param name="pageName" value="<%= pageName %>" />
 			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
 		</jsp:include>
+
 
 		<div class="sidebar-page-container basePage uploadAttachedPage">
 			<div class="auto-container">
@@ -40,7 +40,7 @@
 								</h2>
 								<h2>Trascina o premi sull'apposito riquadro per caricare un
 									file</h2>
-								<div action='<%= request.getContextPath() + "/Uploader" %>'
+								<div action='<%=request.getContextPath() + "/Uploader?id_request=" + id_request%>'
 									class='dropzoneUploader'></div>
 
 								<div class="form-group">
@@ -58,8 +58,51 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-	
+	<script type="text/javascript">
+	$(document).ready(function() {
+	$(document).on('click','#aggiungiAllegati', function(e){
+		var filenames = [];
+		var id_request = new URLSearchParams(window.location.search).get('id_request');
+
+		$(".dz-filename").each(	function(index, element){
+			filenames.push($(this).text());
+		});
+
+		if (filenames.length > 0){
+			$.ajax({
+				url : absolutePath + "/updateAttached",
+				type : "POST",
+				dataType : 'JSON',
+				async : false,
+				data : 
+				{
+					"filenames" : filenames,
+					"id_request" : id_request,
+					"flag": "0"
+				},
+				success : function(msg){
+					if (!msg.result){
+						showAlert(1,msg.error);
+					} 
+					else {
+						showAlert(0,msg.content);
+						setTimeout(function(){
+							window.location.href = absolutePath + "/_areaTeacher_uvp/viewRequestTeacher.jsp";
+						},1000);
+					}
+				},
+				error : function(msg){
+					showAlert(1,"Impossibile Recuperare i dati.");
+				}
+			});
+		} 
+		else {
+			showAlert(1,"Controllare di aver inserito tutti gli allegati richiesti.");
+		}
+	});
+	});
+	</script>
 	<script src="<%= request.getContextPath() %>/js/filesystem_dropzone.js"></script>
-	<script src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttachedAdmin_uvp.js"></script>
+	<script src="<%= request.getContextPath() %>/js/pages_uvp/scripts_uploadAttached.js"></script>
 </body>
 </html>

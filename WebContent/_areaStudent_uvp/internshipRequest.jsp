@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"
-	import="controller.CheckSession, model.SystemAttribute, java.text.SimpleDateFormat, java.time.*, controller.DbConnection, java.sql.Connection, java.sql.ResultSet, java.sql.Statement"%>
+	import="controller.CheckSession"%>
 
 <%
-	String pageName = "firstForm_uvp.jsp";
+	String pageName = "internshipRequest.jsp";
 	String pageFolder = "_areaStudent_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) {
@@ -83,7 +83,7 @@
 
 	<jsp:include page="/partials/includes.jsp" />
 	<script
-		src="<%=request.getContextPath()%>/js/pages/scripts_internship.js"></script>
+		src="<%=request.getContextPath()%>/js/pages_uvp/scripts_internshipRequest.js"></script>
 
 </body>
 </html>

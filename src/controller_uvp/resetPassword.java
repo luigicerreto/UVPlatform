@@ -23,23 +23,21 @@ import util.PasswordGenerator;
  * @author Antonio Baldi
  *
  */
-@WebServlet("/ForgetPassword")
-public class ForgetPassword extends HttpServlet {
+@WebServlet("/resetPassword")
+public class resetPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ForgetPassword() {
+	public resetPassword() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -57,7 +55,7 @@ public class ForgetPassword extends HttpServlet {
 		String subject = "Password autogenerata";
 		PasswordGenerator generatorePassword = new PasswordGenerator();
 		String nuovaPsw = generatorePassword.generate(12);
-		String text = "La tua nuova password �:\n\n"+nuovaPsw+
+		String text = "La tua nuova password è:\n\n"+nuovaPsw+
 				"\nAccedi alla tua pagina utente per modificare la password"
 				+ "\n http://localhost:8080/UVPlatform/index.jsp ";
 		DAOUser queryobj = new DAOUser();
@@ -75,7 +73,7 @@ public class ForgetPassword extends HttpServlet {
 					new Thread(() -> {
 						Mailer.send(mail,subject,text,"");  
 					}).start();
-					
+
 					result=1;
 					content = "Email inviata correttamente";
 				}

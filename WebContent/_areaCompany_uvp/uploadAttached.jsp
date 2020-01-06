@@ -3,7 +3,7 @@
 	import="controller.CheckSession"%>
 
 <%
-	String pageName = "uploadAttachedCompany.jsp";
+	String pageName = "uploadAttached.jsp";
 	String pageFolder = "_areaCompany_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) {
@@ -57,8 +57,51 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
+	<script type="text/javascript">
+	$(document).ready(function() {
+	$(document).on('click','#aggiungiAllegati', function(e){
+		var filenames = [];
+		var id_request = new URLSearchParams(window.location.search).get('id_request');
 
+		$(".dz-filename").each(	function(index, element){
+			filenames.push($(this).text());
+		});
+
+		if (filenames.length > 0){
+			$.ajax({
+				url : absolutePath + "/updateAttached",
+				type : "POST",
+				dataType : 'JSON',
+				async : false,
+				data : 
+				{
+					"filenames" : filenames,
+					"id_request" : id_request,
+					"flag": "1"
+				},
+				success : function(msg){
+					if (!msg.result){
+						showAlert(1,msg.error);
+					} 
+					else {
+						showAlert(0,msg.content);
+						setTimeout(function(){
+							window.location.href = absolutePath + "/_areaTeacher_uvp/viewRequestCompany.jsp";
+						},1000);
+					}
+				},
+				error : function(msg){
+					showAlert(1,"Impossibile Recuperare i dati.");
+				}
+			});
+		} 
+		else {
+			showAlert(1,"Controllare di aver inserito tutti gli allegati richiesti.");
+		}
+	});
+	});
+	</script>
 	<script src="<%= request.getContextPath() %>/js/filesystem_dropzone.js"></script>
-	<script src="<%= request.getContextPath() %>/js/pages/scripts_uploadAttachedCompany.js"></script>
+	<script src="<%= request.getContextPath() %>/js/pages_uvp/scripts_uploadAttached.js"></script>
 </body>
 </html>

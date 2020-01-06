@@ -3,7 +3,7 @@
 
 <%
 	String pageName = "addUser.jsp";
-	String pageFolder = "_areaAdmin";
+	String pageFolder = "_areaAdmin_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) {
 		response.sendRedirect(request.getContextPath() + ck.getUrlRedirect());
@@ -92,6 +92,6 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-	<script src="<%=request.getContextPath()%>/js/pages/scripts_signUp.js"></script>
+	<script src="<%=request.getContextPath()%>/js/pages_uvp/scripts_addUser.js"></script>
 </body>
 </html>
