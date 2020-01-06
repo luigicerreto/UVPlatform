@@ -5,7 +5,7 @@
 
 <%
 	String pageName = "viewUser.jsp";
-	String pageFolder = "_areaAdmin";
+	String pageFolder = "_areaAdmin_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) {
 		response.sendRedirect(request.getContextPath() + ck.getUrlRedirect());
@@ -60,6 +60,6 @@
 
 	<jsp:include page="/partials/includes.jsp" />
 	
-	<script src="<%=request.getContextPath()%>/js/pages/scripts_viewUsers_uvp.js"></script>
+	<script src="<%=request.getContextPath()%>/js/pages_uvp/scripts_viewUser.js"></script>
 </body>
 </html>

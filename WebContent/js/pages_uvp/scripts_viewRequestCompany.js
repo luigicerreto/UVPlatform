@@ -1,13 +1,13 @@
 $(document).ready(function() {
 	// contenuto tabella
-	var table = $('#SecretaryTableInternship').DataTable( {
+	var table = $('#CompanyTableInternship').DataTable( {
 		"order": [[ 0, "desc" ]],
 		"lengthMenu": [[10, -1], [10, "Tutti"]],
 		"autoWidth": false,
 		"bAutoWidth": false,
 		"processing": true,
 		"ajax": {
-			"url": absolutePath + "/showRequest_Secretary",
+			"url": absolutePath + "/showRequest_Company",
 			"dataSrc": "data",
 			"type": "POST"
 		},
@@ -39,7 +39,7 @@ $(document).ready(function() {
 					"sNext":       '<i class="fa fa-caret-right"></i>',
 					"sLast":       "Fine"
 				}
-			}        
+			}          
 	});
 	// azioni tirocinio
 	$(document).on('click', 'label.actionInternship', function(e){
@@ -52,7 +52,7 @@ $(document).ready(function() {
 		if(!($(this).attr('disabled') == "disabled")){
 			if(action === "accept"){ // accetta richiesta
 				$.ajax({
-					url : absolutePath + "/forwardToAdmin",
+					url : absolutePath + "/forwardToSecretary",
 					type : "POST",
 					dataType : 'JSON',
 					async : false,
@@ -97,7 +97,7 @@ $(document).ready(function() {
 					}
 				});
 			} else if (action === "upload"){ // carica allegato
-				var url_redirect = absolutePath + "/_areaSecretary/uploadAttachedSecretary_uvp.jsp?id_request=" + id_request;
+				var url_redirect = absolutePath + "/_areaCompany_uvp/uploadAttached.jsp?id_request=" + id_request;
 				$(window.location).attr('href', url_redirect);
 			} else if (action === "download"){ // scarica allegato
 				var url_download = absolutePath + "/Downloader?flag=1&idRequest=" + id_request;

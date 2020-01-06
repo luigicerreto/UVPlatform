@@ -3,7 +3,7 @@
 <%@ page import="java.util.*,model.Request"%>
 <%
 	String pageName = "viewRequestInternship.jsp";
-	String pageFolder = "_areaAdmin";
+	String pageFolder = "_areaAdmin_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if(!ck.isAllowed()){
 	  response.sendRedirect(request.getContextPath()+ck.getUrlRedirect());  
@@ -15,18 +15,13 @@
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="showData()">
+<body>
 	<div class="page-wrapper">
-
-		<!-- Preloader -->
-		<!--  <div class="preloader"></div> -->
-
 
 		<jsp:include page="/partials/header.jsp">
 			<jsp:param name="pageName" value="<%= pageName %>" />
 			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
 		</jsp:include>
-
 
 		<div class="sidebar-page-container basePage viewRequestStudent">
 			<div class="auto-container">
@@ -76,7 +71,7 @@
 	<jsp:include page="/partials/includes.jsp" />
 
 	<script
-		src="<%= request.getContextPath() %>/js/pages/scripts_viewRequestsAdmin_uvp.js"></script>
+		src="<%= request.getContextPath() %>/js/pages_uvp/scripts_viewRequestAdmin.js"></script>
 
 </body>
 </html>

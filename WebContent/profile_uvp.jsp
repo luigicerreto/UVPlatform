@@ -98,7 +98,7 @@
 	<jsp:include page="/partials/includes.jsp" />
 
 	<script
-		src="<%=request.getContextPath()%>/js/pages/scripts_showProfile.js"></script>
+		src="<%=request.getContextPath()%>/js/pages_uvp/scripts_viewProfile.js"></script>
 
 </body>
 </html>

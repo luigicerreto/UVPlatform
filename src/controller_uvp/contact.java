@@ -17,23 +17,21 @@ import util.Mailer;
 /**
  * Servlet implementation class Contact
  */
-@WebServlet("/Contact")
-public class Contact extends HttpServlet {
+@WebServlet("/contact")
+public class contact extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Contact() {
+    public contact() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -41,7 +39,6 @@ public class Contact extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Integer result = 0;
 		String error = "";
 		String content = "";
@@ -49,7 +46,7 @@ public class Contact extends HttpServlet {
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		String email = currUser.getEmail();
 		String object = request.getParameter("object");
-		String text = "La mail è "+email+" \n"+ request.getParameter("text");
+		String text = "La mail ï¿½ "+email+" \n"+ request.getParameter("text");
 		
 		
 		new Thread(() -> {

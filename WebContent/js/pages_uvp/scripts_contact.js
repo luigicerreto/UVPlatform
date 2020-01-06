@@ -3,7 +3,7 @@ $(document).ready(function() {
 		var object = $("#oggetto").val();
 		var text = $("#textareaContact").val();
 		$.ajax({
-			url : absolutePath + "/Contact",
+			url : absolutePath + "/contact",
 			type : "POST",
 			dataType : 'JSON',
 			async : false,
@@ -26,6 +26,5 @@ $(document).ready(function() {
 				showAlert(1,"Impossibile inviare l'email.");
 			}
 		});
-		return false;
 	});
 });

@@ -2,8 +2,8 @@
 	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
 
 <%
-	String pageName = "viewCompany.jsp";
-	String pageFolder = "_areaAdmin";
+	String pageName = "viewTeacher.jsp";
+	String pageFolder = "_areaAdmin_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) {
 		response.sendRedirect(request.getContextPath() + ck.getUrlRedirect());
@@ -23,7 +23,6 @@
 			<jsp:param name="pageFolder" value="<%=pageFolder%>" />
 		</jsp:include>
 
-
 		<div class="sidebar-page-container basePage viewRequestAdmin">
 			<div class="auto-container">
 				<div class="row clearfix">
@@ -36,6 +35,8 @@
 										<tr>
 											<th class="text-center">E-Mail</th>
 											<th class="text-center">Nome</th>
+											<th class="text-center">Cognome</th>
+											<th class="text-center">Sesso</th>
 											<th class="text-center">Ufficio</th>
 											<th class="text-center">Telefono</th>
 											<th class="text-center">Azioni</th>
@@ -60,6 +61,6 @@
 
 	<jsp:include page="/partials/includes.jsp" />
 	
-	<script src="<%=request.getContextPath()%>/js/pages/scripts_viewCompanies_uvp.js"></script>
+	<script src="<%=request.getContextPath()%>/js/pages_uvp/scripts_viewTeacher.js"></script>
 </body>
 </html>
