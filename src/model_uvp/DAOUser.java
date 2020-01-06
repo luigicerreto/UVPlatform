@@ -108,9 +108,9 @@ public class DAOUser {
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, email);
 			result = stmt.executeQuery();
-			
+
 			int size = result.last() ? result.getRow() : 0;
-			
+
 			if(size>0)
 				return new User(
 						result.getString(1), 			// email
@@ -122,13 +122,13 @@ public class DAOUser {
 						result.getString(7),			// serial
 						result.getString(8)				// phone
 						);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 
 	/**
 	 * 
@@ -146,9 +146,9 @@ public class DAOUser {
 			stmt = con.prepareStatement(sql);
 			stmt.setInt(1, idRequest);
 			result = stmt.executeQuery();
-			
+
 			int size = result.last() ? result.getRow() : 0;
-			
+
 			if(size>0)
 				return new User(
 						result.getString(1), 			// email
@@ -160,13 +160,13 @@ public class DAOUser {
 						result.getString(7),			// serial
 						result.getString(8)				// phone
 						);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -183,9 +183,9 @@ public class DAOUser {
 			stmt = con.prepareStatement(sql);
 			stmt.setInt(1, idRequest);
 			result = stmt.executeQuery();
-			
+
 			int size = result.last() ? result.getRow() : 0;
-			
+
 			if(size>0)
 				return new User(
 						result.getString(1), 			// email
@@ -197,13 +197,13 @@ public class DAOUser {
 						result.getString(7),			// serial
 						result.getString(8)				// phone
 						);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -237,7 +237,7 @@ public class DAOUser {
 		}
 		return users;
 	}
-	
+
 	public ArrayList<User> viewTeachers(){
 		Connection con = new DbConnection().getInstance().getConn();
 		ArrayList<User> users = new ArrayList<>();
@@ -268,7 +268,7 @@ public class DAOUser {
 		}
 		return users;
 	}
-	
+
 	public ArrayList<User> viewCompanies(){
 		Connection con = new DbConnection().getInstance().getConn();
 		ArrayList<User> users = new ArrayList<>();
@@ -299,7 +299,7 @@ public class DAOUser {
 		}
 		return users;
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -313,8 +313,36 @@ public class DAOUser {
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, value);
 			stmt.setString(2, email);
-			
+
 			if(stmt.executeUpdate()==1) {
+				con.commit();
+				return true;
+			} else {
+				con.rollback();
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean addTeacher(User u){
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		String addTeacher = "INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE ) VALUES (?, ?, ?, ?, ?, ?, ?) ";
+
+		try {
+			statement = con.prepareStatement(addTeacher);
+			statement.setString(1, u.getEmail());
+			statement.setString(2, u.getName());
+			statement.setString(3, u.getSurname());
+			statement.setString(4, String.valueOf(u.getSex()));
+			statement.setString(5, u.getPassword());
+			statement.setInt(6, 3);
+			statement.setString(7, u.getOffice());
+
+			if(statement.executeUpdate()>0){
 				con.commit();
 				return true;
 			} else {

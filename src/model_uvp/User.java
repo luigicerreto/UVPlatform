@@ -16,7 +16,7 @@ public class User implements UserInterface {
 	private int userType;
 	private String serial;
 	private String phone;
-
+	private String office;
 
 	public User() {
 	}
@@ -50,55 +50,62 @@ public class User implements UserInterface {
 		this.phone = string;
 	}
 
-	@Override
 	public String getEmail() {
 		return email;
 	}
-	@Override
+
 	public String getName() {
 		return name;
 	}
-	@Override
+
 	public String getSurname() {
 		return surname;
 	}
-	@Override
+
 	public char getSex() {
 		return sex;
 	}
-	@Override
+
 	public String getPassword() {
 		return password;
 	}
-	@Override
+
 	public int getUserType() {
 		return userType;
 	}
-	@Override
+
 	public void setEmail(String e) {
 		this.email=e;
-
 	}
-	@Override
+
 	public void setName(String n) {
 		this.name=n;		
 	}
-	@Override
+
 	public void setSurname(String s) {
 		this.surname=s;
 	}
-	@Override
+
 	public void setSex(char s) {
 		this.sex=s;
 	}
-	@Override
+
 	public void setPassword(String p) {
 		this.password=p;
 	}
-	@Override
+	
 	public void setUserType(int u) {
 		this.userType=u;
 	}
+	
+	public String getOffice() {
+		return office;
+	}
+
+	public void setOffice(String office) {
+		this.office = office;
+	}
+
 	@Override
 	public boolean validate() {
 		return new Stub().database.containsKey(getEmail()) 
