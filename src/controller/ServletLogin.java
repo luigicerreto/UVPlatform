@@ -93,10 +93,10 @@ public class ServletLogin extends HttpServlet {
 							redirect = request.getContextPath() + "/_areaAdmin/viewRequest.jsp";
 							user = new Admin(email, name, surname, sex, password, userType);
 						} else if (userType == 3) { // Profilo docente
-							redirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestTeacher.jsp";
+							redirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestInternship.jsp";
 							user =  new Teacher(email, name, surname, sex, password, userType);
 						} else if (userType == 4) { // Profilo Azienda
-							redirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestCompany.jsp";
+							redirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestInternship.jsp";
 							user =  new Company(email, name, surname, sex, password, userType);
 						}
 						
