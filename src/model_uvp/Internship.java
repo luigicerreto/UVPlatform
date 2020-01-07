@@ -8,7 +8,7 @@ package model_uvp;
 public class Internship {	
 	private int id;
 	private int availability;
-	
+	private String fk_tutor;
 	
 	public Internship(int id, int availability) {
 		this.id = id;
@@ -33,5 +33,13 @@ public class Internship {
 	
 	public void setAvailability(int availability) {
 		this.availability = availability;
+	}
+
+	public String getFk_tutor() {
+		return fk_tutor;
+	}
+
+	public void setFk_tutor(String fk_tutor) {
+		this.fk_tutor = fk_tutor;
 	}
 }

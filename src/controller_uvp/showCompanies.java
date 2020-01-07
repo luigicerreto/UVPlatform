@@ -72,7 +72,7 @@ public class showCompanies extends HttpServlet {
 								+"value='" + u.getName() + "' minlength='10' maxlength='10'"
 								+"required disabled></input> <i class='fa fa-edit'></i>"
 								+ "</div>");
-						jObj.put("serial", u.getSerial());
+						jObj.put("office", u.getOffice());
 						jObj.put("phone", 
 								"<div class='edit-info' id='" + u.getEmail()+ "'"
 								+"class='form-group col-lg-6 col-md-6 col-sm-12 col-xs-12'>"
@@ -80,6 +80,15 @@ public class showCompanies extends HttpServlet {
 								+"value='" + u.getPhone() + "' minlength='10' maxlength='10'"
 								+"required disabled></input> <i class='fa fa-edit'></i>"
 								+ "</div>");
+						jObj.put("action","<label class=\"actionInternship btn btn-default\">" 
+								+ "<input type=\"button\" data-action=\"remove\" id=\""+u.getEmail()+"\">" 
+								+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
+								+ "</label>"
+								+ "<label class=\"infoInternship btn btn-default\">"
+								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+u.getEmail()+"\">" 
+								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+								+ "</label>"
+								);
 
 						jArr.add(jObj);
 					}

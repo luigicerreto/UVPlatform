@@ -45,7 +45,7 @@
 
 									</tbody>
 								</table>
-								<button onclick="window.location.href = 'addUser.jsp'" type="button" class="btn btn-default" style="background:green" aria-label="Left Align">
+								<button onclick="window.location.href = 'addExternal.jsp'" type="button" class="btn btn-default" style="background:green" aria-label="Left Align">
 								<span class="glyphicon glyphicon-plus" style="color:white" aria-hidden="true"></span>
                                </button>
 							</div>
