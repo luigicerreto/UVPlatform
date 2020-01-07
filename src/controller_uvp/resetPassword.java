@@ -55,7 +55,7 @@ public class resetPassword extends HttpServlet {
 		String subject = "Password autogenerata";
 		PasswordGenerator generatorePassword = new PasswordGenerator();
 		String nuovaPsw = generatorePassword.generate(12);
-		String text = "La tua nuova password è:\n\n"+nuovaPsw+
+		String text = "La tua nuova password :\n\n"+nuovaPsw+
 				"\nAccedi alla tua pagina utente per modificare la password"
 				+ "\n http://localhost:8080/UVPlatform/index.jsp ";
 		DAOUser queryobj = new DAOUser();
