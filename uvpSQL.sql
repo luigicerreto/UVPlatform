@@ -5,8 +5,8 @@ USE uvplatform;
 CREATE TABLE USER (
 EMAIL VARCHAR(50) PRIMARY KEY,
 NAME VARCHAR(50) NOT NULL,
-SURNAME VARCHAR(50) ,
-SEX CHAR NOT NULL,
+SURNAME VARCHAR(50),
+SEX CHAR,
 PASSWORD VARCHAR(50) NOT NULL,
 USER_TYPE TINYINT(1) NOT NULL,
 SERIAL VARCHAR(10),
@@ -15,8 +15,8 @@ PHONE VARCHAR(10)
 );
 
 CREATE TABLE SYSTEM_ATTRIBUTE (
-SLUG VARCHAR(50) PRIMARY KEY, 
-VALUE VARCHAR(100) NOT NULL, 
+SLUG VARCHAR(50) PRIMARY KEY,
+VALUE VARCHAR(100) NOT NULL,
 FK_USER VARCHAR(50) NOT NULL,
 FOREIGN KEY (FK_USER) REFERENCES USER(EMAIL)
 );
@@ -39,15 +39,15 @@ CREATE TABLE REQUEST (
 ID_REQUEST INTEGER PRIMARY KEY AUTO_INCREMENT,
 CERTIFICATE_SERIAL VARCHAR(50) NOT NULL,
 LEVEL VARCHAR(7) NOT NULL,
-RELEASE_DATE DATE NOT NULL, 
-EXPIRY_DATE DATE NOT NULL, 
-YEAR YEAR NOT NULL, 
-REQUESTED_CFU TINYINT(2) NOT NULL, 
-SERIAL INTEGER(10) NOT NULL, 
-VALIDATED_CFU TINYINT(2) NOT NULL, 
+RELEASE_DATE DATE NOT NULL,
+EXPIRY_DATE DATE NOT NULL,
+YEAR YEAR NOT NULL,
+REQUESTED_CFU TINYINT(2) NOT NULL,
+SERIAL INTEGER(10) NOT NULL,
+VALIDATED_CFU TINYINT(2) NOT NULL,
 FK_USER VARCHAR(50) NOT NULL,
-FK_CERTIFIER INTEGER(20) NOT NULL, 
-FK_STATE INTEGER(20) NOT NULL, 
+FK_CERTIFIER INTEGER(20) NOT NULL,
+FK_STATE INTEGER(20) NOT NULL,
 FOREIGN KEY(FK_USER) REFERENCES USER(EMAIL),
 FOREIGN KEY(FK_STATE) REFERENCES STATE(ID_STATE),
 FOREIGN KEY(FK_CERTIFIER) REFERENCES ENTE(ID_ENTE)
@@ -101,24 +101,24 @@ FOREIGN KEY(FK_REQUEST_I) REFERENCES REQUEST_INTERNSHIP(ID_REQUEST_I)
 );
 
 INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
-VALUES('segreteria@unisa.it','Segreteria','Studenti','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','1'); 
+VALUES('segreteria@unisa.it','Segreteria','Studenti','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','1');
 
 INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE)
 VALUES('fferrucci@unisa.it','Filomena','Ferrucci','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','2');
 
-INSERT INTO STATE 
+INSERT INTO STATE
 VALUES (1,'Parzialmente Completata');
-INSERT INTO STATE 
+INSERT INTO STATE
 VALUES (2,'In elaborazione dalla Segreteria');
-INSERT INTO STATE 
+INSERT INTO STATE
 VALUES (3,'In elaborazione dall&quot; Amministratore');
-INSERT INTO STATE 
+INSERT INTO STATE
 VALUES (4,'Accettata e In elaborazione dal Consiglio Didattico');
-INSERT INTO STATE 
+INSERT INTO STATE
 VALUES (5,'Rifiutata e In elaborazione dal Consiglio Didattico');
-INSERT INTO STATE 
+INSERT INTO STATE
 VALUES (6,'Conclusa e Accettata');
-INSERT INTO STATE 
+INSERT INTO STATE
 VALUES (7,'Conclusa e Rifiutata');
 
 INSERT INTO SYSTEM_ATTRIBUTE
@@ -184,23 +184,23 @@ VALUES ('16', '','Gatehouse Awards Ltd','', 1);
 INSERT INTO ENTE
 VALUES ('17', '','LanguageCert','', 1);
 
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
 VALUES('rdeprisco@unisa.it','Roberto','De Prisco','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ADA", "089969719");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
 VALUES('adebonis@unisa.it','Annalisa','De Bonis','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio Turing", "089969219");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
 VALUES('bcarpentieri@unisa.it','Bruno','Carpentieri','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ISIS", "089969319");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
 VALUES('gpolese@unisa.it','Giuseppe','Polese','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio ADA", "089969714");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
 VALUES('storre@unisa.it','Salvatore','la Torre','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio di Verifica di Correttezza e SintesiAutomatica di Sistemi Digitali", "089969759");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
 VALUES('msebillo@unisa.it','Monica','Sebillo','F','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','3', "Laboratorio di Sistemi Informativi Geografici", "089969769");
 
 INSERT INTO INTERNSHIP_I (ID_II, FK_TUTOR, TUTOR_NAME, THEME, AVAILABILITY, RESOURCES, GOALS)
 VALUES (1, "rdeprisco@unisa.it", "Roberto De Prisco", "Mobile computing", 15, "Programmazione Object Oriented", "Padroneggiare Kotlin");
 INSERT INTO INTERNSHIP_I (ID_II, FK_TUTOR, TUTOR_NAME, THEME, AVAILABILITY, RESOURCES, GOALS)
-VALUES (2, "adebonis@unisa.it", "Annalisa de Bonis", "Algoritmi avanzati in Python", 60, "Progettazione Algoritmi", "Scrivere algoritmi con complessità lineare "); 
+VALUES (2, "adebonis@unisa.it", "Annalisa de Bonis", "Algoritmi avanzati in Python", 60, "Progettazione Algoritmi", "Scrivere algoritmi con complessità lineare ");
 INSERT INTO INTERNSHIP_I (ID_II, FK_TUTOR, TUTOR_NAME, THEME, AVAILABILITY, RESOURCES, GOALS)
 VALUES (3, "bcarpentieri@unisa.it", "Bruno Carpentieri", "Compressione dati", 5, "Gestione dei dati", "System administrator");
 INSERT INTO INTERNSHIP_I (ID_II, FK_TUTOR, TUTOR_NAME, THEME, AVAILABILITY, RESOURCES, GOALS)
@@ -210,18 +210,18 @@ VALUES (5, "storre@unisa.it", "Salvatore La Torre", "Verifica automatica di corr
 INSERT INTO INTERNSHIP_I (ID_II, FK_TUTOR, TUTOR_NAME, THEME, AVAILABILITY, RESOURCES, GOALS)
 VALUES (6, "msebillo@unisa.it", "Monica Sebillo", "Sistemi Informativi Geografici e applicazioni per Mobile GIS", 25, "http://docenti.unisa.it/004827/risorse?categoria=337&risorsa=807", "Sviluppo di servizi di intelligenza territoriale ");
 
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@kineton.it','Kineton srl','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Napoli", "089452719");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('consulting@mate.it','Mate consulting','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Salerno", "089452799");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@italdata.it','Italdata spa','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", "089412719");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@technodesign.it','TechnoDesig','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Fisciano", "089152719");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@accasoftware.it','Acca','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", "089456719");
-INSERT INTO USER (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE, PHONE)
-VALUES('info@espansione.com','Espansione srl','','M','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", "088452719");
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@kineton.it','Kineton srl','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Napoli", "089452719");
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('consulting@mate.it','Mate consulting','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Salerno", "089452799");
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@italdata.it','Italdata spa','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", "089412719");
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@technodesign.it','TechnoDesig','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Fisciano", "089152719");
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@accasoftware.it','Acca','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", "089456719");
+INSERT INTO USER (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE, PHONE)
+VALUES('info@espansione.com','Espansione srl','4bb47fd2a6c598d2a52ef7de3473fd3ea8401a9b','4', "Avellino", "088452719");
 
 INSERT INTO INTERNSHIP_E (ID_IE, FK_TUTOR, NAME, DURATION_CONVENTION, DATE_CONVENTION, AVAILABILITY, INFO)
 VALUES (1, "info@kineton.it", "Kineton	s.r.l", 3, '2017-01-12', 30, "Kineton is here for all your engineering needs. And whether it’s tech, automotive, or communications, we’re on the cutting edge.");

@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
 
 <%
-	String pageName = "addUser.jsp";
+	String pageName = "addInternal.jsp";
 	String pageFolder = "_areaAdmin_uvp";
 	CheckSession ck = new CheckSession(pageFolder, pageName, request.getSession());
 	if (!ck.isAllowed()) {
@@ -30,30 +30,29 @@
 					<div class="content-side col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="content">
 							<div class="news-block-seven">
-								<form id="signUp">
-
+								<form id="addInternship" data-internship="0">
 									<div
 										class="col-lg-6 col-md-6 col-sm-12 col-xs-12 signUp-container">
 										<div class="panel">
-											<h2 class="text-center">Dati utente</h2>
+											<h2 class="text-center">Dati docente</h2>
 										</div>
 
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="text" class="form-control" id="name"
+											<input type="text" class="form-control" name="name"
 												placeholder="Nome" maxlength="20" required>
 										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="text" class="form-control" id="surname"
+											<input type="text" class="form-control" name="surname"
 												placeholder="Cognome" maxlength="20" required>
 										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<input readonly="readonly"
 												onfocus="this.removeAttribute('readonly');" type="email"
-												class="form-control" id="email" placeholder="Email" required>
+												class="form-control" name="email" placeholder="Email" required>
 										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="text" class="form-control" id="office"
-												placeholder="Ufficio" maxlength="10" required>
+											<input type="text" class="form-control" name="office"
+												placeholder="Ufficio" required>
 										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 											<label class="radio-inline"><input type="radio"
@@ -64,20 +63,29 @@
 										<div class="clearfix"></div>
 										<div class="form-group">
 											<div class="panel">
-												<h2 class="text-center">Dati tirocinio</h2>
+												<h2 class="text-center">Dati tirocinio interno</h2>
 											</div>
 										</div>
 										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-											<input type="text" class="form-control" id="name"
-												placeholder="Nome" maxlength="20" required>
+											<input type="text" class="form-control" name="theme"
+												placeholder="Tema" required>
 										</div>
-
+										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<input type="number" class="form-control" name="availability"
+												placeholder="Disponibilità" required>
+										</div>
+										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<textarea class="form-control" maxlength="180" name="resources"
+												placeholder="Risorse" required></textarea>
+										</div>
+										<div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<textarea class="form-control" maxlength="180" name="goals"
+												placeholder="Obiettivi" required></textarea>
+										</div>
 										<div
 											class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-											<button type="submit" class="btn btn-primary btn-submit">Registrati</button>
-
+											<button type="submit" class="btn btn-primary btn-submit">Registra</button>
 										</div>
-
 										<div class="clearfix"></div>
 									</div>
 								</form>
@@ -92,6 +100,7 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-	<script src="<%=request.getContextPath()%>/js/pages_uvp/scripts_addUser.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/pages_uvp/scripts_addInternship.js"></script>
 </body>
 </html>
