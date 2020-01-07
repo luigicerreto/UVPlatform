@@ -241,6 +241,7 @@ public class DAOUser {
 	public ArrayList<User> viewTeachers(){
 		Connection con = new DbConnection().getInstance().getConn();
 		ArrayList<User> users = new ArrayList<>();
+		User u = null;
 		PreparedStatement stmt;
 		ResultSet result;
 
@@ -251,17 +252,18 @@ public class DAOUser {
 			stmt = con.prepareStatement(sql);
 			result = stmt.executeQuery();
 
-			while(result.next())
-				users.add(new User(
-						result.getString(1), 			// email
-						result.getString(2),			// name
-						result.getString(3),			// surname
-						result.getString(4).charAt(0),	// sex
-						result.getString(5),			// password
-						result.getInt(6),				// user type
-						result.getString(7),			// office
-						result.getString(8)		        // phone
-						));
+			while(result.next()) {
+				u = new User();
+				u.setEmail(result.getString(1));
+				u.setName(result.getString(2));
+				u.setSurname(result.getString(3));
+				u.setSex(result.getString(4).charAt(0));
+				u.setPassword(result.getString(5));
+				u.setUserType(result.getInt(6));
+				u.setOffice(result.getString(7));
+				u.setPhone(result.getString(8));
+				users.add(u);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -274,26 +276,25 @@ public class DAOUser {
 		ArrayList<User> users = new ArrayList<>();
 		PreparedStatement stmt;
 		ResultSet result;
+		User u = null;
 
-		String sql = "SELECT email, name, surname, sex, password, user_type, office, COALESCE(phone,'') as phone "
+		String sql = "SELECT email, name, password, user_type, office, COALESCE(phone,'') as phone "
 				+ "FROM user WHERE user_type = \"4\"";
 
 		try {
 			stmt = con.prepareStatement(sql);
 			result = stmt.executeQuery();
 
-			while(result.next())
-				users.add(new User(
-						result.getString(1), 			// email
-						result.getString(2),			// name
-						result.getString(3),			// surname
-						result.getString(4).charAt(0),	// sex
-						result.getString(5),			// password
-						result.getInt(6),				// user type
-						result.getString(7),			// office
-						result.getString(8)		        // phone
-						));
-
+			while(result.next()) {
+				u = new User();
+				u.setEmail(result.getString(1));
+				u.setName(result.getString(2));
+				u.setPassword(result.getString(3));
+				u.setUserType(result.getInt(4));
+				u.setOffice(result.getString(5));
+				u.setPhone(result.getString(6));
+				users.add(u);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -343,6 +344,27 @@ public class DAOUser {
 			statement.setString(7, u.getOffice());
 
 			if(statement.executeUpdate()>0){
+				con.commit();
+				return true;
+			} else {
+				con.rollback();
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean removeUser(String email) {
+		PreparedStatement statement = null;
+		Connection con = new DbConnection().getInstance().getConn();
+		String sql= "DELETE FROM USER WHERE EMAIL = ?";
+		try {
+			statement = con.prepareStatement(sql);
+			statement.setString(1, email);
+			
+			if(statement.executeUpdate()==1){
 				con.commit();
 				return true;
 			} else {

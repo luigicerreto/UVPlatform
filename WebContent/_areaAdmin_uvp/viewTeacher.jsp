@@ -32,12 +32,12 @@
 								<table id="AdminUserTable"
 									class="display data-results table table-striped table-hover table-bordered">
 									<thead>
-										<tr>
+										<tr align="center">
 											<th class="text-center">E-Mail</th>
 											<th class="text-center">Nome</th>
 											<th class="text-center">Cognome</th>
 											<th class="text-center">Sesso</th>
-											<th class="text-center">Ufficio</th>
+											<th width="20%" class="text-center">Ufficio</th>
 											<th class="text-center">Telefono</th>
 											<th class="text-center">Azioni</th>
 										</tr>

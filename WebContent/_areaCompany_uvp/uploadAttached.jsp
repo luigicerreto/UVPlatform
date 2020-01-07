@@ -39,7 +39,7 @@
 								</h2>
 								<h2>Trascina o premi sull'apposito riquadro per caricare un
 									file</h2>
-								<div action='<%= request.getContextPath() + "/Uploader" %>'
+								<div action='<%= request.getContextPath() + "/Uploader?id_request=" + id_request %>'
 									class='dropzoneUploader'></div>
 
 								<div class="form-group">
