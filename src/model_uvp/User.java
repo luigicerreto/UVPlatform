@@ -108,7 +108,6 @@ public class User implements UserInterface {
 
 	@Override
 	public boolean validate() {
-		return new Stub().database.containsKey(getEmail()) 
-				&& new Stub().database.containsValue(getPassword());
+		return new Stub().database.containsKey(getEmail()) && new Stub().database.containsValue(getPassword());
 	}
 }
