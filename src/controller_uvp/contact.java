@@ -39,14 +39,14 @@ public class contact extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer result = 0;
+		Integer result = 1;
 		String error = "";
 		String content = "";
 		String redirect = "";
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
-		String email = currUser.getEmail();
+		String email = "unisavalidationplatform@gmail.com";
 		String object = request.getParameter("object");
-		String text = "La mail � "+email+" \n"+ request.getParameter("text");
+		String text = "Mittente : "+currUser.getEmail()+" \n"+ request.getParameter("text");
 		
 		
 		new Thread(() -> {
