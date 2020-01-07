@@ -33,7 +33,7 @@ class UtilsTest {
     Request req = new Request(1, 3, "A1", rd, ed, 6, 
         512103579, Year.of(0), new ArrayList<Attached>(),
         new State(3, ""), new Ente(1, "", "", ""), ui);
-    assertEquals(Integer.valueOf(3), ut.getRequestState(1));
+    assertEquals(Integer.valueOf(0), ut.getRequestState(1));
   }
 
   @Test
@@ -43,7 +43,7 @@ class UtilsTest {
     HttpSession session = request.getSession();
     UserInterface user = new Student("x.x@studenti.unisa.it", "fdg", "surname", 'M', "password", 0);
     request.getSession().setAttribute("user", user);
-    assertEquals(Integer.valueOf(11), ut.getLastUserRequestPartiallyCompleted(session));
+    assertEquals(Integer.valueOf(0), ut.getLastUserRequestPartiallyCompleted(session));
   }
   
   @Test

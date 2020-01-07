@@ -1,4 +1,4 @@
-package unitTesting_uvp;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import model_uvp.Company;
 
-class CompanyTest {
+class Uvp_CompanyTest {
 	 static Company app;
 	@BeforeAll
 	static void testConstructorCompany() {
