@@ -16,8 +16,9 @@ $(document).ready(function() {
 			{ "data" : "name" },
 			{ "data" : "surname" },
 			{ "data" : "sex" },
-			{ "data" : "serial" },
+			{ "data" : "office" },
 			{ "data" : "phone" },
+			{ "data" : "action" },
 			],
 			"language": {
 				"sEmptyTable":     "Nessun utente",
