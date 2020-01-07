@@ -83,7 +83,7 @@ public class SystemAttributeTest {
     assertEquals("2", sa.getValueByKey("request-number-max-upload"));
     assertEquals("1", sa.getValueByKey("request-partially-completed"));
     assertEquals("7", sa.getValueByKey("request-refused"));
-    assertEquals("C:\\Users\\Kugga\\Documents\\EV_EnglishValidation\\uploads", sa.getValueByKey("request-upload-path"));
+    assertEquals("//home//vale//newWorkspace//EV_EnglishValidation//uploads//", sa.getValueByKey("request-upload-path"));
     assertEquals("3", sa.getValueByKey("request-working-admin"));
     assertEquals("4", sa.getValueByKey("request-working-educational-advice-1"));
     assertEquals("5", sa.getValueByKey("request-working-educational-advice-2"));
