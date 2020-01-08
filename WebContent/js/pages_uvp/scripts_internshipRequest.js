@@ -196,7 +196,6 @@ $(document).ready(function() {
 			},
 			error : function(msg) 
 			{
-				alert(JSON.stringify(msg));
 				showAlert(1,"Impossibile ottenere le info");
 			}
 		});

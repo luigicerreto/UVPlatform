@@ -103,7 +103,7 @@ public class DAOUser {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement stmt;
 		ResultSet result;
-
+		User user = null;
 		String sql = "SELECT email, name, surname, sex, password, user_type, serial, COALESCE(phone,'') as phone "
 				+ "FROM user WHERE email = ?";
 
@@ -114,22 +114,25 @@ public class DAOUser {
 
 			int size = result.last() ? result.getRow() : 0;
 
-			if(size>0)
-				return new User(
-						result.getString(1), 			// email
-						result.getString(2),			// name
-						result.getString(3),			// surname
-						result.getString(4).charAt(0),	// sex
-						result.getString(5),			// password
-						result.getInt(6),				// user type
-						result.getString(7),			// serial
-						result.getString(8)				// phone
-						);
-
+			if(size>0) {
+				user = new User();
+				user.setEmail(result.getString(1));
+				user.setName(result.getString(2));
+				if(result.getString(3) != null)
+					user.setSurname(result.getString(3));
+				if(result.getString(4) != null)
+					user.setSex(result.getString(4).charAt(0));
+				user.setPassword(result.getString(5));
+				user.setUserType(result.getInt(6));
+				if(result.getString(7) != null)
+					user.setSerial(result.getString(7));
+				if(result.getString(8) != null)
+					user.setPhone(result.getString(8));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return user;
 	}
 
 
@@ -361,7 +364,7 @@ public class DAOUser {
 		}
 		return false;
 	}
-	
+
 	public boolean addCompany(User u){
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -387,16 +390,16 @@ public class DAOUser {
 		}
 		return false;
 	}
-	
+
 	public boolean removeUser(String email) {
 		PreparedStatement statement = null;
 		Connection con = new DbConnection().getInstance().getConn();
 		String sql= "DELETE FROM USER WHERE EMAIL = ?";
-		
+
 		try {
 			statement = con.prepareStatement(sql);
 			statement.setString(1, email);
-			
+
 			if(statement.executeUpdate()==1){
 				con.commit();
 				return true;

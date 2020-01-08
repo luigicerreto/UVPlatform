@@ -39,7 +39,7 @@ public class DAORequest {
 		ArrayList<Attached> attached = new ArrayList<>();
 
 		String sql = "SELECT * FROM REQUEST_INTERNSHIP WHERE FK_USER1 = ?";
-		
+
 		String sql1="SELECT FILENAME FROM ATTACHED WHERE FK_REQUEST_I = ?";
 		try {
 			statement = con.prepareStatement(sql);
@@ -65,12 +65,12 @@ public class DAORequest {
 				request.setStatus(result.getString(3));
 				request.setStudent(new DAOUser().getUser(result.getString(4)));
 				request.setTutor(new DAOUser().getUser(result.getString(5)));
-				
+
 				if (request.getType() == 0)
 					request.setFk_i(result.getInt(7));
 				else if (request.getType() == 1)
 					request.setFk_i(result.getInt(6));
-				
+
 				request.setAttached(attached);
 				requests.add(request);
 			}
@@ -137,7 +137,7 @@ public class DAORequest {
 					statement.setString(2, req.getStatus());
 					statement.setString(3, req.getStudent().getEmail());
 					statement.setString(4, req.getTutor().getEmail());
-					
+
 					if(req.getType() == 0) {
 						statement.setInt(5, req.getFk_i());
 						statement.setNull(6, java.sql.Types.NULL);
@@ -384,12 +384,12 @@ public class DAORequest {
 				request.setStatus(result.getString(3));
 				request.setStudent(new DAOUser().getUser(result.getString(4)));
 				request.setTutor(new DAOUser().getUser(result.getString(5)));
-				
+
 				if (request.getType() == 0)
 					request.setFk_i(result.getInt(7));
 				else if (request.getType() == 1)
 					request.setFk_i(result.getInt(6));
-				
+
 				request.setInternship((InternalInternship) new DAOInternship().getInternship(request.getFk_i(), request.getType()));
 				request.setAttached(attached);
 				requests.add(request);
@@ -439,12 +439,12 @@ public class DAORequest {
 				request.setStatus(result.getString(3));
 				request.setStudent(new DAOUser().getUser(result.getString(4)));
 				request.setTutor(new DAOUser().getUser(result.getString(5)));
-				
+
 				if (request.getType() == 0)
 					request.setFk_i(result.getInt(7));
 				else if (request.getType() == 1)
 					request.setFk_i(result.getInt(6));
-				
+
 				request.setInternship((ExternalInternship) new DAOInternship().getInternship(request.getFk_i(), request.getType()));
 				request.setAttached(attached);
 				requests.add(request);
@@ -498,12 +498,16 @@ public class DAORequest {
 				request.setStatus(result.getString(3));
 				request.setStudent(new DAOUser().getUser(result.getString(4)));
 				request.setTutor(new DAOUser().getUser(result.getString(5)));
-				
-				if (request.getType() == 0)
+
+				if (request.getType() == 0) {
 					request.setFk_i(result.getInt(7));
-				else if (request.getType() == 1)
+					request.setInternship((InternalInternship) new DAOInternship().getInternship(request.getFk_i(), request.getType()));
+				}
+				else if (request.getType() == 1) {
 					request.setFk_i(result.getInt(6));
-				
+					request.setInternship((ExternalInternship) new DAOInternship().getInternship(request.getFk_i(), request.getType()));
+				}
+
 				request.setAttached(attached);
 				requests.add(request);
 			}
@@ -595,7 +599,11 @@ public class DAORequest {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
+		ResultSet resultAttached;
+		Attached a;
+		List<Attached> attached;
 		RequestInternship request = null;
+		
 		String sql = "SELECT * FROM REQUEST_INTERNSHIP WHERE ID_REQUEST_I = ?";
 
 		try {
@@ -606,17 +614,38 @@ public class DAORequest {
 			int size = result.last() ? result.getRow() : 0;
 
 			if(size>0) {
+				String sql1="SELECT FILENAME FROM ATTACHED WHERE FK_REQUEST_I = ?";
+
+				request = new RequestInternship();
+				attached = new ArrayList<>();
+				statement=con.prepareStatement(sql1);
+				statement.setInt(1, result.getInt(1));
+				resultAttached = statement.executeQuery();
+				if(resultAttached.wasNull()) {
+					attached = null;
+				} else {
+					while(resultAttached.next()) {
+						a = new Attached();
+						a.setFilename(resultAttached.getString(1));
+						attached.add(a);
+					}
+				}
 				request = new RequestInternship();
 				request.setId_request_i(result.getInt(1));
 				request.setType(result.getInt(2));
 				request.setStatus(result.getString(3));
 				request.setStudent(new DAOUser().getUser(result.getString(4)));
 				request.setTutor(new DAOUser().getUser(result.getString(5)));
-				
-				if (request.getType() == 0)
+
+				if (request.getType() == 0) {
+					request.setFk_i(result.getInt(7));
+					request.setInternship((InternalInternship) new DAOInternship().getInternship(request.getFk_i(), request.getType()));
+				}
+				else if (request.getType() == 1) {
 					request.setFk_i(result.getInt(6));
-				else if (request.getType() == 1)
-					request.setFk_i(result.getInt(5));
+					request.setInternship((ExternalInternship) new DAOInternship().getInternship(request.getFk_i(), request.getType()));
+				}
+				request.setAttached(attached);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

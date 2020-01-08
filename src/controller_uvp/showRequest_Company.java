@@ -100,8 +100,8 @@ public class showRequest_Company extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
-								+ "<label class=\"infoInternship btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
+								+ "<label class=\"info btn btn-default\">"
+								+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>");
 					else if(a.getStatus().equals("[AZIENDA] Richiesta firmata"))
@@ -122,8 +122,8 @@ public class showRequest_Company extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
-								+ "<label class=\"infoInternship btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
+								+ "<label class=\"info btn btn-default\">"
+								+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>");
 					else
@@ -144,8 +144,8 @@ public class showRequest_Company extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
-								+ "<label class=\"infoInternship btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
+								+ "<label class=\"info btn btn-default\">"
+								+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>");
 

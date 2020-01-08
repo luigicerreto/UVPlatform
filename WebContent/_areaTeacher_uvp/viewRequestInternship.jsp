@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
-	
+
 <%
 	String pageName = "viewRequestInternship.jsp";
 	String pageFolder = "_areaTeacher_uvp";
@@ -54,7 +54,7 @@
 		</div>
 		<jsp:include page="/partials/footer.jsp" />
 	</div>
-	
+
 	<div id="details" class="modal fade" role="dialog">
 		<div id="details-content" class="modal-content modal-dialog">
 			<div class="header">
@@ -72,6 +72,7 @@
 
 	<script
 		src="<%= request.getContextPath() %>/js/pages_uvp/scripts_viewRequestTeacher.js"></script>
-
+	<script
+		src="<%=request.getContextPath()%>/js/pages_uvp/scripts_showInfo.js"></script>
 </body>
 </html>

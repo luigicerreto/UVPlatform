@@ -92,7 +92,7 @@ public class showTeachers extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"remove\" id=\""+u.getEmail()+"\">" 
 								+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
 								+ "</label>"
-								+ "<label class=\"infoInternship btn btn-default\">"
+								+ "<label class=\"info btn btn-default\">"
 								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+u.getEmail()+"\">" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>"

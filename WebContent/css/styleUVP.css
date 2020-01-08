@@ -207,11 +207,11 @@ label.actionInternship:hover span.downloadBtn {
 	color: orange;
 }
 
-label.infoInternship span.infoBtn {
+label.info span.infoBtn {
 	transition: 0.2s;
 }
 
-label.infoInternship:hover span.infoBtn {
+label.info:hover span.infoBtn {
 	color: orange;
 }
 
