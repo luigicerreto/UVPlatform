@@ -61,7 +61,7 @@ public class DAOUser {
 	/**
 	 * 
 	 * Questo metodo serve per controllare se la mail passata come paramentro
-	 * � presente nel database.
+	 * e' presente nel database.
 	 * 
 	 * @author Antonio Baldi
 	 * @author Rosario Di Palma
@@ -96,6 +96,8 @@ public class DAOUser {
 
 	/**
 	 * 
+	 * @param email
+	 * @return
 	 */
 	public User getUser(String email){
 		Connection con = new DbConnection().getInstance().getConn();
@@ -133,6 +135,8 @@ public class DAOUser {
 
 	/**
 	 * 
+	 * @param idRequest
+	 * @return
 	 */
 	public User getUserByRequestInternship(int idRequest){
 		Connection con = new DbConnection().getInstance().getConn();
@@ -207,6 +211,7 @@ public class DAOUser {
 
 	/**
 	 * 
+	 * @return
 	 */
 	public ArrayList<User> viewUsers(){
 		Connection con = new DbConnection().getInstance().getConn();
