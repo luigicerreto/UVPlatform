@@ -55,7 +55,7 @@ public class showInternshipInfo extends HttpServlet {
 		int typeInternship = Integer.parseInt(request.getParameter("type_internship"));
 
 		try {
-			internship = queryobj.getInternshipData(idInternship, typeInternship);
+			internship = queryobj.getInternship(idInternship, typeInternship);
 
 			if(internship != null) {
 				if(typeInternship == 0) {

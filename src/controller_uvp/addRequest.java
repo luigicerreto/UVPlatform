@@ -61,23 +61,16 @@ public class addRequest extends HttpServlet {
 		DAOUser daouser = new DAOUser();
 		DAOInternship daoint = new DAOInternship();
 
-		User user = daouser.getUser(((UserInterface) request.getSession().getAttribute("user")).getEmail());
+		User student = daouser.getUser(((UserInterface) request.getSession().getAttribute("user")).getEmail());
 		int id_request = (Integer.parseInt(request.getParameter("choice")));
 		int type_request = (Integer.parseInt(request.getParameter("type")));
 
-		if (user != null) {
-			if(type_request==0){
-				req.setUserFullName(daoint.getTeacherEmailByInternal(id_request));
-				req.setType("Tirocinio Interno");
-				req.setId_ii(id_request);
-			} else {
-				req.setUserFullName(daoint.getCompanyEmailByExternal(id_request));
-				req.setType("Tirocinio Esterno");
-				req.setId_ie(id_request);
-			}
-
+		if (student != null) {
+			req.setStudent(student);
+			req.setTutor(daoint.getTutor(id_request, type_request));
+			req.setType(type_request);
+			req.setFk_i(id_request);
 			req.setStatus("Parzialmente completata");
-			req.setUserEmail(user.getEmail());
 			int return_val=daoreq.addRequest(req);
 
 			if(return_val == 1) {
@@ -96,7 +89,7 @@ public class addRequest extends HttpServlet {
 		}
 
 		redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached.jsp?id_request=" 
-				+ daoreq.checkLastPartialRequest(user.getEmail()) + "&new_request=true";
+				+ daoreq.checkLastPartialRequest(student.getEmail()) + "&new_request=true";
 
 		JSONObject res = new JSONObject();
 		res.put("result", result);

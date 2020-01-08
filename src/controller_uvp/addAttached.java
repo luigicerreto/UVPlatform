@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
 import model_uvp.DAORequest;
+import model_uvp.RequestInternship;
 import util.Notifier;
 
 /** 
@@ -21,6 +22,7 @@ import util.Notifier;
  * e l'identificativo della richiesta come parametro di sessione.
  * 
  * @author Antonio Baldi
+ * @author Carmine
  */
 @WebServlet("/addAttached")
 public class addAttached extends HttpServlet {
@@ -49,12 +51,12 @@ public class addAttached extends HttpServlet {
 		String error = "";
 		String content = "";
 		String redirect = "";
-		DAORequest queryobj = new DAORequest();
+		DAORequest daoreq = new DAORequest();
 
 		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
 		Integer id_request = Integer.parseInt(request.getParameter("id_request"));
 		boolean new_request = Boolean.parseBoolean(request.getParameter("new_request"));
-		String type_request = queryobj.getRequestTypeById(id_request);
+		RequestInternship req = daoreq.getRequest(id_request);
 		String[] filenames = request.getParameterValues("filenames[]");
 
 		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 
@@ -63,19 +65,19 @@ public class addAttached extends HttpServlet {
 		}
 
 		// aggiunge l'allegato e notifica lo studente
-		if(queryobj.addAttached(filenames[0], user.getEmail(), id_request)) {
+		if(daoreq.addAttached(filenames[0], user.getEmail(), id_request)) {
 			new Thread(() -> {
 				Notifier.notifyStudent(user.getEmail(), id_request);
 			}).start();
 
 			if(new_request) { // se viene inserito il primo allegato
-				if(type_request.equalsIgnoreCase("tirocinio interno")) {
-					if(queryobj.setStatus(id_request, "[DOCENTE] In attesa di accettazione")) {	
+				if(req.getType() == 0) {
+					if(daoreq.setStatus(id_request, "[DOCENTE] In attesa di accettazione")) {	
 						content = "Allegato inserito con successo";
 						result = 1;
 					}
-				} else if (type_request.equalsIgnoreCase("tirocinio esterno")) {
-					if(queryobj.setStatus(id_request, "[AZIENDA] In attesa di accettazione")) {	
+				} else if (req.getType() == 1) {
+					if(daoreq.setStatus(id_request, "[AZIENDA] In attesa di accettazione")) {	
 						content = "Allegato inserito con successo";
 						result = 1;
 					}
@@ -84,7 +86,7 @@ public class addAttached extends HttpServlet {
 					result = 0;
 				}
 			} else { // se viene inserito un allegato aggiuntivo
-				if(queryobj.setStatus(id_request, "[SEGRETERIA] In attesa di accettazione")) {	
+				if(daoreq.setStatus(id_request, "[SEGRETERIA] In attesa di accettazione")) {	
 					content = "Allegato inserito con successo";
 					result = 1;
 				} else {

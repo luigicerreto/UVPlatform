@@ -17,6 +17,8 @@ import org.json.simple.JSONObject;
 import interfacce.UserInterface;
 import model.Attached;
 import model_uvp.DAORequest;
+import model_uvp.ExternalInternship;
+import model_uvp.InternalInternship;
 import model_uvp.RequestInternship;
 
 /**
@@ -64,7 +66,10 @@ public class showRequest_Admin extends HttpServlet {
 					attached = new ArrayList<>();
 					jObj = new JSONObject();
 					jObj.put("id",a.getId_request_i());
-					jObj.put("theme", a.getUserSerial());
+					if(a.getType() == 0)
+						jObj.put("theme", ((InternalInternship) a.getInternship()).getTheme());
+					else if(a.getType() == 1)
+						jObj.put("theme", ((ExternalInternship) a.getInternship()).getName());
 
 					if(a.getAttached().isEmpty()) {
 						jObj.put("attached", "");
@@ -74,8 +79,8 @@ public class showRequest_Admin extends HttpServlet {
 							attached.add("<a href='" + request.getContextPath() + "/Downloader?flag=1&filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a>");
 
 					jObj.put("attached", attached);					
-					jObj.put("name",a.getUserName());
-					jObj.put("surname", a.getUserSurname());
+					jObj.put("name", a.getStudent().getName());
+					jObj.put("surname", a.getStudent().getSurname());
 					jObj.put("type", a.getType());
 					jObj.put("state",a.getStatus());
 					if(a.getStatus().equalsIgnoreCase("[ADMIN] In attesa di accettazione"))

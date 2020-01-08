@@ -86,7 +86,7 @@ public class DAOInternship {
 	 * Questa funzione restituisce i dati di un particolare tirocinio
 	 * @return Internship
 	 */
-	public Internship  getInternshipData(int idInternship, int typeInternship)
+	public Internship getInternship(int idInternship, int typeInternship)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -142,57 +142,33 @@ public class DAOInternship {
 	 * @param id_internship
 	 * @return String
 	 */
-	public String getCompanyEmailByExternal(int id_internship)
+	public User getTutor(int id_internship, int type)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
-		String email_azienda = null;
-		String retriveInternship = "SELECT FK_TUTOR FROM INTERNSHIP_E WHERE ID_IE = ?";
-		try {
-			statement = con.prepareStatement(retriveInternship);
-			statement.setInt(1, id_internship);
-			result = statement.executeQuery();
-			if(result.next())
-			{
-				email_azienda = result.getString(1);
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return email_azienda;
-	}
-
-	/**
-	 * Questa funzione restituisce la mail del docente dato l'id del tirocinio interno.
-	 * 
-	 * @param id_internship
-	 * @return String
-	 */
-	public String getTeacherEmailByInternal(int id_internship)
-	{
-		Connection con = new DbConnection().getInstance().getConn();
-		PreparedStatement statement = null;
-		ResultSet result;
-		String email_docente = null;
+		User tutor = null;
 		String sql = "SELECT FK_TUTOR FROM INTERNSHIP_I WHERE ID_II = ?";
+		String sql1 = "SELECT FK_TUTOR FROM INTERNSHIP_E WHERE ID_IE = ?";
 
 		try {
-			statement = con.prepareStatement(sql);
+			if(type == 0)
+				statement = con.prepareStatement(sql);
+			else if (type == 1)
+				statement = con.prepareStatement(sql1);
+			
 			statement.setInt(1, id_internship);
 			result = statement.executeQuery();
 			if(result.next())
 			{
-				email_docente = result.getString(1);
+				tutor = new DAOUser().getUser(result.getString(1));
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		return email_docente;
+		return tutor;
 	}
 	
 	public boolean addInternship (Internship i, int flag) {

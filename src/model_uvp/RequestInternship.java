@@ -11,79 +11,50 @@ import java.util.List;
  *
  */
 public class RequestInternship {
-	private int id_request_i;
-	private String type;
-	private String userEmail;
-	private String userFullName;
-	private String userSerial;
-	private int id_ie;
-	private int id_ii;
+	private int ID_REQUEST_I; // id richiesta
+	private int FK_I; // foreign key tirocinio interno/esterno
+	private int type;
 	private String status;
 	private List<Attached> attached = new ArrayList<>();
+	private User student;
+	private User tutor;
+	private Internship internship;
 
 	public RequestInternship() {
 
 	}
 
-	public RequestInternship(int id_request_i, String status, String type, String userSerial, String userFullName, int id_ie,
-			int id_ii, List<Attached> attached) {
+	public RequestInternship(int id_request_i, String status, int type,
+			int fk_i, List<Attached> attached) {
 		this.status=status;
 		this.attached=attached;
-		this.id_ie=id_ie;
-		this.id_ii=id_ii;
+		this.FK_I=fk_i;
 		this.type=type;
-		this.id_request_i=id_request_i;
-		this.userSerial=userSerial;
-		this.userFullName=userFullName;
-
+		this.ID_REQUEST_I=id_request_i;
 	}
 
 	public int getId_request_i() {
-		return id_request_i;
+		return ID_REQUEST_I;
 	}
 
-	public void setId_request_i(int id_request_i) {
-		this.id_request_i = id_request_i;
+	public void setId_request_i(int ID_REQUEST_I) {
+		this.ID_REQUEST_I = ID_REQUEST_I;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
-	public String getUserName() {
-		return userFullName.substring(0,userFullName.indexOf("+"));
+	public int getFk_i() {
+		return FK_I;
 	}
 
-	public String getUserSurname() {
-		return userFullName.substring(userFullName.indexOf("+")+1);
-	}
-
-	public String getUserFullName() {
-		return userFullName;
-	}
-
-	public void setUserFullName(String userFullName) {
-		this.userFullName = userFullName;
-	}
-
-	public int getId_ie() {
-		return id_ie;
-	}
-
-	public void setId_ie(int id_ie) {
-		this.id_ie = id_ie;
-	}
-
-	public int getId_ii() {
-		return id_ii;
-	}
-
-	public void setId_ii(int id_ii) {
-		this.id_ii = id_ii;
+	public void setFk_i(int FK_I) {
+		this.FK_I=FK_I;
 	}
 
 	public String getStatus() {
@@ -102,19 +73,27 @@ public class RequestInternship {
 		this.attached = attached;
 	}
 
-	public String getUserEmail() {
-		return userEmail;
+	public User getStudent() {
+		return student;
 	}
 
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-	
-	public String getUserSerial() {
-		return userSerial;
+	public void setStudent(User student) {
+		this.student = student;
 	}
 
-	public void setUserSerial(String userSerial) {
-		this.userSerial = userSerial;
+	public User getTutor() {
+		return tutor;
+	}
+
+	public void setTutor(User tutor) {
+		this.tutor = tutor;
+	}
+
+	public Internship getInternship() {
+		return internship;
+	}
+
+	public void setInternship(Internship internship) {
+		this.internship = internship;
 	}
 }

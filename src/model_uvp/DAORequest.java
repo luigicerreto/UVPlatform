@@ -15,6 +15,7 @@ import model.Attached;
 /**
  * 
  * @author Antonio Baldi
+ * @author Carmine
  *
  */
 @SuppressWarnings("static-access")
@@ -37,9 +38,8 @@ public class DAORequest {
 		ArrayList<RequestInternship> requests = new ArrayList<>();
 		ArrayList<Attached> attached = new ArrayList<>();
 
-		String sql = "SELECT R.ID_REQUEST_I, U.SERIAL, R.TYPE, R.STATE " + 
-				"FROM REQUEST_INTERNSHIP R INNER JOIN USER U ON R.FK_USER1 = U.EMAIL " + 
-				"WHERE R.FK_USER1 = ?";
+		String sql = "SELECT * FROM REQUEST_INTERNSHIP WHERE FK_USER1 = ?";
+		
 		String sql1="SELECT FILENAME FROM ATTACHED WHERE FK_REQUEST_I = ?";
 		try {
 			statement = con.prepareStatement(sql);
@@ -61,10 +61,17 @@ public class DAORequest {
 					}
 				}
 				request.setId_request_i(result.getInt(1));
-				request.setUserSerial(result.getString(2));
+				request.setType(result.getInt(2));
+				request.setStatus(result.getString(3));
+				request.setStudent(new DAOUser().getUser(result.getString(4)));
+				request.setTutor(new DAOUser().getUser(result.getString(5)));
+				
+				if (request.getType() == 0)
+					request.setFk_i(result.getInt(7));
+				else if (request.getType() == 1)
+					request.setFk_i(result.getInt(6));
+				
 				request.setAttached(attached);
-				request.setType(result.getString(3));
-				request.setStatus(result.getString(4));
 				requests.add(request);
 			}
 		}
@@ -118,7 +125,7 @@ public class DAORequest {
 
 		try {
 			statement = con.prepareStatement(sql);
-			statement.setString(1, req.getUserEmail());
+			statement.setString(1, req.getStudent().getEmail());
 			ResultSet r = statement.executeQuery();
 			int count = r.last() ? r.getRow() : 0;
 			if (count == 0){
@@ -126,18 +133,19 @@ public class DAORequest {
 				String addRequest = "INSERT INTO REQUEST_INTERNSHIP (TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) VALUES (?, ?, ?, ?, ?, ?)";
 				try {
 					statement = con.prepareStatement(addRequest);
-					statement.setString(1, req.getType());
+					statement.setInt(1, req.getType());
 					statement.setString(2, req.getStatus());
-					statement.setString(3, req.getUserEmail());
-					statement.setString(4, req.getUserFullName());
-					if(req.getId_ie() != 0) {
-						statement.setNull(5, java.sql.Types.INTEGER);
-						statement.setInt(6, req.getId_ie());
-					} else {
-						statement.setInt(5, req.getId_ii());
-						statement.setNull(6, java.sql.Types.INTEGER);
+					statement.setString(3, req.getStudent().getEmail());
+					statement.setString(4, req.getTutor().getEmail());
+					
+					if(req.getType() == 0) {
+						statement.setInt(5, req.getFk_i());
+						statement.setNull(6, java.sql.Types.NULL);
 					}
-
+					else if (req.getType() == 1) {
+						statement.setNull(5, java.sql.Types.NULL);
+						statement.setInt(6, req.getFk_i());
+					}
 					if(statement.executeUpdate()>0) {
 						con.commit();
 						return 1;
@@ -344,9 +352,8 @@ public class DAORequest {
 		ArrayList<RequestInternship> requests = new ArrayList<>();
 		ArrayList<Attached> attached = new ArrayList<>();
 
-		String sql = "SELECT R.ID_REQUEST_I, I.THEME, U.NAME, U.SURNAME, R.TYPE, R.STATE "
+		String sql = "SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R "
-				+ "INNER JOIN USER U ON R.FK_USER1 = U.EMAIL "
 				+ "INNER JOIN INTERNSHIP_I AS I ON R.FK_II =  I.ID_II "
 				+ "WHERE R.FK_USER2 = ?";
 		try {
@@ -371,11 +378,18 @@ public class DAORequest {
 					}
 				}
 				request.setId_request_i(result.getInt(1));
-				request.setUserSerial(result.getString(2));
+				request.setType(result.getInt(2));
+				request.setStatus(result.getString(3));
+				request.setStudent(new DAOUser().getUser(result.getString(4)));
+				request.setTutor(new DAOUser().getUser(result.getString(5)));
+				
+				if (request.getType() == 0)
+					request.setFk_i(result.getInt(7));
+				else if (request.getType() == 1)
+					request.setFk_i(result.getInt(6));
+				
+				request.setInternship((InternalInternship) new DAOInternship().getInternship(request.getFk_i(), request.getType()));
 				request.setAttached(attached);
-				request.setUserFullName(result.getString(3)+"+"+result.getString(4));
-				request.setType(result.getString(5));
-				request.setStatus(result.getString(6));
 				requests.add(request);
 			}
 		} catch(Exception e) {
@@ -394,10 +408,9 @@ public class DAORequest {
 		ArrayList<RequestInternship> requests = new ArrayList<>();
 		ArrayList<Attached> attached = new ArrayList<>();
 		
-		String sql = "SELECT R.ID_REQUEST_I, E.NAME, U.NAME, U.SURNAME, R.TYPE, R.STATE "
+		String sql = "SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R "
-				+ "INNER JOIN USER U ON R.FK_USER1 = U.EMAIL "
-				+ "INNER JOIN INTERNSHIP_E E ON R.FK_IE =  E.ID_IE "
+				+ "INNER JOIN INTERNSHIP_E E ON R.FK_IE = E.ID_IE "
 				+ "WHERE R.FK_USER2 = ?";
 		try {
 			statement = con.prepareStatement(sql);
@@ -421,11 +434,18 @@ public class DAORequest {
 					}
 				}
 				request.setId_request_i(result.getInt(1));
-				request.setUserSerial(result.getString(2));
+				request.setType(result.getInt(2));
+				request.setStatus(result.getString(3));
+				request.setStudent(new DAOUser().getUser(result.getString(4)));
+				request.setTutor(new DAOUser().getUser(result.getString(5)));
+				
+				if (request.getType() == 0)
+					request.setFk_i(result.getInt(7));
+				else if (request.getType() == 1)
+					request.setFk_i(result.getInt(6));
+				
+				request.setInternship((ExternalInternship) new DAOInternship().getInternship(request.getFk_i(), request.getType()));
 				request.setAttached(attached);
-				request.setUserFullName(result.getString(3)+"+"+result.getString(4));
-				request.setType(result.getString(5));
-				request.setStatus(result.getString(6));
 				requests.add(request);
 			}
 		} catch(Exception e) {
@@ -444,14 +464,12 @@ public class DAORequest {
 		ArrayList<RequestInternship> requests = new ArrayList<>();
 		ArrayList<Attached> attached = new ArrayList<>();
 
-		String sql = "(SELECT R.ID_REQUEST_I, I.THEME, U.NAME, U.SURNAME, R.TYPE, R.STATE "
+		String sql = "(SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R " 
-				+ "INNER JOIN USER U ON R.FK_USER1 = U.EMAIL "
 				+ "INNER JOIN INTERNSHIP_I I ON R.FK_II = I.ID_II)"
 				+ "UNION"
-				+ "(SELECT R.ID_REQUEST_I, NULL, U.NAME, U.SURNAME, R.TYPE, R.STATE "
+				+ "(SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R " 
-				+ "INNER JOIN USER U ON R.FK_USER1 = U.EMAIL "
 				+ "INNER JOIN INTERNSHIP_E E ON R.FK_IE = E.ID_IE)";
 		
 		try {
@@ -475,11 +493,17 @@ public class DAORequest {
 					}
 				}
 				request.setId_request_i(result.getInt(1));
-				request.setUserSerial(result.getString(2));
+				request.setType(result.getInt(2));
+				request.setStatus(result.getString(3));
+				request.setStudent(new DAOUser().getUser(result.getString(4)));
+				request.setTutor(new DAOUser().getUser(result.getString(5)));
+				
+				if (request.getType() == 0)
+					request.setFk_i(result.getInt(7));
+				else if (request.getType() == 1)
+					request.setFk_i(result.getInt(6));
+				
 				request.setAttached(attached);
-				request.setUserFullName(result.getString(3)+"+"+result.getString(4));
-				request.setType(result.getString(5));
-				request.setStatus(result.getString(6));
 				requests.add(request);
 			}
 		} catch(Exception e) {
@@ -565,12 +589,13 @@ public class DAORequest {
 	 * @param idRequest
 	 * @return
 	 */
-	public String getRequestTypeById(int idRequest)
+	public RequestInternship getRequest(int idRequest)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet result;
-		String sql = "select type from request_internship where id_request_i = ?";
+		RequestInternship request = null;
+		String sql = "SELECT * FROM REQUEST_INTERNSHIP WHERE ID_REQUEST_I = ?";
 
 		try {
 			statement = con.prepareStatement(sql);
@@ -579,12 +604,22 @@ public class DAORequest {
 
 			int size = result.last() ? result.getRow() : 0;
 
-			if(size>0)
-				return result.getString(1);
-
+			if(size>0) {
+				request = new RequestInternship();
+				request.setId_request_i(result.getInt(1));
+				request.setType(result.getInt(2));
+				request.setStatus(result.getString(3));
+				request.setStudent(new DAOUser().getUser(result.getString(4)));
+				request.setTutor(new DAOUser().getUser(result.getString(5)));
+				
+				if (request.getType() == 0)
+					request.setFk_i(result.getInt(6));
+				else if (request.getType() == 1)
+					request.setFk_i(result.getInt(5));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return request;
 	}
 }

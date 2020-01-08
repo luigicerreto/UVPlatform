@@ -35,7 +35,7 @@ class uvp_DAOInternshipTest {
 	@Test
 	void testGetInternshipDataFail()
 	{
-		app.getInternshipData(0, 0);
+		app.getInternship(0, 0);
 	}
 	@Test
 	void testGetInternshipDataInternal() throws SQLException {
@@ -45,7 +45,7 @@ class uvp_DAOInternshipTest {
 		statement= con.prepareStatement(insert);
 		statement.executeUpdate();
 		Internship result;
-		result = app.getInternshipData(111, 0);
+		result = app.getInternship(111, 0);
 		assertEquals(111, result.getId());
 		assertEquals(10, result.getAvailability());
 		String delete = "DELETE FROM internship_i WHERE ID_II = 111";
@@ -61,7 +61,7 @@ class uvp_DAOInternshipTest {
 		statement= con.prepareStatement(insert);
 		statement.executeUpdate();
 		Internship result;
-		result = app.getInternshipData(111, 1);
+		result = app.getInternship(111, 1);
 		assertEquals(111, result.getId());
 		assertEquals(20, result.getAvailability());
 		String delete = "DELETE FROM internship_e WHERE ID_IE = 111";
