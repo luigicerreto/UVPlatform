@@ -3,6 +3,7 @@ package test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import controller.DbConnection;
 import model_uvp.DAOInternship;
+import model_uvp.ExternalInternship;
 import model_uvp.InternalInternship;
 import model_uvp.Internship;
 
@@ -51,6 +53,7 @@ class uvp_DAOInternshipTest {
 		String delete = "DELETE FROM internship_i WHERE ID_II = 111";
 		statement = con.prepareStatement(delete);
 		statement.executeUpdate();
+		con.commit();
 	}
 	@Test
 	void testGetInternshipDataExternal() throws SQLException {
@@ -67,6 +70,7 @@ class uvp_DAOInternshipTest {
 		String delete = "DELETE FROM internship_e WHERE ID_IE = 111";
 		statement = con.prepareStatement(delete);
 		statement.executeUpdate();
+		con.commit();
 	}
 
 	@Test
@@ -80,7 +84,9 @@ class uvp_DAOInternshipTest {
 		assertEquals("info@kineton.it",result);
 		String delete = "DELETE FROM internship_e WHERE ID_IE = 111";
 		statement = con.prepareStatement(delete);
-		statement.executeUpdate();	}
+		statement.executeUpdate();	
+		con.commit();
+		}
 
 	@Test
 	void testGetTeacherEmailByInternal() throws SQLException {
@@ -94,6 +100,62 @@ class uvp_DAOInternshipTest {
 		String delete = "DELETE FROM internship_i WHERE ID_II = 111";
 		statement = con.prepareStatement(delete);
 		statement.executeUpdate();
+		con.commit();
 	}
+
+	@Test
+	void testaddInternshipFail()
+	{
+		app.addInternship(new Internship(), 0);
+	}
+	@Test
+	void testaddInternshipPassInternal() throws SQLException
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		InternalInternship tirocinio = new InternalInternship();
+		tirocinio.setTheme("test");
+		tirocinio.setTutor_name("Roberto de prisco");
+		tirocinio.setAvailability(10);
+		tirocinio.setResources("nessuna come sempre");
+		tirocinio.setGoals("sclero");
+		tirocinio.setFk_tutor("rdeprisco@unisa.it");
+
+		app.addInternship(tirocinio, 0);
+
+		String deleteInternship = "DELETE FROM internship_i WHERE RESOURCES = 'nessuna come sempre'";
+		statement = con.prepareStatement(deleteInternship);
+		statement.executeUpdate();
+		con.commit();
+
+
+
+
+	}
+	@Test
+	void testaddInternshipPassExternal() throws SQLException
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ExternalInternship tirocinio = new ExternalInternship();
+		tirocinio.setName("niente");
+		tirocinio.setDuration_convention(3);
+		tirocinio.setDate_convention(new java.util.Date(2019, 01, 01));
+		tirocinio.setAvailability(10);
+		tirocinio.setInfo("niente");
+		tirocinio.setFk_tutor("rdeprisco@unisa.it");
+		app.addInternship(tirocinio, 1);
+
+		String deleteInternship = "DELETE FROM internship_e WHERE INFO = 'niente'";
+		statement = con.prepareStatement(deleteInternship);
+		statement.executeUpdate();
+		con.commit();
+
+
+
+
+	}
+
+
 
 }

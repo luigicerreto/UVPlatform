@@ -220,7 +220,7 @@ public class DAORequest {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Questa funzione permette di cambiare lo stato di una richiesta
 	 * 
@@ -232,7 +232,7 @@ public class DAORequest {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		String sql = "UPDATE REQUEST_INTERNSHIP SET STATE = ? WHERE ID_REQUEST_I = ?;";
-		
+
 		try {
 			statement = con.prepareStatement(sql);
 			statement.setString(1, newStatus);
@@ -370,7 +370,9 @@ public class DAORequest {
 				resultAttached = statement.executeQuery();
 				if(resultAttached.wasNull()) {
 					attached = null;
-				} else {
+				} 
+				else 
+				{
 					while(resultAttached.next()) {
 						a = new Attached();
 						a.setFilename(resultAttached.getString(1));
@@ -407,7 +409,6 @@ public class DAORequest {
 		Attached a;
 		ArrayList<RequestInternship> requests = new ArrayList<>();
 		ArrayList<Attached> attached = new ArrayList<>();
-		
 		String sql = "SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R "
 				+ "INNER JOIN INTERNSHIP_E E ON R.FK_IE = E.ID_IE "
@@ -471,7 +472,7 @@ public class DAORequest {
 				+ "(SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R " 
 				+ "INNER JOIN INTERNSHIP_E E ON R.FK_IE = E.ID_IE)";
-		
+
 		try {
 			statement = con.prepareStatement(sql);
 			result = statement.executeQuery();
