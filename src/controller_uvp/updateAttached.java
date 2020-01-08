@@ -15,7 +15,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import interfacce.UserInterface;
 import model_uvp.DAORequest;
-import util.notifyStudent;
+import util.Notifier;
 
 /**
  * Servlet implementation class updateAttached
@@ -67,17 +67,9 @@ public class updateAttached extends HttpServlet {
 				else if (flag.equals("1"))  status = "[AZIENDA] Richiesta firmata";
 				queryobj.setStatus(idRequest, status);
 			}
-			notifyStudent notify = new notifyStudent();
+
 			new Thread(() -> {
-				try {
-					notify.notify(emailNotify, idRequest);
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				} catch (ServletException e) {
-
-					e.printStackTrace();
-				} 
+				Notifier.notifyStudent(emailNotify, idRequest);
 			}).start();
 
 			content = "Allegati inseriti con successo.";

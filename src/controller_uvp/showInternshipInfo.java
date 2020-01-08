@@ -61,7 +61,7 @@ public class showInternshipInfo extends HttpServlet {
 				if(typeInternship == 0) {
 					jObj = new JSONObject();
 					jObj.put("id", internship.getId());
-					jObj.put("tutor_name", ((InternalInternship) internship).getTutorn_name());
+					jObj.put("tutor_name", ((InternalInternship) internship).getTutor_name());
 					jObj.put("theme", ((InternalInternship) internship).getTheme());
 					jObj.put("availability", internship.getAvailability());
 					jObj.put("resources", ((InternalInternship) internship).getResources());

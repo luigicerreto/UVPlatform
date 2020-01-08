@@ -14,6 +14,7 @@ import controller.Utils;
  * @author Rosario Di Palma
  * @author Carmine
  */
+@SuppressWarnings("static-access")
 public class DAOUser {
 	/**
 	 * 
@@ -331,19 +332,45 @@ public class DAOUser {
 	public boolean addTeacher(User u){
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
-		String addTeacher = "INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE ) VALUES (?, ?, ?, ?, ?, ?, ?) ";
+		String sql = "INSERT INTO user (EMAIL, NAME, SURNAME, SEX, PASSWORD, USER_TYPE, OFFICE ) VALUES (?, ?, ?, ?, ?, ?, ?) ";
 
 		try {
-			statement = con.prepareStatement(addTeacher);
+			statement = con.prepareStatement(sql);
 			statement.setString(1, u.getEmail());
 			statement.setString(2, u.getName());
 			statement.setString(3, u.getSurname());
 			statement.setString(4, String.valueOf(u.getSex()));
-			statement.setString(5, u.getPassword());
+			statement.setString(5, new Utils().generatePwd(u.getPassword()));
 			statement.setInt(6, 3);
 			statement.setString(7, u.getOffice());
 
-			if(statement.executeUpdate()>0){
+			if(statement.executeUpdate()==1){
+				con.commit();
+				return true;
+			} else {
+				con.rollback();
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean addCompany(User u){
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO user (EMAIL, NAME, PASSWORD, USER_TYPE, OFFICE ) VALUES (?, ?, ?, ?, ?) ";
+
+		try {
+			statement = con.prepareStatement(sql);
+			statement.setString(1, u.getEmail());
+			statement.setString(2, u.getName());
+			statement.setString(3, new Utils().generatePwd(u.getPassword()));
+			statement.setInt(4, 4);
+			statement.setString(5, u.getOffice());
+
+			if(statement.executeUpdate()==1){
 				con.commit();
 				return true;
 			} else {
@@ -360,6 +387,7 @@ public class DAOUser {
 		PreparedStatement statement = null;
 		Connection con = new DbConnection().getInstance().getConn();
 		String sql= "DELETE FROM USER WHERE EMAIL = ?";
+		
 		try {
 			statement = con.prepareStatement(sql);
 			statement.setString(1, email);

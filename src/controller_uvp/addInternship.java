@@ -14,12 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import controller.Utils;
 import model_uvp.DAOInternship;
 import model_uvp.DAOUser;
 import model_uvp.ExternalInternship;
 import model_uvp.InternalInternship;
+import model_uvp.Internship;
 import model_uvp.User;
+import util.Notifier;
 import util.PasswordGenerator;
 
 /**
@@ -54,14 +55,13 @@ public class addInternship extends HttpServlet {
 
 		DAOUser daouser = new DAOUser();
 		DAOInternship daoint = new DAOInternship();
-		User user = null;
-		Utils utils = new Utils();
+		final User user = new User();
 		PasswordGenerator pwdgen = new PasswordGenerator();
+		String pass = pwdgen.generate(8);
 
 		Integer flag = Integer.parseInt(request.getParameter("flag"));
 
-		InternalInternship internal = null;
-		ExternalInternship external = null;
+		Internship internship = null;
 
 		if(flag == 0) { // aggiungi interno
 			// dati docente
@@ -69,7 +69,6 @@ public class addInternship extends HttpServlet {
 			String surname = request.getParameter("surname");
 			String email = request.getParameter("email");
 			String office = request.getParameter("office");
-			String pass = pwdgen.generate(8);
 			char sex = request.getParameter("sex").charAt(0);
 
 			// dati tirocinio
@@ -101,32 +100,29 @@ public class addInternship extends HttpServlet {
 			else if (goals.length() < 2) {
 				error = "Il campo \"Obiettivi\" non raggiunge la lunghezza minima";
 			} else {
-				user = new User();
 				user.setName(name);
 				user.setSurname(surname);
 				user.setEmail(email);
 				user.setSex(sex);
-				user.setPassword(utils.generatePwd(pass));
+				user.setPassword(pass);
 				user.setOffice(office);
 
-				internal = new InternalInternship();
-				internal.setTheme(theme);
-				internal.setAvailability(availability);
-				internal.setResources(resources);
-				internal.setGoals(goals);
-				internal.setTutorn_name(user.getName().concat(" ").concat(user.getSurname()));
-				internal.setFk_tutor(user.getEmail());
+				internship = new InternalInternship();
+				((InternalInternship) internship).setTheme(theme);
+				((InternalInternship) internship).setAvailability(availability);
+				((InternalInternship) internship).setResources(resources);
+				((InternalInternship) internship).setGoals(goals);
+				((InternalInternship) internship).setTutor_name(user.getName().concat(" ").concat(user.getSurname()));
+				((InternalInternship) internship).setFk_tutor(user.getEmail());
 
 				if(daouser.addTeacher(user)) {
-					if(daoint.addInternship(internal, flag)) {
+					if(daoint.addInternship(internship, flag)) {
 						result = 1;
 						content = "Docente con tirocinio registrato";
 					} else {
-						result = 0;
 						error = "Errore nella registrazione del tirocinio";
 					}
 				} else {
-					result = 0;
 					error = "Errore nella registrazione del docente";
 				}
 			}
@@ -140,57 +136,57 @@ public class addInternship extends HttpServlet {
 
 			// dati tirocinio
 			Integer availability = Integer.parseInt(request.getParameter("availability"));
-			Integer duration = Integer.parseInt(request.getParameter("duration"));
-			Date date = null;
+			Integer duration_convention = Integer.parseInt(request.getParameter("duration"));
 			String info = request.getParameter("info");
 
+			Date date_convention = null;
 			try {
-				date = new SimpleDateFormat("dd/MM/aaaa").parse(request.getParameter("duration"));
+				date_convention = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 
 			if (name.length() < 2 || name.length() > 20) {
 				error = "Il campo \"Nome\" non rispetta il formato";
-			} else if (email.length() == 0 || !email.endsWith("@unisa.it") || prefix.length() < 3) {
+			} else if (email.length() == 0 || prefix.length() < 3) {
 				error = "Il campo \"Email\" non rispetta il formato";
 			} else if (availability < 0) {
 				error = "Il campo \"Disponibilità\" non rispetta i valori consentiti";
-			} else if (duration < 0) {
+			} else if (duration_convention < 0) {
 				error = "Il campo \"Durata\" non rispetta i valori consentiti";
 			} else if (info.length() < 2) {
 				error = "Il campo \"Info\" non raggiunge la lunghezza minima";
 			} else {
-				user = new User();
 				user.setName(name);
-				user.setSurname(surname);
 				user.setEmail(email);
-				user.setSex(sex);
-				user.setPassword(utils.generatePwd(pass));
+				user.setPassword(pass);
 				user.setOffice(office);
 
-				internal = new InternalInternship();
-				internal.setTheme(theme);
-				internal.setAvailability(availability);
-				internal.setResources(resources);
-				internal.setGoals(goals);
-				internal.setTutorn_name(user.getName().concat(" ").concat(user.getSurname()));
-				internal.setFk_tutor(user.getEmail());
+				internship = new ExternalInternship();
+				((ExternalInternship) internship).setName(name);
+				((ExternalInternship) internship).setAvailability(availability);
+				((ExternalInternship) internship).setDate_convention(date_convention);
+				((ExternalInternship) internship).setInfo(info);
+				((ExternalInternship) internship).setDuration_convention(duration_convention);
+				((ExternalInternship) internship).setFk_tutor(user.getEmail());
 
-				if(daouser.addTeacher(user)) {
-					if(daoint.addInternship(internal, flag)) {
+				if(daouser.addCompany(user)) {
+					if(daoint.addInternship(internship, flag)) {
 						result = 1;
-						content = "Docente con tirocinio registrato";
+						content = "Azienda con tirocinio registrata";
 					} else {
-						result = 0;
 						error = "Errore nella registrazione del tirocinio";
 					}
 				} else {
-					result = 0;
-					error = "Errore nella registrazione del docente";
+					error = "Errore nella registrazione dell'azienda";
 				}
 			}
 
+			if(result == 1) { // notifica docente/azienda
+				new Thread(() -> {
+					Notifier.notifyNewUser(user);
+				}).start();
+			}
 
 			JSONObject res = new JSONObject();
 			res.put("result", result);
@@ -201,4 +197,5 @@ public class addInternship extends HttpServlet {
 			response.setContentType("json");
 		}
 	}
+}
 

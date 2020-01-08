@@ -206,7 +206,7 @@ public class DAOInternship {
 			if(flag == 0) { // interno
 				statement = con.prepareStatement(sql);
 				statement.setString(1, ((InternalInternship) i).getTheme());
-				statement.setString(2, ((InternalInternship) i).getTutorn_name());
+				statement.setString(2, ((InternalInternship) i).getTutor_name());
 				statement.setInt(3, ((InternalInternship) i).getAvailability());
 				statement.setString(4, ((InternalInternship) i).getResources());
 				statement.setString(5, ((InternalInternship) i).getGoals());
@@ -224,7 +224,7 @@ public class DAOInternship {
 				statement = con.prepareStatement(sql1);
 				statement.setString(1, ((ExternalInternship) i).getName());
 				statement.setInt(2, ((ExternalInternship) i).getDuration_convention());
-				statement.setDate(3, ((ExternalInternship) i).getDate_convention());
+				statement.setDate(3,new java.sql.Date(((ExternalInternship) i).getDate_convention().getTime()));
 				statement.setInt(4, ((ExternalInternship) i).getAvailability());
 				statement.setString(5, ((ExternalInternship) i).getInfo());
 				statement.setString(6, ((ExternalInternship) i).getFk_tutor());

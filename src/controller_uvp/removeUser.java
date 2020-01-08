@@ -26,52 +26,42 @@ public class removeUser extends HttpServlet {
      */
     public removeUser() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Integer result = 0;
 		String error = "";
 		String content = "";
-		String redirect = "";
 
-		String email = request.getParameter("email");
-		System.out.println(email);
 		DAOUser queryobj = new DAOUser();
+		
+		String email = request.getParameter("email");
 
-		if(queryobj.removeUser(email))
-		{
+		if(queryobj.removeUser(email)) {
 			result = 1;
 			content = "Utente rimosso";
-		}
-		else
-		{
+		} else {
 			result = 0;
 			error = "Errore nell'elaborazione della richiesta";
 		}
 
-
 		JSONObject res = new JSONObject();
-		
 		res.put("result", result);
 		res.put("error", error);
 		res.put("content", content);
-		res.put("redirect", redirect);
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");
 	}
-
 }

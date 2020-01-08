@@ -13,7 +13,7 @@ import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
 import model_uvp.DAORequest;
-import util.notifyStudent;
+import util.Notifier;
 
 /** 
  * Servlet per gestire l'aggiunta degli allegati ad una determinata richiesta.
@@ -64,13 +64,8 @@ public class addAttached extends HttpServlet {
 
 		// aggiunge l'allegato e notifica lo studente
 		if(queryobj.addAttached(filenames[0], user.getEmail(), id_request)) {
-			notifyStudent notify = new notifyStudent();
 			new Thread(() -> {
-				try {
-					notify.notify(user.getEmail(), id_request);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				Notifier.notifyStudent(user.getEmail(), id_request);
 			}).start();
 
 			if(new_request) { // se viene inserito il primo allegato

@@ -6,7 +6,7 @@ package model_uvp;
  *
  */
 public class InternalInternship extends Internship{
-	private String tutorn_name;
+	private String tutor_name;
 	private String theme;
 	private String resources;
 	private String goals;
@@ -15,7 +15,7 @@ public class InternalInternship extends Internship{
 	public InternalInternship(int id_ii, String tutorn_name, String theme, int availability, String resources, String goals,
 			String place) {
 		super(id_ii, availability);
-		this.tutorn_name = tutorn_name;
+		this.tutor_name = tutorn_name;
 		this.theme = theme;
 		this.resources = resources;
 		this.goals = goals;
@@ -26,12 +26,12 @@ public class InternalInternship extends Internship{
 		super();
 	}
 
-	public String getTutorn_name() {
-		return tutorn_name;
+	public String getTutor_name() {
+		return tutor_name;
 	}
 	
-	public void setTutorn_name(String tutorn_name) {
-		this.tutorn_name = tutorn_name;
+	public void setTutor_name(String tutor_name) {
+		this.tutor_name = tutor_name;
 	}
 	
 	public String getTheme() {

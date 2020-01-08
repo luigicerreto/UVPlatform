@@ -23,12 +23,12 @@ class Uvp_InternalInternshipTest {
 
 	@Test
 	void testGetTutorn_name() {
-		internalinternship.getTutorn_name();
+		internalinternship.getTutor_name();
 	}
 
 	@Test
 	void testSetTutorn_name() {
-		internalinternship.setTutorn_name("Roberto De Prisco");
+		internalinternship.setTutor_name("Roberto De Prisco");
 	}
 
 	@Test
