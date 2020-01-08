@@ -120,14 +120,22 @@ public class DAOUser {
 				user.setName(result.getString(2));
 				if(result.getString(3) != null)
 					user.setSurname(result.getString(3));
+				else
+					user.setSurname("");
 				if(result.getString(4) != null)
 					user.setSex(result.getString(4).charAt(0));
+				else 
+					user.setSex(' ');
 				user.setPassword(result.getString(5));
 				user.setUserType(result.getInt(6));
 				if(result.getString(7) != null)
 					user.setSerial(result.getString(7));
+				else
+					user.setSerial("");
 				if(result.getString(8) != null)
 					user.setPhone(result.getString(8));
+				else
+					user.setPhone("");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
