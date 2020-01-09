@@ -36,7 +36,7 @@ public class DAORequest {
 		RequestInternship request;
 		Attached a;
 		ArrayList<RequestInternship> requests = new ArrayList<>();
-		ArrayList<Attached> attached = new ArrayList<>();
+		ArrayList<Attached> attached;
 
 		String sql = "SELECT * FROM REQUEST_INTERNSHIP WHERE FK_USER1 = ?";
 
@@ -48,6 +48,8 @@ public class DAORequest {
 
 			while(result.next()){
 				request = new RequestInternship();
+				attached = new ArrayList<>();
+				
 				statement=con.prepareStatement(sql1);
 				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();
@@ -350,7 +352,7 @@ public class DAORequest {
 		RequestInternship request;
 		Attached a;
 		ArrayList<RequestInternship> requests = new ArrayList<>();
-		ArrayList<Attached> attached = new ArrayList<>();
+		ArrayList<Attached> attached;
 
 		String sql = "SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R "
@@ -365,6 +367,8 @@ public class DAORequest {
 
 			while(result.next()) {
 				request = new RequestInternship();
+				attached = new ArrayList<>();
+				
 				statement=con.prepareStatement(sql1);
 				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();
@@ -408,7 +412,8 @@ public class DAORequest {
 		RequestInternship request;
 		Attached a;
 		ArrayList<RequestInternship> requests = new ArrayList<>();
-		ArrayList<Attached> attached = new ArrayList<>();
+		ArrayList<Attached> attached;
+		
 		String sql = "SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R "
 				+ "INNER JOIN INTERNSHIP_E E ON R.FK_IE = E.ID_IE "
@@ -422,6 +427,8 @@ public class DAORequest {
 
 			while(result.next()) {
 				request = new RequestInternship();
+				attached = new ArrayList<>();
+				
 				statement=con.prepareStatement(sql1);
 				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();
@@ -455,7 +462,7 @@ public class DAORequest {
 		return requests;
 	}
 
-	public ArrayList<RequestInternship> viewRequestsSecretary() throws SQLException {
+	public ArrayList<RequestInternship> viewAllRequests() throws SQLException {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 		ResultSet resultAttached;
@@ -463,7 +470,7 @@ public class DAORequest {
 		RequestInternship request;
 		Attached a;
 		ArrayList<RequestInternship> requests = new ArrayList<>();
-		ArrayList<Attached> attached = new ArrayList<>();
+		ArrayList<Attached> attached;
 
 		String sql = "(SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R " 
@@ -481,6 +488,8 @@ public class DAORequest {
 
 			while(result.next()) {
 				request = new RequestInternship();
+				attached = new ArrayList<>();
+				
 				statement=con.prepareStatement(sql1);
 				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();

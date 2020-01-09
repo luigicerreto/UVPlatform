@@ -616,7 +616,7 @@ class Uvp_DAORequestTest {
 
 	@Test
 	void testViewRequestsSecretaryFail() throws SQLException {
-		app.viewRequestsSecretary();
+		app.viewAllRequests();
 	}
 	@Test
 	void testViewRequestsSecretaryPass() throws SQLException {
@@ -642,7 +642,7 @@ class Uvp_DAORequestTest {
 		con.commit();
 
 
-		app.viewRequestsSecretary();
+		app.viewAllRequests();
 		
 		String DeleteRequest = "DELETE FROM request_internship WHERE FK_USER1 = 'a.baldi20@studenti.unisa.it'";
 		String DeleteInternshipEx = "DELETE FROM internship_e WHERE ID_IE = 111";

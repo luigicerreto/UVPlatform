@@ -34,7 +34,7 @@
 									<thead>
 										<tr align="center">
 											<th class="text-center" align="center">ID</th>
-											<th class="text-center" align="center">Tema</th>
+											<th class="text-center" align="center">Nome/Tema</th>
 											<th class="text-center" align="center">Allegati</th>
 											<th class="text-center" align="center">Nome</th>
 											<th class="text-center" align="center">Cognome</th>

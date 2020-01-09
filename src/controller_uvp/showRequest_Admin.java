@@ -59,7 +59,7 @@ public class showRequest_Admin extends HttpServlet {
 		{
 			try
 			{
-				requests = queryobj.viewRequestsSecretary();
+				requests = queryobj.viewAllRequests();
 
 				for(RequestInternship a : requests)
 				{
