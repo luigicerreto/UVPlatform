@@ -665,7 +665,7 @@ class Uvp_DAORequestTest {
 
 	@Test
 	void testAcceptRequestByProf_Company() {
-		app.acceptRequestByProf_Company(0);
+		app.acceptRequestByTutor(0);
 	}
 
 	@Test

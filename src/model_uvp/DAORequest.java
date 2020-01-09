@@ -531,7 +531,7 @@ public class DAORequest {
 	 * @param idRequest
 	 * @return true se lo stato della richiesta viene cambiato, false altrimenti
 	 */ 
-	public boolean acceptRequestByProf_Company(int idRequest)
+	public boolean acceptRequestByTutor(int idRequest)
 	{
 		final String newStatus = "In attesa di caricamento Registro di Tirocinio";
 		return this.setStatus(idRequest, newStatus);

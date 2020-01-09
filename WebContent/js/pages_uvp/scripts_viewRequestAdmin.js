@@ -52,12 +52,13 @@ $(document).ready(function() {
 		if(!($(this).attr('disabled') == "disabled")){
 			if(action === "accept"){ // accetta richiesta
 				$.ajax({
-					url : absolutePath + "/validateRequest",
+					url : absolutePath + "/acceptRequest",
 					type : "POST",
 					dataType : 'JSON',
 					async : false,
 					data : {
-						"id_request" : id_request
+						"id_request" : id_request,
+						"flag" : 3
 					},
 					success : function(msg) {
 						if (!msg.result) {
