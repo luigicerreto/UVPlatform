@@ -135,6 +135,56 @@ public class DAOInternship {
 		}
 		return null;
 	}
+	
+	public Internship getInternshipByEmail(String email, int typeInternship)
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		ResultSet result;
+		int resultSize;
+
+		String external = "SELECT E.ID_IE, E.NAME, E.DURATION_CONVENTION, E.DATE_CONVENTION, E.AVAILABILITY, E.INFO, U.EMAIL, U.OFFICE " + 
+				"FROM INTERNSHIP_E AS E INNER JOIN USER AS U ON E.FK_TUTOR = U.EMAIL WHERE U.EMAIL = ?";
+
+		String internal = "SELECT I.ID_II, I.TUTOR_NAME, I.THEME, I.AVAILABILITY, I.RESOURCES, I.GOALS, U.OFFICE " + 
+				"FROM INTERNSHIP_I AS I INNER JOIN USER AS U ON I.FK_TUTOR = U.EMAIL WHERE U.EMAIL = ?";
+
+		try {
+			if(typeInternship == 0) { // internal
+				statement = con.prepareStatement(internal);
+				statement.setString(1, email);
+				result = statement.executeQuery();
+				resultSize = result.last() ? result.getRow() : 0;
+				if(resultSize == 1) {
+					return new InternalInternship(
+							result.getInt(1),		// id
+							result.getString(2),	// tutor name
+							result.getString(3), 	// theme
+							result.getInt(4), 		// availability
+							result.getString(5),	// resources
+							result.getString(6),	// goals
+							result.getString(7));	// place
+				}
+			} else if (typeInternship == 1) { // external
+				statement = con.prepareStatement(external);
+				statement.setString(1, email);
+				result = statement.executeQuery();
+				resultSize = result.last() ? result.getRow() : 0;
+				if(resultSize == 1) {
+					return new ExternalInternship(
+							result.getInt(1),		// id
+							result.getString(2),	// name
+							result.getInt(3), 		// duration convention
+							result.getDate(4), 		// date convention
+							result.getInt(5),		// availability
+							result.getString(6));	// info
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	/**
 	 * Questa funzione restituisce la mail dell'azienda dato l'id del tirocinio esterno.

@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var flag;
 	$("#internshipTableDiv").css("display", "none");
 	$('input[type="submit"]').prop("disabled", true);
-	
+
 	$('#intBtn, #extBtn').click(function(){
 		// nasconde i tasti scelta
 		$("div#internshipChoice").css("display", "none");
@@ -33,7 +33,10 @@ $(document).ready(function() {
 				"bAutoWidth": false,
 				"processing": true,
 				"ajax": {
-					"url": "/UVPlatform/getInternalInternships",
+					"url": "/UVPlatform/getInternships",
+					"data": {
+						"flag" : 0
+					},
 					"dataSrc": "data",
 					"type": "POST"
 				},
@@ -84,7 +87,10 @@ $(document).ready(function() {
 				"bAutoWidth": false,
 				"processing": true,
 				"ajax": {
-					"url": "/UVPlatform/getExternalInternships",
+					"url": "/UVPlatform/getInternships",
+					"data": {
+						"flag" : 1
+					},
 					"dataSrc": "data",
 					"type": "POST"
 
@@ -157,47 +163,5 @@ $(document).ready(function() {
 						showAlert(1,"Impossibile effettuare la richiesta");
 					}
 				});
-		return false;
-	});
-	
-	// popup dettagli tirocinio
-	$('table').on('click', 'button.showDetails', function (e){
-		var btnId = $(this).attr('id');
-		$.ajax({
-			type: "POST",
-			url: "/UVPlatform/showInternshipInfo",
-			async : false,
-			data: {
-				"id_internship" : btnId,
-				"type_internship" : flag
-			},
-			dataType: "JSON",
-			success: function(data) {
-				if(flag == 0){
-				$('div.info').html(
-						'<h4> ID.: ' + data.id + '</h4>' +
-						'<h4> TUTOR: ' + data.tutor_name + '</h4>' +
-						'<h4> TEMA: ' + data.theme + '</h4>' +
-						'<h4> DISPONIBILITA\': ' + data.availability + '</h4>' +
-						'<h4> RISORSE: ' + data.resources + '</h4>' +
-						'<h4> OBIETTIVI: ' + data.goals + '</h4>' +
-						'<h4> SEDE: ' + data.place + '</h4>'
-						);
-				} else if (flag == 1) {
-					$('div.info').html(
-							'<h4> ID.: ' + data.id + '</h4>' +
-							'<h4> NOME: ' + data.name + '</h4>' +
-							'<h4> DURATA: ' + data.duration_convention + '</h4>' +
-							'<h4> DATA STIPULA: ' + data.date_convention + '</h4>' +
-							'<h4> DISPONIBILITA\': ' + data.availability + '</h4>' +
-							'<h4> INFO: ' + data.info + '</h4>' 
-					);
-				}
-			},
-			error : function(msg) 
-			{
-				showAlert(1,"Impossibile ottenere le info");
-			}
-		});
 	});
 });

@@ -85,7 +85,7 @@ public class showCompanies extends HttpServlet {
 								+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
 								+ "</label>"
 								+ "<label class=\"info btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+u.getEmail()+"\">" 
+								+ "<input type='button' data-type-internship='1' data-type-info='1' data-toggle='modal' data-target='#details' id='"+ u.getEmail() +"'>" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>"
 								);

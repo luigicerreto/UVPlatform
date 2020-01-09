@@ -78,7 +78,10 @@ public class showRequest extends HttpServlet {
 								attached.add("<a href='" + request.getContextPath() + "/Downloader?flag=1&filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a>");
 
 						jObj.put("attached", attached);
-						jObj.put("type", a.getType());
+						if (a.getType() == 0)
+							jObj.put("type", "Tirocinio interno");
+						else if (a.getType() == 1)
+							jObj.put("type", "Tirocinio esterno");
 						jObj.put("status", a.getStatus());
 						if(a.getStatus().equalsIgnoreCase("parzialmente completata") ||
 								a.getStatus().equalsIgnoreCase("in attesa di caricamento registro di tirocinio"))

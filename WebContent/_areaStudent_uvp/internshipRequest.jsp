@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"
-	import="controller.CheckSession"%>
+	pageEncoding="ISO-8859-1" import="controller.CheckSession"%>
 
 <%
 	String pageName = "internshipRequest.jsp";
@@ -71,7 +70,7 @@
 	<div id="details" class="modal fade" tabindex="-1" role="dialog">
 		<div id="details-content" class="modal-content modal-dialog">
 			<div class="header">
-				<h1 class="details">DETTAGLI TIROCINIO</h1>
+				<h1 class="details"></h1>
 				<button type="button" class="close" data-dismiss="modal">
 					<i class="fa fa-times-circle"></i>
 				</button>
@@ -82,8 +81,10 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
+	
 	<script
 		src="<%=request.getContextPath()%>/js/pages_uvp/scripts_internshipRequest.js"></script>
-
+	<script
+		src="<%=request.getContextPath()%>/js/pages_uvp/scripts_showInfo.js"></script>
 </body>
 </html>

@@ -59,7 +59,7 @@
 	<div id="details" class="modal fade" role="dialog">
 		<div id="details-content" class="modal-content modal-dialog">
 			<div class="header">
-				<h1 class="details">DETTAGLI RICHIESTA</h1>
+				<h1 class="details"></h1>
 				<button type="button" class="close" data-dismiss="modal">
 					<i class="fa fa-times-circle"></i>
 				</button>

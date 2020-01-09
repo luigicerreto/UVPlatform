@@ -49,19 +49,19 @@ public class showInfo extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONObject jObj = null;
-		Internship internship;
-		RequestInternship req;
 		DAOInternship daoint = new DAOInternship();
 		DAORequest daoreq = new DAORequest();
 
 		List<String> attached;
 		Integer flag = Integer.parseInt(request.getParameter("flag"));
-		Integer id = Integer.parseInt(request.getParameter("id"));
+
 
 
 		if (flag == 0) { // info richiesta 
+			Integer id = Integer.parseInt(request.getParameter("id"));
+
 			try {
-				req = daoreq.getRequest(id);
+				RequestInternship req = daoreq.getRequest(id);
 				attached = new ArrayList<>();
 				jObj = new JSONObject();
 				jObj.put("id", req.getId_request_i());
@@ -79,7 +79,7 @@ public class showInfo extends HttpServlet {
 					else 
 						for (Attached b : req.getAttached())
 							attached.add("<a href='" + request.getContextPath() + "/Downloader?flag=1&filename=" + b.getFilename()
-									+ "&idRequest=" + req.getId_request_i() + "'>" + b.getFilename() + "</a>");
+							+ "&idRequest=" + req.getId_request_i() + "'>" + b.getFilename() + "</a>");
 					jObj.put("attached", attached);
 				}
 				else if (req.getType() == 1) {
@@ -94,17 +94,24 @@ public class showInfo extends HttpServlet {
 					else 
 						for (Attached b : req.getAttached())
 							attached.add("<a href='" + request.getContextPath() + "/Downloader?flag=1&filename=" + b.getFilename()
-									+ "&idRequest=" + req.getId_request_i() + "'>" + b.getFilename() + "</a>");
+							+ "&idRequest=" + req.getId_request_i() + "'>" + b.getFilename() + "</a>");
 					jObj.put("attached", attached);
 				}
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (flag == 1) { // info tirocinio
+		} else if (flag == 1 || flag == 2) { // info tirocinio
 			try {
+				Internship internship = null;
 				Integer typeInternship = Integer.parseInt(request.getParameter("type_internship"));
-				internship = daoint.getInternship(id, typeInternship);
+				if (flag == 1) { // ottieni info tirocinio via mail tutor
+					String email = request.getParameter("email");
+					internship = daoint.getInternshipByEmail(email, typeInternship);
+				} else if (flag == 2) { // ottieni info tirocinio via id tirocinio
+					Integer id = Integer.parseInt(request.getParameter("id"));
+					internship = daoint.getInternship(id, typeInternship);
+				}
 
 				if(internship != null) {
 					if(typeInternship == 0) {

@@ -13,12 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.List;
 import interfacce.UserInterface;
-import model.Attached;
-import model_uvp.DAORequest;
 import model_uvp.DAOUser;
-import model_uvp.RequestInternship;
 import model_uvp.User;
 
 /** 
@@ -93,14 +89,13 @@ public class showTeachers extends HttpServlet {
 								+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
 								+ "</label>"
 								+ "<label class=\"info btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+u.getEmail()+"\">" 
+								+ "<input type='button' data-type-internship='0' data-type-info='1' data-toggle='modal' data-target='#details' id='"+ u.getEmail() +"'>" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>"
 								);
 
 						jArr.add(jObj);
 					}
-
 			} catch(Exception e){
 				e.printStackTrace();
 			}
