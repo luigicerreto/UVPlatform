@@ -182,7 +182,8 @@
 	}
 
 	else if (pageFolder.equals("_areaCompany_uvp") && ck.isAllowed()) { //se stiamo in una pagina dell'area Azienda
-
+		logoRedirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestInternship.jsp";
+		
 		if (pageName.equals("viewRequestInternship.jsp") && ck.isAllowed()) { //se stiamo in viewRequestCompany
 			menu += "<li class=\"current\"><a>Richieste Tirocinio</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
@@ -202,7 +203,7 @@
 		}
 
 	} else if (pageFolder.equals("_areaTeacher_uvp") && ck.isAllowed()) { //se stiamo in una pagina dell'area Docente
-		logoRedirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestTeacher.jsp";
+		logoRedirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestInternship.jsp";
 
 		if (pageName.equals("viewRequestInternship.jsp") && ck.isAllowed()) { //se stiamo in viewRequestTeacher
 			menu += "<li class=\"current\"><a>Richieste Tirocinio</a></li>";
