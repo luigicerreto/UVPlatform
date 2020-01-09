@@ -129,39 +129,35 @@ $(document).ready(function() {
 		$('input[type="submit"]').prop("disabled", false);
 	});
 
-	$('#choiceForm').submit(function() {
+	$('#choiceForm').submit(function(e) {
+		e.preventDefault();
+		
 		var id = $('input[type="radio"]:checked').attr('id');
-		$.ajax(
+		$.ajax({
+			url : absolutePath + "/addRequest",
+			type : "POST",
+			dataType : 'JSON',
+			async : false,
+			data : 
+			{
+				"choice": id,
+				"type": flag
+			},
+			success : function(msg) {
+				if (!msg.result) 
 				{
-					url : absolutePath + "/addRequest",
-					type : "POST",
-					dataType : 'JSON',
-					async : false,
-					data : 
-					{
-						"choice": id,
-						"type": flag
-					},
-					success : function(msg) 
-					{
-						if (!msg.result) 
-						{
-							showAlert(1,msg.error);
-						} 
-						else 
-						{
-							showAlert(0,msg.content);
-							setTimeout(function() 
-									{
-								window.location.href = msg.redirect;
-									},
-									1000);
-						}
-					},
-					error : function(msg) 
-					{
-						showAlert(1,"Impossibile effettuare la richiesta");
-					}
-				});
+					showAlert(1,msg.error);
+				} else {
+					showAlert(0,msg.content);
+					setTimeout(function() {
+						window.location.href = msg.redirect;
+					},1000);
+				}
+			},
+			error : function(msg) {
+				showAlert(1,"Impossibile effettuare la richiesta");
+			}
+		});
+		return false;
 	});
 });

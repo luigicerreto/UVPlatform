@@ -70,7 +70,7 @@ public class addAttached extends HttpServlet {
 				Notifier.notifyStudent(user.getEmail(), id_request);
 			}).start();
 
-			if(new_request) { // se viene inserito il primo allegato
+			if(new_request || req.getStatus().equals("Parzialmente completata")) { // se viene inserito il primo allegato
 				if(req.getType() == 0) {
 					if(daoreq.setStatus(id_request, "[DOCENTE] In attesa di accettazione")) {	
 						content = "Allegato inserito con successo";

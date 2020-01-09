@@ -55,8 +55,7 @@
 
 										</tbody>
 									</table>
-									<input type="submit" id="submit1" class="btn btn-success"
-										value="CONTINUA">
+									<input type="submit" class="btn btn-success" value="CONTINUA">
 								</form>
 							</div>
 						</div>
