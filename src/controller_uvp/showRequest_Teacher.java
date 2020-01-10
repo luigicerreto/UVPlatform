@@ -91,7 +91,7 @@ public class showRequest_Teacher extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"accept\" id=\""+a.getId_request_i() +"\">"
 								+ "<span class=\"acceptBtn glyphicon glyphicon-ok\"></span>" 
 								+ "</label>"
-								+ "<label class=\"actionInternship btn btn-default\" disabled>" 
+								+ "<label class=\"actionInternship btn btn-default\">" 
 								+ "<input type=\"button\" data-action=\"reject\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
 								+ "</label>"
