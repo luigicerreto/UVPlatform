@@ -240,22 +240,22 @@
 					+ "/recuperaPassword.jsp\">Recupera password</a></li>";
 			menu += "<li><a href=\"" + request.getContextPath() + "/index.jsp\">Benvenuto</a></li>";
 		} else if (pageName.equals("profile_uvp.jsp") && ck.isAllowed()) {
-			if (user.getUserType() == 3) {
+			if (user.getUserType() == 4) {
 				logoRedirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestCompany.jsp";
 				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-						+ "_areaCompany_uvp/viewRequestCompany.jsp\">Richiesta Tirocinio</a></li>";
+						+ "_areaCompany_uvp/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 
-			} else if (user.getUserType() == 4) {
-				logoRedirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestTeacher.jsp";
+			} else if (user.getUserType() == 3) {
+				logoRedirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestInternship.jsp";
 				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-						+ "_areaTeacher_uvp/viewRequestTeacher.jsp\">Richiesta Tirocinio</a></li>";
+						+ "_areaTeacher_uvp/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
@@ -267,7 +267,7 @@
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "_areaSecretary/viewRequest.jsp\">Richiesta EV</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-						+ "_areaSecretary/viewRequestSecretary_uvp.jsp\">Richiesta Tirocinio</a></li>";
+						+ "_areaSecretary_uvp/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
@@ -287,7 +287,7 @@
 
 		} else if (pageName.equals("contact_uvp.jsp") && ck.isAllowed()) {
 
-			if (user.getUserType() == 3) {
+			if (user.getUserType() == 4) {
 				logoRedirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestInternship.jsp";
 				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
@@ -298,7 +298,7 @@
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 
-			} else if (user.getUserType() == 4) {
+			} else if (user.getUserType() == 3) {
 				logoRedirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestInternship.jsp";
 				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
@@ -309,12 +309,12 @@
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 			} else if (user.getUserType() == 1) {
-				logoRedirect = request.getContextPath() + "/_areaSecretary/viewRequest.jsp";
+				logoRedirect = request.getContextPath() + "/_areaSecretary_uvp/viewRequestInternship.jsp";
 				
 				menu = "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
 						+ "_areaSecretary/viewRequest.jsp\">Richiesta EV</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
-						+ "_areaSecretary/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
+						+ "_areaSecretary_uvp/viewRequestInternship.jsp\">Richiesta Tirocinio</a></li>";
 				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
