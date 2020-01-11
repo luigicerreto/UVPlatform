@@ -37,7 +37,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 3, '92372', 'f2', '8233923932')";
 		String addInternship = "INSERT INTO internship_i VALUES ('111', 'Salvatore la torre', 'JAVA' , 20, 'risorse', 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
 
 		statement = con.prepareStatement(addUser);
 		statement.executeUpdate();
@@ -72,7 +72,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 3, '92372', 'f2', '8233923932')";
 		String addInternship = "INSERT INTO internship_i VALUES ('111', 'Salvatore la torre', 'JAVA' , 20, 'risorse', 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
 		String addAttached = "INSERT INTO attached VALUES (111, 'prova', null, 'a.baldi20@studenti.unisa.it', 111)";
 		statement = con.prepareStatement(addUser);
 		statement.executeUpdate();
@@ -116,7 +116,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 3, '92372', 'f2', '8233923932')";
 		String addInternship = "INSERT INTO internship_i VALUES ('111', 'Salvatore la torre', 'JAVA' , 20, 'risorse', 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
 		String addAttached = "INSERT INTO attached VALUES (111, 'prova', null, 'a.baldi20@studenti.unisa.it', 111)";
 		statement = con.prepareStatement(addUser);
 		statement.executeUpdate();
@@ -158,7 +158,7 @@ class Uvp_DAORequestTest {
 	void testAddRequestFailWithWrongField() {
 		allegati = new ArrayList<Attached>();
 		RequestInternship prova = new RequestInternship(111, "", "INTERNO", "", "", 101, 100, allegati);
-		prova.setUserEmail("d.capuano3@studenti.unisa.it");
+		prova.set("d.capuano3@studenti.unisa.it");
 		prova.setUserFullName("h.jkd@info.it");
 		app.addRequest(prova);
 	}
@@ -258,7 +258,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 
 		statement = con.prepareStatement(addUser);
 		statement.executeUpdate();
@@ -301,7 +301,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 
 		statement = con.prepareStatement(addUser);
 		statement.executeUpdate();
@@ -344,7 +344,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 
 		statement = con.prepareStatement(addUser);
 		statement.executeUpdate();
@@ -387,7 +387,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 
 		statement = con.prepareStatement(addUser);
 		statement.executeUpdate();
@@ -433,7 +433,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 		String addAttached = "INSERT INTO attached VALUES (111, 'prova', null, 'a.baldi20@studenti.unisa.it', 111)";
 
 		statement = con.prepareStatement(addUser);
@@ -482,7 +482,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 		String addAttached = "INSERT INTO attached VALUES (111, 'prova', null, 'a.baldi20@studenti.unisa.it', 111)";
 
 		statement = con.prepareStatement(addUser);
@@ -530,7 +530,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 3, '92372', 'f2', '8233923932')";
 		String addInternship = "INSERT INTO internship_i VALUES ('111', 'Salvatore la torre', 'JAVA' , 20, 'risorse', 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
 		String addAttached = "INSERT INTO attached VALUES (111, 'prova', null, 'a.baldi20@studenti.unisa.it', 111)";
 		statement = con.prepareStatement(addUser);
 		statement.executeUpdate();
@@ -577,7 +577,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 		String addAttached = "INSERT INTO attached VALUES (111, 'prova', null, 'a.baldi20@studenti.unisa.it', 111)";
 
 		statement = con.prepareStatement(addUser);
@@ -626,7 +626,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 		String addAttached = "INSERT INTO attached VALUES (111, 'prova', null, 'a.baldi20@studenti.unisa.it', 111)";
 
 		statement = con.prepareStatement(addUser);
@@ -695,7 +695,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 		String addAttached = "INSERT INTO attached VALUES (111, 'prova', null, 'a.baldi20@studenti.unisa.it', 111)";
 
 		statement = con.prepareStatement(addUser);
@@ -745,7 +745,7 @@ class Uvp_DAORequestTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 4, '92372', 'f2', '8233923932')";
 		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'Parzialmente completata', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', 111, null)";
 		String addAttached = "INSERT INTO attached VALUES (111, 'prova', null, 'a.baldi20@studenti.unisa.it', 111)";
 
 		statement = con.prepareStatement(addUser);

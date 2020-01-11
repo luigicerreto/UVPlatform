@@ -101,7 +101,7 @@ class Uvp_DAOUserTest {
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
 		String addUser2 = "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 3, '92372', 'f2', '8233923932')";
 		String addInternship = "INSERT INTO internship_i VALUES ('111', 'Salvatore la torre', 'JAVA' , 20, 'risorse', 'usare poo', 'slatorre@unisa.it')";
-		String addRequest = "INSERT INTO request_internship VALUES ('111', 'Interno', 'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
+		String addRequest = "INSERT INTO request_internship VALUES ('111', 1,  'In attesa', 'a.baldi20@studenti.unisa.it', 'slatorre@unisa.it', null, 111)";
 
 		statement = con.prepareStatement(addUser);
 		statement.executeUpdate();
