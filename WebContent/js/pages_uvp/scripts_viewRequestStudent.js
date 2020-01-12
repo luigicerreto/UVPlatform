@@ -49,7 +49,9 @@ $(document).ready(function() {
 
 		if(!($(this).attr('disabled') == "disabled")){
 			if (action === "upload"){ // carica allegato
-				var url_redirect = absolutePath + "/_areaStudent_uvp/uploadAttached.jsp?id_request=" + id_request;
+				var is_partial = $(this).children("input").data("partial-request");
+				let url_redirect = absolutePath + "/_areaStudent_uvp/uploadAttached.jsp?id_request=" + id_request;
+				if (is_partial) url_redirect += "&new_request=true";
 				$(window.location).attr('href', url_redirect);
 			} else if (action === "download"){ // scarica allegato
 				var url_download = absolutePath + "/Downloader?flag=1&idRequest=" + id_request;

@@ -83,11 +83,10 @@ public class showRequest extends HttpServlet {
 						else if (a.getType() == 1)
 							jObj.put("type", "Tirocinio esterno");
 						jObj.put("status", a.getStatus());
-						if(a.getStatus().equalsIgnoreCase("parzialmente completata") ||
-								a.getStatus().equalsIgnoreCase("in attesa di caricamento registro di tirocinio"))
+						if(a.getStatus().equals("Parzialmente completata"))
 							jObj.put("actions", ""
 									+ "<label class=\"actionInternship btn btn-default pulse\">"
-									+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
+									+ "<input type='button' data-partial-request='true' data-action='upload' id='"+a.getId_request_i()+"'>" 
 									+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
 									+ "</label>"
 									+ "<label class=\"actionInternship btn btn-default\">"
@@ -98,10 +97,24 @@ public class showRequest extends HttpServlet {
 									+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
 									+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 									+ "</label>");
-						else {
+						else if(a.getStatus().equals("In attesa di caricamento Registro di Tirocinio")) 
+							jObj.put("actions", ""
+									+ "<label class=\"actionInternship btn btn-default pulse\">"
+									+ "<input type='button' data-partial-request='false' data-action='upload' id='"+a.getId_request_i()+"'>" 
+									+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+									+ "</label>"
+									+ "<label class=\"actionInternship btn btn-default\">"
+									+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
+									+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
+									+ "</label>"
+									+ "<label class=\"info btn btn-default\">"
+									+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
+									+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+									+ "</label>");
+						else 
 							jObj.put("actions", ""
 									+ "<label class=\"actionInternship btn btn-default\" disabled>"
-									+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
+									+ "<input type='button' data-partial-request='false' data-action='upload' id='"+a.getId_request_i()+"'>" 
 									+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
 									+ "</label>"
 									+ "<label class=\"actionInternship btn btn-default\">"
@@ -112,7 +125,7 @@ public class showRequest extends HttpServlet {
 									+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
 									+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 									+ "</label>");
-						}
+
 						jArr.add(jObj);
 					}
 			}
