@@ -93,11 +93,11 @@ public class User implements UserInterface {
 	public void setPassword(String p) {
 		this.password=p;
 	}
-	
+
 	public void setUserType(int u) {
 		this.userType=u;
 	}
-	
+
 	public String getOffice() {
 		return office;
 	}

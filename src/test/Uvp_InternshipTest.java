@@ -21,19 +21,24 @@ class Uvp_InternshipTest {
 
 	@Test
 	void testGetId() {
-		internship.getId();
+		assertEquals(1 , internship.getId());
+
 	}
 
 	@Test
 	void testSetId() {
-		internship.setId(1);	}
+		internship.setId(2);
+		assertEquals(2, internship.getId());
+		}
 
 	@Test
 	void testGetAvailability() {
-		internship.getAvailability();	}
+		assertEquals(3 , internship.getAvailability());
+	}
 
 	@Test
 	void testSetAvailability() {
-		internship.setAvailability(3);	}
-
+		internship.setAvailability(4);
+		assertEquals(4, internship.getAvailability());
+	}
 }

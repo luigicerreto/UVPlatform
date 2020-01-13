@@ -24,8 +24,7 @@ public class RequestInternship {
 
 	}
 
-	public RequestInternship(int id_request_i, String status, int type,
-			int fk_i, List<Attached> attached) {
+	public RequestInternship(int id_request_i, String status, int type, int fk_i, List<Attached> attached) {
 		this.status=status;
 		this.attached=attached;
 		this.FK_I=fk_i;

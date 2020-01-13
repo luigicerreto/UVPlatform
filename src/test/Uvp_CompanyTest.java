@@ -21,82 +21,93 @@ class Uvp_CompanyTest {
 
 	@Test
 	void testGetEmail() {
-		app.getEmail();
+		assertEquals("info@microsoft.it", app.getEmail());
+
 	}
 
 	@Test
 	void testSetEmail() {
-		app.setEmail("microsoft@info.it");
+		app.setEmail("111info@microsoft.it");
+		assertEquals("111info@microsoft.it", app.getEmail());
 	}
 
 	@Test
 	void testGetName() {
-		app.getName();
+		assertEquals("", app.getName());
 	}
 
 	@Test
 	void testSetName() {
-		app.setName("Bill");
+		app.setName("ciao");
+		assertEquals("ciao", app.getName());
 	}
 
 	@Test
 	void testGetSurname() {
-		app.getSurname();
+		assertEquals("", app.getSurname());
 	}
 
 	@Test
 	void testSetSurname() {
-		app.setSurname("Gates");
+		app.setSurname("Buongiorno2");
+		assertEquals("Buongiorno2", app.getSurname());
 	}
 
 	@Test
 	void testGetSex() {
-		app.getSex();
+		assertEquals('M', app.getSex());
 	}
 
 	@Test
 	void testSetSex() {
-	app.setSex('F');
+		app.setSex('F');
+		assertEquals('F', app.getSex());
 	}
 
 	@Test
-	void testGetPassword() {
-		app.getPassword();
+	void atestGetPassword() {
+		app.setPassword("password3");
+		assertEquals("password3", app.getPassword());
 	}
 
 	@Test
 	void testSetPassword() {
-		app.setPassword("password1");
+		app.setPassword("password2");
+		assertEquals("password2", app.getPassword());
 	}
 
 	@Test
-	void testGetUserType() {
-		app.getUserType();
+	void btestGetUserType() {
+		assertEquals(4, app.getUserType());
 	}
 
 	@Test
 	void testSetUserType() {
-		app.setUserType(3);
+		app.setUserType(5);	
+		assertEquals(5, app.getUserType());
 	}
 
 	@Test
 	void testGetSerial() {
-		app.getSerial();
-	}
+		app.setSerial("1234567890");	
+		assertEquals("1234567890", app.getSerial());
+		}
 
 	@Test
 	void testSetSerial() {
-		app.setSerial("2838443232");
+		app.setSerial("12345678920");	
+		assertEquals("12345678920", app.getSerial());
 	}
 
 	@Test
-	void testGetOffice() {
-		app.getOffice();
+	void ctestGetOffice() {
+		app.getOffice();	
+		assertEquals(null, app.getOffice());
 	}
 
 	@Test
 	void testSetOffice() {
-		app.setOffice("via umberto I ");
+		app.setOffice("edificio f7");
 	}
 
 	@Test

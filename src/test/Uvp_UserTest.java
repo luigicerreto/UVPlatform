@@ -20,93 +20,97 @@ class Uvp_UserTest {
 	}
 
 	@Test
-	void testGetSerial() {
-		app.getSerial();
+	void atestGetSerial() {
+		assertEquals("0512105521", app.getSerial());
 	}
 
 	@Test
 	void testSetSerial() {
-		app.setSerial("0512105521");
+		app.setSerial("0123456789");
+		assertEquals("0123456789", app.getSerial());
 	}
 
 	@Test
 	void testGetPhone() {
-		app.getPhone();
+		assertEquals("3922412978", app.getPhone());
+
 	}
 
 	@Test
 	void testSetPhone() {
-		app.setPhone("3928317821");
+		app.setPhone("392241234");
+		assertEquals("392241234", app.getPhone());
 	}
 
 	@Test
 	void testGetEmail() {
-		app.getEmail();
-	}
-
-	@Test
-	void testGetName() {
-		app.getName();
-	}
-
-	@Test
-	void testGetSurname() {
-		app.getSurname();
-	}
-
-	@Test
-	void testGetSex() {
-		app.getSex();
-	}
-
-	@Test
-	void testGetPassword() {
-		app.getPassword();
-	}
-
-	@Test
-	void testGetUserType() {
-		app.getUserType();
+		assertEquals("a.baldi20@studenti.unisa.it", app.getEmail());
 	}
 
 	@Test
 	void testSetEmail() {
-		app.setEmail("a.baldi21@studenti.unisa.it");
+		app.setEmail("a.baldi30@studenti.unisa.it");
+		assertEquals("a.baldi30@studenti.unisa.it", app.getEmail());
+	}
+
+	@Test
+	void testGetName() {
+		assertEquals("Antonio", app.getName());
+
 	}
 
 	@Test
 	void testSetName() {
-		app.setName("michele");
+		app.setName("Roberto");
+		assertEquals("Roberto", app.getName());
+	}
+
+	@Test
+	void testGetSurname() {
+		assertEquals("Baldi", app.getSurname());
+
 	}
 
 	@Test
 	void testSetSurname() {
-		app.setSurname("pirro");
+		app.setSurname("Pirro");
+		assertEquals("Pirro", app.getSurname());
+	}
+
+	@Test
+	void testGetSex() {
+		assertEquals('M', app.getSex());
+
 	}
 
 	@Test
 	void testSetSex() {
 		app.setSex('F');
+		assertEquals('F', app.getSex());
+	}
+
+	@Test
+	void btestGetPassword() {
+		app.setPassword("password");
+		assertEquals("password", app.getPassword());
 	}
 
 	@Test
 	void testSetPassword() {
-		app.setPassword("password1");
+		app.setPassword("password3");
+		assertEquals("password3", app.getPassword());
+	}
+
+	@Test
+	void testGetUserType() {
+		app.setUserType(0);
+		assertEquals(0, app.getUserType());
 	}
 
 	@Test
 	void testSetUserType() {
-		app.setUserType(2);
-	}
-
-	@Test
-	void testGetOffice() {
-		app.getOffice();
-	}
-
-	@Test
-	void testSetOffice() {
-		app.setOffice("office");
+		app.setUserType(5);	
+		assertEquals(5, app.getUserType());
 	}
 
 	@Test

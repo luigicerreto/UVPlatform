@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -21,75 +23,94 @@ class Uvp_TeacherTest {
 
 	@Test
 	void testGetEmail() {
-		teac.getEmail();
+		assertEquals("rdeprisco@unisa.it", teac.getEmail());
 	}
 
 	@Test
 	void testSetEmail() {
-		teac.setEmail("rdeprisco@unisa.it");
+		teac.setEmail("111rdeprisco@unisa.it");
+		assertEquals("111rdeprisco@unisa.it", teac.getEmail());
 	}
 
 	@Test
 	void testGetName() {
-		teac.getName();
+		assertEquals("Roberto", teac.getName());
 	}
 
 	@Test
 	void testSetName() {
-		teac.setName("Roberto");
+		teac.setName("Roberto1");
+		assertEquals("Roberto1", teac.getName());
 	}
 
 	@Test
 	void testGetSurname() {
-		teac.getSurname();
+		assertEquals("De Prisco", teac.getSurname());
+
 	}
 
 	@Test
 	void testSetSurname() {
-		teac.setSurname("De Prisco");
+		teac.setSurname("De Prisco2");
+		assertEquals("De Prisco2", teac.getSurname());
+
 	}
 
 	@Test
 	void testGetSex() {
-
-		teac.getSex();
+		assertEquals('M', teac.getSex());
 	}
 
 	@Test
 	void testSetSex() {
-		teac.setSex('M');
+		teac.setSex('F');
+		assertEquals('F', teac.getSex());
 	}
 
 	@Test
-	void testGetPassword() {
-		teac.getPassword();
+	void atestGetPassword() {
+		teac.setPassword("password3");
+		assertEquals("password3", teac.getPassword());
+
 	}
 
 	@Test
 	void testSetPassword() {
-		teac.setPassword("password");
+		teac.setPassword("password2");
+		assertEquals("password2", teac.getPassword());
 	}
 
 	@Test
-	void testGetUserType() {
-		teac.getUserType();	}
+	void btestGetUserType() {
+		assertEquals(3, teac.getUserType());
+
+	}
 
 	@Test
 	void testSetUserType() {
-		teac.setUserType(3);	
+		teac.setUserType(5);	
+		assertEquals(5, teac.getUserType());
+
 	}
 
 	@Test
 	void testGetSerial() {
-		teac.getSerial();	}
+		teac.setSerial("1234567890");	
+		assertEquals("1234567890", teac.getSerial());
+	}
 
 	@Test
 	void testSetSerial() {
-		teac.setSerial("1234567890");	}
+		teac.setSerial("12345678920");	
+		assertEquals("12345678920", teac.getSerial());
+
+	}
 
 	@Test
-	void testGetOffice() {
-		teac.getOffice();	}
+	void ctestGetOffice() {
+		teac.getOffice();	
+		assertEquals(null, teac.getOffice());	
+	}
 
 	@Test
 	void testSetOffice() {

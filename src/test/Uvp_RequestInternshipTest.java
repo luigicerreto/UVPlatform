@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.Attached;
@@ -18,111 +19,60 @@ static RequestInternship app;
 		RequestInternship app2 = new RequestInternship();
 	}
 
-	@BeforeAll
-	static void testConstructorRequestInternship() {
+	@BeforeEach
+	 void testConstructorRequestInternship() {
 		 List<Attached> attached = new ArrayList<>();
-		app = new RequestInternship(1, "In attesa di accettazione", "Interno", "0512105521", "Antonio+Baldi", 1, 0, attached );
-			}
+		app = new RequestInternship(1, "In attesa di accettazione", 0, 1, attached );
+			
+	}
 
 	@Test
-	void testGetId_request_i() {
-		app.getId_request_i();
+	void atestGetId_request_i() {
+		assertEquals(1, app.getId_request_i());
 	}
 
 	@Test
 	void testSetId_request_i() {
-		app.setId_request_i(2);
+		app.setId_request_i(3);
+		assertEquals(3, app.getId_request_i());
 	}
 
 	@Test
 	void testGetType() {
-		app.getType();
+		assertEquals(0, app.getType());
 	}
-
+	
 	@Test
 	void testSetType() {
-		app.setType("esterno");
+		app.setType(1);
+		assertEquals(1, app.getType());
 	}
 
-	@Test
-	void testGetUserName() {
-		app.getUserName();
-	}
 
 	@Test
-	void testGetUserSurname() {
-		app.getUserSurname();
-	}
+	void btestGetStatus() {
+		assertEquals("In attesa di accettazione", app.getStatus());
 
-	@Test
-	void testGetUserFullName() {
-		app.getUserFullName();
-	}
-
-	@Test
-	void testSetUserFullName() {
-		app.setUserFullName("michele+pirro");
-	}
-
-	@Test
-	void testGetId_ie() {
-		app.getId_ie();
-	}
-
-	@Test
-	void testSetId_ie() {
-		app.setId_ie(0);
-	}
-
-	@Test
-	void testGetId_ii() {
-		app.getId_ii();
-	}
-
-	@Test
-	void testSetId_ii() {
-		app.setId_ii(2);
-	}
-
-	@Test
-	void testGetStatus() {
-		app.getStatus();
 	}
 
 	@Test
 	void testSetStatus() {
-	app.setStatus("conclusa");	
+		app.setStatus("Conclusa");
+		assertEquals("Conclusa", app.getStatus());
 	}
 
 	@Test
 	void testGetAttached() {
-		app.getAttached();
+		 List<Attached> attached = new ArrayList<>();
+		assertEquals(attached, app.getAttached());
 	}
 
 	@Test
 	void testSetAttached() {
 		 List<Attached> attached = new ArrayList<>();
-		app.setAttached(attached);
-	}
+		 attached.add(new Attached(99, "rosariolove"));
+		 app.setAttached(attached);
+			assertEquals(attached, app.getAttached());
 
-	@Test
-	void testGetUserEmail() {
-		app.getUserEmail();
 	}
-
-	@Test
-	void testSetUserEmail() {
-		app.setUserEmail("a.baldi20@studenti.unisa.it");
-	}
-
-	@Test
-	void testGetUserSerial() {
-		app.getUserSerial();
-	}
-
-	@Test
-	void testSetUserSerial() {
-		app.setUserSerial("2378932239");
-	}
-
 }
