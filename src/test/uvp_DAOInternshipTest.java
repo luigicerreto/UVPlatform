@@ -349,7 +349,7 @@ class uvp_DAOInternshipTest {
 	}
 	
 	@Test
-	void testgetTutorPass() throws SQLException
+	void testgetTutorPassInternal() throws SQLException
 	{
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -363,6 +363,43 @@ class uvp_DAOInternshipTest {
 		con.commit();
 		
 		result = app.getTutor(111, 0);
+		
+		assertEquals("slatorre@unisa.it",result.getEmail());
+		assertEquals("Salvatore",result.getName());
+		assertEquals("La torre",result.getSurname());
+		assertEquals('M',result.getSex());
+		assertEquals("password",result.getPassword());
+		assertEquals(3,result.getUserType());
+		assertEquals("92372",result.getSerial());
+		
+		
+		
+		
+		String delete = "DELETE FROM internship_e WHERE ID_IE = 111";
+		String DeleteUser = "DELETE FROM user WHERE email = 'slatorre@unisa.it'";
+		statement = con.prepareStatement(delete);
+		statement = con.prepareStatement(DeleteUser);
+		statement.executeUpdate();
+		statement.executeUpdate();
+		con.commit();
+		
+	}
+	
+	@Test
+	void testgetTutorPassExternal() throws SQLException
+	{
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		User result;
+		String addUser= "INSERT INTO user VALUES ('slatorre@unisa.it', 'Salvatore', 'La torre', 'M', 'password', 3, '92372', 'f2', '8233923932')";
+		String addInternshipEx = "INSERT INTO internship_e VALUES ('111', 'Salvatore la torre', 3 , '2019-01-01', 30, 'usare poo', 'slatorre@unisa.it')";
+		statement= con.prepareStatement(addUser);
+		statement.executeUpdate();
+		statement= con.prepareStatement(addInternshipEx);
+		statement.executeUpdate();
+		con.commit();
+		
+		result = app.getTutor(111, 1);
 		
 		assertEquals("slatorre@unisa.it",result.getEmail());
 		assertEquals("Salvatore",result.getName());
