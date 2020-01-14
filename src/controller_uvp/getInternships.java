@@ -42,7 +42,7 @@ public class getInternships extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();

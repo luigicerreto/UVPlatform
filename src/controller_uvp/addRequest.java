@@ -50,7 +50,7 @@ public class addRequest extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer result = 0;
 		String error = "";
 		String content = "";
@@ -61,7 +61,10 @@ public class addRequest extends HttpServlet {
 		DAOUser daouser = new DAOUser();
 		DAOInternship daoint = new DAOInternship();
 
-		User student = daouser.getUser(((UserInterface) request.getSession().getAttribute("user")).getEmail());
+		User student = null;
+		if (request.getSession().getAttribute("user") != null)
+			student = daouser.getUser(((UserInterface) request.getSession().getAttribute("user")).getEmail());
+		
 		int id_request = (Integer.parseInt(request.getParameter("choice")));
 		int type_request = (Integer.parseInt(request.getParameter("type")));
 
@@ -76,6 +79,8 @@ public class addRequest extends HttpServlet {
 			if(return_val == 1) {
 				result = 1;
 				content = "Richiesta parziale presentata";
+				redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached.jsp?id_request=" 
+						+ daoreq.checkLastPartialRequest(student.getEmail()) + "&new_request=true";
 			} else if(return_val == 2) {
 				result = 0;
 				error = "Hai una richiesta ancora non conclusa";
@@ -87,9 +92,6 @@ public class addRequest extends HttpServlet {
 			result = 0;
 			error = "Si è verificato un errore";
 		}
-
-		redirect = request.getContextPath() + "/_areaStudent_uvp/uploadAttached.jsp?id_request=" 
-				+ daoreq.checkLastPartialRequest(student.getEmail()) + "&new_request=true";
 
 		JSONObject res = new JSONObject();
 		res.put("result", result);

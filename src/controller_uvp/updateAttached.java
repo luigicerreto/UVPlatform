@@ -42,7 +42,7 @@ public class updateAttached extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer result = 0;
 		String error = "";
 		String content = "";
@@ -51,33 +51,41 @@ public class updateAttached extends HttpServlet {
 		DAORequest queryobj = new DAORequest();
 		String status = null;
 
+		UserInterface currUser = null;
+		if (request.getSession().getAttribute("user") != null)
+			currUser = (UserInterface) request.getSession().getAttribute("user");
+		
 		String[] filenames = request.getParameterValues("filenames[]");
 		Integer idRequest = Integer.parseInt(request.getParameter("id_request"));
 		String flag = request.getParameter("flag");
 
 		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 
 		{
-			throw new IllegalArgumentException("Valore non corretto");
-		}
-
-		String emailNotify = queryobj.updateAttached(filenames[0], idRequest);
-		if(emailNotify != null){
-			if (flag != null) {
-				if (flag.equals("0")) status = "[DOCENTE] Richiesta firmata";
-				else if (flag.equals("1"))  status = "[AZIENDA] Richiesta firmata";
-				queryobj.setStatus(idRequest, status);
-			}
-
-			new Thread(() -> {
-				Notifier.notifyStudent(emailNotify, idRequest);
-			}).start();
-
-			content = "Allegati inseriti con successo.";
-			result = 1;
-		}
-		else {
-			error = "Impossibile inserire l'allegato: " + filenames[0];
 			result = 0;
+			error = "Quantità o formato degli allegati non valido";
+		} else if(currUser != null) {
+			String emailNotify = queryobj.updateAttached(filenames[0], idRequest);
+			if(emailNotify != null){
+				if (flag != null) {
+					if (flag.equals("0")) status = "[DOCENTE] Richiesta firmata";
+					else if (flag.equals("1"))  status = "[AZIENDA] Richiesta firmata";
+					queryobj.setStatus(idRequest, status);
+				}
+
+				new Thread(() -> {
+					Notifier.notifyStudent(emailNotify, idRequest);
+				}).start();
+
+				content = "Allegati inseriti con successo.";
+				result = 1;
+			}
+			else {
+				error = "Impossibile inserire l'allegato: " + filenames[0];
+				result = 0;
+			}
+		} else {
+			result = 0;
+			error = "Si è verificato un errore";
 		}
 
 		JSONObject res = new JSONObject();
@@ -90,4 +98,3 @@ public class updateAttached extends HttpServlet {
 		response.setContentType("json");
 	}
 }
-

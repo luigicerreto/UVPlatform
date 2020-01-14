@@ -38,49 +38,54 @@ public class showProfile extends HttpServlet {
 	 */
 	public showProfile() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+	*/
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer result = 0;
 		String error = "";
 		String redirect = "";
 		DAOUser queryobj = new DAOUser();
-		User user = null;
 		JSONObject res = new JSONObject();
 
-		try{
-			user = queryobj.getUser(currUser.getEmail());
-			
-			if(user == null) {
-				result = 0;
-				error = "Errore nel caricamento dei dati";
-			} else {
-				res.put("name", user.getName());
-				res.put("surname", user.getSurname());
-				res.put("email", user.getEmail());
-				res.put("phone", user.getPhone());
-				result = 1;
+		User user = null;
+
+		UserInterface currUser = null;
+		if (request.getSession().getAttribute("user") != null)
+			currUser = (UserInterface) request.getSession().getAttribute("user");
+		if(currUser != null) {
+			try{
+				user = queryobj.getUser(currUser.getEmail());
+
+				if(user == null) {
+					result = 0;
+					error = "Errore nel caricamento dei dati";
+				} else {
+					res.put("name", user.getName());
+					res.put("surname", user.getSurname());
+					res.put("email", user.getEmail());
+					res.put("phone", user.getPhone());
+					result = 1;
+				}
 			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		} else {
+			result = 0;
+			error = "Si è verificato un errore";
 		}
 
 

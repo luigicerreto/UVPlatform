@@ -46,54 +46,60 @@ public class addAttached extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer result = 0;
 		String error = "";
 		String content = "";
 		String redirect = "";
 		DAORequest daoreq = new DAORequest();
 
-		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
+		UserInterface currUser = null;
+		if (request.getSession().getAttribute("user") != null)
+			currUser = (UserInterface) request.getSession().getAttribute("user");
+
 		Integer id_request = Integer.parseInt(request.getParameter("id_request"));
 		boolean new_request = Boolean.parseBoolean(request.getParameter("new_request"));
 		RequestInternship req = daoreq.getRequest(id_request);
 		String[] filenames = request.getParameterValues("filenames[]");
 
-		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 
-		{
-			throw new IllegalArgumentException("Valore non corretto");
-		}
+		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) {
+			result = 0;
+			error = "Quantità o formato degli allegati non valido";
+		} else if(currUser != null) {
+			// aggiunge l'allegato e notifica lo studente
+			if(daoreq.addAttached(filenames[0], currUser.getEmail(), id_request)) {
+				new Thread(() -> {
+					Notifier.notifyStudent(((UserInterface) request.getSession().getAttribute("user")).getEmail(), id_request);
+				}).start();
 
-		// aggiunge l'allegato e notifica lo studente
-		if(daoreq.addAttached(filenames[0], user.getEmail(), id_request)) {
-			new Thread(() -> {
-				Notifier.notifyStudent(user.getEmail(), id_request);
-			}).start();
-
-			if(new_request || req.getStatus().equals("Parzialmente completata")) { // se viene inserito il primo allegato
-				if(req.getType() == 0) {
-					if(daoreq.setStatus(id_request, "[DOCENTE] In attesa di accettazione")) {	
+				if(new_request==true || req.getStatus().equals("Parzialmente completata")) { // se viene inserito il primo allegato
+					if(req.getType() == 0) {
+						if(daoreq.setStatus(id_request, "[DOCENTE] In attesa di accettazione")) {	
+							content = "Allegato inserito con successo";
+							result = 1;
+						}
+					} else if (req.getType() == 1) {
+						if(daoreq.setStatus(id_request, "[AZIENDA] In attesa di accettazione")) {	
+							content = "Allegato inserito con successo";
+							result = 1;
+						}
+					} else {
+						error = "Impossibile inserire l'allegato";
+						result = 0;
+					}
+				} else { // se viene inserito un allegato aggiuntivo
+					if(daoreq.setStatus(id_request, "[SEGRETERIA] In attesa di accettazione")) {	
 						content = "Allegato inserito con successo";
 						result = 1;
+					} else {
+						error = "Impossibile inserire l'allegato";
+						result = 0;
 					}
-				} else if (req.getType() == 1) {
-					if(daoreq.setStatus(id_request, "[AZIENDA] In attesa di accettazione")) {	
-						content = "Allegato inserito con successo";
-						result = 1;
-					}
-				} else {
-					error = "Impossibile inserire l'allegato";
-					result = 0;
-				}
-			} else { // se viene inserito un allegato aggiuntivo
-				if(daoreq.setStatus(id_request, "[SEGRETERIA] In attesa di accettazione")) {	
-					content = "Allegato inserito con successo";
-					result = 1;
-				} else {
-					error = "Impossibile inserire l'allegato";
-					result = 0;
 				}
 			}
+		} else {
+			result = 0;
+			error = "Si è verificato un errore";
 		}
 
 		JSONObject res = new JSONObject();
