@@ -31,8 +31,6 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
-					+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 	} else if (pageFolder.equals("_areaAdmin_uvp") && ck.isAllowed()) { //se stiamo in una pagina dell'area admin
 		logoRedirect = request.getContextPath() + "/_areaAdmin/viewRequest.jsp";
@@ -50,8 +48,6 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
-					+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 		if (pageName.equals("viewUser.jsp") && ck.isAllowed()) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + "_areaAdmin"
@@ -66,8 +62,6 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
-					+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 		if (pageName.equals("viewTeacher.jsp") && ck.isAllowed()) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + "_areaAdmin"
@@ -82,8 +76,6 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
-					+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 		if (pageName.equals("viewCompany.jsp") && ck.isAllowed()) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + "_areaAdmin"
@@ -98,8 +90,6 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
-					+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 		if (pageName.equals("uploadAttached.jsp") && ck.isAllowed()) {
 			menu += "<li><a href=\"" + request.getContextPath() + "/" + "_areaAdmin"
@@ -110,8 +100,6 @@
 			menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
 			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 					+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
-			menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
-					+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
 		}
 	} else if (pageFolder.equals("_areaSecretary") && ck.isAllowed()) { //se stiamo in una pagina dell'area segreteria
 		logoRedirect = request.getContextPath() + "/_areaSecretary/viewRequest.jsp";
@@ -317,6 +305,16 @@
 						+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
 						+ "/contact_uvp.jsp\"><i class=\"fa fa-envelope\"></i>Contattaci</a></li>";
+			} else if (user.getUserType() == 2) {
+				logoRedirect = request.getContextPath() + "/_areaAdmin_uvp/viewRequestInternship.jsp";
+				
+				menu = "<li><a href=\"" + request.getContextPath()
+						+ "/_areaAdmin/viewRequest.jsp\">Richieste EV</a></li>";
+				menu += "<li><a href=\"" + request.getContextPath() + "/" + pageFolder
+						+ "_areaAdmin_uvp/viewRequestInternship.jsp\">Richieste Tirocinio</a></li>";
+				menu += "<li><a href=\"" + request.getContextPath() + "/logout.jsp\">Disconnetti</a></li>";
+				menu += "<li style=\"float:right\"><a href=\"" + request.getContextPath()
+						+ "/profile_uvp.jsp\"><i class=\"fa fa-user\"></i>" + user.getName() + "</a></li>";
 			} else if (user.getUserType() == 1) {
 				logoRedirect = request.getContextPath() + "/_areaSecretary/viewRequest.jsp";
 
