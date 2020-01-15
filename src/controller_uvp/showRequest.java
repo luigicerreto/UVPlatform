@@ -49,7 +49,7 @@ public class showRequest extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user");
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();

@@ -20,15 +20,15 @@ import org.springframework.mock.web.MockHttpSession;
 
 import controller.DbConnection;
 import controller.ServletSignup;
-import controller_uvp.showRequest_Admin;
+import controller_uvp.showRequest_Secretary;
 import interfacce.UserInterface;
 import model_uvp.DAOUser;
 import model_uvp.User;
 
-public class ShowRequest_AdminTest {
+public class ShowRequest_SecretaryTest {
 	private MockHttpServletRequest request;
 	private MockHttpServletResponse response;
-	private showRequest_Admin servlet;
+	private showRequest_Secretary servlet;
 	private JSONObject res;
 	private static MockHttpSession session;
 
@@ -45,12 +45,12 @@ public class ShowRequest_AdminTest {
 		signup_req.addParameter("email", "t.tester@studenti.unisa.it");
 		signup_req.addParameter("sex", "M");
 		signup_req.addParameter("password", "password");
-		signup_req.addParameter("flag", "2");
+		signup_req.addParameter("flag", "1");
 		signup.doPost(signup_req, signup_res);
 
 
 		UserInterface user = (UserInterface) new User("t.tester@studenti.unisa.it", "TESTER", "TESTER", 
-				'M', "password", 2, "0000000000", "");
+				'M', "password", 1, "0000000000", "");
 		session = new MockHttpSession();
 		session.setAttribute("user", user);
 		Connection con = new DbConnection().getInstance().getConn();
@@ -58,7 +58,7 @@ public class ShowRequest_AdminTest {
 
 		// nuova richiesta tirocinio interno
 		String req_int = "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
-				+ "VALUES (1000, 0, \"[ADMIN] In attesa di accettazione\", \"t.tester@studenti.unisa.it\", \"rdeprisco@unisa.it\", 1, null)";
+				+ "VALUES (1000, 0, \"[SEGRETERIA] In attesa di accettazione\", \"t.tester@studenti.unisa.it\", \"rdeprisco@unisa.it\", 1, null)";
 		statement = con.prepareStatement(req_int);
 		
 
@@ -117,12 +117,12 @@ public class ShowRequest_AdminTest {
 	public void init() {
 		response = new MockHttpServletResponse();
 		request = new MockHttpServletRequest();
-		servlet = new showRequest_Admin();
+		servlet = new showRequest_Secretary();
 		res = new JSONObject();
 	}
 
 	@Test
-	public void testEditPassword_pass() throws ServletException, IOException, ParseException {
+	public void testShowRequest_Secretary_pass() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
 		request.addParameter("field", "password");
 		request.addParameter("value", "password");
@@ -133,7 +133,7 @@ public class ShowRequest_AdminTest {
 
 	}
 	@Test
-	public void testEditPassword_fail() throws ServletException, IOException, ParseException {
+	public void testShowRequest_Secretary_fail() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
 		request.addParameter("field", "password");
 		request.addParameter("value", "password");
@@ -143,3 +143,4 @@ public class ShowRequest_AdminTest {
 	}
 
 }
+

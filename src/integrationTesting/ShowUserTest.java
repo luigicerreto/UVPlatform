@@ -1,7 +1,5 @@
 package integrationTesting;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -18,7 +16,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 
 import controller.ServletSignup;
-import controller_uvp.contact;
 import controller_uvp.showUsers;
 import interfacce.UserInterface;
 import model_uvp.DAOUser;

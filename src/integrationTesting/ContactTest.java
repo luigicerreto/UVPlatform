@@ -19,7 +19,6 @@ import org.springframework.mock.web.MockHttpSession;
 
 import controller.ServletSignup;
 import controller_uvp.contact;
-import controller_uvp.removeUser;
 import interfacce.UserInterface;
 import model_uvp.DAOUser;
 import model_uvp.User;

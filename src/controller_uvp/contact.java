@@ -64,8 +64,5 @@ public class contact extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");
-		
-		
 	}
-
 }

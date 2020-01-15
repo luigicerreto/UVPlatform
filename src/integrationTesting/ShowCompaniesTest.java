@@ -1,7 +1,5 @@
 package integrationTesting;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.sql.SQLException;
 

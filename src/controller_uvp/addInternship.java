@@ -48,7 +48,7 @@ public class addInternship extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer result = 0;
 		String error = "";
 		String content = "";
@@ -181,21 +181,21 @@ public class addInternship extends HttpServlet {
 					error = "Errore nella registrazione dell'azienda";
 				}
 			}
-
-			if(result == 1) { // notifica docente/azienda
-				new Thread(() -> {
-					Notifier.notifyNewUser(user);
-				}).start();
-			}
-
-			JSONObject res = new JSONObject();
-			res.put("result", result);
-			res.put("error", error);
-			res.put("content", content);
-			PrintWriter out = response.getWriter();
-			out.println(res);
-			response.setContentType("json");
 		}
+
+		if(result == 1) { // notifica docente/azienda
+			new Thread(() -> {
+				Notifier.notifyNewUser(user);
+			}).start();
+		}
+
+		JSONObject res = new JSONObject();
+		res.put("result", result);
+		res.put("error", error);
+		res.put("content", content);
+		PrintWriter out = response.getWriter();
+		out.println(res);
+		response.setContentType("json");
 	}
 }
 

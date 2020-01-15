@@ -80,10 +80,7 @@ public class showRequest_Company extends HttpServlet {
 					jObj.put("attached", attached);
 					jObj.put("name", a.getStudent().getName());
 					jObj.put("surname", a.getStudent().getSurname());
-					if (a.getType() == 0)
-						jObj.put("type", "Tirocinio interno");
-					else if (a.getType() == 1)
-						jObj.put("type", "Tirocinio esterno");
+					jObj.put("type", "Tirocinio esterno");
 					jObj.put("state",a.getStatus());
 					if(a.getStatus().equals("[AZIENDA] In attesa di accettazione"))
 						jObj.put("actions", ""

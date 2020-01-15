@@ -45,7 +45,7 @@ public class showRequest_Teacher extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		String email="";
 		ArrayList<RequestInternship> requests;
@@ -80,10 +80,7 @@ public class showRequest_Teacher extends HttpServlet {
 					jObj.put("attached", attached);					
 					jObj.put("name", a.getStudent().getName());
 					jObj.put("surname", a.getStudent().getSurname());
-					if (a.getType() == 0)
-						jObj.put("type", "Tirocinio interno");
-					else if (a.getType() == 1)
-						jObj.put("type", "Tirocinio esterno");
+					jObj.put("type", "Tirocinio interno");
 					jObj.put("state",a.getStatus());
 					if(a.getStatus().equals("[DOCENTE] In attesa di accettazione"))
 						jObj.put("actions", ""

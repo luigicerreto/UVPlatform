@@ -1,11 +1,10 @@
 package integrationTesting;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 

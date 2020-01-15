@@ -3,9 +3,6 @@ package integrationTesting;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -21,9 +18,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 
-import controller.DbConnection;
 import controller.ServletSignup;
-import controller_uvp.addRequest;
 import controller_uvp.editUser;
 import interfacce.UserInterface;
 import model_uvp.DAOUser;
