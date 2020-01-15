@@ -196,4 +196,9 @@ public class ShowInfoTest {
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
 		assertEquals(res.get("id").toString(), "1");
 	}
+	
+	@Test
+	public void doGetTest() throws ServletException, IOException {
+		servlet.doGet(request, response);
+	}
 }

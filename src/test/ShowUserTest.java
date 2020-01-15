@@ -80,5 +80,10 @@ public class ShowUserTest {
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
 	
 	}
+	
+	@Test
+	public void doGetTest() throws ServletException, IOException {
+		servlet.doGet(request, response);
+	}
 
 }

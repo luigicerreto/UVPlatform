@@ -156,4 +156,9 @@ public class UpdateAttachedTest {
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
 		assertEquals(res.get("result").toString(), "0");
 	}
+	
+	@Test
+	public void doGetTest() throws ServletException, IOException {
+		servlet.doGet(request, response);
+	}
 }

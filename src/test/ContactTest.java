@@ -58,6 +58,10 @@ public class ContactTest {
 		session.setAttribute("user", user);
 	}
 	
+	public void doGetTest() throws ServletException, IOException {
+		servlet.doGet(request, response);
+	}
+	
 	@AfterEach
 	public void tearDown() throws SQLException {
 		// elimina studente per il test

@@ -113,4 +113,8 @@ public class AcceptRequestTest {
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
 		assertEquals(res.get("result").toString(), "0");
 	}
+	
+	public void doGetTest() throws ServletException, IOException {
+		servlet.doGet(request, response);
+	}
 }
