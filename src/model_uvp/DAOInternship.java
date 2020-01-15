@@ -135,7 +135,13 @@ public class DAOInternship {
 		}
 		return null;
 	}
-	
+	/**
+	 * Questa mail restituisce un tirocinio data una mail
+	 * 
+	 * @param email
+	 * @param typeInternship
+	 * @return
+	 */
 	public Internship getInternshipByEmail(String email, int typeInternship)
 	{
 		Connection con = new DbConnection().getInstance().getConn();
@@ -206,7 +212,7 @@ public class DAOInternship {
 				statement = con.prepareStatement(sql);
 			else if (type == 1)
 				statement = con.prepareStatement(sql1);
-			
+
 			statement.setInt(1, id_internship);
 			result = statement.executeQuery();
 			if(result.next())
@@ -220,14 +226,21 @@ public class DAOInternship {
 		}
 		return tutor;
 	}
-	
+	/**
+	 * 
+	 * Questa funzione aggiunge un tirocinio
+	 * 
+	 * @param i
+	 * @param flag
+	 * @return
+	 */
 	public boolean addInternship (Internship i, int flag) {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
 
 		String sql = "INSERT INTO INTERNSHIP_I (THEME, TUTOR_NAME, AVAILABILITY, RESOURCES, GOALS, FK_TUTOR) VALUES (?, ?, ?, ?, ?, ?)";
 		String sql1 = "INSERT INTO INTERNSHIP_E (NAME, DURATION_CONVENTION, DATE_CONVENTION, AVAILABILITY, INFO, FK_TUTOR) VALUES (?, ?, ?, ?, ?, ?)";
-	
+
 		try {
 			if(flag == 0) { // interno
 				statement = con.prepareStatement(sql);
@@ -237,7 +250,7 @@ public class DAOInternship {
 				statement.setString(4, ((InternalInternship) i).getResources());
 				statement.setString(5, ((InternalInternship) i).getGoals());
 				statement.setString(6, ((InternalInternship) i).getFk_tutor());
-				
+
 				if(statement.executeUpdate()>0) {
 					con.commit();
 					return true;
@@ -254,7 +267,7 @@ public class DAOInternship {
 				statement.setInt(4, ((ExternalInternship) i).getAvailability());
 				statement.setString(5, ((ExternalInternship) i).getInfo());
 				statement.setString(6, ((ExternalInternship) i).getFk_tutor());
-				
+
 				if(statement.executeUpdate()>0) {
 					con.commit();
 					return true;

@@ -49,7 +49,7 @@ public class DAORequest {
 			while(result.next()){
 				request = new RequestInternship();
 				attached = new ArrayList<>();
-				
+
 				statement=con.prepareStatement(sql1);
 				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();
@@ -343,7 +343,12 @@ public class DAORequest {
 		}
 		return null;
 	}
-
+	/**
+	 * 
+	 * @param email
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<RequestInternship> viewRequestsTeacher(String email) throws SQLException {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -368,7 +373,7 @@ public class DAORequest {
 			while(result.next()) {
 				request = new RequestInternship();
 				attached = new ArrayList<>();
-				
+
 				statement=con.prepareStatement(sql1);
 				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();
@@ -403,7 +408,13 @@ public class DAORequest {
 		}
 		return requests;
 	}
-
+	/**
+	 *  Questa funziona permette alle Aziende di far visualizzare le richiest
+	 *  
+	 * @param email
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<RequestInternship> viewRequestsCompany(String email) throws SQLException {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -413,7 +424,7 @@ public class DAORequest {
 		Attached a;
 		ArrayList<RequestInternship> requests = new ArrayList<>();
 		ArrayList<Attached> attached;
-		
+
 		String sql = "SELECT R.* "
 				+ "FROM REQUEST_INTERNSHIP R "
 				+ "INNER JOIN INTERNSHIP_E E ON R.FK_IE = E.ID_IE "
@@ -428,7 +439,7 @@ public class DAORequest {
 			while(result.next()) {
 				request = new RequestInternship();
 				attached = new ArrayList<>();
-				
+
 				statement=con.prepareStatement(sql1);
 				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();
@@ -461,7 +472,13 @@ public class DAORequest {
 		}
 		return requests;
 	}
-
+	/**
+	 * 
+	 * Questa funzionalità permette di visualizzare tutte le richieste
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<RequestInternship> viewAllRequests() throws SQLException {
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -489,7 +506,7 @@ public class DAORequest {
 			while(result.next()) {
 				request = new RequestInternship();
 				attached = new ArrayList<>();
-				
+
 				statement=con.prepareStatement(sql1);
 				statement.setInt(1, result.getInt(1));
 				resultAttached = statement.executeQuery();
@@ -612,7 +629,7 @@ public class DAORequest {
 		Attached a;
 		List<Attached> attached;
 		RequestInternship request = null;
-		
+
 		String sql = "SELECT * FROM REQUEST_INTERNSHIP WHERE ID_REQUEST_I = ?";
 
 		try {

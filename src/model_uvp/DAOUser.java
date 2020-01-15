@@ -95,6 +95,7 @@ public class DAOUser {
 	}
 
 	/**
+	 * Questa funzione permette di recuperare tutti i dati di un utente data la mail.
 	 * 
 	 * @param email
 	 * @return
@@ -146,6 +147,8 @@ public class DAOUser {
 
 	/**
 	 * 
+	 * Questa funzione permette di recuperare le informazioni di un utente da una richiesta di tiroicnio
+	 * 
 	 * @param idRequest
 	 * @return
 	 */
@@ -185,6 +188,10 @@ public class DAOUser {
 
 	/**
 	 * 
+	 * Questa funzione permette di recuperare le informazioni di un utente da una richiesta di EnglishValidation
+	 * 
+	 * @param idRequest
+	 * @return
 	 */
 	public User getUserByRequestEV(int idRequest){
 		Connection con = new DbConnection().getInstance().getConn();
@@ -222,6 +229,8 @@ public class DAOUser {
 
 	/**
 	 * 
+	 * Questa funzione permette di recuperare le informazioni di tutti gli utenti registrati
+	 * 
 	 * @return
 	 */
 	public ArrayList<User> viewUsers(){
@@ -254,7 +263,12 @@ public class DAOUser {
 		}
 		return users;
 	}
-
+	/**
+	 * 
+	 * Questa funzione permette di recuperare le informazioni di tutti i docenti registrati alla piattaforma
+	 * 
+	 * @return
+	 */
 	public ArrayList<User> viewTeachers(){
 		Connection con = new DbConnection().getInstance().getConn();
 		ArrayList<User> users = new ArrayList<>();
@@ -287,7 +301,10 @@ public class DAOUser {
 		}
 		return users;
 	}
-
+	/**
+	 * Questa funzione permette di recuperare le informazioni di tutte le aziende registrate
+	 * @return
+	 */
 	public ArrayList<User> viewCompanies(){
 		Connection con = new DbConnection().getInstance().getConn();
 		ArrayList<User> users = new ArrayList<>();
@@ -320,6 +337,12 @@ public class DAOUser {
 
 	/**
 	 * 
+	 * Questa funzionalità permette di modificare i dati di un determinato utente
+	 * 
+	 * @param email
+	 * @param parameter
+	 * @param value
+	 * @return
 	 */
 	public boolean editUser(String email, String parameter, String value){
 		Connection con = new DbConnection().getInstance().getConn();
@@ -344,7 +367,13 @@ public class DAOUser {
 		}
 		return false;
 	}
-
+	/**
+	 * 
+	 * Questa funzione permette di aggiungere un docente alla piattaforma
+	 * 
+	 * @param u
+	 * @return
+	 */
 	public boolean addTeacher(User u){
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -372,7 +401,9 @@ public class DAOUser {
 		}
 		return false;
 	}
-
+	/*
+	 * Questa funzione permette di aggiungere un'Azienda alla piattaforma
+	 */
 	public boolean addCompany(User u){
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement = null;
@@ -398,7 +429,10 @@ public class DAOUser {
 		}
 		return false;
 	}
-
+	/*
+	 * Questa funzione permette di rimuovere un utente dalla piattaforma
+	 * 
+	 */
 	public boolean removeUser(String email) {
 		PreparedStatement statement = null;
 		Connection con = new DbConnection().getInstance().getConn();
