@@ -82,7 +82,6 @@ $(document).ready(function() {
 		$(this).toggleClass("fa-edit fa-check");
 	});
 	
-	
 	$(document).on('click', 'label.actionInternship', function(e){
 		e.stopPropagation();
 		e.preventDefault();
@@ -90,7 +89,7 @@ $(document).ready(function() {
 		var action = $(this).children("input").data("action");
 		var email = $(this).children("input").attr("id");
 		
-		if (action === "remove"){ // rifiuta richiesta
+		if (action === "remove"){
 			$.ajax({
 				url : absolutePath + "/removeUser",
 				type : "POST",
