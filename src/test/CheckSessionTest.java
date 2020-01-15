@@ -193,7 +193,7 @@ public class CheckSessionTest {
     request.getSession().setAttribute("user", u);
     HttpSession session = request.getSession();
     CheckSession check = new CheckSession("","",session);
-    assertEquals(false, check.isAllowed());
+    assertEquals(true, check.isAllowed());
   }
   
   @Test
@@ -213,7 +213,7 @@ public class CheckSessionTest {
     request.getSession().setAttribute("user", u);
     HttpSession session = request.getSession();
     CheckSession check = new CheckSession("","",session);
-    assertEquals(false, check.isAllowed());
+    assertEquals(true, check.isAllowed());
   }
   
   @Test
@@ -252,7 +252,7 @@ public class CheckSessionTest {
     request.getSession().setAttribute("user", u);
     HttpSession session = request.getSession();
     CheckSession check = new CheckSession("","",session);
-    assertEquals(false, check.isAllowed());
+    assertEquals(true, check.isAllowed());
   }
   
   @Test
