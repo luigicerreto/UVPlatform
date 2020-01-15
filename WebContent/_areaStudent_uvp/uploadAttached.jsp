@@ -40,7 +40,7 @@
 								<div class="form-group">
 									<button type="button"
 										class="btn btn-primary btn-submit generatePDF"
-										onclick="createPdf()">Genera PDF</button>
+										onclick="downloadPdf()">Genera PDF</button>
 								</div>
 								<%
 									}
