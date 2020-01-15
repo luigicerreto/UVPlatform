@@ -60,7 +60,7 @@ public class ShowUserTest {
 	}
 	
 	@Test
-	public void testEditPassword_pass() throws ServletException, IOException, ParseException {
+	public void testShowUserTest_pass() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
 		request.addParameter("field", "password");
 		request.addParameter("value", "password");
@@ -71,7 +71,7 @@ public class ShowUserTest {
 	
 	}
 	@Test
-	public void testEditPassword_fail() throws ServletException, IOException, ParseException {
+	public void testShowUserTest_fail() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
 		request.addParameter("field", "password");
 		request.addParameter("value", "password");

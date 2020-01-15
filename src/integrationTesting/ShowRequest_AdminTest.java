@@ -122,7 +122,7 @@ public class ShowRequest_AdminTest {
 	}
 
 	@Test
-	public void testEditPassword_pass() throws ServletException, IOException, ParseException {
+	public void testShowRequest_Admin_pass() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
 		request.addParameter("field", "password");
 		request.addParameter("value", "password");
@@ -133,7 +133,7 @@ public class ShowRequest_AdminTest {
 
 	}
 	@Test
-	public void testEditPassword_fail() throws ServletException, IOException, ParseException {
+	public void testShowRequest_Admin_fail() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
 		request.addParameter("field", "password");
 		request.addParameter("value", "password");

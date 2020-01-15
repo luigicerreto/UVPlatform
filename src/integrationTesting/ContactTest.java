@@ -65,7 +65,7 @@ public class ContactTest {
 	}
 	
 	@Test
-	public void testEditPassword_pass() throws ServletException, IOException, ParseException {
+	public void testContact_pass() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
 		request.addParameter("field", "password");
 		request.addParameter("value", "password");

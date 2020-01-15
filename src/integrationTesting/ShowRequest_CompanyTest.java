@@ -126,14 +126,14 @@ public class ShowRequest_CompanyTest {
 	}
 
 	@Test
-	public void testShowRequest_Teacher_pass() throws ServletException, IOException, ParseException {
+	public void testShowRequest_Company_pass() throws ServletException, IOException, ParseException {
 		request.setSession(session);
 		servlet.doPost(request, response);
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
 	}
 	
 	@Test
-	public void testShowRequest_Teacher_fail() throws ServletException, IOException, ParseException {
+	public void testShowRequest_Company_fail() throws ServletException, IOException, ParseException {
 		servlet.doPost(request, response);
 	}
 }
