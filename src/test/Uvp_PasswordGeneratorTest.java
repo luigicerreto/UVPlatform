@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import util.PasswordGenerator;
 import util.PasswordGenerator.PasswordGeneratorBuilder;
 
-class uvp_PasswordGeneratorTest {
+class Uvp_PasswordGeneratorTest {
 	PasswordGenerator generatorePassword;
 
 	@Test

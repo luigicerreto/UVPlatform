@@ -35,14 +35,7 @@ public class Uploader extends HttpServlet {
 		super();
 	}
 
-	/**
-	 * method doGet.
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
-	}
+	
 
 	/**
 	 * method doPost.
@@ -64,7 +57,7 @@ public class Uploader extends HttpServlet {
 		User user = null;
 		String user_dir = null;
 		int id_request;
-		
+
 		String param = String.valueOf(request.getSession().getAttribute("idRequest"));
 
 		if(param == null || param.equals("null"))

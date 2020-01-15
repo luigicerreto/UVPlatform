@@ -20,7 +20,7 @@ import model_uvp.InternalInternship;
 import model_uvp.Internship;
 import model_uvp.User;
 
-class uvp_DAOInternshipTest {
+class Uvp_DAOInternshipTest {
 	DAOInternship app;
 	@BeforeEach
 	void setup()

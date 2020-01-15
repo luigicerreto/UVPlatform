@@ -41,18 +41,7 @@ public class Downloader extends HttpServlet {
 		super();
 	}
 
-	/**
-	 * method doGet.
-	 * @throws IOException 
-	 * @throws ServletException 
-	 * 
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException{
-		doPost(request, response);
-	}
-		
+
 
 	/**
 	 * method doPost.
@@ -67,7 +56,7 @@ public class Downloader extends HttpServlet {
 		InputStream in = null;
 		DAORequest daoreq = new DAORequest();
 		DAOUser daouser = new DAOUser();
-		
+
 		User user = null;
 		String user_dir = null;
 		String basePath = null;
@@ -76,7 +65,7 @@ public class Downloader extends HttpServlet {
 		String flag = request.getParameter("flag");
 		Integer id_request = Integer.parseInt(request.getParameter("idRequest"));
 		String filename = request.getParameter("filename");
-		
+
 		if(flag != null && flag.equals("1")) 
 		{
 			user = daouser.getUserByRequestInternship(id_request);
@@ -91,10 +80,10 @@ public class Downloader extends HttpServlet {
 					+ "/git/UVPlatform/uploads/english_validation/" 
 					+ user_dir + "/" + id_request + "/";
 		}
-		
+
 		if(filename == null || filename.equals("null")) { // download come zip
 			filenames = daoreq.retrieveAttached(id_request);
-			
+
 			response.setContentType("Content-type: text/zip");
 			response.setHeader("Content-Disposition",
 					"attachment; filename=" + user_dir + "_IDREQ_" + id_request + ".zip");

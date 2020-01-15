@@ -13,7 +13,7 @@ import model_uvp.User;
 import util.Mailer;
 import util.Notifier;
 
-class uvp_NotifierTest {
+class Uvp_NotifierTest {
 
 	@Test
 	void testNotifyStudentFail()
