@@ -62,10 +62,6 @@ public class ServletLoginTest extends Mockito {
     assertEquals("json", response.getContentType());
   }
   
-  @Test
-  public void testDoGet() throws ServletException, IOException {
-    servlet.doGet(request, response);
-  }
   
   @Test
   public void testLoginStudent() throws ServletException, IOException {

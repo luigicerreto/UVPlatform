@@ -45,6 +45,10 @@ public class RemoveUserTest {
 		signup_req.addParameter("flag", "1");
 		signup.doPost(signup_req, signup_res);
 	}
+	@Test
+	public void DogetTest() throws ServletException, IOException {
+		servlet.doGet(request, response);
+	}
 	
 	@AfterEach
 	public void tearDown() throws SQLException {
