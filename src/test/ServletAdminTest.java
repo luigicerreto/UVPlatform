@@ -180,8 +180,8 @@ public class ServletAdminTest extends Mockito {
 	}
 	@Test
 	public void testUpdateRequestAccept() throws ServletException, IOException, SQLException {
-UserInterface user = new Student("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 2);
-		
+		UserInterface user = new Admin("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 2);
+
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement;
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
@@ -201,12 +201,12 @@ UserInterface user = new Student("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', 
 		statement = con.prepareStatement(addAttached);
 		statement.executeUpdate();
 		con.commit();
-		
+
 		request.getSession().setAttribute("user", user);
 		request.addParameter("idRequest", "111");
 		request.addParameter("flag", "5");
-		servlet.doPost(request, response);
-		
+		servlet.doGet(request, response);
+
 		String DeleteAttached = "DELETE FROM attached WHERE ID_ATTACHED = 111";
 		String DeleteUser2 = "DELETE FROM user WHERE email = 'a.baldi21@studenti.unisa.it'";
 		String DeleteRequest2 = "DELETE FROM request WHERE ID_REQUEST = 112";
@@ -227,7 +227,7 @@ UserInterface user = new Student("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', 
 	@Test
 	public void testUpdateRequestReject() throws ServletException, IOException, SQLException {
 		UserInterface user = new Student("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 0);
-		
+
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement;
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
@@ -243,12 +243,12 @@ UserInterface user = new Student("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', 
 		statement = con.prepareStatement(addRequestEV2);
 		statement.executeUpdate();
 		con.commit();
-		
+
 		request.getSession().setAttribute("user", user);
 		request.addParameter("idRequest", "111");
 		request.addParameter("flag", "1");
 		servlet.doPost(request, response);
-		
+
 		String DeleteUser2 = "DELETE FROM user WHERE email = 'a.baldi21@studenti.unisa.it'";
 		String DeleteRequest2 = "DELETE FROM request WHERE ID_REQUEST = 112";
 		String DeleteUser = "DELETE FROM user WHERE email = 'a.baldi20@studenti.unisa.it'";
@@ -262,13 +262,13 @@ UserInterface user = new Student("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', 
 		statement = con.prepareStatement(DeleteUser2);
 		statement.executeUpdate();
 		con.commit();
-		
-		
+
+
 	}
 	@Test
 	public void testUpdateRequestReject2() throws ServletException, IOException, SQLException {
-		UserInterface user = new Student("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 2);
-		
+		UserInterface user = new Admin("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 2);
+
 		Connection con = new DbConnection().getInstance().getConn();
 		PreparedStatement statement;
 		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
@@ -288,12 +288,12 @@ UserInterface user = new Student("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', 
 		statement = con.prepareStatement(addAttached);
 		statement.executeUpdate();
 		con.commit();
-		
+
 		request.getSession().setAttribute("user", user);
 		request.addParameter("idRequest", "111");
 		request.addParameter("flag", "6");
-		servlet.doPost(request, response);
-		
+		servlet.doGet(request, response);
+
 		String DeleteAttached = "DELETE FROM attached WHERE ID_ATTACHED = 111";
 		String DeleteUser2 = "DELETE FROM user WHERE email = 'a.baldi21@studenti.unisa.it'";
 		String DeleteRequest2 = "DELETE FROM request WHERE ID_REQUEST = 112";
@@ -310,7 +310,196 @@ UserInterface user = new Student("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', 
 		statement = con.prepareStatement(DeleteUser2);
 		statement.executeUpdate();
 		con.commit();
-		
-		
+
+
+	}
+
+	@Test
+	public void testUpdateRequestAcceptFail() throws ServletException, IOException, SQLException {
+		UserInterface user = new Admin("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 2);
+
+
+		request.getSession().setAttribute("user", user);
+		request.addParameter("idRequest", "111");
+		request.addParameter("flag", "5");
+		servlet.doGet(request, response);
+
+
+	}
+	@Test
+	public void testUpdateRequestAcceptFail2() throws ServletException, IOException, SQLException {
+		UserInterface user = new Admin("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 2);
+
+
+		request.getSession().setAttribute("user", user);
+		request.addParameter("idRequest", "111");
+		request.addParameter("flag", "6");
+		servlet.doGet(request, response);
+
+
+	}
+	
+	@Test
+	public void testDOPost() throws ServletException, IOException, SQLException {
+		UserInterface user = new Admin("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 2);
+
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement;
+		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
+		String addRequestEV = "INSERT INTO request (ID_REQUEST, `CERTIFICATE_SERIAL`, `LEVEL`, `RELEASE_DATE`, `EXPIRY_DATE`, `YEAR`, `REQUESTED_CFU`, `SERIAL`, `VALIDATED_CFU`, `FK_USER`, FK_CERTIFIER, FK_STATE) VALUES (111,'sdds', 'A1', '2011-08-19', '2018-08-19', 2020, '3', '0512105521', '3', 'a.baldi20@studenti.unisa.it', 7, 3)\r\n";
+		String addUser2 = "INSERT INTO user VALUES ('a.baldi21@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
+		String addRequestEV2 = "INSERT INTO request (ID_REQUEST, `CERTIFICATE_SERIAL`, `LEVEL`, `RELEASE_DATE`, `EXPIRY_DATE`, `YEAR`, `REQUESTED_CFU`, `SERIAL`, `VALIDATED_CFU`, `FK_USER`, FK_CERTIFIER, FK_STATE) VALUES (112,'sdds', 'A1', '2011-08-19', '2018-08-19', 2020, '3', '0512105521', '3', 'a.baldi21@studenti.unisa.it', 7, 5)\r\n";
+		String addAttached = "INSERT INTO attached VALUES (111, 'prova', 111, 'a.baldi20@studenti.unisa.it', null)";
+		String addAttached2 = "INSERT INTO attached VALUES (112, 'prova', 112, 'a.baldi21@studenti.unisa.it', null)";
+
+		statement = con.prepareStatement(addUser);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addRequestEV);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addAttached);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addUser2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addRequestEV2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addAttached2);
+		statement.executeUpdate();
+		con.commit();
+
+		request.getSession().setAttribute("user", user);
+		request.addParameter("idRequest", "111");
+		request.addParameter("flag", "1");
+		servlet.doGet(request, response);
+
+		String DeleteAttached2 = "DELETE FROM attached WHERE ID_ATTACHED = 112";
+		String DeleteAttached = "DELETE FROM attached WHERE ID_ATTACHED = 111";
+		String DeleteUser2 = "DELETE FROM user WHERE email = 'a.baldi21@studenti.unisa.it'";
+		String DeleteRequest2 = "DELETE FROM request WHERE ID_REQUEST = 112";
+		String DeleteUser = "DELETE FROM user WHERE email = 'a.baldi20@studenti.unisa.it'";
+		String DeleteRequest = "DELETE FROM request WHERE ID_REQUEST = 111";
+		statement = con.prepareStatement(DeleteAttached);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteRequest);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteUser);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteAttached2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteRequest2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteUser2);
+		statement.executeUpdate();
+		con.commit();
+
+
+	}
+	@Test
+	public void testDOPost2() throws ServletException, IOException, SQLException {
+		UserInterface user = new Admin("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 2);
+
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement;
+		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
+		String addRequestEV = "INSERT INTO request (ID_REQUEST, `CERTIFICATE_SERIAL`, `LEVEL`, `RELEASE_DATE`, `EXPIRY_DATE`, `YEAR`, `REQUESTED_CFU`, `SERIAL`, `VALIDATED_CFU`, `FK_USER`, FK_CERTIFIER, FK_STATE) VALUES (111,'sdds', 'A1', '2011-08-19', '2018-08-19', 2020, '3', '0512105521', '3', 'a.baldi20@studenti.unisa.it', 7, 2)\r\n";
+		String addUser2 = "INSERT INTO user VALUES ('a.baldi21@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
+		String addRequestEV2 = "INSERT INTO request (ID_REQUEST, `CERTIFICATE_SERIAL`, `LEVEL`, `RELEASE_DATE`, `EXPIRY_DATE`, `YEAR`, `REQUESTED_CFU`, `SERIAL`, `VALIDATED_CFU`, `FK_USER`, FK_CERTIFIER, FK_STATE) VALUES (112,'sdds', 'A1', '2011-08-19', '2018-08-19', 2020, '3', '0512105521', '3', 'a.baldi21@studenti.unisa.it', 7, 3)\r\n";
+		String addAttached = "INSERT INTO attached VALUES (111, 'prova', 111, 'a.baldi20@studenti.unisa.it', null)";
+		String addAttached2 = "INSERT INTO attached VALUES (112, 'prova', 112, 'a.baldi21@studenti.unisa.it', null)";
+
+		statement = con.prepareStatement(addUser);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addRequestEV);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addAttached);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addUser2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addRequestEV2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addAttached2);
+		statement.executeUpdate();
+		con.commit();
+
+		request.getSession().setAttribute("user", user);
+		request.addParameter("idRequest", "111");
+		request.addParameter("flag", "1");
+		servlet.doGet(request, response);
+
+		String DeleteAttached2 = "DELETE FROM attached WHERE ID_ATTACHED = 112";
+		String DeleteAttached = "DELETE FROM attached WHERE ID_ATTACHED = 111";
+		String DeleteUser2 = "DELETE FROM user WHERE email = 'a.baldi21@studenti.unisa.it'";
+		String DeleteRequest2 = "DELETE FROM request WHERE ID_REQUEST = 112";
+		String DeleteUser = "DELETE FROM user WHERE email = 'a.baldi20@studenti.unisa.it'";
+		String DeleteRequest = "DELETE FROM request WHERE ID_REQUEST = 111";
+		statement = con.prepareStatement(DeleteAttached);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteRequest);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteUser);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteAttached2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteRequest2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteUser2);
+		statement.executeUpdate();
+		con.commit();
+
+
+	}
+	
+	@Test
+	public void testDOPost3() throws ServletException, IOException, SQLException {
+		UserInterface user = new Admin("a.baldi20@unisa.it", "Antonio", "Baldi", 'M', "password", 2);
+
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement;
+		String addUser = "INSERT INTO user VALUES ('a.baldi20@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
+		String addRequestEV = "INSERT INTO request (ID_REQUEST, `CERTIFICATE_SERIAL`, `LEVEL`, `RELEASE_DATE`, `EXPIRY_DATE`, `YEAR`, `REQUESTED_CFU`, `SERIAL`, `VALIDATED_CFU`, `FK_USER`, FK_CERTIFIER, FK_STATE) VALUES (111,'sdds', 'A1', '2011-08-19', '2018-08-19', 2020, '3', '0512105521', '3', 'a.baldi20@studenti.unisa.it', 7, 6)\r\n";
+		String addUser2 = "INSERT INTO user VALUES ('a.baldi21@studenti.unisa.it', 'Antonio', 'Baldi', 'M', 'password', 0, '0512105521', 'null', 'null' )";
+		String addRequestEV2 = "INSERT INTO request (ID_REQUEST, `CERTIFICATE_SERIAL`, `LEVEL`, `RELEASE_DATE`, `EXPIRY_DATE`, `YEAR`, `REQUESTED_CFU`, `SERIAL`, `VALIDATED_CFU`, `FK_USER`, FK_CERTIFIER, FK_STATE) VALUES (112,'sdds', 'A1', '2011-08-19', '2018-08-19', 2020, '3', '0512105521', '3', 'a.baldi21@studenti.unisa.it', 7, 7)\r\n";
+		String addAttached = "INSERT INTO attached VALUES (111, 'prova', 111, 'a.baldi20@studenti.unisa.it', null)";
+		String addAttached2 = "INSERT INTO attached VALUES (112, 'prova', 112, 'a.baldi21@studenti.unisa.it', null)";
+
+		statement = con.prepareStatement(addUser);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addRequestEV);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addAttached);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addUser2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addRequestEV2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(addAttached2);
+		statement.executeUpdate();
+		con.commit();
+
+		request.getSession().setAttribute("user", user);
+		request.addParameter("idRequest", "111");
+		request.addParameter("flag", "1");
+		servlet.doGet(request, response);
+
+		String DeleteAttached2 = "DELETE FROM attached WHERE ID_ATTACHED = 112";
+		String DeleteAttached = "DELETE FROM attached WHERE ID_ATTACHED = 111";
+		String DeleteUser2 = "DELETE FROM user WHERE email = 'a.baldi21@studenti.unisa.it'";
+		String DeleteRequest2 = "DELETE FROM request WHERE ID_REQUEST = 112";
+		String DeleteUser = "DELETE FROM user WHERE email = 'a.baldi20@studenti.unisa.it'";
+		String DeleteRequest = "DELETE FROM request WHERE ID_REQUEST = 111";
+		statement = con.prepareStatement(DeleteAttached);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteRequest);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteUser);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteAttached2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteRequest2);
+		statement.executeUpdate();
+		statement = con.prepareStatement(DeleteUser2);
+		statement.executeUpdate();
+		con.commit();
+
+
 	}
 }
