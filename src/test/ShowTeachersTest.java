@@ -1,5 +1,4 @@
-package integrationTesting;
-import static org.junit.Assert.assertEquals;
+package test;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,23 +13,27 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
 
 import controller.ServletSignup;
-import controller_uvp.removeUser;
+import controller_uvp.showTeachers;
+import interfacce.UserInterface;
 import model_uvp.DAOUser;
+import model_uvp.User;
 
-
-public class RemoveUserTest {
+public class ShowTeachersTest {
 	private MockHttpServletRequest request;
 	private MockHttpServletResponse response;
-	private removeUser servlet;
+	private showTeachers servlet;
 	private JSONObject res;
-		
+	private static MockHttpSession session;
+	
+	
 	@BeforeEach
 	public void setUp() throws ServletException, IOException {
 		response = new MockHttpServletResponse();
 		request = new MockHttpServletRequest();
-		servlet = new removeUser();
+		servlet = new showTeachers();
 		res = new JSONObject();
 		
 		ServletSignup signup = new ServletSignup();
@@ -42,8 +45,13 @@ public class RemoveUserTest {
 		signup_req.addParameter("email", "t.tester@studenti.unisa.it");
 		signup_req.addParameter("sex", "M");
 		signup_req.addParameter("password", "password");
-		signup_req.addParameter("flag", "1");
+		signup_req.addParameter("flag", "2");
 		signup.doPost(signup_req, signup_res);
+		
+		UserInterface user = (UserInterface) new User("t.tester@studenti.unisa.it", "TESTER", "TESTER", 
+				'M', "password", 2, "0000000000", "");
+		session = new MockHttpSession();
+		session.setAttribute("user", user);
 	}
 	
 	@AfterEach
@@ -51,20 +59,27 @@ public class RemoveUserTest {
 		// elimina studente per il test
 		new DAOUser().removeUser("t.tester@studenti.unisa.it");
 	}
-    
-	@Test
-	public void testRemoveUser_pass() throws ServletException, IOException, ParseException {
-		request.addParameter("email", "t.tester@studenti.unisa.it");
-		servlet.doPost(request, response);
-		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
-		assertEquals(res.get("result").toString(), "1");
-	}
 	
 	@Test
-	public void testRemoveUser_fail() throws ServletException, IOException, ParseException {
-		request.addParameter("email", "none@null.com");
+	public void testShowTeachers_pass() throws ServletException, IOException, ParseException {
+		request.addParameter("email", "t.tester@studenti.unisa.it");
+		request.addParameter("field", "password");
+		request.addParameter("value", "password");
+		request.addParameter("current_pwd", "password");
+		request.setSession(session);
 		servlet.doPost(request, response);
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
-		assertEquals(res.get("result").toString(), "0");
+	
 	}
+	@Test
+	public void testShowTeachers_fail() throws ServletException, IOException, ParseException {
+		request.addParameter("email", "t.tester@studenti.unisa.it");
+		request.addParameter("field", "password");
+		request.addParameter("value", "password");
+		request.addParameter("current_pwd", "password");
+		servlet.doPost(request, response);
+		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
+	
+	}
+
 }

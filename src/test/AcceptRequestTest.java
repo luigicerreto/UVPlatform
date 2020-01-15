@@ -1,4 +1,5 @@
-package integrationTesting;
+package test;
+
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
@@ -17,56 +18,52 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockHttpSession;
 
 import controller.DbConnection;
 import controller.ServletSignup;
-import controller_uvp.addRequest;
-import interfacce.UserInterface;
+import controller_uvp.acceptRequest;
 import model_uvp.DAOUser;
-import model_uvp.User;
 
-
-public class AddRequestTest {
+public class AcceptRequestTest {
 	private MockHttpServletRequest request;
 	private MockHttpServletResponse response;
-	private static MockHttpSession session;
-	private addRequest servlet;
+	private acceptRequest servlet;
 	private JSONObject res;
-
+	
 	@BeforeAll
-	public static void setUp() throws ServletException, IOException {
+	public static void setUp() throws ServletException, IOException, SQLException {
 		ServletSignup signup = new ServletSignup();
 		MockHttpServletRequest signup_req = new MockHttpServletRequest();
 		MockHttpServletResponse signup_res = new MockHttpServletResponse();
-		// nuovo studente test
+		// nuovo studente per il test
 		signup_req.addParameter("name", "TESTER");
 		signup_req.addParameter("surname", "TESTER");
 		signup_req.addParameter("email", "t.tester@studenti.unisa.it");
 		signup_req.addParameter("sex", "M");
 		signup_req.addParameter("password", "password");
-		signup_req.addParameter("flag", "1");
+		signup_req.addParameter("flag", "0");
 		signup.doPost(signup_req, signup_res);
 
-		// aggiungi studente alla sessione
-		UserInterface user = (UserInterface) new User("t.tester@studenti.unisa.it", "TESTER", "TESTER", 
-				'M', "password", 0, "0000000000", "");
-		session = new MockHttpSession();
-		session.setAttribute("user", user);
+		Connection con = new DbConnection().getInstance().getConn();
+		PreparedStatement statement = null;
+		// nuova richiesta tirocinio interno
+		String req_int = "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
+				+ "VALUES (1000, 0, \"TEST\", \"t.tester@studenti.unisa.it\", \"rdeprisco@unisa.it\", 1, null)";
+		statement = con.prepareStatement(req_int);
+		if(statement.executeUpdate()==1) 
+			con.commit();
+		else 
+			con.rollback();
 	}
 
 	@AfterAll
 	public static void tearDown() throws SQLException {
-		// elimina studente test
 		new DAOUser().removeUser("t.tester@studenti.unisa.it");
 
-		// elimina le richieste effettuate
-		PreparedStatement statement = null;
 		Connection con = new DbConnection().getInstance().getConn();
-
-		String sql= "DELETE FROM REQUEST_INTERNSHIP WHERE FK_USER1 = \"t.tester@studenti.unisa.it\"";
-		statement = con.prepareStatement(sql);
-
+		PreparedStatement statement = null;
+		String sql1= "DELETE FROM REQUEST_INTERNSHIP WHERE FK_USER1 = \"t.tester@studenti.unisa.it\"";
+		statement = con.prepareStatement(sql1);
 		if(statement.executeUpdate()>0)
 			con.commit();
 		else
@@ -77,34 +74,41 @@ public class AddRequestTest {
 	public void init() {
 		response = new MockHttpServletResponse();
 		request = new MockHttpServletRequest();
-		servlet = new addRequest();
+		servlet = new acceptRequest();
 		res = new JSONObject();
 	}
 
 	@Test
-	public void testAddRequest_pass() throws ServletException, IOException, ParseException {
-		request.addParameter("type", "0");
-		request.addParameter("choice", "1");
-		request.setSession(session);
+	void testAcceptRequestByTutor() throws ServletException, IOException, ParseException {
+		request.setParameter("flag", "1");
+		request.addParameter("id_request", "1000");
+		servlet.doPost(request, response);
+		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
+		assertEquals(res.get("result").toString(), "1");
+	}
+	
+	@Test
+	void testAcceptRequestBySecretary() throws ServletException, IOException, ParseException {
+		request.setParameter("flag", "2");
+		request.addParameter("id_request", "1000");
+		servlet.doPost(request, response);
+		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
+		assertEquals(res.get("result").toString(), "1");
+	}
+	
+	@Test
+	void testAcceptRequestByAdmin()throws ServletException, IOException, ParseException {
+		request.setParameter("flag", "3");
+		request.addParameter("id_request", "1000");
 		servlet.doPost(request, response);
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
 		assertEquals(res.get("result").toString(), "1");
 	}
 
 	@Test
-	public void testAddRequest_fail1() throws ServletException, IOException, ParseException {
-		request.addParameter("type", "0");
-		request.addParameter("choice", "1");
-		request.setSession(session);
-		servlet.doPost(request, response);
-		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
-		assertEquals(res.get("result").toString(), "0");
-	}
-
-	@Test
-	public void testAddRequest_fail2() throws ServletException, IOException, ParseException {
-		request.addParameter("type", "0");
-		request.addParameter("choice", "1");
+	void testAcceptRequest_fail() throws ServletException, IOException, ParseException {
+		request.setParameter("flag", "4");
+		request.addParameter("id_request", "1000");
 		servlet.doPost(request, response);
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
 		assertEquals(res.get("result").toString(), "0");

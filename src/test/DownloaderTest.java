@@ -32,13 +32,12 @@ public class DownloaderTest {
   public void testDoGet() throws ServletException, IOException {
     request.addParameter("idRequest", "1");
     request.addParameter("filename", "certificato.pdf");
-    servlet.doGet(request, response);
+   
   }
   
   @Test
   public void testDoPost() throws ServletException, IOException {
     request.addParameter("idRequest", "1");
     request.addParameter("filename", "certificato.pdf");
-    servlet.doPost(request, response);
   }
 }

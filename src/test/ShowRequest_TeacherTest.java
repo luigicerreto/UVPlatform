@@ -1,4 +1,4 @@
-package integrationTesting;
+package test;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -20,22 +20,20 @@ import org.springframework.mock.web.MockHttpSession;
 
 import controller.DbConnection;
 import controller.ServletSignup;
-import controller_uvp.showRequest_Admin;
+import controller_uvp.showRequest_Teacher;
 import interfacce.UserInterface;
 import model_uvp.DAOUser;
 import model_uvp.User;
 
-public class ShowRequest_AdminTest {
+public class ShowRequest_TeacherTest {
 	private MockHttpServletRequest request;
 	private MockHttpServletResponse response;
-	private showRequest_Admin servlet;
+	private showRequest_Teacher servlet;
 	private JSONObject res;
 	private static MockHttpSession session;
 
 	@BeforeAll
 	public static void setUp() throws ServletException, IOException, SQLException {
-
-
 		ServletSignup signup = new ServletSignup();
 		MockHttpServletRequest signup_req = new MockHttpServletRequest();
 		MockHttpServletResponse signup_res = new MockHttpServletResponse();
@@ -45,12 +43,12 @@ public class ShowRequest_AdminTest {
 		signup_req.addParameter("email", "t.tester@studenti.unisa.it");
 		signup_req.addParameter("sex", "M");
 		signup_req.addParameter("password", "password");
-		signup_req.addParameter("flag", "2");
+		signup_req.addParameter("flag", "3");
 		signup.doPost(signup_req, signup_res);
 
 
-		UserInterface user = (UserInterface) new User("t.tester@studenti.unisa.it", "TESTER", "TESTER", 
-				'M', "password", 2, "0000000000", "");
+		UserInterface user = (UserInterface) new User("rdeprisco@unisa.it", "TESTER", "TESTER", 
+				'M', "password", 3, "0000000000", "");
 		session = new MockHttpSession();
 		session.setAttribute("user", user);
 		Connection con = new DbConnection().getInstance().getConn();
@@ -58,10 +56,29 @@ public class ShowRequest_AdminTest {
 
 		// nuova richiesta tirocinio interno
 		String req_int = "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
-				+ "VALUES (1000, 0, \"[ADMIN] In attesa di accettazione\", \"t.tester@studenti.unisa.it\", \"rdeprisco@unisa.it\", 1, null)";
+				+ "VALUES (1000, 0, \"[DOCENTE] In attesa di accettazione\", \"t.tester@studenti.unisa.it\", \"rdeprisco@unisa.it\", 1, null)";
 		statement = con.prepareStatement(req_int);
 		
 
+		if(statement.executeUpdate()==1) 
+			con.commit();
+		else 
+			con.rollback();
+		
+		String req_int1 = "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
+				+ "VALUES (1001, 0, \"[DOCENTE] Richiesta firmata\", \"t.tester@studenti.unisa.it\", \"rdeprisco@unisa.it\", 1, null)";
+		statement = con.prepareStatement(req_int1);
+		
+
+		if(statement.executeUpdate()==1) 
+			con.commit();
+		else 
+			con.rollback();
+		
+		String req_int3 = "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
+				+ "VALUES (1002, 0, \"TESTING\", \"t.tester@studenti.unisa.it\", \"rdeprisco@unisa.it\", 1, null)";
+		statement = con.prepareStatement(req_int3);
+		
 		if(statement.executeUpdate()==1) 
 			con.commit();
 		else 
@@ -75,16 +92,6 @@ public class ShowRequest_AdminTest {
             con.commit();
         else
             con.rollback();
-
-		// nuova richiesta tirocinio esterno
-		String req_ext = "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
-				+ "VALUES (1001, 1, \"TESTING\", \"t.tester@studenti.unisa.it\", \"info@kineton.it\", null, 1)";
-		statement = con.prepareStatement(req_ext);
-
-		if(statement.executeUpdate()==1) 
-			con.commit();
-		else 
-			con.rollback();
 	}
 
 	@AfterAll
@@ -103,8 +110,6 @@ public class ShowRequest_AdminTest {
 		new DAOUser().removeUser("t.tester@studenti.unisa.it");
 
 		// elimina le richieste effettuate
-		
-
 		String sql1= "DELETE FROM REQUEST_INTERNSHIP WHERE FK_USER1 = \"t.tester@studenti.unisa.it\"";
 		statement = con.prepareStatement(sql1);
 
@@ -113,33 +118,26 @@ public class ShowRequest_AdminTest {
 		else
 			con.rollback();
 	}
+	
 	@BeforeEach
 	public void init() {
 		response = new MockHttpServletResponse();
 		request = new MockHttpServletRequest();
-		servlet = new showRequest_Admin();
+		servlet = new showRequest_Teacher();
 		res = new JSONObject();
 	}
 
 	@Test
-	public void testShowRequest_Admin_pass() throws ServletException, IOException, ParseException {
-		request.addParameter("email", "t.tester@studenti.unisa.it");
-		request.addParameter("field", "password");
-		request.addParameter("value", "password");
-		request.addParameter("current_pwd", "password");
+	public void testShowRequest_Teacher_pass() throws ServletException, IOException, ParseException {
 		request.setSession(session);
 		servlet.doPost(request, response);
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
-
 	}
+	
 	@Test
-	public void testShowRequest_Admin_fail() throws ServletException, IOException, ParseException {
-		request.addParameter("email", "t.tester@studenti.unisa.it");
-		request.addParameter("field", "password");
-		request.addParameter("value", "password");
-		request.addParameter("current_pwd", "password");
+	public void testShowRequest_Teacher_fail() throws ServletException, IOException, ParseException {
 		servlet.doPost(request, response);
-
 	}
-
 }
+
+

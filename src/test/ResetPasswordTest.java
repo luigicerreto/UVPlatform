@@ -1,7 +1,7 @@
-package integrationTesting;
+package test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 
@@ -13,27 +13,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockHttpSession;
 
 import controller.ServletSignup;
-import controller_uvp.showCompanies;
-import interfacce.UserInterface;
+import controller_uvp.resetPassword;
 import model_uvp.DAOUser;
-import model_uvp.User;
 
-public class ShowCompaniesTest {
+
+public class ResetPasswordTest {
+	
 	private MockHttpServletRequest request;
 	private MockHttpServletResponse response;
-	private showCompanies servlet;
+	private resetPassword servlet;
 	private JSONObject res;
-	private static MockHttpSession session;
-	
 	
 	@BeforeEach
 	public void setUp() throws ServletException, IOException {
 		response = new MockHttpServletResponse();
 		request = new MockHttpServletRequest();
-		servlet = new showCompanies();
+		servlet = new resetPassword();
 		res = new JSONObject();
 		
 		ServletSignup signup = new ServletSignup();
@@ -45,41 +42,28 @@ public class ShowCompaniesTest {
 		signup_req.addParameter("email", "t.tester@studenti.unisa.it");
 		signup_req.addParameter("sex", "M");
 		signup_req.addParameter("password", "password");
-		signup_req.addParameter("flag", "2");
+		signup_req.addParameter("flag", "3");
 		signup.doPost(signup_req, signup_res);
-		
-		UserInterface user = (UserInterface) new User("t.tester@studenti.unisa.it", "TESTER", "TESTER", 
-				'M', "password", 2, "0000000000", "");
-		session = new MockHttpSession();
-		session.setAttribute("user", user);
 	}
 	
 	@AfterEach
-	public void tearDown() throws SQLException {
-		// elimina studente per il test
+	public void tearDown() {
 		new DAOUser().removeUser("t.tester@studenti.unisa.it");
 	}
 	
 	@Test
-	public void testShowCompanies_pass() throws ServletException, IOException, ParseException {
+	void testResetPassword_pass() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
-		request.addParameter("field", "password");
-		request.addParameter("value", "password");
-		request.addParameter("current_pwd", "password");
-		request.setSession(session);
 		servlet.doPost(request, response);
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
-	
+		assertEquals(res.get("result").toString(), "1");
 	}
+	
 	@Test
-	public void testShowCompanies_fail() throws ServletException, IOException, ParseException {
-		request.addParameter("email", "t.tester@studenti.unisa.it");
-		request.addParameter("field", "password");
-		request.addParameter("value", "password");
-		request.addParameter("current_pwd", "password");
+	void testResetPassword_fail() throws ServletException, IOException, ParseException {
+		request.addParameter("email", "null@studenti.unisa.it");
 		servlet.doPost(request, response);
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
-	
+		assertEquals(res.get("result").toString(), "0");
 	}
-
 }

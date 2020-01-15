@@ -1,4 +1,4 @@
-package integrationTesting;
+package test;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,23 +16,24 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 
 import controller.ServletSignup;
-import controller_uvp.showUsers;
+import controller_uvp.showCompanies;
 import interfacce.UserInterface;
 import model_uvp.DAOUser;
 import model_uvp.User;
 
-public class ShowUserTest {
+public class ShowCompaniesTest {
 	private MockHttpServletRequest request;
 	private MockHttpServletResponse response;
-	private showUsers servlet;
+	private showCompanies servlet;
 	private JSONObject res;
 	private static MockHttpSession session;
+	
 	
 	@BeforeEach
 	public void setUp() throws ServletException, IOException {
 		response = new MockHttpServletResponse();
 		request = new MockHttpServletRequest();
-		servlet = new showUsers();
+		servlet = new showCompanies();
 		res = new JSONObject();
 		
 		ServletSignup signup = new ServletSignup();
@@ -60,7 +61,7 @@ public class ShowUserTest {
 	}
 	
 	@Test
-	public void testShowUserTest_pass() throws ServletException, IOException, ParseException {
+	public void testShowCompanies_pass() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
 		request.addParameter("field", "password");
 		request.addParameter("value", "password");
@@ -71,7 +72,7 @@ public class ShowUserTest {
 	
 	}
 	@Test
-	public void testShowUserTest_fail() throws ServletException, IOException, ParseException {
+	public void testShowCompanies_fail() throws ServletException, IOException, ParseException {
 		request.addParameter("email", "t.tester@studenti.unisa.it");
 		request.addParameter("field", "password");
 		request.addParameter("value", "password");

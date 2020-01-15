@@ -1,4 +1,4 @@
-package integrationTesting;
+package test;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -20,15 +20,15 @@ import org.springframework.mock.web.MockHttpSession;
 
 import controller.DbConnection;
 import controller.ServletSignup;
-import controller_uvp.showRequest;
+import controller_uvp.showRequest_Admin;
 import interfacce.UserInterface;
 import model_uvp.DAOUser;
 import model_uvp.User;
 
-public class ShowRequestTest {
+public class ShowRequest_AdminTest {
 	private MockHttpServletRequest request;
 	private MockHttpServletResponse response;
-	private showRequest servlet;
+	private showRequest_Admin servlet;
 	private JSONObject res;
 	private static MockHttpSession session;
 
@@ -58,35 +58,29 @@ public class ShowRequestTest {
 
 		// nuova richiesta tirocinio interno
 		String req_int = "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
-				+ "VALUES (1000, 0, \"Parzialmente completata\", \"t.tester@studenti.unisa.it\", \"rdeprisco@unisa.it\", 1, null)";
+				+ "VALUES (1000, 0, \"[ADMIN] In attesa di accettazione\", \"t.tester@studenti.unisa.it\", \"rdeprisco@unisa.it\", 1, null)";
 		statement = con.prepareStatement(req_int);
+		
+
 		if(statement.executeUpdate()==1) 
 			con.commit();
 		else 
 			con.rollback();
-
 		// nuovo allegato richiesta tirocinio
-		String att_int = "INSERT INTO ATTACHED (FILENAME, FK_USER, FK_REQUEST_I) "
-				+ "VALUES (\"TESTFILE.pdf\", \"t.tester@studenti.unisa.it\" , 1000)";
-		statement = con.prepareStatement(att_int);
-		if(statement.executeUpdate()==1)
-			con.commit();
-		else
-			con.rollback();
+        String att_int = "INSERT INTO ATTACHED (FILENAME, FK_USER, FK_REQUEST_I) "
+                + "VALUES (\"TESTFILE.pdf\", \"t.tester@studenti.unisa.it\" , 1000)";
+        statement = con.prepareStatement(att_int);
+ 
+        if(statement.executeUpdate()==1)
+            con.commit();
+        else
+            con.rollback();
 
 		// nuova richiesta tirocinio esterno
-		String req_ext1 = "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
-				+ "VALUES (1001, 1, \"In attesa di caricamento Registro di Tirocinio\", \"t.tester@studenti.unisa.it\", \"info@kineton.it\", null, 1)";
-		statement = con.prepareStatement(req_ext1);
-		if(statement.executeUpdate()==1) 
-			con.commit();
-		else 
-			con.rollback();
+		String req_ext = "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
+				+ "VALUES (1001, 1, \"TESTING\", \"t.tester@studenti.unisa.it\", \"info@kineton.it\", null, 1)";
+		statement = con.prepareStatement(req_ext);
 
-		// nuova richiesta tirocinio esterno
-		String req_ext2= "INSERT INTO REQUEST_INTERNSHIP (ID_REQUEST_I, TYPE, STATE, FK_USER1, FK_USER2, FK_II, FK_IE) "
-				+ "VALUES (1002, 1, \"TEST\", \"t.tester@studenti.unisa.it\", \"info@kineton.it\", null, 1)";
-		statement = con.prepareStatement(req_ext2);
 		if(statement.executeUpdate()==1) 
 			con.commit();
 		else 
@@ -98,42 +92,54 @@ public class ShowRequestTest {
 		PreparedStatement statement = null;
 		Connection con = new DbConnection().getInstance().getConn();
 		// elimina allegati studente
-		String sql= "DELETE FROM ATTACHED WHERE FK_USER = \"t.tester@studenti.unisa.it\"";
-		statement = con.prepareStatement(sql);
-		if(statement.executeUpdate()>0)
-			con.commit();
-		else
-			con.rollback();
-
+        String sql= "DELETE FROM ATTACHED WHERE FK_USER = \"t.tester@studenti.unisa.it\"";
+        statement = con.prepareStatement(sql);
+ 
+        if(statement.executeUpdate()>0)
+            con.commit();
+        else
+            con.rollback();
 		// elimina studente per il test
 		new DAOUser().removeUser("t.tester@studenti.unisa.it");
 
 		// elimina le richieste effettuate
+		
+
 		String sql1= "DELETE FROM REQUEST_INTERNSHIP WHERE FK_USER1 = \"t.tester@studenti.unisa.it\"";
 		statement = con.prepareStatement(sql1);
+
 		if(statement.executeUpdate()>0)
 			con.commit();
 		else
 			con.rollback();
 	}
-
 	@BeforeEach
 	public void init() {
 		response = new MockHttpServletResponse();
 		request = new MockHttpServletRequest();
-		servlet = new showRequest();
+		servlet = new showRequest_Admin();
 		res = new JSONObject();
 	}
 
 	@Test
-	public void testShowRequest_pass() throws ServletException, IOException, ParseException {
+	public void testShowRequest_Admin_pass() throws ServletException, IOException, ParseException {
+		request.addParameter("email", "t.tester@studenti.unisa.it");
+		request.addParameter("field", "password");
+		request.addParameter("value", "password");
+		request.addParameter("current_pwd", "password");
 		request.setSession(session);
 		servlet.doPost(request, response);
 		res = (JSONObject) new JSONParser().parse(response.getContentAsString());
 
 	}
 	@Test
-	public void testShowRequest_fail() throws ServletException, IOException, ParseException {
+	public void testShowRequest_Admin_fail() throws ServletException, IOException, ParseException {
+		request.addParameter("email", "t.tester@studenti.unisa.it");
+		request.addParameter("field", "password");
+		request.addParameter("value", "password");
+		request.addParameter("current_pwd", "password");
 		servlet.doPost(request, response);
+
 	}
+
 }

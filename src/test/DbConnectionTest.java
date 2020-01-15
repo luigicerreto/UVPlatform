@@ -43,7 +43,7 @@ public class DbConnectionTest {
 
   @Test
   void testgetConn() {
-    DbConnection db = new DbConnection();
+    DbConnection db = new DbConnection().getInstance();
     assertNotEquals(null, db.getConn());
   }
 
