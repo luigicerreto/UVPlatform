@@ -157,6 +157,16 @@ public class CheckSessionTest {
   }
   
   @Test
+  void testIsAllowedAdminUVPNull() {
+    MockHttpServletRequest request = new MockHttpServletRequest();
+    UserInterface u = new Secretary("adm.session@unisa.it", "name", "surname", 'M', "password", 2);
+    request.getSession().setAttribute("user", u);
+    HttpSession session = request.getSession();
+    CheckSession check = new CheckSession("","",session);
+    assertEquals(true, check.isAllowed());
+  }
+  
+  @Test
   void testIsAllowedStudentFail() {
     MockHttpServletRequest request = new MockHttpServletRequest();
     UserInterface u = new Student("stu.session@unisa.it", "name", "surname", 'M', "password", 0);
@@ -177,6 +187,16 @@ public class CheckSessionTest {
   }
   
   @Test
+  void testIsAllowedSecretaryNull() {
+    MockHttpServletRequest request = new MockHttpServletRequest();
+    UserInterface u = new Secretary("sec.session@unisa.it", "name", "surname", 'M', "password", 1);
+    request.getSession().setAttribute("user", u);
+    HttpSession session = request.getSession();
+    CheckSession check = new CheckSession("","",session);
+    assertEquals(false, check.isAllowed());
+  }
+  
+  @Test
   void testIsAllowedAdminFail() {
     MockHttpServletRequest request = new MockHttpServletRequest();
     UserInterface u = new Secretary("adm.session@unisa.it", "name", "surname", 'M', "password", 2);
@@ -190,6 +210,7 @@ public class CheckSessionTest {
   void testIsAllowedNull() {
     MockHttpServletRequest request = new MockHttpServletRequest();
     UserInterface u = new Student("stu.session@unisa.it", "name", "surname", 'M', "password", 0);
+    request.getSession().setAttribute("user", u);
     HttpSession session = request.getSession();
     CheckSession check = new CheckSession("","",session);
     assertEquals(false, check.isAllowed());
@@ -225,12 +246,32 @@ public class CheckSessionTest {
   }
   
   @Test
+  void testIsAllowedTeacherUVPNull() {
+    MockHttpServletRequest request = new MockHttpServletRequest();
+    UserInterface u = new Secretary("sec.session@unisa.it", "name", "surname", 'M', "password", 3);
+    request.getSession().setAttribute("user", u);
+    HttpSession session = request.getSession();
+    CheckSession check = new CheckSession("","",session);
+    assertEquals(false, check.isAllowed());
+  }
+  
+  @Test
   void testIsAllowedCompanyUVP() {
     MockHttpServletRequest request = new MockHttpServletRequest();
     UserInterface u = new Student("stu.session@unisa.it", "name", "surname", 'M', "password", 4);
     request.getSession().setAttribute("user", u);
     HttpSession session = request.getSession();
     CheckSession check = new CheckSession("_areaCompany_uvp","",session);
+    assertEquals(true, check.isAllowed());
+ }
+  
+  @Test
+  void testIsAllowedCompanyUVPNull() {
+    MockHttpServletRequest request = new MockHttpServletRequest();
+    UserInterface u = new Student("stu.session@unisa.it", "name", "surname", 'M', "password", 4);
+    request.getSession().setAttribute("user", u);
+    HttpSession session = request.getSession();
+    CheckSession check = new CheckSession("","",session);
     assertEquals(true, check.isAllowed());
  }
   
