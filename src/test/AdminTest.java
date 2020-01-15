@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -94,7 +95,7 @@ class AdminTest {
   @Test
   void AdminvalidateFail() {
     Admin ad = new Admin();
-    assertTrue(ad.validate());
+    assertFalse(ad.validate());
   }
   @Test
   void AdminvalidateFail2() {
