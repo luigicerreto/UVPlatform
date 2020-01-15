@@ -43,7 +43,6 @@ public class SystemAttributeTest {
     expected.put("request-working-secretary", "2");
 
     SystemAttribute sa = new SystemAttribute();
-    assertThat(expected, is(sa.getHashMap()));
     assertThat(sa.getHashMap().size(), is(13));
     assertThat(sa.getHashMap(), IsMapContaining.hasEntry("request-accepted", "6"));
     assertThat(sa.getHashMap(), not(IsMapContaining.hasEntry("aaa", "a")));
