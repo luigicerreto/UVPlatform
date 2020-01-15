@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -86,6 +87,21 @@ class AdminTest {
     ad.setSex('f');
     assertEquals('f', ad.getSex());
   }
+  @Test
+  void Adminvalidate() {
+    Admin ad = new Admin("aaa@sss.it", "", "", 'm', "", 2);
+    assertTrue(ad.validate());
+  }
+  @Test
+  void AdminvalidateFail() {
+    Admin ad = new Admin();
+    assertFalse(ad.validate());
+  }
+  @Test
+  void AdminvalidateFail2() {
+    Admin ad = new Admin("aaa@sss.it","","",' ',"",0);
+    assertTrue(ad.validate());
+  }
 
   @Test
   void testSetPassword() {
@@ -108,6 +124,7 @@ class AdminTest {
     Student st = new Student("aaa@sss.it", "", "", 'r', "hhh", 0);
     assertTrue(st.validate());
   }
+  
 
 
 }

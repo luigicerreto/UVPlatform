@@ -4,7 +4,7 @@
 <%
 	String pageName = "logout.jsp";
 	String pageFolder = "";
-	
+
 	request.getSession().invalidate();
 %>
 
@@ -14,7 +14,7 @@
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="">
+<body>
 	<div class="page-wrapper">
 
 		<!-- Preloader -->
@@ -22,8 +22,8 @@
 
 
 		<jsp:include page="/partials/header.jsp">
-			<jsp:param name="pageName" value="<%= pageName %>" />
-			<jsp:param name="pageFolder" value="<%= pageFolder %>" />
+			<jsp:param name="pageName" value="<%=pageName%>" />
+			<jsp:param name="pageFolder" value="<%=pageFolder%>" />
 		</jsp:include>
 
 
@@ -51,5 +51,15 @@
 
 	<jsp:include page="/partials/includes.jsp" />
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var delay = 3000;
+			var url_redirect = absolutePath + "/index.jsp";
+			
+			setTimeout(function() {
+				$(window.location).attr('href', url_redirect);
+			}, delay);
+		});
+	</script>
 </body>
 </html>

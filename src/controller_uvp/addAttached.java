@@ -11,23 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import com.mysql.jdbc.PreparedStatement;
-
 import interfacce.UserInterface;
-import model.SystemAttribute;
-import model_uvp.DAORichiesta;
-import util.Mailer;
-import util.notifyStudent;
+import model_uvp.DAORequest;
+import model_uvp.RequestInternship;
+import util.Notifier;
 
-/**
- * 
+/** 
  * Servlet per gestire l'aggiunta degli allegati ad una determinata richiesta.
  * Questa servlet richiede "filenames[]" come parametro della request
  * e l'identificativo della richiesta come parametro di sessione.
  * 
- * 
  * @author Antonio Baldi
- *
+ * @author Carmine
  */
 @WebServlet("/addAttached")
 public class addAttached extends HttpServlet {
@@ -38,14 +33,12 @@ public class addAttached extends HttpServlet {
 	 */
 	public addAttached() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -53,53 +46,61 @@ public class addAttached extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer result = 0;
 		String error = "";
 		String content = "";
 		String redirect = "";
-		DAORichiesta queryobj = new DAORichiesta();
-		String addAttach;
-		PreparedStatement statement;
+		DAORequest daoreq = new DAORequest();
 
+		UserInterface currUser = null;
+		if (request.getSession().getAttribute("user") != null)
+			currUser = (UserInterface) request.getSession().getAttribute("user");
 
+		Integer id_request = Integer.parseInt(request.getParameter("id_request"));
+		boolean new_request = Boolean.parseBoolean(request.getParameter("new_request"));
+		RequestInternship req = daoreq.getRequest(id_request);
 		String[] filenames = request.getParameterValues("filenames[]");
-		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) 
-		{
-			throw new IllegalArgumentException("Valore non corretto");
-		}
-		Integer idRequest = (Integer) request.getSession().getAttribute("idRequest_i");
-		UserInterface user = (UserInterface) request.getSession().getAttribute("user");
 
-		if(queryobj.addAttachment(filenames[0], user.getEmail(), idRequest))
-		{
-
-			notifyStudent notify = new notifyStudent();
-			new Thread(() -> {
-				try {
-					notify.notify(user.getEmail(), idRequest);
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				} catch (ServletException e) {
-
-					e.printStackTrace();
-				} 
-			}).start();
-
-			if(queryobj.updateState(idRequest, "[DOCENTE] In attesa di accettazione")) {	
-				content = "Allegati inseriti con successo.";
-				result = 1;
-			}
-		}
-		else
-		{
-			error = " Impossibile inserire l'allegato ." + filenames[0];
+		if (filenames.length != 1 || !filenames[0].endsWith(".pdf")) {
 			result = 0;
-		}
+			error = "Quantità o formato degli allegati non valido";
+		} else if(currUser != null) {
+			// aggiunge l'allegato e notifica lo studente
+			if(daoreq.addAttached(filenames[0], currUser.getEmail(), id_request)) {
+				new Thread(() -> {
+					Notifier.notifyStudent(((UserInterface) request.getSession().getAttribute("user")).getEmail(), id_request);
+				}).start();
 
+				if(new_request==true || req.getStatus().equals("Parzialmente completata")) { // se viene inserito il primo allegato
+					if(req.getType() == 0) {
+						if(daoreq.setStatus(id_request, "[DOCENTE] In attesa di accettazione")) {	
+							content = "Allegato inserito con successo";
+							result = 1;
+						}
+					} else if (req.getType() == 1) {
+						if(daoreq.setStatus(id_request, "[AZIENDA] In attesa di accettazione")) {	
+							content = "Allegato inserito con successo";
+							result = 1;
+						}
+					} else {
+						error = "Impossibile inserire l'allegato";
+						result = 0;
+					}
+				} else { // se viene inserito un allegato aggiuntivo
+					if(daoreq.setStatus(id_request, "[SEGRETERIA] In attesa di accettazione")) {	
+						content = "Allegato inserito con successo";
+						result = 1;
+					} else {
+						error = "Impossibile inserire l'allegato";
+						result = 0;
+					}
+				}
+			}
+		} else {
+			result = 0;
+			error = "Si è verificato un errore";
+		}
 
 		JSONObject res = new JSONObject();
 		res.put("result", result);

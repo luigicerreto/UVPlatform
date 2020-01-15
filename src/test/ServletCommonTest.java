@@ -39,16 +39,17 @@ public class ServletCommonTest extends Mockito {
   @Test
   public void testUpdateName() throws ServletException, IOException {
     request.addParameter("idUser", "fferrucci@unisa.it");
-    request.addParameter("newName", "Luigia");
+    request.addParameter("newName", "Filomena");
     request.addParameter("flag", "2");
     servlet.doPost(request, response);
     assertEquals("json", response.getContentType());
+    
   }
   
   @Test
   public void testUpdateNameFail() throws ServletException, IOException {
     request.addParameter("idUser", "aferrucci@unisa.it");
-    request.addParameter("newName", "Luigia");
+    request.addParameter("newName", "Filomena");
     request.addParameter("flag", "2");
     servlet.doPost(request, response);
     assertEquals("json", response.getContentType());
@@ -57,7 +58,7 @@ public class ServletCommonTest extends Mockito {
   @Test
   public void testUpdateSurname() throws ServletException, IOException {
     request.addParameter("idUser", "fferrucci@unisa.it");
-    request.addParameter("newSurname", "Melchionno");
+    request.addParameter("newSurname", "Ferrucci");
     request.addParameter("flag", "3");
     servlet.doPost(request, response);
     assertEquals("json", response.getContentType());
@@ -66,7 +67,7 @@ public class ServletCommonTest extends Mockito {
   @Test
   public void testUpdateSurnameFail() throws ServletException, IOException {
     request.addParameter("idUser", "aferrucci@unisa.it");
-    request.addParameter("newSurname", "Melchionno");
+    request.addParameter("newSurname", "Ferrucci");
     request.addParameter("flag", "3");
     servlet.doPost(request, response);
     assertEquals("json", response.getContentType());
@@ -75,7 +76,7 @@ public class ServletCommonTest extends Mockito {
   @Test
   public void testDoGet() throws ServletException, IOException {
     request.addParameter("idUser", "fferrucci@unisa.it");
-    request.addParameter("newSurname", "Melchionno");
+    request.addParameter("newSurname", "Ferrucci");
     request.addParameter("flag", "3");
     servlet.doGet(request, response);
     assertEquals("json", response.getContentType());

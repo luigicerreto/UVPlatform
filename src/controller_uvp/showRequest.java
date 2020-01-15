@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.List;
 import interfacce.UserInterface;
 import model.Attached;
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
 import model_uvp.RequestInternship;
 
 /**
@@ -35,14 +36,12 @@ public class showRequest extends HttpServlet {
 	 */
 	public showRequest() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -50,75 +49,94 @@ public class showRequest extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
-		String email="";
-		Integer result = 0;
-		String error = "";
-		String content = "";
-		String redirect = "";
-		ArrayList<RequestInternship> richieste;
-		List<Attached> allegati;
-		DAORichiesta queryobj = new DAORichiesta();
-		
-		if (currUser != null) 
-		{
-			email = currUser.getEmail();
-			try
-			{
-			richieste = queryobj.viewRequests(email);
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user");
+		JSONObject jObj;
+		JSONArray jArr = new JSONArray();
+		JSONObject mainObj = new JSONObject();
+		ArrayList<RequestInternship> requests;
+		List<String> attached;
+		DAORequest queryobj = new DAORequest();
 
-			if(richieste.size()==0)
-			{
-				content += "<tr>"
-						+ "<td class=\"text-center\"" + "></td>"
-						+ "<td class=\"text-center\"" + "></td>"
-						+ "<td class=\"text-center\"" + ">Nessuna Richiesta Presente</td>"
-						+ "<td class=\"text-center\"" + "></td>"
-						+ "<td class=\"text-center\"" + "></td>"
-						+ "</tr>";
-			}
-			else
-				for(RequestInternship a : richieste)
-				{
+		if (currUser != null){
+			try {
+				requests = queryobj.viewRequests(currUser.getEmail());
 
-					content += "<tr role='row'>";
-					content += "    <td class='text-center'>" + a.getId_request_i() + "</td>";
-					content += "    <td class='text-center'>" + a.getTheme() + "</td>";
-					content += "    <td class='text-center'>";
-					allegati = a.getAttached();
-					for (Attached b : allegati)
-					{
-						content += "<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>";
+				if(requests.size()>0)
+					for(RequestInternship a : requests){
+
+						attached = new ArrayList<>();
+						jObj = new JSONObject();
+						jObj.put("id", a.getId_request_i());
+						jObj.put("user_serial", a.getStudent().getSerial());
+
+						if(a.getAttached().isEmpty()) {
+							jObj.put("attached", "");
+						}
+						else 
+							for (Attached b : a.getAttached())
+								attached.add("<a href='" + request.getContextPath() + "/Downloader?flag=1&filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a>");
+
+						jObj.put("attached", attached);
+						if (a.getType() == 0)
+							jObj.put("type", "Tirocinio interno");
+						else if (a.getType() == 1)
+							jObj.put("type", "Tirocinio esterno");
+						jObj.put("status", a.getStatus());
+						if(a.getStatus().equals("Parzialmente completata"))
+							jObj.put("actions", ""
+									+ "<label class=\"actionInternship btn btn-default pulse\">"
+									+ "<input type='button' data-partial-request='true' data-action='upload' id='"+a.getId_request_i()+"'>" 
+									+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+									+ "</label>"
+									+ "<label class=\"actionInternship btn btn-default\">"
+									+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
+									+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
+									+ "</label>"
+									+ "<label class=\"info btn btn-default\">"
+									+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
+									+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+									+ "</label>");
+						else if(a.getStatus().equals("In attesa di caricamento Registro di Tirocinio")) 
+							jObj.put("actions", ""
+									+ "<label class=\"actionInternship btn btn-default pulse\">"
+									+ "<input type='button' data-partial-request='false' data-action='upload' id='"+a.getId_request_i()+"'>" 
+									+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+									+ "</label>"
+									+ "<label class=\"actionInternship btn btn-default\">"
+									+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
+									+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
+									+ "</label>"
+									+ "<label class=\"info btn btn-default\">"
+									+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
+									+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+									+ "</label>");
+						else 
+							jObj.put("actions", ""
+									+ "<label class=\"actionInternship btn btn-default\" disabled>"
+									+ "<input type='button' data-partial-request='false' data-action='upload' id='"+a.getId_request_i()+"'>" 
+									+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+									+ "</label>"
+									+ "<label class=\"actionInternship btn btn-default\">"
+									+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
+									+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
+									+ "</label>"
+									+ "<label class=\"info btn btn-default\">"
+									+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
+									+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+									+ "</label>");
+
+						jArr.add(jObj);
 					}
-					content += "    </td>";
-					content += "    <td class='text-center'>" + a.getType() + "</td>";
-					content += "    <td class='text-center'>" + a.getState() + "</td>";
-					content += "</tr>";
-
-
-				}
-			result=1;
 			}
-			catch(Exception e)
-			{
-				error = "catch";
-				result=0;
+			catch(Exception e){
 				e.printStackTrace();
 			}
 
-
-
-			JSONObject res = new JSONObject();
-			res.put("result", result);
-			res.put("error", error);
-			res.put("content", content);
-			res.put("redirect", redirect);
+			mainObj.put("data", jArr);
 			PrintWriter out = response.getWriter();
-			out.println(res);
+			out.println(mainObj);
 			response.setContentType("json");
-
-
 		}
 	}
 }

@@ -106,27 +106,35 @@ public class CheckSession implements Serializable {
     if (u != null) {
       int userType = u.getUserType();
 
-      if (userType == 0 && (this.pageFolder.equals("_areaStudent") || this.pageFolder.equals(""))) {
-        this.setAllowed(true); // Profilo Student
+      if (userType == 0 && (
+    		  this.pageFolder.equals("_areaStudent_uvp") || 
+    		  this.pageFolder.equals("_areaStudent") || 
+    		  this.pageFolder.equals(""))) {
+        this.setAllowed(true);
 
-      } else if (userType == 1 && (this.pageFolder.equals("_areaSecretary") || this.pageFolder.equals(""))) {
-        this.setAllowed(true); // Profilo Secretary
+      } else if (userType == 1 && (
+    		  this.pageFolder.equals("_areaSecretary") || 
+    		  this.pageFolder.equals("_areaSecretary_uvp") || 
+    		  this.pageFolder.equals(""))) {
+        this.setAllowed(true);
 
-      } else if (userType == 2 && (this.pageFolder.equals("_areaAdmin") || this.pageFolder.equals(""))) {
-        this.setAllowed(true); // Profilo Admin
+      } else if (userType == 2 && (
+    		  this.pageFolder.equals("_areaAdmin") || 
+    		  this.pageFolder.equals("_areaAdmin_uvp") || 
+    		  this.pageFolder.equals(""))) {
+        this.setAllowed(true);
       }
-      else if(userType == 3 && (this.pageFolder.equals("_areaTeacher_uvp") || this.pageFolder.equals(""))) {
-    	  this.setAllowed(true); //Profilo docente
+      else if(userType == 3 && (
+    		  this.pageFolder.equals("_areaTeacher_uvp") || 
+    		  this.pageFolder.equals(""))) {
+    	  this.setAllowed(true);
       }
-      else if (userType == 4 && (this.pageFolder.equals("_areaCompany_uvp") || this.pageFolder.equals(""))) {
-    	  this.setAllowed(true); //Profilo azienda
-      }
-      else if (userType == 0 && (this.pageFolder.equals("_areaStudent_uvp") || this.pageFolder.equals(""))) {
-          this.setAllowed(true);
-      }
-     
+      else if (userType == 4 && (
+    		  this.pageFolder.equals("_areaCompany_uvp") || 
+    		  this.pageFolder.equals(""))) {
+    	  this.setAllowed(true);
+      }     
     }
-     
     return allowed;
   }
 
@@ -138,5 +146,4 @@ public class CheckSession implements Serializable {
   public void setAllowed(boolean allowed) {
     this.allowed = allowed;
   }
-
 }

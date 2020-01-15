@@ -1,8 +1,7 @@
 $(document).ready(
 		function() {
-		$('#name,#surname,#email,#serial,#phone').prop("disabled", true);
-	
-		$(document).on('submit','#signUp',function(e) {
+
+			$(document).on('submit','#signUp',function(e) {
 				var name = $("#name").val();
 				var surname = $("#surname").val();
 				var email = $("#email").val();

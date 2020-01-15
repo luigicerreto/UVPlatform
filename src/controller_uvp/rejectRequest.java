@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
 
 /**
  * Servlet implementation class rejectRequest
@@ -25,48 +25,39 @@ public class rejectRequest extends HttpServlet {
 	 */
 	public rejectRequest() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer result = 0;
 		String error = "";
 		String content = "";
-		String redirect = "";
 
 		int id_request = (Integer.parseInt(request.getParameter("id_request")));
-		DAORichiesta queryobj = new DAORichiesta();
+		DAORequest queryobj = new DAORequest();
 
-		if(queryobj.rejectByTeacher_Company_Secretary(id_request))
-		{
+		if(queryobj.rejectRequest(id_request)){
 			result = 1;
-			content = "Richiesta rifiutata";
-		}
-		else
-		{
-			result = 0;
+			content = "Richiesta non convalidata e conclusa";
+		} else {
 			error = "Errore nell'elaborazione della richiesta";
 		}
-
 
 		JSONObject res = new JSONObject();
 		
 		res.put("result", result);
 		res.put("error", error);
 		res.put("content", content);
-		res.put("redirect", redirect);
 		PrintWriter out = response.getWriter();
 		out.println(res);
 		response.setContentType("json");

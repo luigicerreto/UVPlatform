@@ -16,13 +16,9 @@
 <jsp:include page="/partials/head.jsp" />
 </head>
 
-<body onLoad="showDataUser()">
+<body>
 	<div class="page-wrapper">
-
-		<!-- Preloader -->
-		<!-- <div class="preloader"></div>  -->
-
-
+	
 		<jsp:include page="/partials/header.jsp">
 			<jsp:param name="pageName" value="<%=pageName%>" />
 			<jsp:param name="pageFolder" value="<%=pageFolder%>" />
@@ -41,7 +37,7 @@
 										<p></p>
 									</div>
 									<div class="form-contact">
-										<form action="/ServletContact">
+										<form id="Contact">
 											<input type="text" size="50" class="form-control"
 												id="oggetto" placeholder="Oggetto" maxlength="30" required>
 											<p></p>
@@ -66,7 +62,6 @@
 	<!--End pagewrapper-->
 
 	<jsp:include page="/partials/includes.jsp" />
-	<script src="<%=request.getContextPath()%>/js/pages/scripts_profile.js"></script>
-	<script src="<%=request.getContextPath()%>/js/pages/showUserDate.js"></script>
+	<script src="<%=request.getContextPath()%>/js/pages_uvp/scripts_contact.js"></script>
 </body>
 </html>

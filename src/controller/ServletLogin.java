@@ -36,17 +36,12 @@ public class ServletLogin extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Integer result = 0;
 		String error = "";
@@ -76,14 +71,18 @@ public class ServletLogin extends HttpServlet {
 						UserInterface user = null;
 						String name = r.getString("name");
 						String surname = r.getString("surname");
-						char sex = r.getString("sex").charAt(0);
+						char sex;
+						if (r.getString("sex") != null)
+							sex = r.getString("sex").charAt(0);
+						else
+							sex = ' ';
 
 						int userType = r.getInt("user_type");
 						if (userType == 0) { // Profilo Student
 							// cambiato il redirect per la nuova pagina scelta tra tirocinio e english validation
 
 							redirect = request.getContextPath() + "/choice.jsp"; 
-							//Modifica effettuata= redirect su scelta.jsp in modo che l'utente possa scegliere gestione tirocinio o english validation
+
 							// redirect = request.getContextPath() + "/_areaStudent/viewRequest.jsp";
 							user = new Student(email, name, surname, sex, password, userType);
 						} else if (userType == 1) { // Profilo Secretary
@@ -93,13 +92,13 @@ public class ServletLogin extends HttpServlet {
 							redirect = request.getContextPath() + "/_areaAdmin/viewRequest.jsp";
 							user = new Admin(email, name, surname, sex, password, userType);
 						} else if (userType == 3) { // Profilo docente
-							redirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestTeacher.jsp";
+							redirect = request.getContextPath() + "/_areaTeacher_uvp/viewRequestInternship.jsp";
 							user =  new Teacher(email, name, surname, sex, password, userType);
 						} else if (userType == 4) { // Profilo Azienda
-							redirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestCompany.jsp";
+							redirect = request.getContextPath() + "/_areaCompany_uvp/viewRequestInternship.jsp";
 							user =  new Company(email, name, surname, sex, password, userType);
 						}
-						
+
 						else {
 							throw new NumberFormatException("utente non valido");
 						}

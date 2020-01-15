@@ -1,8 +1,8 @@
 package model_uvp;
-import interfacce.UserInterface;
+
 import model.Attached;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -11,94 +11,57 @@ import java.util.List;
  *
  */
 public class RequestInternship {
-	private int id_request_i;
-	private String type;
-	private String theme;
-	private String userFullName;
-	private int id_ie;
-	private int id_ii;
-	private String state;
+	private int ID_REQUEST_I; // id richiesta
+	private int FK_I; // foreign key tirocinio interno/esterno
+	private int type;
+	private String status;
 	private List<Attached> attached = new ArrayList<>();
+	private User student;
+	private User tutor;
+	private Internship internship;
 
 	public RequestInternship() {
 
 	}
 
-	public RequestInternship(int id_request_i, String state, String type, String theme, String userFullName, int id_ie,
-			int id_ii, List<Attached> attached) {
-		this.state=state;
+	public RequestInternship(int id_request_i, String status, int type, int fk_i, List<Attached> attached) {
+		this.status=status;
 		this.attached=attached;
-		this.id_ie=id_ie;
-		this.id_ii=id_ii;
+		this.FK_I=fk_i;
 		this.type=type;
-		this.id_request_i=id_request_i;
-		this.theme=theme;
-		this.userFullName=userFullName;
-
+		this.ID_REQUEST_I=id_request_i;
 	}
 
 	public int getId_request_i() {
-		return id_request_i;
+		return ID_REQUEST_I;
 	}
 
-	public void setId_request_i(int id_request_i) {
-		this.id_request_i = id_request_i;
+	public void setId_request_i(int ID_REQUEST_I) {
+		this.ID_REQUEST_I = ID_REQUEST_I;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
-	public String getTheme() {
-		return theme;
+	public int getFk_i() {
+		return FK_I;
 	}
 
-	public void setTheme(String theme) {
-		this.theme = theme;
+	public void setFk_i(int FK_I) {
+		this.FK_I=FK_I;
 	}
 
-	public String getUserName() {
-		return userFullName.substring(0,userFullName.indexOf("+"));
+	public String getStatus() {
+		return status;
 	}
 
-	public String getUserSurname() {
-		return userFullName.substring(userFullName.indexOf("+")+1);
-	}
-
-	public String getUserFullName() {
-		return userFullName;
-	}
-
-	public void setUserFullName(String userFullName) {
-		this.userFullName = userFullName;
-	}
-
-	public int getId_ie() {
-		return id_ie;
-	}
-
-	public void setId_ie(int id_ie) {
-		this.id_ie = id_ie;
-	}
-
-	public int getId_ii() {
-		return id_ii;
-	}
-
-	public void setId_ii(int id_ii) {
-		this.id_ii = id_ii;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public List<Attached> getAttached() {
@@ -109,4 +72,27 @@ public class RequestInternship {
 		this.attached = attached;
 	}
 
+	public User getStudent() {
+		return student;
+	}
+
+	public void setStudent(User student) {
+		this.student = student;
+	}
+
+	public User getTutor() {
+		return tutor;
+	}
+
+	public void setTutor(User tutor) {
+		this.tutor = tutor;
+	}
+
+	public Internship getInternship() {
+		return internship;
+	}
+
+	public void setInternship(Internship internship) {
+		this.internship = internship;
+	}
 }

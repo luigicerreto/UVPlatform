@@ -13,8 +13,8 @@ Luigi Cerreto, Giuseppe D'Avanzo e Antonio Martella
 Dipartimento di Informatica dell'Università di Salerno, Prof.ssa Filomena Ferrucci.
 
 ## Come si installa
-Avviare MySQL Workbench, creare un nuovo schema e successivamente cliccare su “Data Import/Restore” situato nel menù a tendina a sinistra. Dalla pagina che segue, spuntare la voce “Import from Self-Contained File” e selezionare il file sql “uvpSQL.sql”. In
-corrispondenza della voce Default Target Schema, selezionare lo schema precedentemente creato.
+Avviare MySQL Workbench, dalla barra di navigazione cliccare su "File" e in sequito sulla voce "Run SQL Script...".<br/>A questo punto selezionare lo script sql “uvpSQL.sql” e premere "Invio".<br/>Verrà mostrata una finestra contenente una preview dello script sql, premere quindi il pulsante "Run" situato in basso a destra.<br/>Attendere l'esecuzione dello script.<br/>
+
 Per completare l’installazione in locale, aprire il browser e digitare il seguente indirizzo: http://localhost:8080/UVPlatform/index.jsp
 
 Per accedere come admin le credenziali sono le seguenti:

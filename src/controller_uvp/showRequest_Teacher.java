@@ -16,7 +16,8 @@ import org.json.simple.JSONObject;
 
 import interfacce.UserInterface;
 import model.Attached;
-import model_uvp.DAORichiesta;
+import model_uvp.DAORequest;
+import model_uvp.InternalInternship;
 import model_uvp.RequestInternship;
 
 /**
@@ -31,14 +32,12 @@ public class showRequest_Teacher extends HttpServlet {
 	 */
 	public showRequest_Teacher() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -46,13 +45,12 @@ public class showRequest_Teacher extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserInterface currUser = (UserInterface) request.getSession().getAttribute("user"); 
 		String email="";
 		ArrayList<RequestInternship> requests;
-		DAORichiesta queryobj = new DAORichiesta();
-		List<String> attached = new ArrayList<>();
+		DAORequest queryobj = new DAORequest();
+		List<String> attached;
 		JSONObject jObj;
 		JSONArray jArr = new JSONArray();
 		JSONObject mainObj = new JSONObject();
@@ -66,24 +64,47 @@ public class showRequest_Teacher extends HttpServlet {
 
 				for(RequestInternship a : requests)
 				{
+					attached = new ArrayList<>();
 					jObj = new JSONObject();
-					jObj.put("id",a.getId_request_i());
-					jObj.put("theme", a.getTheme());
+					jObj.put("id", a.getId_request_i());
+					jObj.put("theme", ((InternalInternship) a.getInternship()).getTheme());
 
 					if(a.getAttached().isEmpty()) {
 						jObj.put("attached", "");
 					}
 					else 
 						for (Attached b : a.getAttached())
-							attached.add("<a href='" + request.getContextPath() + "/Downloader?filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a><br>");
-							
+							attached.add("<a href='" + request.getContextPath() + "/Downloader?flag=1&filename=" + b.getFilename()+ "&idRequest=" + a.getId_request_i() + "'>" + b.getFilename() + "</a>");
+
+
 					jObj.put("attached", attached);					
-					jObj.put("name",a.getUserName());
-					jObj.put("surname", a.getUserSurname());
-					jObj.put("type", a.getType());
-					jObj.put("state",a.getState());
-					if(a.getState().equalsIgnoreCase("parzialmente completata") ||
-							a.getState().equalsIgnoreCase("[DOCENTE] In attesa di accettazione"))
+					jObj.put("name", a.getStudent().getName());
+					jObj.put("surname", a.getStudent().getSurname());
+					jObj.put("type", "Tirocinio interno");
+					jObj.put("state",a.getStatus());
+					if(a.getStatus().equals("[DOCENTE] In attesa di accettazione"))
+						jObj.put("actions", ""
+								+ "<label class=\"actionInternship btn btn-default\" disabled>" 
+								+ "<input type=\"button\" data-action=\"accept\" id=\""+a.getId_request_i() +"\">"
+								+ "<span class=\"acceptBtn glyphicon glyphicon-ok\"></span>" 
+								+ "</label>"
+								+ "<label class=\"actionInternship btn btn-default\">" 
+								+ "<input type=\"button\" data-action=\"reject\" id=\""+a.getId_request_i()+"\">" 
+								+ "<span class=\"refuseBtn glyphicon glyphicon-remove\"></span>" 
+								+ "</label>"
+								+ "<label class=\"actionInternship btn btn-default\">"
+								+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
+								+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
+								+ "</label>"
+								+ "<label class=\"actionInternship btn btn-default\">"
+								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
+								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
+								+ "</label>"
+								+ "<label class=\"info btn btn-default\">"
+								+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
+								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
+								+ "</label>");
+					else if(a.getStatus().equals("[DOCENTE] Richiesta firmata"))
 						jObj.put("actions", ""
 								+ "<label class=\"actionInternship btn btn-default\">" 
 								+ "<input type=\"button\" data-action=\"accept\" id=\""+a.getId_request_i() +"\">"
@@ -101,8 +122,8 @@ public class showRequest_Teacher extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
-								+ "<label class=\"infoInternship btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
+								+ "<label class=\"info btn btn-default\">"
+								+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>");
 					else
@@ -119,15 +140,15 @@ public class showRequest_Teacher extends HttpServlet {
 								+ "<input type=\"button\" data-action=\"upload\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"uploadBtn glyphicon glyphicon-open\"></span>" 
 								+ "</label>"
-								+ "<label class=\"actionInternship btn btn-default\" disabled>"
+								+ "<label class=\"actionInternship btn btn-default\">"
 								+ "<input type=\"button\" data-action=\"download\" id=\""+a.getId_request_i()+"\">" 
 								+ "<span class=\"downloadBtn glyphicon glyphicon-save\"></span>" 
 								+ "</label>"
-								+ "<label class=\"infoInternship btn btn-default\">"
-								+ "<input type=\"button\" data-action=\"info\" data-toggle=\"modal\" data-target=\"#details\" id=\""+a.getId_request_i()+"\">" 
+								+ "<label class=\"info btn btn-default\">"
+								+ "<input type='button' data-type-info='0' data-toggle='modal' data-target='#details' id='"+a.getId_request_i()+"'>" 
 								+ "<span class=\"infoBtn glyphicon glyphicon-info-sign\"></span>" 
 								+ "</label>");
-					
+
 					jArr.add(jObj);
 				}
 			}
